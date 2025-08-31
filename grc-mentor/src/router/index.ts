@@ -22,6 +22,16 @@ import ProfileLogoutView from '../views/ProfileLogoutView.vue'
 import CalenderView from '../views/CalenderView.vue'
 import MatchingjobsView from '../views/MatchingjobsView.vue'
 import CertificateView from '../views/CertificateView.vue'
+import Policyreview2View from '@/views/Policyreview2View.vue'
+import Policyreview3View from '@/views/Policyreview3View.vue'
+import Policyreview4View from '@/views/Policyreview4View.vue'
+import Policyreview5View from '@/views/Policyreview5View.vue'
+import Policyreview6View from '@/views/Policyreview6View.vue'
+import Policyreview7View from '@/views/Policyreview7View.vue'
+import ISO27001View from '@/views/ISO27001View.vue'
+import MycvView from '@/views/MycvView.vue'
+import SettingView from '@/views/SettingView.vue'
+import OverviewView from '@/views/OverviewView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -113,6 +123,56 @@ const router = createRouter({
        path: '/policyreview1',
       name: 'policyreview1',
       component: Policyreview1View,
+    },
+      {
+       path: '/policyreview2',
+      name: 'policyreview2',
+      component: Policyreview2View,
+    },
+    {
+       path: '/policyreview3',
+      name: 'policyreview3',
+      component: Policyreview3View,
+    },
+     {
+       path: '/policyreview4',
+      name: 'policyreview4',
+      component: Policyreview4View,
+    },
+    {
+       path: '/policyreview5',
+      name: 'policyreview5',
+      component: Policyreview5View,
+    },
+      {
+       path: '/policyreview6',
+      name: 'policyreview6',
+      component: Policyreview6View,
+    },
+      {
+       path: '/policyreview7',
+      name: 'policyreview7',
+      component: Policyreview7View,
+    },
+     {
+       path: '/iso-27001',
+      name: 'iso-27001',
+      component: ISO27001View
+    },
+     {
+       path: '/mycv',
+      name: 'mycv',
+      component: MycvView
+    },
+      {
+       path: '/setting',
+      name: 'setting',
+      component: SettingView
+    },
+      {
+       path: '/overview',
+      name: 'overview',
+      component: OverviewView
     },
      {
        path: '/badges',

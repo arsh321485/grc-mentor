@@ -4,7 +4,6 @@
             <div class="col-2 col-md-2">
                 <Starmedia />
             </div>
-
             <div class="col-10 col-md-10">
                 <!-- Main Policy Page -->
                 <div class="policy-page flex-grow-1">
@@ -18,11 +17,7 @@
                             <div class="d-flex">
                                 <h2 class="fw-semibold mb-1">{{ policy.title }}</h2>
                                 <small class="text-muted deadlinebox ">Deadline: {{ policy.deadline }}</small>
-                                <div class="ms-5 d-flex gap-3 ">
-                                    <span class="color"> <i class="bi bi-tools p-2"></i>Tools</span>
-                                    <span class="color"> <i class="bi bi-file-earmark-ruled"></i>Methods</span>
-                                    <span class="color"> <i class="bi bi-play-circle-fill"></i>Resousrces</span>
-                                </div>
+
                             </div>
                         </div>
 
@@ -34,25 +29,8 @@
 
 
                     <!-- Subtasks -->
+
                     <div class="p-4">
-                        <!-- <h6 class="fw-semibold mb-3">Subtasks ({{ policy.subtasks.length }})</h6> -->
-
-                        <!-- First subtask expanded -->
-                        <div class="mb-4  rounded p-3">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h6 class="fw-semibold">• {{ policy.subtasks[0].name }}</h6>
-                                <!-- <small class="text-muted">Deadline: {{ policy.subtasks[0].deadline }}</small> -->
-                            </div>
-                            <div>
-                                <p class="mb-2"><strong>Instructions for the subtask:</strong></p>
-                                <p class="text-muted" style="white-space: pre-line;">{{ policy.subtasks[0].instructions
-                                    }}</p>
-                                <a :href="policy.subtasks[0].link" target="_blank">{{ policy.subtasks[0].link }}</a>
-                            </div>
-
-                        </div>
-
-                        <!-- Remaining subtasks collapsible -->
                         <div class="p-4">
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 <div class="accordion-item" v-for="(task, index) in policy.subtasks" :key="index">
@@ -76,17 +54,28 @@
                                         <div class="accordion-body">
                                             <p class="mb-2"><strong>Instructions:</strong></p>
                                             <p class="text-muted paratext">{{ task.instructions }}</p>
-                                            <a v-if="task.link" :href="task.link" target="_blank" class="color">{{
-                                                task.link }}</a>
+                                            <a v-if="task.link" :href="task.link" target="_blank">{{ task.link }}</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <div class="mb-4  rounded p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2  pt-4">
+                                <h6 class="fw-semibold">• {{ policy.subtasks[0].name }}</h6>
+                                <!-- <small class="text-muted">Deadline: {{ policy.subtasks[0].deadline }}</small> -->
+                            </div>
+                            <div>
+                                <p class="mb-2"><strong>Instructions for the subtask:</strong></p>
+                                <p class="text-muted" style="white-space: pre-line;">{{ policy.subtasks[0].instructions
+                                    }}</p>
+                                <a :href="policy.subtasks[0].link" target="_blank">{{ policy.subtasks[0].link }}</a>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
@@ -94,12 +83,11 @@
 
 
 
-
 <script>
-import Starmedia from '@/components/Starmedia.vue';
+import Starmedia from "@/components/Starmedia.vue";
 
 export default {
-    name: "Policyreview1View",
+    name: "Policyreview6View",
     components: { Starmedia },
     props: {
         policy: {
@@ -115,8 +103,11 @@ export default {
                         instructions: `
                         One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me?" he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops
                         `,
-                        link: "https://grcmentor.ai/link",
+                        link: "Checking subtask status. Please wait...",
                     },
+                    { name: "Subtask name", deadline: "23rd July, 2025", instructions: "More details..." },
+                    { name: "Subtask name", deadline: "23rd July, 2025", instructions: "More details..." },
+                    { name: "Subtask name", deadline: "23rd July, 2025", instructions: "More details..." },
                     { name: "Subtask name", deadline: "23rd July, 2025", instructions: "More details..." },
                     { name: "Subtask name", deadline: "23rd July, 2025", instructions: "More details..." },
                     { name: "Subtask name", deadline: "23rd July, 2025", instructions: "More details..." },
@@ -165,13 +156,9 @@ export default {
     color: #0096D6;
 }
 
-.color {
-    color: #0096D6;
-}
-
 .deadlinebox {
 
-    margin-left: 55em;
+    margin-left: 25em;
     padding: 8px;
     font-size: 14px;
 
@@ -184,12 +171,11 @@ export default {
 }
 
 .policy-page {
-
     width: 1124px;
     min-height: 100vh;
     background: #ffffff;
-    /* box-shadow: -4px 0px 25px rgba(0, 0, 0, 0.08);
-    border-radius: 24px 0px 0px 24px; */
+    box-shadow: -4px 0px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 24px 0px 0px 24px;
     font-family: "Inter", sans-serif;
 }
 
@@ -213,5 +199,9 @@ h2 {
     line-height: 24px;
     letter-spacing: -0.8%;
 
+}
+
+a {
+    text-decoration: none;
 }
 </style>

@@ -4,7 +4,6 @@
             <div class="col-2 col-md-2">
                 <Starmedia />
             </div>
-
             <div class="col-10 col-md-10">
                 <!-- Main Policy Page -->
                 <div class="policy-page flex-grow-1">
@@ -18,11 +17,11 @@
                             <div class="d-flex">
                                 <h2 class="fw-semibold mb-1">{{ policy.title }}</h2>
                                 <small class="text-muted deadlinebox ">Deadline: {{ policy.deadline }}</small>
-                                <div class="ms-5 d-flex gap-3 ">
-                                    <span class="color"> <i class="bi bi-tools p-2"></i>Tools</span>
-                                    <span class="color"> <i class="bi bi-file-earmark-ruled"></i>Methods</span>
-                                    <span class="color"> <i class="bi bi-play-circle-fill"></i>Resousrces</span>
-                                </div>
+                                <!-- <div class="ms-5 d-flex gap-3 ">
+                            <span class="text-primary"> <i class="bi bi-tools p-2"></i>Tools</span>
+                            <span class="text-primary"> <i class="bi bi-file-earmark-ruled"></i>Methods</span>
+                            <span class="text-primary"> <i class="bi bi-play-circle-fill"></i>Resousrces</span>
+                        </div> -->
                             </div>
                         </div>
 
@@ -34,12 +33,14 @@
 
 
                     <!-- Subtasks -->
+
                     <div class="p-4">
                         <!-- <h6 class="fw-semibold mb-3">Subtasks ({{ policy.subtasks.length }})</h6> -->
-
+                        <h6 class="fw-semibold"> <i class="bi bi-check-circle-fill" style="color: #0096D6;"></i> {{
+                            policy.subtasks[0].name }}</h6>
                         <!-- First subtask expanded -->
                         <div class="mb-4  rounded p-3">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div class="d-flex justify-content-between align-items-center mb-2 border-top pt-4">
                                 <h6 class="fw-semibold">• {{ policy.subtasks[0].name }}</h6>
                                 <!-- <small class="text-muted">Deadline: {{ policy.subtasks[0].deadline }}</small> -->
                             </div>
@@ -76,8 +77,7 @@
                                         <div class="accordion-body">
                                             <p class="mb-2"><strong>Instructions:</strong></p>
                                             <p class="text-muted paratext">{{ task.instructions }}</p>
-                                            <a v-if="task.link" :href="task.link" target="_blank" class="color">{{
-                                                task.link }}</a>
+                                            <a v-if="task.link" :href="task.link" target="_blank">{{ task.link }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,6 @@
 
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
@@ -96,10 +95,10 @@
 
 
 <script>
-import Starmedia from '@/components/Starmedia.vue';
+import Starmedia from "@/components/Starmedia.vue";
 
 export default {
-    name: "Policyreview1View",
+    name: "Policyreview4View",
     components: { Starmedia },
     props: {
         policy: {
@@ -165,13 +164,9 @@ export default {
     color: #0096D6;
 }
 
-.color {
-    color: #0096D6;
-}
-
 .deadlinebox {
 
-    margin-left: 55em;
+    margin-left: 25em;
     padding: 8px;
     font-size: 14px;
 
@@ -184,12 +179,11 @@ export default {
 }
 
 .policy-page {
-
     width: 1124px;
     min-height: 100vh;
     background: #ffffff;
-    /* box-shadow: -4px 0px 25px rgba(0, 0, 0, 0.08);
-    border-radius: 24px 0px 0px 24px; */
+    box-shadow: -4px 0px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 24px 0px 0px 24px;
     font-family: "Inter", sans-serif;
 }
 
