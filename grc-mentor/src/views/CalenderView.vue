@@ -65,7 +65,7 @@
     </main>
 </template>
 
-<script>
+<script lang="ts">
 import Sidebargrc2 from '@/components/Sidebargrc2.vue';
 
 export default {
@@ -114,6 +114,7 @@ export default {
     color: #000000DE;
 }
 
+/* Month & Today Button */
 .btn-today {
     font-size: 14px;
     color: #000000;
@@ -129,14 +130,13 @@ export default {
     border: 2px solid #0000000F;
 }
 
+/* Search Box */
 .search-box {
-    /* width: 220px; */
     border: 1px solid #00000029;
     border-radius: 30px;
     max-width: 300px;
     background-color: #0000000F;
 }
-
 
 .search-box input {
     border-radius: 50px;
@@ -178,8 +178,6 @@ export default {
     min-width: 164px;
 }
 
-
-
 .task-card strong {
     display: block;
     font-weight: 600;
@@ -191,4 +189,119 @@ export default {
     color: #555;
     margin: 0;
 }
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+    .calendar-title {
+        font-size: 36px;
+        padding-left: 40px;
+    }
+    .month-select {
+        width: 140px;
+        font-size: 13px;
+    }
+    .btn-today {
+        font-size: 13px;
+    }
+    .search-box {
+        max-width: 250px;
+    }
+    .week-header {
+        font-size: 14px;
+    }
+    .calendar-grid {
+        min-height: 450px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .task-card {
+        font-size: 13px;
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 992px) {
+    .calendar-title {
+        font-size: 32px;
+        padding-left: 30px;
+    }
+    .month-select {
+        width: 120px;
+        font-size: 12px;
+    }
+    .btn-today {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+    .search-box {
+        max-width: 200px;
+    }
+    .week-header {
+        font-size: 13px;
+    }
+    .calendar-grid {
+        min-height: 400px;
+    }
+    .task-card {
+        font-size: 12px;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-title {
+        font-size: 28px;
+        padding-left: 20px;
+    }
+    .month-select {
+        width: 100px;
+        font-size: 12px;
+    }
+    .btn-today {
+        font-size: 12px;
+        padding: 3px 6px;
+    }
+    .search-box {
+        max-width: 160px;
+    }
+    .week-header {
+        font-size: 12px;
+    }
+    .calendar-grid {
+        min-height: 350px;
+    }
+    .task-card {
+        font-size: 11px;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 576px) {
+    .calendar-title {
+        font-size: 24px;
+        padding-left: 10px;
+    }
+    .month-select {
+        width: 90px;
+        font-size: 11px;
+    }
+    .btn-today {
+        font-size: 11px;
+        padding: 2px 4px;
+    }
+    .search-box {
+        max-width: 140px;
+    }
+    .week-header {
+        font-size: 11px;
+    }
+    .calendar-grid {
+        min-height: 300px;
+    }
+    .task-card {
+        font-size: 10px;
+        min-width: 90px;
+    }
+}
+
 </style>

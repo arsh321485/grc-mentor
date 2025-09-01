@@ -1,14 +1,14 @@
-<!-- <template>
+ <template>
   <main>
     <div class="sidebar">
-   
+
       <div class="sidebar-header">
         <h6 class="stepper-title">
           <span class="dot"></span> GRC Mentor
         </h6>
       </div>
 
-   
+
       <div>
         <p class="media-text">Star media</p>
       </div>
@@ -18,10 +18,10 @@
       </div>
 
      <div>
-       
+
         <p class="media-sub-text ">Industry</p>
         <p class="media-broad-text">Sustainable Products E-commerce</p>
-     
+
      </div>
 
       <div>
@@ -150,7 +150,7 @@ export default {
   width: 25px;
   background: linear-gradient(180deg, #B0A0FF 0%, #4023CF 100%);
   border-radius: 50%;
- 
+
 }
 
 
@@ -172,24 +172,24 @@ export default {
   align-items: center;
   gap: 10px;
 }
-</style> -->
+</style>
 
 
 
-<template>
+<!-- <template>
 
 
-  <!-- Header -->
+
   <div class="d-flex align-items-center mb-5">
     <div class="blue-circle "></div>
     <h5 class="mb-0 fw-semibold5">GRC Mentor</h5>
   </div>
 
-  <!-- Company Title -->
+
   <h3 class="fw-semibold mb-3">{{ company.name }}</h3>
   <small class="text-muted">About the company <i class="bi bi-info-circle icon-color"></i></small>
 
-  <!-- Info List -->
+
   <div class=" mt-4">
     <div v-for="(item, index) in companyInfo" :key="index" class="mb-3">
       <small class="text-muted d-block">{{ item.label }}</small>
@@ -201,7 +201,7 @@ export default {
 
 <script>
 export default {
-  name: "Starmedia",
+  name:"Starmedia",
   props: {
     company: {
       type: Object,
@@ -285,4 +285,4 @@ export default {
   font-size: 15px;
   color: #000;
 }
-</style>
+</style> -->

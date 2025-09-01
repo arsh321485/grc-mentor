@@ -148,7 +148,7 @@
 
 
     <!-- Mentornship benefit section -->
-     
+
     <section class="benefits-section text-center">
       <small class="industry-text">Industries</small>
       <h1 class="industry-h1 mt-2">Mentorship benefits</h1>

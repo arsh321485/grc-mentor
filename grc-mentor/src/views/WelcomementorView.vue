@@ -22,16 +22,22 @@
                 </div>
 
                 <!-- Start Learning Button -->
-                <div class="start-btn-container">
-                    <button class="start-btn">Start learning</button>
-                </div>
+               <div class="start-btn-container">
+  <router-link 
+      to="/grc101" 
+      class="start-btn"
+  >
+      Start learning
+  </router-link>
+</div>
+
             </div>
 
         </div>
     </main>
 </template>
 
-<script>
+<script lang="ts">
 import Stepper from '@/components/Stepper.vue';
 
 export default {
@@ -140,6 +146,7 @@ export default {
     transition: background 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    text-decoration: none;
     /* Always stays on top */
 }
 

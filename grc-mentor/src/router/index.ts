@@ -72,7 +72,7 @@ const router = createRouter({
       component: SignupView,
     },
 
-    
+
      {
       path: '/uploadcv',
       name: 'uploadcv',

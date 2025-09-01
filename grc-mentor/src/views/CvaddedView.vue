@@ -32,7 +32,10 @@
                 </div>
 
                 <!-- Button -->
-                <button class="next-btn px-5 ">Next: Course Payment</button>
+                <router-link to="/paymentprocess" class="next-btn px-5">
+                    Next: Course Payment
+                </router-link>
+
             </div>
         </div>
     </main>
@@ -88,7 +91,8 @@ export default {
 .blue-circle {
     width: 55px;
     height: 55px;
-    background-color: #E1F6FF; /* Light blue background */
+    background-color: #E1F6FF;
+    /* Light blue background */
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -99,7 +103,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0096D6; /* Dark blue inner circle */
+    background-color: #0096D6;
+    /* Dark blue inner circle */
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -124,25 +129,33 @@ export default {
 }
 
 @keyframes blink {
-    0%, 80%, 100% {
+
+    0%,
+    80%,
+    100% {
         opacity: 0.3;
     }
+
     40% {
         opacity: 1;
     }
 }
 
-.status-text{
+.status-text {
     color: #000000DE;
     font-weight: 500;
     font-size: 20px;
 }
 
 .next-btn {
-    position: fixed;         /* Stick to the viewport */
-    bottom: 20px;           /* Distance from bottom */
-    left: 25%;              /* Move to center horizontally */
-    transform: translateX(-50%); /* Adjust for perfect center */
+    position: fixed;
+    /* Stick to the viewport */
+    bottom: 20px;
+    /* Distance from bottom */
+    left: 25%;
+    /* Move to center horizontally */
+    transform: translateX(-50%);
+    /* Adjust for perfect center */
     padding: 12px 40px;
     background-color: #7ea4b4;
     color: #FFFFFF;
@@ -153,7 +166,8 @@ export default {
     font-weight: 600;
     transition: background 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;          /* Always stays on top */
+    z-index: 1000;
+    /* Always stays on top */
 }
 
 /* Hover Effect */
@@ -164,7 +178,8 @@ export default {
 /* Responsive Styling */
 @media (max-width: 768px) {
     .next-btn {
-        width: 90%;             /* Take most of the width on mobile */
+        width: 90%;
+        /* Take most of the width on mobile */
         left: 50%;
         transform: translateX(-50%);
         padding: 14px;

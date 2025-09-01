@@ -15,7 +15,7 @@
         placeholder="Search for anything..."
         v-model="searchQuery"
       />
-      <span class="search-icon"> <i class="bi bi-search"></i></span>
+      <span class="search-icon"><i class="bi bi-search"></i></span>
     </div>
 
     <!-- Navigation Links -->
@@ -24,15 +24,27 @@
         v-for="(item, index) in navItems"
         :key="index"
         :class="{ active: activeItem === item.name }"
-        @click="handleNavClick(item)"
       >
-        <div class="nav-item">
+        <!-- Router link for navigation items -->
+        <router-link
+          v-if="item.name !== 'Projects'"
+          :to="item.route"
+          class="nav-item text-decoration-none"
+          @click="handleNavClick(item)"
+        >
           <i :class="item.icon"></i>
           <span>{{ item.name }}</span>
+        </router-link>
 
-          <!-- Dropdown arrow only for Projects -->
+        <!-- Projects Dropdown -->
+        <div
+          v-if="item.name === 'Projects'"
+          class="nav-item"
+          @click="toggleProjectsDropdown"
+        >
+          <i :class="item.icon"></i>
+          <span>{{ item.name }}</span>
           <i
-            v-if="item.name === 'Projects'"
             :class="[
               'fas',
               projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
@@ -41,13 +53,18 @@
           ></i>
         </div>
 
-        <!-- Dropdown Submenu for Projects -->
-        <ul
-          v-if="item.name === 'Projects' && projectDropdownOpen"
-          class="dropdown-list"
-        >
-          <li v-for="(project, i) in projects" :key="i">
-            {{ project }}
+        <!-- Projects Submenu -->
+        <ul v-if="item.name === 'Projects' && projectDropdownOpen" class="dropdown-list">
+          <li
+            v-for="(project, i) in projects"
+            :key="i"
+          >
+            <router-link
+              :to="`/projects/${project.toLowerCase().replace(/\s+/g, '-')}`"
+              class="text-decoration-none dropdown-link"
+            >
+              {{ project }}
+            </router-link>
           </li>
         </ul>
       </li>
@@ -63,9 +80,24 @@
     <div class="account-section">
       <p class="account-label">ACCOUNT</p>
       <ul>
-         <li><i class="fas fa-file-alt"></i> Your CV</li>
-        <li><i class="fas fa-comment-dots"></i> <span>Feedback</span></li>
-        <li><i class="fas fa-cog"></i> <span>Settings</span></li>
+        <li>
+          <router-link to="/mycv" class="account-link text-decoration-none">
+            <i class="fas fa-file-alt"></i>
+            <span>Your CV</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/feedback" class="account-link text-decoration-none">
+            <i class="fas fa-comment-dots"></i>
+            <span>Feedback</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/setting" class="account-link text-decoration-none">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </router-link>
+        </li>
       </ul>
     </div>
 
@@ -95,33 +127,34 @@ export default {
       activeItem: "Working Desk",
       projectDropdownOpen: false,
       navItems: [
-        { name: "Overview", icon: "fas fa-home" },
-        { name: "Working Desk", icon: "fas fa-briefcase" },
+        { name: "Overview", icon: "fas fa-home", route: "/overview" },
+        { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
         { name: "Projects", icon: "fas fa-tasks" },
-        { name: "Matching jobs", icon: "fas fa-map" },
-        { name: "Badges", icon: "fas fa-award" },
-        { name: "Career graph", icon: "fas fa-chart-line" },
-        { name: "Profile views", icon: "fas fa-user" },
-         { name: "Calender", icon: "fas fa-calendar" },
+        { name: "Matching jobs", icon: "fas fa-map", route: "/matchingjobs" },
+        { name: "Badges", icon: "fas fa-award", route: "/badges" },
+        { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
+        { name: "Profile views", icon: "fas fa-user", route: "/profile-views" },
+        { name: "Calender", icon: "fas fa-calendar", route: "/calendar" }
       ],
       projects: [
         "ISO 27001",
         "ISO 27002",
         "ISO 27003",
-        "ISO 27004",
-      ],
+        "ISO 27004"
+      ]
     };
   },
   methods: {
     handleNavClick(item) {
-      if (item.name === "Projects") {
-        this.projectDropdownOpen = !this.projectDropdownOpen;
-      } else {
+      if (item.name !== "Projects") {
         this.activeItem = item.name;
         this.projectDropdownOpen = false;
       }
     },
-  },
+    toggleProjectsDropdown() {
+      this.projectDropdownOpen = !this.projectDropdownOpen;
+    }
+  }
 };
 </script>
 
@@ -202,7 +235,6 @@ export default {
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
-  cursor: pointer;
   transition: background 0.3s;
 }
 
@@ -211,6 +243,11 @@ export default {
   align-items: center;
   gap: 10px;
   padding: 7px 15px;
+}
+
+.nav-item:hover {
+  background-color: #f1f1f1;
+  border-radius: 20px;
 }
 
 .nav-links li i {
@@ -249,26 +286,19 @@ export default {
 }
 
 .dropdown-list li {
-  display: flex;
-  align-items: start;
-  gap: 8px;
   padding: 6px 0;
   font-size: 14px;
-  color: #000000DE;
-  cursor: pointer;
-  transition: color 0.2s;
-  list-style: disc;
 }
 
-.dropdown-list li:hover {
+.dropdown-link {
+  color: #000000DE;
+}
+
+.dropdown-link:hover {
   color: #008AC5;
 }
 
 /* Account Section */
-/* .account-section {
-  margin-top: 20px;
-} */
-
 .account-label {
   font-size: 13px;
   font-weight: bold;
@@ -276,31 +306,24 @@ export default {
   margin-bottom: 10px;
 }
 
-.account-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.account-section ul li {
+.account-link {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 10px;
-  cursor: pointer;
   font-size: 14px;
-  border-radius: 6px;
-}
-
-.account-section ul li i {
-  color: #D9D9D9;
-}
-
-.account-section ul li span {
   color: #00000099;
+  border-radius: 6px;
+  transition: background-color 0.2s;
 }
 
-.account-section ul li:hover {
+.account-link:hover {
   background-color: #f1f1f1;
+  color: #008AC5;
+}
+
+.account-link i {
+  color: #D9D9D9;
 }
 
 /* Profile Section */

@@ -6,46 +6,49 @@
             </div>
 
             <div class="col-10 col-md-10">
-              
-                    <h2 class="process-text mt-5 pt-4">Please pay to proceed:</h2>
-                    <p class="sub-text  pt-2">Please wait while we set things up for you...</p>
 
-                    <div class="row">
-                        <div class="col-5">
-                              <div class="payment-box">
-                        <h6 class="mb-0">Select payment option:</h6>
-                        <p class="sub-text  pt-2">Select payment option:</p>
+                <h2 class="process-text mt-5 pt-4">Please pay to proceed:</h2>
+                <p class="sub-text  pt-2">Please wait while we set things up for you...</p>
 
-                        <!-- UPI Option -->
-                        <label class="payment-option">
-                            <input type="radio" value="upi" v-model="selectedOption" />
-                            UPI
-                        </label>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="payment-box">
+                            <h6 class="mb-0">Select payment option:</h6>
+                            <p class="sub-text  pt-2">Select payment option:</p>
 
-                        <!-- Credit Card Option -->
-                        <label class="payment-option-2 card-option">
-                            <input type="radio" value="card" v-model="selectedOption" />
-                            <div>
-                                <span>Credit card</span>
-                                <p class="sub-text pt-2">Select payment option:</p>
-                                <input v-if="selectedOption === 'card'" type="text" placeholder="Card number"
-                                    v-model="cardNumber" />
+                            <!-- UPI Option -->
+                            <label class="payment-option">
+                                <input type="radio" value="upi" v-model="selectedOption" />
+                                UPI
+                            </label>
+
+                            <!-- Credit Card Option -->
+                            <label class="payment-option-2 card-option">
+                                <input type="radio" value="card" v-model="selectedOption" />
+                                <div>
+                                    <span>Credit card</span>
+                                    <p class="sub-text pt-2">Select payment option:</p>
+                                    <input v-if="selectedOption === 'card'" type="text" placeholder="Card number"
+                                        v-model="cardNumber" />
 
                                     <p class="card-sub-text">Card number</p>
-                            </div>
+                                </div>
 
-                            
-                        </label>
-                        
-                    </div>
+
+                            </label>
+
                         </div>
                     </div>
+                </div>
 
-                  
 
-                    <!-- Submit Button -->
-                    <button class="submit-btn px-5">Your mentorship</button>
-                
+
+                <!-- Submit Button -->
+                <router-link to="/mentornship" class="submit-btn px-5">
+                    Your mentorship
+                </router-link>
+
+
 
             </div>
 
@@ -70,7 +73,7 @@ export default {
 
 
 <style>
-.process-text{
+.process-text {
     color: #000000;
     font-weight: 500;
 }
@@ -79,7 +82,7 @@ export default {
     color: #00000099;
     font-size: 14px;
     /* margin-bottom: 20px; */
-    
+
 }
 
 .payment-box {
@@ -99,7 +102,7 @@ export default {
     color: #000000;
     font-weight: 500;
     font-size: 16px;
-    
+
 }
 
 .payment-option input[type="radio"] {
@@ -111,15 +114,19 @@ export default {
     display: flex;
     align-items: flex-start;
     margin: 15px 0;
-    padding: 20px;              /* Increased padding for more space */
+    padding: 20px;
+    /* Increased padding for more space */
     border: 1px solid #ddd;
-    border-radius: 12px;        /* Slightly larger radius for modern look */
+    border-radius: 12px;
+    /* Slightly larger radius for modern look */
     cursor: pointer;
     color: #000000;
     font-weight: 500;
     font-size: 16px;
-    min-height: 230px;          /* Added minimum height */
-    transition: all 0.3s ease;  /* Smooth hover effects */
+    min-height: 230px;
+    /* Added minimum height */
+    transition: all 0.3s ease;
+    /* Smooth hover effects */
 }
 
 
@@ -137,17 +144,22 @@ export default {
     border: 1px solid #ddd;
     border-radius: 6px;
 }
-.card-sub-text{
+
+.card-sub-text {
     color: #000000DE;
     font-weight: 500;
     font-size: 13px;
 }
 
 .submit-btn {
-      position: fixed;         /* Stick to the viewport */
-    bottom: 20px;           /* Distance from bottom */
-    left: 25%;              /* Move to center horizontally */
-    transform: translateX(-50%); /* Adjust for perfect center */
+    position: fixed;
+    /* Stick to the viewport */
+    bottom: 20px;
+    /* Distance from bottom */
+    left: 25%;
+    /* Move to center horizontally */
+    transform: translateX(-50%);
+    /* Adjust for perfect center */
     padding: 12px 40px;
     background-color: #007BAF;
     color: #FFFFFF;
@@ -158,7 +170,9 @@ export default {
     font-weight: 600;
     transition: background 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;          /* Always stays on top */
+    z-index: 1000;
+    text-decoration: none;
+    /* Always stays on top */
 }
 
 .submit-btn:hover {

@@ -19,39 +19,47 @@
     </div>
 
     <!-- Navigation Links -->
-    <ul class="nav-links">
+   <ul class="nav-links">
+  <li
+    v-for="(item, index) in navItems"
+    :key="index"
+    :class="{ active: activeItem === item.name }"
+  >
+    <router-link
+      :to="item.route"
+      class="nav-item"
+      @click.native="handleNavClick(item)"
+    >
+      <i :class="item.icon"></i>
+      <span>{{ item.name }}</span>
+
+      <!-- Dropdown arrow only for Projects -->
+      <i
+        v-if="item.name === 'Projects'"
+        :class="[
+          'fas',
+          projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
+          'dropdown-arrow'
+        ]"
+      ></i>
+    </router-link>
+
+    <!-- Dropdown Submenu for Projects -->
+    <ul
+      v-if="item.name === 'Projects' && projectDropdownOpen"
+      class="dropdown-list"
+    >
       <li
-        v-for="(item, index) in navItems"
-        :key="index"
-        :class="{ active: activeItem === item.name }"
-        @click="handleNavClick(item)"
+        v-for="(project, i) in projects"
+        :key="i"
+        @click="$router.push(`/projects/${project.toLowerCase().replace(/\s+/g, '-')}`)"
       >
-        <div class="nav-item">
-          <i :class="item.icon"></i>
-          <span>{{ item.name }}</span>
-
-          <!-- Dropdown arrow only for Projects -->
-          <i
-            v-if="item.name === 'Projects'"
-            :class="[
-              'fas',
-              projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
-              'dropdown-arrow'
-            ]"
-          ></i>
-        </div>
-
-        <!-- Dropdown Submenu for Projects -->
-        <ul
-          v-if="item.name === 'Projects' && projectDropdownOpen"
-          class="dropdown-list"
-        >
-          <li v-for="(project, i) in projects" :key="i">
-            {{ project }}
-          </li>
-        </ul>
+        {{ project }}
       </li>
     </ul>
+  </li>
+</ul>
+
 
     <!-- Chat & Settings -->
     <div class="d-flex justify-content-end gap-3">
@@ -63,10 +71,28 @@
     <div class="account-section">
       <p class="account-label">ACCOUNT</p>
       <ul>
-         <li><i class="fas fa-file-alt"></i> Your CV</li>
-        <li><i class="fas fa-comment-dots"></i> <span>Feedback</span></li>
-        <li><i class="fas fa-cog"></i> <span>Settings</span></li>
-      </ul>
+  <li>
+    <router-link to="/mycv" class="d-flex align-items-center text-decoration-none account-link gap-3">
+      <i class="fas fa-file-alt"></i>
+      <span>Your CV</span>
+    </router-link>
+  </li>
+
+  <li>
+    <router-link to="/feedback" class="d-flex align-items-center text-decoration-none account-link gap-3">
+      <i class="fas fa-comment-dots"></i>
+      <span>Feedback</span>
+    </router-link>
+  </li>
+
+  <li>
+    <router-link to="/setting" class="d-flex align-items-center text-decoration-none account-link gap-3">
+      <i class="fas fa-cog"></i>
+      <span>Settings</span>
+    </router-link>
+  </li>
+</ul>
+
     </div>
 
     <!-- Profile Section -->
@@ -95,15 +121,16 @@ export default {
       activeItem: "Working Desk",
       projectDropdownOpen: false,
       navItems: [
-        { name: "Overview", icon: "fas fa-home" },
-        { name: "Working Desk", icon: "fas fa-briefcase" },
-        { name: "Projects", icon: "fas fa-tasks" },
-        { name: "Roadmap", icon: "fas fa-map" },
-        { name: "Badges", icon: "fas fa-award" },
-        { name: "Career graph", icon: "fas fa-chart-line" },
-        { name: "Profile views", icon: "fas fa-user" },
-         { name: "Calender", icon: "fas fa-calendar" },
-      ],
+  { name: "Overview", icon: "fas fa-home", route: "/profileview" },
+  { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
+  { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
+  { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
+  { name: "Badges", icon: "fas fa-award", route: "/badges" },
+  { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
+  { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
+  { name: "Calender", icon: "fas fa-calendar", route: "/calender" },
+],
+
       projects: [
         "ISO 27001",
         "ISO 27002",
@@ -212,6 +239,21 @@ export default {
   gap: 10px;
   padding: 6px 15px;
 }
+.nav-links .nav-item {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 15px;
+  color: inherit;
+  width: 100%;
+}
+
+.nav-links .nav-item:hover {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+}
+
 
 .nav-links li i {
   font-size: 15px;

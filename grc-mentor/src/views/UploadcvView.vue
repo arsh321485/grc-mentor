@@ -1,4 +1,3 @@
-
 <template>
     <main>
         <div class="container-fluid row">
@@ -30,8 +29,8 @@
 
                             <!-- Progress Bar -->
                             <div v-if="uploading" class="progress my-3">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                    role="progressbar" :style="{ width: uploadProgress + '%' }">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                    :style="{ width: uploadProgress + '%' }">
                                     {{ uploadProgress }}%
                                 </div>
                             </div>
@@ -49,6 +48,12 @@
                             <!-- Hidden File Input -->
                             <input type="file" ref="fileInput" class="d-none" @change="handleFileChange" />
                         </div>
+
+                        <!-- Button -->
+                        <router-link to="/cvadded" class="next-btn px-5">
+                            Next: Course Payment
+                        </router-link>
+
                     </div>
                 </div>
             </div>
@@ -123,6 +128,35 @@ body {
     background-color: #f8f9fa;
 }
 
+.next-btn {
+    position: fixed;
+    /* Stick to the viewport */
+    bottom: 20px;
+    /* Distance from bottom */
+    left: 25%;
+    /* Move to center horizontally */
+    transform: translateX(-50%);
+    /* Adjust for perfect center */
+    padding: 12px 40px;
+    background-color: #7ea4b4;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-decoration: none;
+    /* Always stays on top */
+}
+
+/* Hover Effect */
+.next-btn:hover {
+    background-color: #4a9dcf;
+}
+
 .upload-box {
     /* border: 2px dashed #cfd8dc; */
     border-radius: 12px;
@@ -165,4 +199,3 @@ body {
     color: #00000099;
 }
 </style>
-

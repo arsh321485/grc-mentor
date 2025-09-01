@@ -1,114 +1,117 @@
-
 <template>
     <main>
-         <div class="container-fluid row">
-             <div class="col-2 col-md-2">
+        <div class="container-fluid row">
+            <div class="col-2 col-md-2">
                 <Sidebargrc2 />
             </div>
-              <div class="col-10 col-md-10">
-                  <div class="overview-page p-5">
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-start">
-            <div>
-                <h1 class="fw-bold">ISO 27001</h1>
-                <p class="text-muted skill-desc">
-                    Skill description Skill description Skill description Skill description Skill description Skill
-                    description Skill description
-                </p>
-            </div>
-            <div class="calendar-container">
-                <!-- Calendar view button -->
-                <div class="d-flex align-items-center " role="button" @click="openCalendar">
-                    <i class="bi bi-calendar3 me-2 "></i>
-                    <span class="fw-bold fs-5">Calendar view</span>
-                </div>
-
-                <!-- Bootstrap Modal -->
-                <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="calendarModalLabel">Calendar</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Calendar Component -->
-                                <input type="date" class="form-control" v-model="selectedDate" />
-                                <p class="mt-3">
-                                    <strong>Selected date:</strong> {{ selectedDate }}
-                                </p>
-                            </div>
+            <div class="col-10 col-md-10">
+                <div class="overview-page p-5">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h1 class="fw-bold">ISO 27001</h1>
+                            <p class="text-muted skill-desc">
+                                Skill description Skill description Skill description Skill description Skill
+                                description Skill
+                                description Skill description
+                            </p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <div class="calendar-container">
+                            <!-- Calendar view button -->
+                            <div class="d-flex align-items-center " role="button" @click="openCalendar">
+                                <i class="bi bi-calendar3 me-2 "></i>
+                                <span class="fw-bold fs-5">Calendar view</span>
+                            </div>
 
-        <!-- Project Details -->
-        <div class="row text-center mt-4 mb-5">
-            <div class="col-md-3">
-                <p class="text-muted mb-1">Duration of the project</p>
-                <h6 class="fw-semibold">3 weeks</h6>
-            </div>
-            <div class="col-md-3">
-                <p class="text-muted mb-1">Industry worked with</p>
-                <h6 class="fw-semibold">Media</h6>
-            </div>
-            <div class="col-md-3">
-                <p class="text-muted mb-1">Skills learned</p>
-
-            </div>
-            <div class="col-md-3">
-                <p class="text-muted mb-1">Management Interactions</p>
-
-            </div>
-        </div>
-
-        <!-- Tasks Completed Section -->
-        <h5 class="fw-semibold mb-3">Tasks completed</h5>
-        <div class="row">
-            <div v-for="(task, idx) in tasks" :key="idx" class="col-12 col-sm-6 col-lg-3 mb-4">
-                <div class="card task-card h-100">
-                    <div class="card-body p-3">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <div>
-                                <h6 class="fw-semibold mb-1">{{ task.title }}</h6>
-                                <p class="text-muted small mb-1">
-                                    Deadline: {{ task.deadline }}
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <!-- Avatar -->
-                                    <div class="pe-0">
-                                        <img src="../assets/avtar.png" class="rounded-circle" alt="avatar" />
-                                    </div>
-                                    <div v-if="task.tag" class="small text-secondary">
-                                        • {{ task.tag }}
+                            <!-- Bootstrap Modal -->
+                            <div class="modal fade" id="calendarModal" tabindex="-1"
+                                aria-labelledby="calendarModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="calendarModalLabel">Calendar</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Calendar Component -->
+                                            <input type="date" class="form-control" v-model="selectedDate" />
+                                            <p class="mt-3">
+                                                <strong>Selected date:</strong> {{ selectedDate }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <i class="bi bi-arrow-right text-primary fs-5"></i>
                         </div>
                     </div>
+
+                    <!-- Project Details -->
+                    <div class="row text-center mt-4 mb-5">
+                        <div class="col-md-3">
+                            <p class="text-muted mb-1">Duration of the project</p>
+                            <h6 class="fw-semibold">3 weeks</h6>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="text-muted mb-1">Industry worked with</p>
+                            <h6 class="fw-semibold">Media</h6>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="text-muted mb-1">Skills learned</p>
+
+                        </div>
+                        <div class="col-md-3">
+                            <p class="text-muted mb-1">Management Interactions</p>
+
+                        </div>
+                    </div>
+
+                    <!-- Tasks Completed Section -->
+                    <h5 class="fw-semibold mb-3">Tasks completed</h5>
+                    <div class="row">
+                        <div v-for="(task, idx) in tasks" :key="idx" class="col-12 col-sm-6 col-lg-3 mb-4">
+                            <div class="card task-card h-100">
+                                <div class="card-body p-3">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div>
+                                            <h6 class="fw-semibold mb-1">{{ task.title }}</h6>
+                                            <p class="text-muted small mb-1">
+                                                Deadline: {{ task.deadline }}
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <!-- Avatar -->
+                                                <div class="pe-0">
+                                                    <img src="../assets/avtar.png" class="rounded-circle"
+                                                        alt="avatar" />
+                                                </div>
+                                                <div v-if="task.tag" class="small text-secondary">
+                                                    • {{ task.tag }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <i class="bi bi-arrow-right text-primary fs-5"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
         </div>
-
-    </div>
-
-              </div>
-         </div>
     </main>
 </template>
 
 
 <script>
+
 import Sidebargrc2 from '@/components/Sidebargrc2.vue';
+import { Modal } from 'bootstrap';
 
 export default {
     name: "ISO-27001View",
-    components:{Sidebargrc2},
+    components: { Sidebargrc2 },
     data() {
         return {
 
@@ -171,6 +174,7 @@ export default {
 }
 
 .skill-desc {
+
     max-width: 700px;
     line-height: 1.6;
 }

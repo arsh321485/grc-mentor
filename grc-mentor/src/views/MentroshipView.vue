@@ -1,7 +1,7 @@
 <template>
     <main>
         <div class="container-fluid row">
-            <div class="col-2 col-md-2">
+            <div class="col-2 col-md-2">w
                 <Stepper :currentStep="4" />
             </div>
 
@@ -19,8 +19,8 @@
                             <div class="icon-wrapper media">
                                 <i class="fas fa-play"></i>
                             </div>
-                            
-                           <h6>Media</h6>
+
+                            <h6>Media</h6>
                         </div>
                         <p>Company name</p>
                     </div>
@@ -30,7 +30,7 @@
                             <div class="icon-wrapper legal">
                                 <i class="fas fa-gavel"></i>
                             </div>
-                           
+
                             <h6>Legal</h6>
                         </div>
                         <p>Company name</p>
@@ -41,7 +41,7 @@
                             <div class="icon-wrapper education">
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
-                            
+
                             <h6>Education</h6>
                         </div>
                         <p>Company name</p>
@@ -52,7 +52,7 @@
                             <div class="icon-wrapper ecommerce">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                          
+
                             <h6>E-commerce</h6>
                         </div>
                         <p>Company name</p>
@@ -70,7 +70,7 @@
                 <p class="placeholder-text mt-3 pt-4">Your responsibilities will be:</p>
 
                 <!-- Policy -->
-                
+
                 <p class="pt-4 mt-5 placeholder-text">Acceptance usage policy</p>
                 <label class="checkbox">
                     <input type="checkbox" v-model="agree" />
@@ -81,9 +81,10 @@
                 <!-- <button class="submit-btn" :disabled="!agree">
                     Setup your email
                 </button> -->
-               <button class="emial-btn ">
-                 Setup your email
-               </button>
+                <router-link to="/welcomementor" class="emial-btn">
+                    Setup your email
+                </router-link>
+
             </div>
 
         </div>
@@ -92,6 +93,7 @@
 </template>
 
 <script>
+
 import Stepper from '@/components/Stepper.vue';
 
 export default {
@@ -180,16 +182,16 @@ input {
 
 }
 
-.top h6{
-   font-weight: 500;
+.top h6 {
+    font-weight: 500;
     color: #000000;
     padding-top: 8px;
 }
 
-.text-project{
-   font-size: 15px;
-   font-weight: 600;
-   color: #000000DE;
+.text-project {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000DE;
 }
 
 .sub-text {
@@ -197,6 +199,7 @@ input {
     font-size: 14px;
     margin-bottom: 20px;
 }
+
 /* .top-text{
     font-size: 18px;
     font-weight: 500;
@@ -299,7 +302,7 @@ input {
 }
 
 
-.emial-btn{
+.emial-btn {
     background-color: #007BAF;
     color: #FFFFFF;
     border: none;
@@ -307,10 +310,12 @@ input {
     cursor: pointer;
     font-size: 15px;
     font-weight: 600;
-     padding: 12px 40px;
-     bottom: 20px;           /* Distance from bottom */
+    padding: 12px 40px;
+    bottom: 20px;
+    /* Distance from bottom */
     left: 25%;
-  
+    text-decoration: none;
+
 }
 
 /* ✅ Responsive */

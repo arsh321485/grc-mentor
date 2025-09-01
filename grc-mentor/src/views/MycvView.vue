@@ -97,6 +97,7 @@
 </template>
 
 <script>
+
 import Sidebarprofile from '@/components/Sidebarprofile.vue';
 
 export default {

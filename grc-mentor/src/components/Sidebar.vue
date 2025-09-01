@@ -19,39 +19,43 @@
     </div>
 
     <!-- Navigation Links -->
-    <ul class="nav-links">
-      <li
-        v-for="(item, index) in navItems"
-        :key="index"
-        :class="{ active: activeItem === item.name }"
-        @click="handleNavClick(item)"
-      >
-        <div class="nav-item">
-          <i :class="item.icon"></i>
-          <span>{{ item.name }}</span>
+   <ul class="nav-links">
+  <li
+    v-for="(item, index) in navItems"
+    :key="index"
+    :class="{ active: activeItem === item.name }"
+  >
+    <router-link
+      :to="item.route"
+      class="nav-item"
+      @click.native="handleNavClick(item)"
+    >
+      <i :class="item.icon"></i>
+      <span>{{ item.name }}</span>
 
-          <!-- Dropdown arrow only for Projects -->
-          <i
-            v-if="item.name === 'Projects'"
-            :class="[
-              'fas',
-              projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
-              'dropdown-arrow'
-            ]"
-          ></i>
-        </div>
+      <!-- Dropdown arrow only for Projects -->
+      <i
+        v-if="item.name === 'Projects'"
+        :class="[
+          'fas',
+          projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
+          'dropdown-arrow'
+        ]"
+      ></i>
+    </router-link>
 
-        <!-- Dropdown Submenu for Projects -->
-        <ul
-          v-if="item.name === 'Projects' && projectDropdownOpen"
-          class="dropdown-list"
-        >
-          <li v-for="(project, i) in projects" :key="i">
-            {{ project }}
-          </li>
-        </ul>
+    <!-- Dropdown Submenu for Projects -->
+    <ul
+      v-if="item.name === 'Projects' && projectDropdownOpen"
+      class="dropdown-list"
+    >
+      <li v-for="(project, i) in projects" :key="i">
+        {{ project }}
       </li>
     </ul>
+  </li>
+</ul>
+
 
     <!-- Chat & Settings -->
     <div class="d-flex justify-content-end gap-3">
@@ -93,15 +97,16 @@ export default {
       searchQuery: "",
       activeItem: "Working Desk",
       projectDropdownOpen: false,
-      navItems: [
-        { name: "Overview", icon: "fas fa-home" },
-        { name: "Working Desk", icon: "fas fa-briefcase" },
-        { name: "Projects", icon: "fas fa-tasks" },
-        { name: "Roadmap", icon: "fas fa-map" },
-        { name: "Badges", icon: "fas fa-award" },
-        { name: "Career graph", icon: "fas fa-chart-line" },
-        { name: "Profile views", icon: "fas fa-user" },
-      ],
+     navItems: [
+  { name: "Overview", icon: "fas fa-home", route: "/overview" },
+  { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
+  { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
+  { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
+  { name: "Badges", icon: "fas fa-award", route: "/badges" },
+  { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
+  { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
+],
+
       projects: [
         "Project Apollo",
         "Project Orion",
@@ -110,16 +115,17 @@ export default {
       ],
     };
   },
-  methods: {
-    handleNavClick(item) {
-      if (item.name === "Projects") {
-        this.projectDropdownOpen = !this.projectDropdownOpen;
-      } else {
-        this.activeItem = item.name;
-        this.projectDropdownOpen = false;
-      }
-    },
+methods: {
+  handleNavClick(item) {
+    if (item.name === "Projects") {
+      this.projectDropdownOpen = !this.projectDropdownOpen;
+    } else {
+      this.activeItem = item.name;
+      this.projectDropdownOpen = false;
+    }
   },
+}
+
 };
 </script>
 
@@ -225,6 +231,21 @@ export default {
   color: #008AC5;
   border-radius: 20px;
 }
+
+.nav-links .nav-item {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  color: inherit;
+}
+
+.nav-links .nav-item:hover {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+}
+
 
 .nav-links li.active i,
 .nav-links li.active span {
