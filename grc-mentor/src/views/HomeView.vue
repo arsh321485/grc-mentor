@@ -1,10 +1,6 @@
 <template>
   <main>
     <Header />
-    <!-- Logout button -->
-    <div class="container d-flex justify-content-end mt-3">
-      <button class="btn btn-outline-danger btn-sm" @click="logout">Logout</button>
-    </div>
 
     <!-- section carousal -->
 
@@ -570,71 +566,60 @@
 
     </section>
 
+
   </main>
 </template>
+
+
 <script lang="ts">
-import { defineComponent, ref, onMounted, onBeforeUnmount } from 'vue';
-import { useRouter } from 'vue-router';
-import Header from '@/components/Header.vue';
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
+import { defineComponent } from "vue";
+import Header from "@/components/Header.vue";
+import Swiper from "swiper/bundle";
+import "swiper/css/bundle";
 
 export default defineComponent({
-  name: 'HomeView',
+  name: "HomeView",
   components: { Header },
-  setup() {
-    const router = useRouter();
-    const swiperInstance = ref<any>(null);
-
-    const testimonials = [
-      { quote: "GRC’s expertise in GDPR gave us the confidence to navigate compliance.", name: "Daniel US", position: "CEO, Star Media" },
-      { quote: "Their guidance was clear, concise, and tailored to our needs.", name: "Sophia Lee", position: "CTO, Tech Solutions" },
-      { quote: "Great support in handling regulatory frameworks.", name: "Raj Patel", position: "Manager, FinEdge" },
-      { quote: "We could expand globally thanks to their compliance strategies.", name: "Emily Wong", position: "Director, Global Trade" },
-      { quote: "Truly professional and reliable service.  to navigate compliance.", name: "Carlos Mendez", position: "CEO, BrightFuture" },
-      { quote: "Their solutions saved us significant time and effort.  to navigate compliance.", name: "Marchent Dios", position: "CEO, Global Bright" }
-    ];
-
-    const logout = () => {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('user');
-      router.push({ name: 'auth' });
+  data() {
+    return {
+      swiper: null as Swiper | null, // ✅ declare swiper here
+      testimonials: [
+        { quote: "GRC’s expertise in GDPR gave us the confidence to navigate compliance.", name: "Daniel US", position: "CEO, Star Media" },
+        { quote: "Their guidance was clear, concise, and tailored to our needs.", name: "Sophia Lee", position: "CTO, Tech Solutions" },
+        { quote: "Great support in handling regulatory frameworks.", name: "Raj Patel", position: "Manager, FinEdge" },
+        { quote: "We could expand globally thanks to their compliance strategies.", name: "Emily Wong", position: "Director, Global Trade" },
+        { quote: "Truly professional and reliable service.", name: "Carlos Mendez", position: "CEO, BrightFuture" },
+        { quote: "Their solutions saved us significant time and effort.", name: "Marchent Dios", position: "CEO, Global Bright" }
+      ]
     };
-
-    onMounted(() => {
-      swiperInstance.value = new Swiper(".mySwiper", {
-        slidesPerView: 3,
-        slidesPerGroup: 3,
-        spaceBetween: 30,
-        loop: true,
-        autoplay: {
-          delay: 4000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          0: { slidesPerView: 1, slidesPerGroup: 1 },
-          768: { slidesPerView: 2, slidesPerGroup: 2 },
-          1024: { slidesPerView: 3, slidesPerGroup: 3 },
-        },
-      });
+  },
+  mounted() {
+    this.swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        0: { slidesPerView: 1, slidesPerGroup: 1 },
+        768: { slidesPerView: 2, slidesPerGroup: 2 },
+        1024: { slidesPerView: 3, slidesPerGroup: 3 },
+      },
     });
-
-    onBeforeUnmount(() => {
-      if (swiperInstance.value) swiperInstance.value.destroy(true, true);
-    });
-
-    return { testimonials, logout };
-  }
+  },
+  beforeUnmount() {
+    if (this.swiper) {
+      this.swiper.destroy(true, true);
+      this.swiper = null;
+    }
+  },
 });
 </script>
 
-<style scoped>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-</style>

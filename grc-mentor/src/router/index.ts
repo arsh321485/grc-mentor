@@ -32,7 +32,7 @@ import ISO27001View from '@/views/ISO27001View.vue'
 import MycvView from '@/views/MycvView.vue'
 import SettingView from '@/views/SettingView.vue'
 import OverviewView from '@/views/OverviewView.vue'
-import AuthenticationView from '@/views/AuthenticationView.vue'
+import Login from '@/components/Login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,7 +63,7 @@ const router = createRouter({
       component: Sidebarprofile,
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: HomeView,
     },
@@ -212,27 +212,13 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
-  path: '/auth',
-  name: 'auth',
-  component: AuthenticationView,
+  path: '/',
+  name: 'login',
+  component: Login,
 },
 
   ],
 })
-
-// Navigation Guard
-router.beforeEach((to, from, next) => {
-  const publicPages = ['/auth', '/signup']; // pages that don't need login
-  const authRequired = !publicPages.includes(to.path);
-  const token = localStorage.getItem('accessToken');
-
-  if (authRequired && !token) {
-    // if trying to access a protected route without login → redirect to login
-    return next('/auth');
-  }
-
-  next();
-});
 
 
 export default router

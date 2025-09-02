@@ -97,7 +97,6 @@
 import { defineComponent } from "vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Datepicker from "vue3-datepicker";
-import { Modal } from "bootstrap"; // Make sure you installed bootstrap and imported Modal
 
 export default defineComponent({
   name: "Grc101View",
