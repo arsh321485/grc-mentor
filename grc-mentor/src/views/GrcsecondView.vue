@@ -94,68 +94,75 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import Sidebargrc2 from "@/components/Sidebargrc2.vue";
-import type { Modal } from "bootstrap"; // ✅ Import type for Bootstrap Modal
-import "bootstrap/dist/js/bootstrap.bundle"; // ✅ Ensure Bootstrap JS is loaded
+import "bootstrap/dist/js/bootstrap.bundle"; // Ensure Bootstrap JS is loaded
 
-export default {
-    name: "GrcsecondView",
-    components: {
-        Sidebargrc2,
-    },
-    data() {
-        return {
-            selectedDate: null as string | null,
-            calendarModal: null as Modal | null, // ✅ Type the modal
-            industries: [
-                {
-                    name: "Media",
-                    tasks: [
-                        { title: "Risk assessment", deadline: "23rd July, 2025", tag: "ISO 27001" },
-                        { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                    ],
-                },
-                {
-                    name: "Legal",
-                    tasks: [
-                        { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                    ],
-                },
-                {
-                    name: "Education",
-                    tasks: [
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                    ],
-                },
-                {
-                    name: "E-commerce",
-                    tasks: [
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                    ],
-                },
-            ],
-        };
-    },
-    methods: {
-        openCalendar() {
-            if (!this.calendarModal) {
-                // ✅ Create a new Bootstrap Modal
-                const modalEl = document.getElementById("calendarModal");
-                if (modalEl) {
-                    this.calendarModal = new (window as any).bootstrap.Modal(modalEl) as Modal;
-                }
-            }
-            this.calendarModal?.show(); // ✅ Optional chaining to avoid TS errors
-        },
-    },
+// Optional: Declare Modal type to avoid TS errors
+type BootstrapModal = {
+  show: () => void;
+  hide: () => void;
+  toggle?: () => void;
 };
+
+export default defineComponent({
+  name: "GrcsecondView",
+  components: {
+    Sidebargrc2,
+  },
+  data() {
+    return {
+      selectedDate: null as string | null,
+      calendarModal: null as BootstrapModal | null, // ✅ Use custom type
+      industries: [
+        {
+          name: "Media",
+          tasks: [
+            { title: "Risk assessment", deadline: "23rd July, 2025", tag: "ISO 27001" },
+            { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+          ],
+        },
+        {
+          name: "Legal",
+          tasks: [
+            { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+          ],
+        },
+        {
+          name: "Education",
+          tasks: [
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+          ],
+        },
+        {
+          name: "E-commerce",
+          tasks: [
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+          ],
+        },
+      ],
+    };
+  },
+  methods: {
+    openCalendar() {
+      if (!this.calendarModal) {
+        // Create a new Bootstrap Modal using any
+        const modalEl = document.getElementById("calendarModal");
+        if (modalEl) {
+          this.calendarModal = new (window as any).bootstrap.Modal(modalEl) as BootstrapModal;
+        }
+      }
+      this.calendarModal?.show(); // Optional chaining avoids TS errors
+    },
+  },
+});
 </script>
 
 
