@@ -26,15 +26,16 @@
         :class="{ active: activeItem === item.name }"
       >
         <!-- Router link for navigation items -->
-        <router-link
-          v-if="item.name !== 'Projects'"
-          :to="item.route"
-          class="nav-item text-decoration-none"
-          @click="handleNavClick(item)"
-        >
-          <i :class="item.icon"></i>
-          <span>{{ item.name }}</span>
-        </router-link>
+      <router-link
+  v-if="item.name !== 'Projects'"
+  :to="item.route || '#'"
+  class="nav-item text-decoration-none"
+  @click="handleNavClick(item)"
+>
+  <i :class="item.icon"></i>
+  <span>{{ item.name }}</span>
+</router-link>
+
 
         <!-- Projects Dropdown -->
         <div
@@ -118,7 +119,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "Sidebarprofile",
   data() {
@@ -145,7 +146,7 @@ export default {
     };
   },
   methods: {
-    handleNavClick(item) {
+    handleNavClick(item: { name: string; icon?: string; route?: string }) {
       if (item.name !== "Projects") {
         this.activeItem = item.name;
         this.projectDropdownOpen = false;
@@ -157,6 +158,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 /* Title */

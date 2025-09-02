@@ -96,7 +96,7 @@
     </main>
 </template>
 
-<script>
+<script lang="ts">
 
 import Sidebarprofile from '@/components/Sidebarprofile.vue';
 

@@ -91,16 +91,20 @@
 
     </main>
 </template>
-
-<script>
-
+<script lang="ts">
 import Stepper from '@/components/Stepper.vue';
 
 export default {
-    name: "MentornshipView",
-    components: { Stepper }
+  name: "MentorshipView",
+  components: { Stepper },
+  data() {
+    return {
+      agree: false, // ✅ Declare the variable here
+    };
+  },
 };
 </script>
+
 
 
 <style>

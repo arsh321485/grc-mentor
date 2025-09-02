@@ -89,7 +89,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "Sidebar",
   data() {
@@ -97,16 +97,15 @@ export default {
       searchQuery: "",
       activeItem: "Working Desk",
       projectDropdownOpen: false,
-     navItems: [
-  { name: "Overview", icon: "fas fa-home", route: "/overview" },
-  { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
-  { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
-  { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
-  { name: "Badges", icon: "fas fa-award", route: "/badges" },
-  { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
-  { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
-],
-
+      navItems: [
+        { name: "Overview", icon: "fas fa-home", route: "/overview" },
+        { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
+        { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
+        { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
+        { name: "Badges", icon: "fas fa-award", route: "/badges" },
+        { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
+        { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
+      ],
       projects: [
         "Project Apollo",
         "Project Orion",
@@ -115,19 +114,19 @@ export default {
       ],
     };
   },
-methods: {
-  handleNavClick(item) {
-    if (item.name === "Projects") {
-      this.projectDropdownOpen = !this.projectDropdownOpen;
-    } else {
-      this.activeItem = item.name;
-      this.projectDropdownOpen = false;
-    }
+  methods: {
+    handleNavClick(item: { name: string; icon?: string; route?: string }) {
+      if (item.name === "Projects") {
+        this.projectDropdownOpen = !this.projectDropdownOpen;
+      } else {
+        this.activeItem = item.name;
+        this.projectDropdownOpen = false;
+      }
+    },
   },
-}
-
 };
 </script>
+
 
 <style scoped>
 /* Title */

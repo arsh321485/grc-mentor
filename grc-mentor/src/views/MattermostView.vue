@@ -41,7 +41,7 @@
     </main>
 </template>
 
-<script>
+<script lang="ts">
 
 import Stepper from '@/components/Stepper.vue';
 

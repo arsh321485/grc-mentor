@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
 import Sidebargrc2 from "@/components/Sidebargrc2.vue";
 

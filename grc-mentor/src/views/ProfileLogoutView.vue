@@ -48,7 +48,7 @@
 
 
 
-<script>
+<script lang="ts">
 import Logoutsidebar from '@/components/Logoutsidebar.vue';
 export default {
     name: "ProfileLogoutView",

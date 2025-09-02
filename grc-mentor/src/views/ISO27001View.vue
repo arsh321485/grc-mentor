@@ -104,67 +104,38 @@
 </template>
 
 
-<script>
-
+<script lang="ts">
 import Sidebargrc2 from '@/components/Sidebargrc2.vue';
-import { Modal } from 'bootstrap';
 
 export default {
-    name: "ISO-27001View",
+    name: "ISO27001View",
     components: { Sidebargrc2 },
     data() {
         return {
-
             tasks: [
-                {
-                    title: "Task to be done",
-                    deadline: "23rd July, 2025",
-                    tag: "ISO 27001",
-                },
-                {
-                    title: "Task to be done",
-                    deadline: "23rd July, 2025",
-                    tag: "ISO 27001",
-                },
-                {
-                    title: "Task to be done",
-                    deadline: "23rd July, 2025",
-                    tag: "ISO 27001",
-                },
-                {
-                    title: "Task to be done",
-                    deadline: "23rd July, 2025",
-                    tag: "ISO 27001",
-                },
-                {
-                    title: "Task to be done",
-                    deadline: "23rd July, 2025",
-                    tag: "ISO 27001",
-                }, {
-                    title: "Task to be done",
-                    deadline: "23rd July, 2025",
-                    tag: "ISO 27001",
-                }, {
-                    title: "Task to be done",
-                    deadline: "23rd July, 2025",
-                    tag: "ISO 27001",
-                }, {
-                    title: "Task to be done",
-                    deadline: "23rd July, 2025",
-                    tag: "ISO 27001",
-                },
+                { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
             ],
+            selectedDate: null as string | null,
+            calendarModal: null as any, // ✅ Declare calendarModal here
         };
     },
     methods: {
         openCalendar() {
+            // Access Bootstrap Modal via window.bootstrap.Modal
             if (!this.calendarModal) {
-                this.calendarModal = new Modal(document.getElementById("calendarModal"));
+                // @ts-ignore
+                this.calendarModal = new (window as any).bootstrap.Modal(document.getElementById("calendarModal"));
             }
             this.calendarModal.show();
         },
     },
-
 };
 </script>
 

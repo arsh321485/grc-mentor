@@ -61,55 +61,55 @@
     </main>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import Stepper from "@/components/Stepper.vue";
 
-export default {
-    name: "UploadcvView",
-    components: { Stepper },
-    data() {
-        return {
-            selectedFile: null,
-            uploading: false,
-            uploadProgress: 0,
-            uploadSuccess: false,
-        };
+export default defineComponent({
+  name: "UploadcvView",
+  components: { Stepper },
+  data() {
+    return {
+      selectedFile: null as File | null, // ✅ TypeFile explicitly
+      uploading: false,
+      uploadProgress: 0,
+      uploadSuccess: false,
+    };
+  },
+  methods: {
+    triggerFileUpload() {
+      const input = this.$refs.fileInput as HTMLInputElement; // ✅ Cast to HTMLInputElement
+      input.click();
     },
-    methods: {
-        // Open hidden file input
-        triggerFileUpload() {
-            this.$refs.fileInput.click();
-        },
 
-        // Handle file selection
-        handleFileChange(event) {
-            const file = event.target.files[0];
-            if (file) {
-                this.selectedFile = file;
-                this.uploadFile();
-            }
-        },
-
-        // Simulate file upload with progress
-        uploadFile() {
-            this.uploading = true;
-            this.uploadSuccess = false;
-            this.uploadProgress = 0;
-
-            // Simulate progress (replace this with real API if needed)
-            const interval = setInterval(() => {
-                if (this.uploadProgress < 100) {
-                    this.uploadProgress += 10;
-                } else {
-                    clearInterval(interval);
-                    this.uploading = false;
-                    this.uploadSuccess = true;
-                }
-            }, 300); // every 300ms increases 10%
-        },
+    handleFileChange(event: Event) {
+      const target = event.target as HTMLInputElement;
+      const file = target.files?.[0];
+      if (file) {
+        this.selectedFile = file; // ✅ Now TypeScript knows this is File
+        this.uploadFile();
+      }
     },
-};
+
+    uploadFile() {
+      this.uploading = true;
+      this.uploadSuccess = false;
+      this.uploadProgress = 0;
+
+      const interval = setInterval(() => {
+        if (this.uploadProgress < 100) {
+          this.uploadProgress += 10;
+        } else {
+          clearInterval(interval);
+          this.uploading = false;
+          this.uploadSuccess = true;
+        }
+      }, 300);
+    },
+  },
+});
 </script>
+
 
 <style>
 .cv-heading {

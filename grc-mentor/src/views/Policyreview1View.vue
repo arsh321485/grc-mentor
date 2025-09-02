@@ -155,7 +155,7 @@ export default {
 
 
 
-<style>
+<style >
 .icon-section {
   width: 40px;
   /* size of the circle */

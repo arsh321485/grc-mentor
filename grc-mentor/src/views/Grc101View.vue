@@ -93,67 +93,73 @@
     </main>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Datepicker from "vue3-datepicker";
+import { Modal } from "bootstrap"; // Make sure you installed bootstrap and imported Modal
 
-export default {
-    name: "Grc101View",
-    components: {
-        Sidebar,
-        Datepicker,
-    },
-    data() {
-        return {
-            selectedDate: null,
-            calendarModal: null,
-            industries: [
-                {
-                    name: "Media",
-                    tasks: [
-                        { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
-                        { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                    ],
-                },
-                {
-                    name: "Legal",
-                    tasks: [
-                        { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                    ],
-                },
-                {
-                    name: "Education",
-                    tasks: [
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                    ],
-                },
-                {
-                    name: "E-commerce",
-                    tasks: [
-                        { title: "Task to be done", deadline: "23rd July, 2025" },
-                    ],
-                },
-            ],
-            showCalendar: false,
-        };
-    },
-    methods: {
-        openCalendar() {
-            if (!this.calendarModal) {
-                this.calendarModal = new Modal(document.getElementById("calendarModal"));
-            }
-            this.calendarModal.show();
+export default defineComponent({
+  name: "Grc101View",
+  components: {
+    Sidebar,
+    Datepicker,
+  },
+  data() {
+    return {
+      selectedDate: null as Date | null,
+      calendarModal: null as Modal | null,
+      showCalendar: false,
+      industries: [
+        {
+          name: "Media",
+          tasks: [
+            { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+            { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+          ],
         },
+        {
+          name: "Legal",
+          tasks: [
+            { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+          ],
+        },
+        {
+          name: "Education",
+          tasks: [
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+          ],
+        },
+        {
+          name: "E-commerce",
+          tasks: [
+            { title: "Task to be done", deadline: "23rd July, 2025" },
+          ],
+        },
+      ],
+    };
+  },
+  methods: {
+    openCalendar() {
+      const calendarElement = document.getElementById("calendarModal");
+      if (!calendarElement) return;
+
+      if (!this.calendarModal) {
+        this.calendarModal = new Modal(calendarElement);
+      }
+      this.calendarModal.show();
     },
-};
+  },
+});
 </script>
+
 
 
 <style scoped>

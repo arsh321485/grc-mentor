@@ -35,7 +35,7 @@
     </main>
 </template>
 
-<script>
+<script lang="ts">
 import Sidebarprofile from '@/components/Sidebarprofile.vue';
 // ✅ Import image properly for Vite/Webpack
 import certificateImage from '../assets/certificate.png';
@@ -58,30 +58,38 @@ export default {
         },
 
         // Prints the certificate
-        printCertificate() {
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-        <html>
-          <head>
-            <title>Print Certificate</title>
-            <style>
-              body { margin: 0; text-align: center; }
-              img { max-width: 100%; height: auto; }
-            </style>
-          </head>
-          <body>
-            <img src="${this.certificatePath}" alt="Certificate" />
-            <script>
-              window.onload = function() {
-                window.print();
-                window.close();
-              }
-            <\/script>
-          </body>
-        </html>
-      `);
-            printWindow.document.close();
-        }
+       printCertificate() {
+    const printWindow = window.open('', '_blank');
+
+    if (!printWindow) {
+        alert('Unable to open print window');
+        return;
+    }
+
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Print Certificate</title>
+          <style>
+            body { margin: 0; text-align: center; }
+            img { max-width: 100%; height: auto; }
+          </style>
+        </head>
+        <body>
+          <img src="${this.certificatePath}" alt="Certificate" />
+          <script>
+            window.onload = function() {
+              window.print();
+              window.close();
+            }
+          <\/script>
+        </body>
+      </html>
+    `);
+
+    printWindow.document.close();
+}
+
     }
 };
 </script>

@@ -112,35 +112,33 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  name: "Sidebargrc2",
+  name: "Sidebar",
   data() {
     return {
       searchQuery: "",
       activeItem: "Working Desk",
       projectDropdownOpen: false,
       navItems: [
-  { name: "Overview", icon: "fas fa-home", route: "/profileview" },
-  { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
-  { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
-  { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
-  { name: "Badges", icon: "fas fa-award", route: "/badges" },
-  { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
-  { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
-  { name: "Calender", icon: "fas fa-calendar", route: "/calender" },
-],
-
+        { name: "Overview", icon: "fas fa-home", route: "/overview" },
+        { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
+        { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
+        { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
+        { name: "Badges", icon: "fas fa-award", route: "/badges" },
+        { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
+        { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
+      ],
       projects: [
-        "ISO 27001",
-        "ISO 27002",
-        "ISO 27003",
-        "ISO 27004",
+        "Project Apollo",
+        "Project Orion",
+        "Project Gemini",
+        "Project Phoenix",
       ],
     };
   },
   methods: {
-    handleNavClick(item) {
+    handleNavClick(item: { name: string; icon?: string; route?: string }) {
       if (item.name === "Projects") {
         this.projectDropdownOpen = !this.projectDropdownOpen;
       } else {
@@ -151,6 +149,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 /* Title */

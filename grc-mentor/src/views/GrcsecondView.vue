@@ -93,20 +93,20 @@
     </main>
 </template>
 
-<script>
+<script lang="ts">
 import Sidebargrc2 from "@/components/Sidebargrc2.vue";
-import Datepicker from "vue3-datepicker";
+import type { Modal } from "bootstrap"; // ✅ Import type for Bootstrap Modal
+import "bootstrap/dist/js/bootstrap.bundle"; // ✅ Ensure Bootstrap JS is loaded
 
 export default {
     name: "GrcsecondView",
     components: {
         Sidebargrc2,
-        Datepicker,
     },
     data() {
         return {
-            selectedDate: null,
-            calendarModal: null,
+            selectedDate: null as string | null,
+            calendarModal: null as Modal | null, // ✅ Type the modal
             industries: [
                 {
                     name: "Media",
@@ -141,19 +141,23 @@ export default {
                     ],
                 },
             ],
-            showCalendar: false,
         };
     },
     methods: {
         openCalendar() {
             if (!this.calendarModal) {
-                this.calendarModal = new Modal(document.getElementById("calendarModal"));
+                // ✅ Create a new Bootstrap Modal
+                const modalEl = document.getElementById("calendarModal");
+                if (modalEl) {
+                    this.calendarModal = new (window as any).bootstrap.Modal(modalEl) as Modal;
+                }
             }
-            this.calendarModal.show();
+            this.calendarModal?.show(); // ✅ Optional chaining to avoid TS errors
         },
     },
 };
 </script>
+
 
 
 <style scoped>
