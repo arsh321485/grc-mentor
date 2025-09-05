@@ -20,42 +20,46 @@
 
           <!-- Carousel Items -->
           <div class="carousel-inner rounded-4 overflow-hidden">
+           
             <div class="carousel-item active">
               <img src="../assets/slider-img-chng.png" class="d-block w-100 carousel-img" alt="Slide 1">
-              <div class="carousel-caption text-start">
-                <h3 class="fw-semibold display-6">Experience counts</h3>
-                <p class="lead">Some representative placeholder content for the first slide.</p>
+              <div class="carousel-caption custom-caption">
+                <h2 class="fw-semibold display-6">Experience counts</h2>
+                <p class="carousal-subtext">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos similique culpa, quae rerum omnis iure ratione vitae dolorem provident voluptatibus.</p>
               </div>
             </div>
 
+          
             <div class="carousel-item">
-              <img src="../assets/slider-img2.jpg" class="d-block w-100 carousel-img" alt="Slide 2">
-              <div class="carousel-caption text-start">
-                <h5 class="fw-semibold display-6">Experience counts</h5>
-                <p class="lead">Some representative placeholder content for the second slide.</p>
+              <img src="../assets/slider-img2.jpg" class="d-block w-100 carousel-img" alt="Slide 1">
+              <div class="carousel-caption custom-caption">
+                <h2 class="fw-semibold display-6">99.99% real</h2>
+                <p class="carousal-subtext">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos similique culpa, quae rerum omnis iure ratione vitae dolorem provident voluptatibus.</p>
               </div>
             </div>
 
+           
+
             <div class="carousel-item">
-              <img src="../assets/slider-img2.jpg" class="d-block w-100 carousel-img" alt="Slide 3">
-              <div class="carousel-caption text-start">
-                <h5 class="fw-semibold display-6">Experience counts</h5>
-                <p class="lead">Some representative placeholder content for the third slide.</p>
+              <img src="../assets/slider-img2.jpg" class="d-block w-100 carousel-img" alt="Slide 1">
+              <div class="carousel-caption custom-caption">
+                <h2 class="fw-semibold display-6">Life time mentorship for all levels</h2>
+                <p class="carousal-subtext">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos similique culpa, quae rerum omnis iure ratione vitae dolorem provident voluptatibus.</p>
               </div>
             </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
-
-          <!-- Controls -->
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
       </div>
     </section>
@@ -65,85 +69,37 @@
 
     <section class="container my-5">
       <div class="text-center mb-5">
-        <p class="industry-text">Industries</p>
+        <!-- <p class="industry-text">Industries</p>/ -->
         <h1 class="industry-h1">Industries you’ll work with:</h1>
         <p class="industry-subtext">Industries you’ll work with:</p>
       </div>
+      <div class="container">
+        <div class="row g-4">
+          <div v-for="(item, index) in industries" :key="index" class="col-12 col-md-6 col-lg-4">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <!-- Front -->
+                <div class="flip-card-front d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
+                  :style="{ backgroundColor: item.color }">
+                  <i :class="item.icon + ' fs-1'" :style="{ color: item.iconColor }"></i>
+                  <h5 class="mt-3 fw-bold">{{ item.title }}</h5>
+                </div>
 
-      <div class="row g-4">
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="p-4 rounded-3 shadow-sm text-center" style="background-color: #EAFFFE;">
-            <i class="bi bi-gear-fill fs-1 " style="color: #3CACA7;"></i>
-            <h5 class="mt-3 fw-bold">Technology & IT Services</h5>
-            <p class="text-muted small">Technology & IT Services</p>
+                <!-- back -->
+                <div class="flip-card-back">
+                  <img :src="item.image" class="img-fluid rounded-3" :alt="item.title" />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="p-4 rounded-3 shadow-sm text-center" style="background-color: #EAF2FF;">
-            <i class="bi bi-gear-fill fs-1" style="color: #3460A7;"></i>
-            <h5 class="mt-3 fw-bold">Banking & Financial Services</h5>
-            <p class="text-muted small">Technology & IT Services</p>
-          </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="p-4 rounded-3 shadow-sm text-center" style="background-color: #FFECEA;">
-            <i class="bi bi-gear-fill fs-1" style="color: #892318;"></i>
-            <h5 class="mt-3 fw-bold">Healthcare & Life Sciences</h5>
-            <p class="text-muted small">Technology & IT Services</p>
-          </div>
         </div>
-
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="p-4  rounded-3 shadow-sm text-center" style="background-color: #F9EAFF;">
-            <i class="bi bi-gear-fill fs-1" style="color: #60187D;"></i>
-            <h5 class="mt-3 fw-bold">Business Process Outsourcing</h5>
-            <p class="text-muted small">Technology & IT Services</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="p-4 rounded-3 shadow-sm text-center" style="background-color: #EAFFEC;">
-            <i class="bi bi-gear-fill fs-1" style="color: #25822E;"></i>
-            <h5 class="mt-3 fw-bold">Legal & Consulting Services</h5>
-            <p class="text-muted small">Technology & IT Services</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="p-4 rounded-3 shadow-sm text-center" style="background-color: #FFFBEA;">
-            <i class="bi bi-gear-fill fs-1" style="color: #967E17;"></i>
-            <h5 class="mt-3 fw-bold">E-commerce & Retail</h5>
-            <p class="text-muted small">Technology & IT Services</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="p-4 rounded-3 shadow-sm text-center" style="background-color: #FFE7FA;">
-            <i class="bi bi-gear-fill fs-1" style="color: #60187D;"></i>
-            <h5 class="mt-3 fw-bold">Education & Research</h5>
-            <p class="text-muted small">Technology & IT Services</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="p-4 rounded-3 shadow-sm text-center" style=" background-color: #FFEAEA;">
-            <i class="bi bi-gear-fill fs-1" style="color: #A34545;"></i>
-            <h5 class="mt-3 fw-bold">Media & Telecommunications</h5>
-            <p class="text-muted small">Technology & IT Services</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-12">
-          <div class="p-4 rounded-3 shadow-sm text-center" style="background-color: #EAFFFE;">
-            <i class="bi bi-gear-fill fs-1" style="color: #3CACA7;"></i>
-            <h5 class="mt-3 fw-bold">Energy & Utilities</h5>
-            <p class="text-muted small">Energy & Utilities</p>
-          </div>
-        </div>
-        <!-- Repeat the same col-lg-4 col-md-6 col-12 structure for remaining cards -->
       </div>
+
+
+      <!-- Repeat the same col-lg-4 col-md-6 col-12 structure for remaining cards -->
+
     </section>
 
 
@@ -151,8 +107,8 @@
 
     <section class="benefits-section text-center">
       <small class="industry-text">Industries</small>
-      <h1 class="industry-h1 mt-2">Mentorship benefits</h1>
-      <p class="industry-subtext">Mentorship benefits</p>
+      <h1 class="industry-h1 mt-2">Our Mentornship Program</h1>
+      <p class="industry-subtext">Our Mentornship Program</p>
 
       <div class="container mt-5">
         <div class="row g-4">
@@ -253,114 +209,100 @@
 
     <!-- Our Courses -->
 
-    <div class="home-core-section container py-5">
 
-      <h5 class="text-center industry-text">Our courses</h5>
-      <h1 class="text-center industry-h1">Our courses</h1>
-      <p class="industry-subtext text-center"> Our courses</p>
-      <div class="container-fluid fluid-padding">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
+    <div class="container-lg" style="max-width: 1100px;">
+      <div class="row mt-3 core-benfites-row">
+        <div class="col-lg-6 col-md-6 mb-4">
+          <div class="home-core-benifts-widget">
+            <img class="main-img" src="../assets/course-img.png" alt="">
+            <div class="blur-section"></div>
+            <div class="home-core-benefites-overlay">
+              <h5 class="text-white text-center">GRC 101</h5>
+              <p class="text-white text-center pt-2 px-4 py-4">
+                GRC Analyst (1–2 years): Maps control frameworks (e.g. NIST, ISO 27001) to business processes,
+                conducts risk and compliance assessments, and helps prepare audit evidence.
+              </p>
 
+
+              <router-link to="/signup">
+                <button type="button" class="btn card-btn">
+                  Know More
+                </button>
+              </router-link>
+
+            </div>
           </div>
+
         </div>
 
-        <div class="row mt-3 core-benfites-row">
-          <div class="col-lg-4 col-md-6 mb-4 ">
 
 
-            <div class="home-core-benifts-widget">
-              <img class="main-img" src="../assets/course-img.png" alt="">
 
-              <!-- blurred image only behind text -->
-              <div class="blur-section"></div>
 
-              <div class="home-core-benefites-overlay">
-                <h5 class="text-white text-center">GRC 101</h5>
-                <p class="text-white text-center pt-2 px-4 py-4">
-                  GRC Analyst (1–2 years): Maps control frameworks (e.g. NIST, ISO 27001) to business processes,
-                  conducts risk and compliance assessments, and helps prepare audit evidence.
-                </p>
-              </div>
+        <div class="col-lg-6 col-md-6 mb-4">
+          <div class="home-core-benifts-widget">
+            <img class="main-img" src="../assets/course-img.png" alt="">
+            <div class="blur-section"></div>
+            <div class="home-core-benefites-overlay">
+              <h5 class="text-white text-center">GRC 301</h5>
+              <p class="text-white text-center pt-2 px-4 py-4">
+                GRC Analyst (1–2 years): Maps control frameworks (e.g. NIST, ISO 27001) to business processes,
+                conducts risk and compliance assessments, and helps prepare audit evidence.
+              </p>
+
+              <router-link to="/signup">
+                <button type="button" class="btn card-btn">
+                  Know More
+                </button>
+              </router-link>
             </div>
           </div>
+          <!-- card here -->
+        </div>
+        <div class="col-lg-6 col-md-6 mb-4">
+          <div class="home-core-benifts-widget">
+            <img class="main-img" src="../assets/course-img.png" alt="">
+            <div class="blur-section"></div>
+            <div class="home-core-benefites-overlay">
+              <h5 class="text-white text-center">GRC 501</h5>
+              <p class="text-white text-center pt-2 px-4 py-4">
+                GRC Analyst (1–2 years): Maps control frameworks (e.g. NIST, ISO 27001) to business processes,
+                conducts risk and compliance assessments, and helps prepare audit evidence.
+              </p>
 
-
-          <div class="col-lg-4 col-md-6 mb-4">
-
-            <div class="home-core-benifts-widget">
-              <img class="main-img" src="../assets/course-img.png" alt="">
-
-              <!-- blurred image only behind text -->
-              <div class="blur-section"></div>
-
-              <div class="home-core-benefites-overlay">
-                <h5 class=" text-center">GRC 301</h5>
-                <p class="text-white text-center pt-2 px-4 py-4">
-                  GRC Analyst (1–2 years): Maps control frameworks (e.g. NIST, ISO 27001) to business processes,
-                  conducts risk and compliance assessments, and helps prepare audit evidence.
-                </p>
-              </div>
+              <router-link to="/signup">
+                <button type="button" class="btn card-btn">
+                  Know More
+                </button>
+              </router-link>
             </div>
-
           </div>
-          <div class="col-lg-4 col-md-6 mb-4">
+          <!-- card here -->
+        </div>
+        <div class="col-lg-6 col-md-6 mb-4">
+          <div class="home-core-benifts-widget">
+            <img class="main-img" src="../assets/course-img.png" alt="">
+            <div class="blur-section"></div>
+            <div class="home-core-benefites-overlay">
+              <h5 class="text-white text-center">GRC 701</h5>
+              <p class="text-white text-center pt-2 px-4 py-4">
+                GRC Analyst (1–2 years): Maps control frameworks (e.g. NIST, ISO 27001) to business processes,
+                conducts risk and compliance assessments, and helps prepare audit evidence.
+              </p>
 
-            <div class="home-core-benifts-widget">
-              <img class="main-img" src="../assets/course-img.png" alt="">
-
-              <!-- blurred image only behind text -->
-              <div class="blur-section"></div>
-
-              <div class="home-core-benefites-overlay">
-                <h5 class="text-white text-center">GRC 501</h5>
-                <p class="text-white text-center pt-2  px-4 py-4">
-                  GRC Analyst (1–2 years): Maps control frameworks (e.g. NIST, ISO 27001) to business processes,
-                  conducts risk and compliance assessments, and helps prepare audit evidence.
-                </p>
-              </div>
+              <router-link to="/signup">
+                <button type="button" class="btn card-btn">
+                  Know More
+                </button>
+              </router-link>
             </div>
-
           </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-
-            <div class="home-core-benifts-widget">
-              <img class="main-img" src="../assets/course-img.png" alt="">
-
-              <!-- blurred image only behind text -->
-              <div class="blur-section"></div>
-
-              <div class="home-core-benefites-overlay">
-                <h5 class="text-white text-center">GRC 701</h5>
-                <p class="text-white text-center pt-2  px-4 py-4">
-                  GRC Analyst (1–2 years): Maps control frameworks (e.g. NIST, ISO 27001) to business processes,
-                  conducts risk and compliance assessments, and helps prepare audit evidence.
-                </p>
-              </div>
-            </div>
-
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="home-core-benifts-widget">
-              <img class="main-img" src="../assets/course-img.png" alt="">
-
-              <!-- blurred image only behind text -->
-              <div class="blur-section"></div>
-
-              <div class="home-core-benefites-overlay">
-                <h5 class="text-white text-center">GRC 901</h5>
-                <p class="text-white text-center pt-2 px-4 py-4">
-                  GRC Analyst (1–2 years): Maps control frameworks (e.g. NIST, ISO 27001) to business processes,
-                  conducts risk and compliance assessments, and helps prepare audit evidence.
-                </p>
-              </div>
-            </div>
-
-
-          </div>
+          <!-- card here -->
         </div>
       </div>
     </div>
+
+
 
     <!-- Faq's  Section-->
 
@@ -567,6 +509,14 @@
     </section>
 
 
+    <!-- Footer section -->
+    <div>
+
+      <Footer />
+    </div>
+
+
+
   </main>
 </template>
 
@@ -576,13 +526,103 @@ import { defineComponent } from "vue";
 import Header from "@/components/Header.vue";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
+import Footer from "@/components/Footer.vue";
 
 export default defineComponent({
   name: "HomeView",
-  components: { Header },
+  components: { Header, Footer },
+
   data() {
     return {
-      swiper: null as Swiper | null, // ✅ declare swiper here
+      industries: [
+        {
+          title: "Technology & IT Services",
+          icon: "bi bi-gear-wide-connected",
+          iconColor: "#3CACA7",
+          color: "#EAFFFE",
+          image: "https://via.placeholder.com/400x250?text=Tech+IT"
+        },
+        {
+          title: "Banking & Financial Services",
+          icon: "bi bi-bank",
+          iconColor: "#3460A7",
+          color: "#EAF2FF",
+          image: "https://via.placeholder.com/400x250?text=Banking"
+        },
+        {
+          title: "Healthcare & Life Sciences",
+          icon: "bi bi-hospital",
+          iconColor: "#892318",
+          color: "#FFECEA",
+          image: "https://via.placeholder.com/400x250?text=Healthcare"
+        },
+        {
+          title: "Business Process Outsourcing",
+          icon: "bi bi-people",
+          iconColor: "#60187D",
+          color: "#F9EAFF",
+          image: "https://via.placeholder.com/400x250?text=BPO"
+        },
+        {
+          title: "Legal & Consulting Services",
+          icon: "bi bi-person-workspace",
+          iconColor: "#25822E",
+          color: "#EAFFEC",
+          image: "https://via.placeholder.com/400x250?text=Legal"
+        },
+        {
+          title: "E-commerce & Retail",
+          icon: "bi bi-cart",
+          iconColor: "#967E17",
+          color: "#FFFBEA",
+          image: "https://via.placeholder.com/400x250?text=E-commerce"
+        },
+        {
+          title: "Manufacturing & Industrial",
+          icon: "bi bi-gear-wide-connected",
+          iconColor: "#C15D16",
+          color: "#FFE7FA",
+          image: "https://via.placeholder.com/400x250?text=Manufacturing"
+        },
+        {
+          title: "Government & Public Sector",
+          icon: "bi bi-building",
+          iconColor: "#1F7595",
+          color: "#FFEAEA",
+          image: "https://via.placeholder.com/400x250?text=Government"
+        },
+        {
+          title: "Transportation & Logistics",
+          icon: "bi bi-truck",
+          iconColor: "#800B5B",
+          color: "#EAFFFE",
+          image: "https://via.placeholder.com/400x250?text=Transport"
+        },
+        {
+          title: "Education & Research",
+          icon: "bi bi-mortarboard",
+          iconColor: "#0A741F",
+          color: "#FFECEA",
+          image: "https://via.placeholder.com/400x250?text=Education"
+        },
+        {
+          title: "Media & Telecommunications",
+          icon: "bi bi-broadcast",
+          iconColor: "#A34545",
+          color: "#F9EAFF",
+          image: "https://via.placeholder.com/400x250?text=Media"
+        },
+        {
+          title: "Energy & Utilities",
+          icon: "bi bi-lightning-charge",
+          iconColor: "#1B6494",
+          color: "#FFFBEA",
+          image: "https://via.placeholder.com/400x250?text=Energy"
+        }
+      ],
+
+
+      swiper: null as Swiper | null,
       testimonials: [
         { quote: "GRC’s expertise in GDPR gave us the confidence to navigate compliance.", name: "Daniel US", position: "CEO, Star Media" },
         { quote: "Their guidance was clear, concise, and tailored to our needs.", name: "Sophia Lee", position: "CTO, Tech Solutions" },
@@ -593,6 +633,7 @@ export default defineComponent({
       ]
     };
   },
+
   mounted() {
     this.swiper = new Swiper(".mySwiper", {
       slidesPerView: 3,
@@ -620,6 +661,126 @@ export default defineComponent({
       this.swiper = null;
     }
   },
+
 });
 </script>
 
+
+
+
+<style scoped>
+
+.carousal-subtext{
+  font-weight: 400;
+  color: #FFFFFF99;
+}
+/* Base button styling */
+.card-btn {
+  background-color: #0096D6;
+  border: 1px solid #0096D6;
+  color: white;
+  border-radius: 20px;
+  margin-bottom: 60px;
+}
+
+
+.flip-card {
+  background-color: transparent;
+  height: 280px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.flip-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+
+/* carousal */
+/* Custom caption positioning */
+.carousel-caption.custom-caption {
+  position: absolute;
+  top: 25%;
+  /* Push caption to 25% from top */
+  left: 10%;
+  right: 10%;
+  text-align: left;
+  /* Align text to left (can change to center if needed) */
+  transform: translateY(-10%);
+   max-width: 700px; 
+}
+
+/* Adjust heading and paragraph spacing */
+.carousel-caption.custom-caption h2,
+.carousel-caption.custom-caption h5 {
+  margin-bottom: 10px;
+}
+/* Paragraph styling to wrap text automatically */
+.carousel-caption.custom-caption p {
+  display: block;
+  white-space: normal; /* ✅ ensures normal wrapping */
+  word-wrap: break-word; /* ✅ breaks long words if needed */
+  font-size: 1.1rem;
+  line-height: 1.6; /* ✅ nice spacing between lines */
+  margin-top: 0.5rem;
+  font-weight: 500
+}
+
+/* ✅ Responsive Fix: Slightly lower captions on smaller screens */
+@media (max-width: 768px) {
+  .carousel-caption.custom-caption {
+      max-width: 90%;
+    top: 30%;
+    left: 5%;
+    right: 5%;
+  }
+
+  .carousel-caption.custom-caption h2,
+  .carousel-caption.custom-caption h5 {
+    font-size: 1.5rem;
+  }
+
+  .carousel-caption.custom-caption p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-caption.custom-caption {
+    top: 35%;
+    text-align: center;
+     max-width: 95%; 
+    /* Center text on very small screens */
+  }
+    .carousel-caption.custom-caption p {
+    font-size: 0.95rem;
+  }
+}
+</style>

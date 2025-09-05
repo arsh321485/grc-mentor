@@ -1,11 +1,16 @@
 <template>
   <div class="sidebar">
     <!-- Logo & App Name -->
-    <div class="sidebar-header">
+    <!-- <div class="sidebar-header">
       <h6 class="stepper-title">
         <span class="dot"></span> GRC Mentor
       </h6>
+    </div> -->
+
+     <div>
+      <img  src="../assets/logo-img.png" alt="" style="height: 20px; padding-left: 20px;margin-bottom: 20px; ">
     </div>
+
 
     <!-- Search Bar -->
     <div class="search-box">
@@ -78,12 +83,12 @@
     </router-link>
   </li>
 
-  <li>
+  <!-- <li>
     <router-link to="/feedback" class="d-flex align-items-center text-decoration-none account-link gap-3">
       <i class="fas fa-comment-dots"></i>
       <span>Feedback</span>
     </router-link>
-  </li>
+  </li> -->
 
   <li>
     <router-link to="/setting" class="d-flex align-items-center text-decoration-none account-link gap-3">

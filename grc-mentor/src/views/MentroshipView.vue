@@ -2,7 +2,7 @@
     <main>
         <div class="container-fluid row">
             <div class="col-2 col-md-2">w
-                <Stepper :currentStep="4" />
+                <Stepper :currentStep="3" />
             </div>
 
             <div class="col-10 col-md-10">
@@ -81,7 +81,7 @@
                 <!-- <button class="submit-btn" :disabled="!agree">
                     Setup your email
                 </button> -->
-                <router-link to="/welcomementor" class="emial-btn">
+                <router-link to="/mattermost" class="emial-btn">
                     Setup your email
                 </router-link>
 

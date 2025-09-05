@@ -1,9 +1,13 @@
 
 <template>
   <div class="stepper-container">
-    <h6 class="stepper-title">
+    <!-- <h6 class="stepper-title">
       <span class="dot"></span> GRC Mentor
-    </h6>
+    </h6> -->
+
+    <div>
+      <img  src="../assets/logo-img.png" alt="" style="height: 20px; padding-left: 20px;margin-bottom: 20px; ">
+    </div>
 
     <div class="steps">
       <div
@@ -50,10 +54,10 @@ export default {
     return {
       steps: [
         "Upload your CV",
-        "Course Payment",
-        "Connect Mattermost",
+        "Mentornship Payment",
         "Your mentorship",
-        "Course setup",
+        "Connect Mattermost",
+        "Mentornship setup",
       ],
     };
   },

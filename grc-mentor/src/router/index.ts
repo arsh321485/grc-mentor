@@ -33,6 +33,14 @@ import MycvView from '@/views/MycvView.vue'
 import SettingView from '@/views/SettingView.vue'
 import OverviewView from '@/views/OverviewView.vue'
 import Login from '@/components/Login.vue'
+import AienabledView from '@/views/AienabledView.vue'
+import PlatformView from '@/views/PlatformView.vue'
+import WhatToExceptView from '@/views/WhatToExceptView.vue'
+import ExperienceGainView from '@/views/ExperienceGainView.vue'
+import CareerPathView from '@/views/CareerPathView.vue'
+import CardPayment from '@/views/CardPayment.vue'
+import PayPalPayment from '@/views/PayPalPayment.vue'
+import NetBankingPayment from '@/views/NetBankingPayment.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -205,12 +213,62 @@ const router = createRouter({
       name: 'certificate',
       component: CertificateView,
     },
-    {
 
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
+      {
+       path: '/aienable',
+      name: 'aienable',
+      component: AienabledView,
     },
+
+      {
+       path: '/platform',
+      name: 'platform',
+      component: PlatformView,
+    },
+    
+      {
+       path: '/whattoexcept',
+      name: 'whattoexcept',
+      component: WhatToExceptView,
+    },
+
+     {
+       path: '/experiencegain',
+      name: 'experiencegain',
+      component: ExperienceGainView,
+    },
+
+     {
+       path: '/careerpath',
+      name: 'careerpath',
+      component: CareerPathView,
+    },
+
+     {
+       path: '/pay-card',
+      name: 'pay-card',
+      component: CardPayment,
+    },
+
+     {
+       path: '/pay-paypal',
+      name: 'pay-paypal',
+      component: PayPalPayment,
+    },
+
+    {
+       path: '/pay-netbanking',
+      name: 'pay-netbanking',
+      component: NetBankingPayment,
+    },
+
+
+    // {
+
+    //   path: '/about',
+    //   name: 'about',
+    //   component: () => import('../views/AboutView.vue'),
+    // },
     {
   path: '/',
   name: 'login',

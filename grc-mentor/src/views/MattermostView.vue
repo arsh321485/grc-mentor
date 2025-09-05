@@ -2,7 +2,7 @@
     <main>
         <div class="container-fluid row">
              <div class="col-2 col-md-2">
-                <Stepper :currentStep="3" />
+                <Stepper :currentStep="4" />
             </div>
 
              <div class="col-10 col-md-10">
@@ -35,7 +35,10 @@
                 </div>
 
                 <!-- Button -->
-                <button class="next-btn px-5 ">Next: Your mentorship</button>
+                <!-- <button class="next-btn px-5 ">Next: Your mentorship</button> -->
+                 <router-link to="/welcomementor" class="next-btn">
+                    Next: Your mentorship
+                </router-link>
             </div>
         </div>
     </main>

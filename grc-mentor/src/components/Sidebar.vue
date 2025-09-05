@@ -1,11 +1,16 @@
 <template>
   <div class="sidebar">
     <!-- Logo & App Name -->
-    <div class="sidebar-header">
+    <!-- <div class="sidebar-header">
       <h6 class="stepper-title">
         <span class="dot"></span> GRC Mentor
       </h6>
+    </div> -->
+
+     <div>
+      <img  src="../assets/logo-img.png" alt="" style="height: 20px; padding-left: 20px;margin-bottom: 20px; ">
     </div>
+
 
     <!-- Search Bar -->
     <div class="search-box">
@@ -67,7 +72,7 @@
     <div class="account-section">
       <p class="account-label">ACCOUNT</p>
       <ul>
-        <li><i class="fas fa-comment-dots"></i> <span>Feedback</span></li>
+        <!-- <li><i class="fas fa-comment-dots"></i> <span>Feedback</span></li> -->
         <li><i class="fas fa-cog"></i> <span>Settings</span></li>
       </ul>
     </div>
