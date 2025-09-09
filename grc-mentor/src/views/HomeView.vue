@@ -67,9 +67,9 @@
 
     <!-- industries section -->
 
-    <section class="container my-5">
+    <!-- <section class="container my-5">
       <div class="text-center mb-5">
-        <!-- <p class="industry-text">Industries</p>/ -->
+      
         <h1 class="industry-h1">Industries you’ll work with:</h1>
         <p class="industry-subtext">Industries you’ll work with:</p>
       </div>
@@ -78,14 +78,14 @@
           <div v-for="(item, index) in industries" :key="index" class="col-12 col-md-6 col-lg-4">
             <div class="flip-card">
               <div class="flip-card-inner">
-                <!-- Front -->
+               
                 <div class="flip-card-front d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
                   :style="{ backgroundColor: item.color }">
                   <i :class="item.icon + ' fs-1'" :style="{ color: item.iconColor }"></i>
                   <h5 class="mt-3 fw-bold">{{ item.title }}</h5>
                 </div>
 
-                <!-- back -->
+              
                 <div class="flip-card-back">
                   <img :src="item.image" class="img-fluid rounded-3" :alt="item.title" />
                 </div>
@@ -97,10 +97,37 @@
         </div>
       </div>
 
+    </section> -->
 
-      <!-- Repeat the same col-lg-4 col-md-6 col-12 structure for remaining cards -->
 
-    </section>
+    <section class="container my-5">
+  <div class="text-center mb-5">
+    <h1 class="industry-h1">Industries you’ll work with:</h1>
+    <p class="industry-subtext">Industries you’ll work with:</p>
+  </div>
+
+  <div class="container">
+    <div class="row g-4">
+      <div v-for="(item, index) in industries" :key="index" class="col-12 col-md-6 col-lg-4">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <!-- FRONT (IMAGE) -->
+            <div class="flip-card-front">
+              <img :src="item.image" class="img-fluid rounded-3 w-100 h-100" :alt="item.title" />
+            </div>
+
+            <!-- BACK (COLOR + ICON + TEXT) -->
+            <div class="flip-card-back d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
+              :style="{ backgroundColor: item.color }">
+              <i :class="item.icon + ' fs-1'" :style="{ color: item.iconColor }"></i>
+              <h5 class="mt-3 fw-bold text-center">{{ item.title }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
     <!-- Mentornship benefit section -->

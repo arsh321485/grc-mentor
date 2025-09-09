@@ -49,8 +49,10 @@
     </main>
 </template>
 
+
 <script lang="ts">
 import axios from "axios";
+import { nextTick } from "vue";
 
 export default {
   name: "Login",
@@ -76,13 +78,19 @@ export default {
           this.message = "✅ Login successful!";
           console.log("Login Response:", response.data);
 
-          // Save token if API provides one
           if (response.data.token) {
             localStorage.setItem("authToken", response.data.token);
           }
 
-          // Redirect to /home
-          this.$router.push("/home");
+          console.log("✅ Redirecting to /home...");
+          nextTick(() => {
+            try {
+              this.$router.push("/home");
+            } catch (e) {
+              console.error("Router navigation failed, using fallback", e);
+              window.location.href = "/home";
+            }
+          });
         })
         .catch((error) => {
           this.message = "❌ Login failed. Please check your credentials.";
@@ -95,3 +103,63 @@ export default {
   },
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <script lang="ts">
+import axios from "axios";
+import { nextTick } from "vue";
+
+export default {
+  name: "Login",
+  data() {
+    return {
+      email: "",
+      password: "",
+      message: "",
+      loading: false,
+    };
+  },
+  methods: {
+    handleLogin() {
+      this.loading = true;
+      this.message = "";
+
+      axios
+        .post("https://middleware-pn9u.onrender.com/login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          this.message = "✅ Login successful!";
+          console.log("Login Response:", response.data);
+
+          if (response.data.token) {
+            localStorage.setItem("authToken", response.data.token);
+          }
+
+       
+          this.$router.push("/home");
+        })
+        .catch((error) => {
+          this.message = "❌ Login failed. Please check your credentials.";
+          console.error("Login Error:", error.response?.data || error.message);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+  },
+};
+</script> -->
+
+
+

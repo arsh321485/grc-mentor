@@ -120,7 +120,7 @@ export default {
 
                     <!-- Social Login -->
 
-                    <p class="signup-text">Sign in with</p>
+                    <!-- <p class="signup-text">Sign in with</p>
 
                     <div class="d-flex justify-content-center align-items-center gap-3 px-3">
 
@@ -154,17 +154,17 @@ export default {
 
                         </button>
 
-                    </div>
+                    </div> -->
 
 
 
                     <!-- Divider -->
-
+                    <!-- 
                     <div class="or-divider">
 
                         <span>or</span>
 
-                    </div>
+                    </div> -->
 
 
 
@@ -189,7 +189,7 @@ export default {
                                 placeholder="Enter your last name">
 
                         </div>
-
+                        <!-- 
                         <div class="mb-1">
 
                             <label class="form-label">Email</label>
@@ -197,6 +197,15 @@ export default {
                             <input type="email" v-model="form.email" class="form-control"
                                 placeholder="Enter your email address">
 
+                        </div> -->
+
+                        <div class="mb-1">
+                            <label class="form-label">Email</label>
+                            <div class="input-group">
+                                <input type="text" v-model="form.emailUsername" class="form-control"
+                                    placeholder="Enter your email name">
+                                <span class="input-group-text">@gmail.com</span>
+                            </div>
                         </div>
 
                         <div class="mb-1">
@@ -252,7 +261,7 @@ export default {
 
                         <!-- Submit -->
 
-                        <router-link to="/uploadcv" class="btn w-100 btn-submit">
+                        <router-link to="/welcome" class="btn w-100 btn-submit">
 
                             Get started with GRC Department
 
@@ -266,7 +275,7 @@ export default {
 
                             Already have an account?
 
-                            <router-link to="/login" class="login-link">Login</router-link>
+                            <router-link to="/signin" class="login-link">Login</router-link>
 
                         </p>
 
@@ -312,7 +321,7 @@ export default {
 
                 lastName: "",
 
-                email: "",
+                emailUsername: "",
 
                 password: "",
 
@@ -326,6 +335,12 @@ export default {
 
         };
 
+    },
+
+    computed: {
+        fullEmail() {
+            return this.form.emailUsername + "@gmail.com";
+        }
     },
 
     methods: {
@@ -370,21 +385,23 @@ export default {
 
 <style scoped>
 .btn-submit {
-  border-radius: 30px;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  background-color: #0096D6;
-  color: #FFFFFF;
+    border-radius: 30px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #0096D6;
+    color: #FFFFFF;
 }
+
 .btn-submit:hover {
-  border-radius: 30px;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  background-color: #0096D6;
-  color: #FFFFFF;
+    border-radius: 30px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #0096D6;
+    color: #FFFFFF;
 }
+
 .social-icon-btn {
 
     width: 45px;
@@ -555,7 +572,7 @@ export default {
 
 .login-link:hover {
 
-    text-decoration: underline;
+    text-decoration: none;
 
 }
 </style>

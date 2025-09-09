@@ -41,6 +41,15 @@ import CareerPathView from '@/views/CareerPathView.vue'
 import CardPayment from '@/views/CardPayment.vue'
 import PayPalPayment from '@/views/PayPalPayment.vue'
 import NetBankingPayment from '@/views/NetBankingPayment.vue'
+import AssesmentView from '@/views/AssesmentView.vue'
+import Signin from '@/components/Signin.vue'
+import MentorshipprogramView from '@/views/MentorshipprogramView.vue'
+import OnboardingView from '@/views/OnboardingView.vue'
+import Payment1View from '@/views/Payment1View.vue'
+import ProfilesetView from '@/views/ProfilesetView.vue'
+import ResultView from '@/views/ResultView.vue'
+import WelcomeView from '@/views/WelcomeView.vue'
+import PaymentSuccessView from '@/views/PaymentSuccessView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -75,191 +84,243 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
     },
-     {
+    {
       path: '/signup',
       name: 'signup',
       component: SignupView,
     },
 
+    {
+      path: '/signin',
+      name: 'signin',
+      component: Signin,
+    },
 
-     {
+    {
       path: '/uploadcv',
       name: 'uploadcv',
       component: UploadcvView,
     },
-     {
+    {
       path: '/cvadded',
       name: 'cvadded',
       component: CvaddedView,
     },
-     {
+    {
       path: '/paymentprocess',
       name: 'paymentprocess',
       component: PaymentprocessView,
     },
-     {
+    {
       path: '/mentornship',
       name: 'mentornship',
       component: MentroshipView,
     },
-     {
+    {
       path: '/welcomementor',
       name: 'welcomementor',
       component: WelcomementorView,
     },
-     {
+    {
       path: '/mattermost',
       name: 'mattermost',
       component: MattermostView,
     },
 
-     {
+    {
       path: '/careergraph',
       name: 'careergraph',
       component: CareergraphView,
     },
     {
-       path: '/grc101',
+      path: '/grc101',
       name: 'grc101',
       component: Grc101View,
     },
-     {
-       path: '/grcsecond',
+    {
+      path: '/grcsecond',
       name: 'grcsecond',
       component: GrcsecondView,
     },
-     {
-       path: '/policyreview1',
+    {
+      path: '/policyreview1',
       name: 'policyreview1',
       component: Policyreview1View,
     },
-      {
-       path: '/policyreview2',
+    {
+      path: '/policyreview2',
       name: 'policyreview2',
       component: Policyreview2View,
     },
     {
-       path: '/policyreview3',
+      path: '/policyreview3',
       name: 'policyreview3',
       component: Policyreview3View,
     },
-     {
-       path: '/policyreview4',
+    {
+      path: '/policyreview4',
       name: 'policyreview4',
       component: Policyreview4View,
     },
     {
-       path: '/policyreview5',
+      path: '/policyreview5',
       name: 'policyreview5',
       component: Policyreview5View,
     },
-      {
-       path: '/policyreview6',
+    {
+      path: '/policyreview6',
       name: 'policyreview6',
       component: Policyreview6View,
     },
-      {
-       path: '/policyreview7',
+    {
+      path: '/policyreview7',
       name: 'policyreview7',
       component: Policyreview7View,
     },
-     {
-       path: '/iso-27001',
+    {
+      path: '/iso-27001',
       name: 'iso-27001',
       component: ISO27001View
     },
-     {
-       path: '/mycv',
+    {
+      path: '/mycv',
       name: 'mycv',
       component: MycvView
     },
-      {
-       path: '/setting',
+    {
+      path: '/setting',
       name: 'setting',
       component: SettingView
     },
-      {
-       path: '/overview',
+    {
+      path: '/overview',
       name: 'overview',
       component: OverviewView
     },
-     {
-       path: '/badges',
+    {
+      path: '/badges',
       name: 'badges',
       component: BadgesView,
     },
-      {
-       path: '/profileview',
+    {
+      path: '/profileview',
       name: 'profileview',
       component: ViewprofileView,
     },
-      {
-       path: '/profilelogout',
+    {
+      path: '/profilelogout',
       name: 'profilelogout',
       component: ProfileLogoutView,
     },
-     {
-       path: '/calender',
+    {
+      path: '/calender',
       name: 'calender',
       component: CalenderView,
     },
-     {
-       path: '/matchingjobs',
+    {
+      path: '/matchingjobs',
       name: 'matchingjobs',
       component: MatchingjobsView,
     },
-      {
-       path: '/certificate',
+    {
+      path: '/certificate',
       name: 'certificate',
       component: CertificateView,
     },
 
-      {
-       path: '/aienable',
+    {
+      path: '/aienable',
       name: 'aienable',
       component: AienabledView,
     },
 
-      {
-       path: '/platform',
+    {
+      path: '/platform',
       name: 'platform',
       component: PlatformView,
     },
-    
-      {
-       path: '/whattoexcept',
+
+    {
+      path: '/whattoexcept',
       name: 'whattoexcept',
       component: WhatToExceptView,
     },
 
-     {
-       path: '/experiencegain',
+    {
+      path: '/experiencegain',
       name: 'experiencegain',
       component: ExperienceGainView,
     },
 
-     {
-       path: '/careerpath',
+    {
+      path: '/careerpath',
       name: 'careerpath',
       component: CareerPathView,
     },
 
-     {
-       path: '/pay-card',
+    {
+      path: '/pay-card',
       name: 'pay-card',
       component: CardPayment,
     },
 
-     {
-       path: '/pay-paypal',
+    {
+      path: '/pay-paypal',
       name: 'pay-paypal',
       component: PayPalPayment,
     },
 
     {
-       path: '/pay-netbanking',
+      path: '/pay-netbanking',
       name: 'pay-netbanking',
       component: NetBankingPayment,
+    },
+
+    {
+      path: '/assessment',
+      name: 'assessment',
+      component: AssesmentView
+    },
+
+    {
+      path: '/mentornshipprogram',
+      name: 'mentornshipprogram',
+      component: MentorshipprogramView
+    },
+
+    {
+      path: '/onboarding',
+      name: 'onboarding',
+      component: OnboardingView
+    },
+
+    {
+      path: '/payment1',
+      name: 'payment1',
+      component: Payment1View
+    },
+    {
+      path: '/profileset',
+      name: 'profileset',
+      component: ProfilesetView
+    },
+
+    {
+      path: '/result',
+      name: 'result',
+      component: ResultView
+    },
+
+    {
+      path: '/welcome',
+      name: 'welcome',
+      component: WelcomeView
+    },
+
+     {
+      path: '/paymentsuccess',
+      name: 'paymentsuccess',
+      component: PaymentSuccessView
     },
 
 
@@ -270,10 +331,10 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue'),
     // },
     {
-  path: '/',
-  name: 'login',
-  component: Login,
-},
+      path: '/',
+      name: 'login',
+      component: Login,
+    },
 
   ],
 })
