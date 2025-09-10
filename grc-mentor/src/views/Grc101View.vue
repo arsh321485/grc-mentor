@@ -7,35 +7,35 @@
 
             <div class="col-10 col-md-10">
 
-                 <!-- calendar -->
-            <div class="calendar-container d-flex justify-content-end">
-                <!-- Calendar view button -->
-                <div class="d-flex align-items-center pt-3" role="button" @click="openCalendar">
-                    <i class="bi bi-calendar3 me-2 fs-4"></i>
-                    <span class="fs-5">Calendar view</span>
-                </div>
+                <!-- calendar -->
+                <div class="calendar-container d-flex justify-content-end">
+                    <!-- Calendar view button -->
+                    <div class="d-flex align-items-center pt-3" role="button" @click="openCalendar">
+                        <i class="bi bi-calendar3 me-2 fs-4"></i>
+                        <span class="fs-5">Calendar view</span>
+                    </div>
 
-                <!-- Bootstrap Modal -->
-                <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="calendarModalLabel">Calendar</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Calendar Component -->
-                                <input type="date" class="form-control" v-model="selectedDate" />
-                                <p class="mt-3">
-                                    <strong>Selected date:</strong> {{ selectedDate }}
-                                </p>
+                    <!-- Bootstrap Modal -->
+                    <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="calendarModalLabel">Calendar</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Calendar Component -->
+                                    <input type="date" class="form-control" v-model="selectedDate" />
+                                    <p class="mt-3">
+                                        <strong>Selected date:</strong> {{ selectedDate }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
                 <div class="d-flex justify-content-between align-items-start mb-5">
                     <div class="ps-5">
@@ -80,7 +80,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <i class="bi bi-arrow-right fs-5 icon-grc"></i>
+                                        <!-- <i class="bi bi-arrow-right fs-5 icon-grc"></i> -->
+                                        <router-link to="/policyreview2" class="text-decoration-none">
+                                            <i class="bi bi-arrow-right fs-5 icon-grc"></i>
+                                        </router-link>
+
                                     </div>
                                 </div>
                             </div>
@@ -99,71 +103,69 @@ import Sidebar from "@/components/Sidebar.vue";
 import Datepicker from "vue3-datepicker";
 
 export default defineComponent({
-  name: "Grc101View",
-  components: {
-    Sidebar,
-    Datepicker,
-  },
-  data() {
-    return {
-      selectedDate: null as Date | null,
-      calendarModal: null as Modal | null,
-      showCalendar: false,
-      industries: [
-        {
-          name: "Media",
-          tasks: [
-            { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
-            { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
-            { title: "Task to be done", deadline: "23rd July, 2025" },
-            { title: "Task to be done", deadline: "23rd July, 2025" },
-            { title: "Task to be done", deadline: "23rd July, 2025" },
-          ],
-        },
-        {
-          name: "Legal",
-          tasks: [
-            { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
-            { title: "Task to be done", deadline: "23rd July, 2025" },
-            { title: "Task to be done", deadline: "23rd July, 2025" },
-            { title: "Task to be done", deadline: "23rd July, 2025" },
-            { title: "Task to be done", deadline: "23rd July, 2025" },
-          ],
-        },
-        {
-          name: "Education",
-          tasks: [
-            { title: "Task to be done", deadline: "23rd July, 2025" },
-          ],
-        },
-        {
-          name: "E-commerce",
-          tasks: [
-            { title: "Task to be done", deadline: "23rd July, 2025" },
-          ],
-        },
-      ],
-    };
-  },
-  methods: {
-    openCalendar() {
-      const calendarElement = document.getElementById("calendarModal");
-      if (!calendarElement) return;
-
-      if (!this.calendarModal) {
-        this.calendarModal = new Modal(calendarElement);
-      }
-      this.calendarModal.show();
+    name: "Grc101View",
+    components: {
+        Sidebar,
+        Datepicker,
     },
-  },
+    data() {
+        return {
+            selectedDate: null as Date | null,
+            calendarModal: null as Modal | null,
+            showCalendar: false,
+            industries: [
+                {
+                    name: "Media",
+                    tasks: [
+                        { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                        { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                        { title: "Task to be done", deadline: "23rd July, 2025" },
+                        { title: "Task to be done", deadline: "23rd July, 2025" },
+                        { title: "Task to be done", deadline: "23rd July, 2025" },
+                    ],
+                },
+                {
+                    name: "Legal",
+                    tasks: [
+                        { title: "Task to be done", deadline: "23rd July, 2025", tag: "ISO 27001" },
+                        { title: "Task to be done", deadline: "23rd July, 2025" },
+                        { title: "Task to be done", deadline: "23rd July, 2025" },
+                        { title: "Task to be done", deadline: "23rd July, 2025" },
+                        { title: "Task to be done", deadline: "23rd July, 2025" },
+                    ],
+                },
+                {
+                    name: "Education",
+                    tasks: [
+                        { title: "Task to be done", deadline: "23rd July, 2025" },
+                    ],
+                },
+                {
+                    name: "E-commerce",
+                    tasks: [
+                        { title: "Task to be done", deadline: "23rd July, 2025" },
+                    ],
+                },
+            ],
+        };
+    },
+    methods: {
+        openCalendar() {
+            const calendarElement = document.getElementById("calendarModal");
+            if (!calendarElement) return;
+
+            if (!this.calendarModal) {
+                this.calendarModal = new Modal(calendarElement);
+            }
+            this.calendarModal.show();
+        },
+    },
 });
 </script>
 
 
 
 <style scoped>
-
-
 .custom-heading {
     font-family: Inter;
     font-weight: 600;

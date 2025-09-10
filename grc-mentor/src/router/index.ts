@@ -50,6 +50,7 @@ import ProfilesetView from '@/views/ProfilesetView.vue'
 import ResultView from '@/views/ResultView.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 import PaymentSuccessView from '@/views/PaymentSuccessView.vue'
+import SignupGrc101View from '@/views/SignupGrc101View.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -321,6 +322,13 @@ const router = createRouter({
       path: '/paymentsuccess',
       name: 'paymentsuccess',
       component: PaymentSuccessView
+    },
+
+    
+     {
+      path: '/signup-grc101',
+      name: 'signup-grc101',
+      component: SignupGrc101View
     },
 
 

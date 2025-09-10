@@ -1,65 +1,41 @@
 <template>
   <div class="sidebar">
-    <!-- Logo & App Name -->
-    <!-- <div class="sidebar-header">
-      <h6 class="stepper-title">
-        <span class="dot"></span> GRC Mentor
-      </h6>
-    </div> -->
 
-     <div>
-      <img  src="../assets/logo-img.png" alt="" style="height: 20px; padding-left: 20px;margin-bottom: 20px; ">
+
+    <div>
+      <img src="../assets/logo-img.png" alt="" style="height: 20px; padding-left: 20px;margin-bottom: 20px; ">
     </div>
 
 
     <!-- Search Bar -->
     <div class="search-box">
-      <input
-        style="border: 0;"
-        type="text"
-        placeholder="Search for anything..."
-        v-model="searchQuery"
-      />
+      <input style="border: 0;" type="text" placeholder="Search for anything..." v-model="searchQuery" />
       <span class="search-icon"> <i class="bi bi-search"></i></span>
     </div>
 
     <!-- Navigation Links -->
-   <ul class="nav-links">
-  <li
-    v-for="(item, index) in navItems"
-    :key="index"
-    :class="{ active: activeItem === item.name }"
-  >
-    <router-link
-      :to="item.route"
-      class="nav-item"
-      @click.native="handleNavClick(item)"
-    >
-      <i :class="item.icon"></i>
-      <span>{{ item.name }}</span>
+    <ul class="nav-links">
+      <li v-for="(item, index) in navItems" :key="index" :class="{ active: activeItem === item.name }">
+        <router-link :to="item.route" class="nav-item" @click.native="handleNavClick(item)">
+          <i :class="item.icon"></i>
+          <span>{{ item.name }}</span>
 
-      <!-- Dropdown arrow only for Projects -->
-      <i
-        v-if="item.name === 'Projects'"
-        :class="[
-          'fas',
-          projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
-          'dropdown-arrow'
-        ]"
-      ></i>
-    </router-link>
+          <!-- Dropdown arrow only for Projects -->
+          <i v-if="item.name === 'Projects'" :class="[
+            'fas',
+            projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
+            'dropdown-arrow'
+          ]"></i>
+        </router-link>
 
-    <!-- Dropdown Submenu for Projects -->
-    <ul
-      v-if="item.name === 'Projects' && projectDropdownOpen"
-      class="dropdown-list"
-    >
-      <li v-for="(project, i) in projects" :key="i">
-        {{ project }}
+        <!-- Dropdown Submenu for Projects -->
+        <ul v-if="item.name === 'Projects' && projectDropdownOpen" class="dropdown-list">
+          <li v-for="(project, i) in projects" :key="i">
+            {{ project }}
+          </li>
+        </ul>
       </li>
     </ul>
-  </li>
-</ul>
 
 
     <!-- Chat & Settings -->

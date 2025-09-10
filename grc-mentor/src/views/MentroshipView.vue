@@ -1,7 +1,7 @@
 <template>
     <main>
         <div class="container-fluid row">
-            <div class="col-2 col-md-2">w
+            <div class="col-2 col-md-2">
                 <Stepper :currentStep="3" />
             </div>
 

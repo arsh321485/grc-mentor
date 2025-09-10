@@ -1,145 +1,182 @@
 <template>
-    <div class="payment-success py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-9 col-lg-10">
 
-                    <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                        <div class="hero p-4 d-flex flex-column flex-md-row align-items-center gap-3">
-                            <div class="hero-icon d-flex align-items-center justify-content-center">
-                                <svg viewBox="0 0 24 24" class="check-svg" aria-hidden>
-                                    <path fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round"
-                                        stroke-linejoin="round" d="M20 6L9 17l-5-5" />
-                                </svg>
-                            </div>
-                            <div class="flex-grow-1 text-center text-md-start">
-                                <div class="h4 mb-1">Payment successful</div>
-                                <div class="small text-muted">Thanks — your payment was processed successfully.</div>
-                                <div class="mt-2 small level-row">
-                                    <span class="level-badge me-2">{{ displayLevel }}</span>
-                                    <span class="text-muted">Plan: <strong class="ms-1">{{ payload?.plan ?? '—'
-                                            }}</strong></span>
+    <main>
+        <div class="container-fluid row">
+            <div class="col-2 col-md-2">
+                <Stepper :currentStep="2" />
+            </div>
+
+            <div class="col-10 col-md-10">
+                <div class="payment-success py-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-9 col-lg-10">
+
+                                <div class="card border-0 shadow-sm overflow-hidden mb-4">
+                                    <div class="hero p-4 d-flex flex-column flex-md-row align-items-center gap-3">
+                                        <div class="hero-icon d-flex align-items-center justify-content-center">
+                                            <svg viewBox="0 0 24 24" class="check-svg" aria-hidden>
+                                                <path fill="none" stroke="white" stroke-width="1.6"
+                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M20 6L9 17l-5-5" />
+                                            </svg>
+                                        </div>
+                                        <div class="flex-grow-1 text-center text-md-start">
+                                            <div class="h4 mb-1">Payment successful</div>
+                                            <div class="small text-muted">Thanks — your payment was processed
+                                                successfully.</div>
+                                            <div class="mt-2 small level-row">
+                                                <span class="level-badge me-2">{{ displayLevel }}</span>
+                                                <span class="text-muted">Plan: <strong class="ms-1">{{ payload?.plan ??
+                                                    '—'
+                                                }}</strong></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="text-center text-md-end">
+                                            <div class="fw-semibold fs-5">{{ formatted(payload?.amount) }}</div>
+                                            <div class="small text-muted">{{ payload?.currency }}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="confetti" aria-hidden></div>
                                 </div>
-                            </div>
-
-                            <div class="text-center text-md-end">
-                                <div class="fw-semibold fs-5">{{ formatted(payload?.amount) }}</div>
-                                <div class="small text-muted">{{ payload?.currency }}</div>
-                            </div>
-                        </div>
-
-                        <div class="confetti" aria-hidden></div>
-                    </div>
 
 
-                    <div class="card border-0 shadow-sm mb-4">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <h6 class="mb-0">Receipt</h6>
-                                <div class="small text-muted">Transaction: <strong class="ms-1">{{ txId }}</strong>
-                                </div>
-                            </div>
+                                <div class="card border-0 shadow-sm mb-4">
+                                    <div class="card-body p-4">
+                                        <div class="d-flex justify-content-between align-items-start mb-3">
+                                            <h6 class="mb-0">Receipt</h6>
+                                            <div class="small text-muted">Transaction: <strong class="ms-1">{{ txId
+                                            }}</strong>
+                                            </div>
+                                        </div>
 
-                            <div v-if="payload" class="receipt-grid mb-3">
-                                <div class="row gx-2 gy-2">
-                                    <div class="col-sm-6 text-muted">Plan</div>
-                                    <div class="col-sm-6">{{ payload.plan }}</div>
-                                    <div class="col-sm-6 text-muted">Level</div>
-                                    <div class="col-sm-6">{{ payload.level }}</div>
-                                    <div class="col-sm-6 text-muted">Method</div>
-                                    <div class="col-sm-6 text-uppercase">{{ payload.method }}</div>
-                                    <div class="col-sm-6 text-muted">Amount (converted)</div>
-                                    <div class="col-sm-6">{{ formatted(payload.amount) }} {{ payload.currency }}</div>
-                                    <div class="col-sm-6 text-muted">Base ({{ payload.baseCurrency }})</div>
-                                    <div class="col-sm-6">{{ payload.baseAmount }}</div>
-                                    <div class="col-sm-6 text-muted">Coupon</div>
-                                    <div class="col-sm-6">{{ payload.coupon ?? '—' }}</div>
-                                    <div class="col-sm-6 text-muted">Date</div>
-                                    <div class="col-sm-6">{{ dateStr }}</div>
-                                </div>
-                            </div>
+                                        <div v-if="payload" class="receipt-grid mb-3">
+                                            <div class="row gx-2 gy-2">
+                                                <div class="col-sm-6 text-muted">Plan</div>
+                                                <div class="col-sm-6">{{ payload.plan }}</div>
+                                                <div class="col-sm-6 text-muted">Level</div>
+                                                <div class="col-sm-6">{{ payload.level }}</div>
+                                                <div class="col-sm-6 text-muted">Method</div>
+                                                <div class="col-sm-6 text-uppercase">{{ payload.method }}</div>
+                                                <div class="col-sm-6 text-muted">Amount (converted)</div>
+                                                <div class="col-sm-6">{{ formatted(payload.amount) }} {{
+                                                    payload.currency }}</div>
+                                                <div class="col-sm-6 text-muted">Base ({{ payload.baseCurrency }})</div>
+                                                <div class="col-sm-6">{{ payload.baseAmount }}</div>
+                                                <div class="col-sm-6 text-muted">Coupon</div>
+                                                <div class="col-sm-6">{{ payload.coupon ?? '—' }}</div>
+                                                <div class="col-sm-6 text-muted">Date</div>
+                                                <div class="col-sm-6">{{ dateStr }}</div>
+                                            </div>
+                                        </div>
 
-                            <div v-else class="text-muted mb-3">No receipt data available.</div>
+                                        <div v-else class="text-muted mb-3">No receipt data available.</div>
 
-                            <div class="d-flex flex-column flex-sm-row gap-2 mt-3">
-                                <button class="btn btn-primary" @click="printReceipt" :disabled="!payload">
-                                    <svg class="me-2 btn-icon" viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-width="1.6"
-                                            d="M6 9h12v7H6zM6 6h12" />
-                                    </svg>
-                                    Print / Download
-                                </button>
+                                        <div class="d-flex flex-column flex-sm-row gap-2 mt-3">
+                                            <button class="btn btn-primary" @click="printReceipt" :disabled="!payload">
+                                                <svg class="me-2 btn-icon" viewBox="0 0 24 24">
+                                                    <path fill="none" stroke="currentColor" stroke-width="1.6"
+                                                        d="M6 9h12v7H6zM6 6h12" />
+                                                </svg>
+                                                Print / Download
+                                            </button>
 
-                                <button class="btn btn-outline-secondary" @click="copyTx" :disabled="!payload">
-                                    <svg class="me-2 btn-icon" viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-width="1.6"
-                                            d="M9 12h6M9 16h6M4 6h14v12H4z" />
-                                    </svg>
-                                    Copy Transaction ID
-                                </button>
+                                            <button class="btn btn-outline-secondary" @click="copyTx"
+                                                :disabled="!payload">
+                                                <svg class="me-2 btn-icon" viewBox="0 0 24 24">
+                                                    <path fill="none" stroke="currentColor" stroke-width="1.6"
+                                                        d="M9 12h6M9 16h6M4 6h14v12H4z" />
+                                                </svg>
+                                                Copy Transaction ID
+                                            </button>
 
-                                <button class="btn btn-success ms-sm-auto" @click="goToDashboard">
+                                            <!-- <button class="btn btn-success ms-sm-auto" @click="goToDashboard">
                                     <svg class="me-2 btn-icon" viewBox="0 0 24 24">
                                         <path fill="none" stroke="white" stroke-width="1.6" d="M3 12h18M12 3v18" />
                                     </svg>
-                                    Go to Dashboard
-                                </button>
-                            </div>
+                                    Your Mentornship
+                                </button> -->
 
-                            <div v-if="copiedMsg" class="small text-success mt-2">{{ copiedMsg }}</div>
-                            <div class="small text-muted mt-3">A copy of this receipt will be saved in your account (if
-                                logged in).</div>
+                                            <router-link to="/mentornship"
+                                                class="btn btn-success ms-sm-auto d-flex align-items-center">
+
+                                                <path fill="none" stroke="white" stroke-width="1.6"
+                                                    d="M3 12h18M12 3v18" />
+
+                                                Your Mentorship
+                                            </router-link>
+
+                                        </div>
+
+                                        <div v-if="copiedMsg" class="small text-success mt-2">{{ copiedMsg }}</div>
+                                        <div class="small text-muted mt-3">A copy of this receipt will be saved in your
+                                            account (if
+                                            logged in).</div>
+                                    </div>
+                                </div>
+
+
+                                <div class="d-flex gap-2 flex-column flex-md-row">
+                                    <button class="btn btn-outline-secondary w-100" @click="contactSupport">Contact
+                                        Support</button>
+                                    <button class="btn btn-light w-100" @click="viewInvoices">View Invoices</button>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
 
-                    <div class="d-flex gap-2 flex-column flex-md-row">
-                        <button class="btn btn-outline-secondary w-100" @click="contactSupport">Contact Support</button>
-                        <button class="btn btn-light w-100" @click="viewInvoices">View Invoices</button>
+                    <div id="printArea" class="d-none">
+                        <div style="font-family: Arial, sans-serif; padding:20px; max-width:700px; margin:auto;">
+                            <h2>Receipt</h2>
+                            <p><strong>Transaction:</strong> {{ txId }}</p>
+                            <p><strong>Date:</strong> {{ dateStr }}</p>
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <td style="padding:6px; border-top:1px solid #e9ecef;">Plan</td>
+                                    <td style="padding:6px; border-top:1px solid #e9ecef;">{{ payload?.plan }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:6px;">Level</td>
+                                    <td style="padding:6px;">{{ payload?.level }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:6px;">Method</td>
+                                    <td style="padding:6px;">{{ payload?.method }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:6px;">Amount</td>
+                                    <td style="padding:6px;">{{ formatted(payload?.amount) }} {{ payload?.currency }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:6px;">Coupon</td>
+                                    <td style="padding:6px;">{{ payload?.coupon ?? '—' }}</td>
+                                </tr>
+                            </table>
+                            <p style="margin-top:18px;">Thank you for your purchase.</p>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
+    </main>
 
 
-        <div id="printArea" class="d-none">
-            <div style="font-family: Arial, sans-serif; padding:20px; max-width:700px; margin:auto;">
-                <h2>Receipt</h2>
-                <p><strong>Transaction:</strong> {{ txId }}</p>
-                <p><strong>Date:</strong> {{ dateStr }}</p>
-                <table style="width:100%; border-collapse:collapse;">
-                    <tr>
-                        <td style="padding:6px; border-top:1px solid #e9ecef;">Plan</td>
-                        <td style="padding:6px; border-top:1px solid #e9ecef;">{{ payload?.plan }}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:6px;">Level</td>
-                        <td style="padding:6px;">{{ payload?.level }}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:6px;">Method</td>
-                        <td style="padding:6px;">{{ payload?.method }}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:6px;">Amount</td>
-                        <td style="padding:6px;">{{ formatted(payload?.amount) }} {{ payload?.currency }}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding:6px;">Coupon</td>
-                        <td style="padding:6px;">{{ payload?.coupon ?? '—' }}</td>
-                    </tr>
-                </table>
-                <p style="margin-top:18px;">Thank you for your purchase.</p>
-            </div>
-        </div>
 
-    </div>
+
 </template>
 
 <script>
+import Stepper from '@/components/Stepper.vue';
+
 export default {
     name: "PaymentSuccessView",
+    components: { Stepper },
     data() {
         return {
             payload: null,

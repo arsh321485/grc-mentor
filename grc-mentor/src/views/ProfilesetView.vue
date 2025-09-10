@@ -1,5 +1,14 @@
 <!-- src/components/ProfileSetup.vue -->
 <template>
+
+  <main>
+    <div class="container-fluid row">
+
+      <div class="col-2 col-md-2">
+        <Stepper :currentStep="1" />
+      </div>
+
+       <div class="col-10 col-md-10">
   <div class="profile-page py-5">
     <div class="container">
       <!-- Hero Section -->
@@ -169,11 +178,25 @@
       </div>
     </div>
   </div>
+
+       </div>
+
+      </div>
+
+      </main>
+
+
+
+
+
 </template>
 
 <script>
+import Stepper from '@/components/Stepper.vue';
+
 export default {
   name: "ProfileSetup",
+  components: {Stepper},
   data() {
     return {
       file: null,

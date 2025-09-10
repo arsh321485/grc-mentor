@@ -20,31 +20,34 @@
 
           <!-- Carousel Items -->
           <div class="carousel-inner rounded-4 overflow-hidden">
-           
+
             <div class="carousel-item active">
               <img src="../assets/slider-img-chng.png" class="d-block w-100 carousel-img" alt="Slide 1">
               <div class="carousel-caption custom-caption">
                 <h2 class="fw-semibold display-6">Experience counts</h2>
-                <p class="carousal-subtext">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos similique culpa, quae rerum omnis iure ratione vitae dolorem provident voluptatibus.</p>
+                <p class="carousal-subtext">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos similique
+                  culpa, quae rerum omnis iure ratione vitae dolorem provident voluptatibus.</p>
               </div>
             </div>
 
-          
+
             <div class="carousel-item">
               <img src="../assets/slider-img2.jpg" class="d-block w-100 carousel-img" alt="Slide 1">
               <div class="carousel-caption custom-caption">
                 <h2 class="fw-semibold display-6">99.99% real</h2>
-                <p class="carousal-subtext">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos similique culpa, quae rerum omnis iure ratione vitae dolorem provident voluptatibus.</p>
+                <p class="carousal-subtext">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos similique
+                  culpa, quae rerum omnis iure ratione vitae dolorem provident voluptatibus.</p>
               </div>
             </div>
 
-           
+
 
             <div class="carousel-item">
               <img src="../assets/slider-img2.jpg" class="d-block w-100 carousel-img" alt="Slide 1">
               <div class="carousel-caption custom-caption">
                 <h2 class="fw-semibold display-6">Life time mentorship for all levels</h2>
-                <p class="carousal-subtext">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos similique culpa, quae rerum omnis iure ratione vitae dolorem provident voluptatibus.</p>
+                <p class="carousal-subtext">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos similique
+                  culpa, quae rerum omnis iure ratione vitae dolorem provident voluptatibus.</p>
               </div>
             </div>
 
@@ -101,33 +104,43 @@
 
 
     <section class="container my-5">
-  <div class="text-center mb-5">
-    <h1 class="industry-h1">Industries you’ll work with:</h1>
-    <p class="industry-subtext">Industries you’ll work with:</p>
-  </div>
+      <div class="text-center mb-5">
+        <h1 class="industry-h1">Industries you’ll work with:</h1>
+        <p class="industry-subtext">Industries you’ll work with:</p>
+      </div>
 
-  <div class="container">
-    <div class="row g-4">
-      <div v-for="(item, index) in industries" :key="index" class="col-12 col-md-6 col-lg-4">
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <!-- FRONT (IMAGE) -->
-            <div class="flip-card-front">
+      <div class="container">
+        <div class="row g-4">
+          <div v-for="(item, index) in industries" :key="index" class="col-12 col-md-6 col-lg-4">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <!-- FRONT (IMAGE) -->
+                <!-- <div class="flip-card-front">
               <img :src="item.image" class="img-fluid rounded-3 w-100 h-100" :alt="item.title" />
-            </div>
+            </div> -->
 
-            <!-- BACK (COLOR + ICON + TEXT) -->
-            <div class="flip-card-back d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
-              :style="{ backgroundColor: item.color }">
-              <i :class="item.icon + ' fs-1'" :style="{ color: item.iconColor }"></i>
-              <h5 class="mt-3 fw-bold text-center">{{ item.title }}</h5>
+                <!-- FRONT (IMAGE + TITLE TEXT OVERLAY) -->
+                <div class="flip-card-front position-relative">
+                  <img :src="item.image" class="img-fluid rounded-3 w-100 h-100" :alt="item.title" />
+
+                  <!-- Overlay Title -->
+                  <div class="industry-overlay-text position-absolute w-100 text-center">
+                    <h5 class="fw-bold text-white">{{ item.title }}</h5>
+                  </div>
+                </div>
+
+                <!-- BACK (COLOR + ICON + TEXT) -->
+                <div class="flip-card-back d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
+                  :style="{ backgroundColor: item.color }">
+                  <i :class="item.icon + ' fs-1'" :style="{ color: item.iconColor }"></i>
+                  <p class="mt-3 fw-bold text-center">{{ item.paragraph }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
 
     <!-- Mentornship benefit section -->
@@ -567,84 +580,96 @@ export default defineComponent({
           icon: "bi bi-gear-wide-connected",
           iconColor: "#3CACA7",
           color: "#EAFFFE",
-          image: "https://via.placeholder.com/400x250?text=Tech+IT"
+          image: new URL('@/assets/technology-img.webp', import.meta.url).href,
+          paragraph: " SaaS companies, Managed Service Providers (MSPs), Cloud hosting providers, Data centers, Software development firms"
         },
         {
           title: "Banking & Financial Services",
           icon: "bi bi-bank",
           iconColor: "#3460A7",
           color: "#EAF2FF",
-          image: "https://via.placeholder.com/400x250?text=Banking"
+          image: new URL('@/assets/banking-financial.jpg', import.meta.url).href,
+          paragraph: "Commercial banks, fintech companies, payment processors, investment firms, insurance providers, and credit rating agencies."
         },
         {
           title: "Healthcare & Life Sciences",
           icon: "bi bi-hospital",
           iconColor: "#892318",
           color: "#FFECEA",
-          image: "https://via.placeholder.com/400x250?text=Healthcare"
+          image: new URL('@/assets/health-care.jpg', import.meta.url).href,
+          paragraph: "Hospitals, clinics, HealthTech platforms, pharmaceutical companies, clinical research organizations, and health insurers."
         },
         {
           title: "Business Process Outsourcing",
           icon: "bi bi-people",
           iconColor: "#60187D",
           color: "#F9EAFF",
-          image: "https://via.placeholder.com/400x250?text=BPO"
+          image: new URL('@/assets/outsourcing.webp', import.meta.url).href,
+          paragraph: "Call centers, shared service centers, payroll processors, and legal process outsourcing firms."
         },
         {
           title: "Legal & Consulting Services",
           icon: "bi bi-person-workspace",
           iconColor: "#25822E",
           color: "#EAFFEC",
-          image: "https://via.placeholder.com/400x250?text=Legal"
+          image: new URL('@/assets/consulting-source.webp', import.meta.url).href,
+          paragraph: "Law firms, CPA firms, and consulting advisors."
         },
         {
           title: "E-commerce & Retail",
           icon: "bi bi-cart",
           iconColor: "#967E17",
           color: "#FFFBEA",
-          image: "https://via.placeholder.com/400x250?text=E-commerce"
+          image: new URL('@/assets/ecommarce-retail.webp', import.meta.url).href,
+          paragraph: "Online marketplaces, e-commerce platforms, and point-of-sale solution providers."
         },
         {
           title: "Manufacturing & Industrial",
           icon: "bi bi-gear-wide-connected",
           iconColor: "#C15D16",
           color: "#FFE7FA",
-          image: "https://via.placeholder.com/400x250?text=Manufacturing"
+          image: new URL('@/assets/manufacture-industrial.webp', import.meta.url).href,
+          paragraph: "Smart factories with IIoT, automotive and electronics manufacturers, and defense and aerospace contractors."
         },
         {
           title: "Government & Public Sector",
           icon: "bi bi-building",
           iconColor: "#1F7595",
           color: "#FFEAEA",
-          image: "https://via.placeholder.com/400x250?text=Government"
+          image: new URL('@/assets/public-sector.webp', import.meta.url).href,
+          paragraph: "Government ministries, defense and intelligence agencies, and e-governance platforms."
         },
         {
           title: "Transportation & Logistics",
           icon: "bi bi-truck",
           iconColor: "#800B5B",
           color: "#EAFFFE",
-          image: "https://via.placeholder.com/400x250?text=Transport"
+          image: new URL('@/assets/transport-logistics.webp', import.meta.url).href,
+          paragraph: "Airlines and airports, maritime and shipping companies, and railway and logistics platforms."
         },
         {
           title: "Education & Research",
           icon: "bi bi-mortarboard",
           iconColor: "#0A741F",
           color: "#FFECEA",
-          image: "https://via.placeholder.com/400x250?text=Education"
+          image: new URL('@/assets/education-research.jpg', import.meta.url).href,
+          paragraph: "Universities, research institutions, and EdTech platforms."
         },
         {
           title: "Media & Telecommunications",
           icon: "bi bi-broadcast",
           iconColor: "#A34545",
           color: "#F9EAFF",
-          image: "https://via.placeholder.com/400x250?text=Media"
+          image: new URL('@/assets/media-telecomunication.webp', import.meta.url).href,
+          paragraph: "ISPs, telecom companies, and digital media providers."
         },
         {
           title: "Energy & Utilities",
           icon: "bi bi-lightning-charge",
           iconColor: "#1B6494",
           color: "#FFFBEA",
-          image: "https://via.placeholder.com/400x250?text=Energy"
+          image: new URL('@/assets/energy-utility.webp', import.meta.url).href,
+          paragraph: "Oil & gas firms, power providers, and smart grid solution companies."
         }
       ],
 
@@ -694,14 +719,14 @@ export default defineComponent({
 
 
 
-
+<!-- 
 <style scoped>
 
 .carousal-subtext{
   font-weight: 400;
   color: #FFFFFF99;
 }
-/* Base button styling */
+
 .card-btn {
   background-color: #0096D6;
   border: 1px solid #0096D6;
@@ -750,37 +775,45 @@ export default defineComponent({
 }
 
 
-/* carousal */
-/* Custom caption positioning */
+
+.industry-overlay-text {
+  bottom: 15px; 
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-shadow: 0px 2px 6px rgba(0,0,0,0.6); 
+}
+
+
+
 .carousel-caption.custom-caption {
   position: absolute;
   top: 25%;
-  /* Push caption to 25% from top */
+
   left: 10%;
   right: 10%;
   text-align: left;
-  /* Align text to left (can change to center if needed) */
+ 
   transform: translateY(-10%);
    max-width: 700px; 
 }
 
-/* Adjust heading and paragraph spacing */
+
 .carousel-caption.custom-caption h2,
 .carousel-caption.custom-caption h5 {
   margin-bottom: 10px;
 }
-/* Paragraph styling to wrap text automatically */
+
 .carousel-caption.custom-caption p {
   display: block;
-  white-space: normal; /* ✅ ensures normal wrapping */
-  word-wrap: break-word; /* ✅ breaks long words if needed */
+  white-space: normal; 
+  word-wrap: break-word; 
   font-size: 1.1rem;
-  line-height: 1.6; /* ✅ nice spacing between lines */
+  line-height: 1.6; 
   margin-top: 0.5rem;
   font-weight: 500
 }
 
-/* ✅ Responsive Fix: Slightly lower captions on smaller screens */
 @media (max-width: 768px) {
   .carousel-caption.custom-caption {
       max-width: 90%;
@@ -804,9 +837,152 @@ export default defineComponent({
     top: 35%;
     text-align: center;
      max-width: 95%; 
-    /* Center text on very small screens */
+ 
   }
     .carousel-caption.custom-caption p {
+    font-size: 0.95rem;
+  }
+}
+</style> -->
+
+
+<style scoped>
+.carousal-subtext {
+  font-weight: 400;
+  color: #FFFFFF99;
+}
+
+/* Base button styling */
+.card-btn {
+  background-color: #0096D6;
+  border: 1px solid #0096D6;
+  color: white;
+  border-radius: 20px;
+  margin-bottom: 60px;
+}
+
+/* Flip Card */
+.flip-card {
+  background-color: transparent;
+  height: 280px;
+  perspective: 1000px;
+  /* enables 3D effect */
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  /* keeps both faces aligned */
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  /* hides back when not visible */
+}
+
+.flip-card-front {
+  z-index: 2;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Image on back side */
+.flip-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Overlay text on front image */
+.industry-overlay-text {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.6);
+  /* makes text readable */
+  font-weight: 600;
+  text-align: center;
+  padding: 0 10px;
+}
+
+/* Carousel Section */
+/* Custom caption positioning */
+.carousel-caption.custom-caption {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  right: 10%;
+  text-align: left;
+  transform: translateY(-10%);
+  max-width: 700px;
+}
+
+/* Heading and paragraph spacing */
+.carousel-caption.custom-caption h2,
+.carousel-caption.custom-caption h5 {
+  margin-bottom: 10px;
+}
+
+/* Paragraph styling */
+.carousel-caption.custom-caption p {
+  display: block;
+  white-space: normal;
+  /* ensures normal wrapping */
+  word-wrap: break-word;
+  /* breaks long words */
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* ✅ Responsive Fix: Slightly lower captions on smaller screens */
+@media (max-width: 768px) {
+  .carousel-caption.custom-caption {
+    max-width: 90%;
+    top: 30%;
+    left: 5%;
+    right: 5%;
+  }
+
+  .carousel-caption.custom-caption h2,
+  .carousel-caption.custom-caption h5 {
+    font-size: 1.5rem;
+  }
+
+  .carousel-caption.custom-caption p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-caption.custom-caption {
+    top: 35%;
+    text-align: center;
+    max-width: 95%;
+  }
+
+  .carousel-caption.custom-caption p {
     font-size: 0.95rem;
   }
 }

@@ -1,4 +1,13 @@
 <template>
+
+   <main>
+
+    <div class="container-fluid row">
+        <div class="col-2 col-md-2">
+        <Stepper :currentStep="2" />
+      </div>
+
+       <div class="col-10 col-md-10">
   <div class="payment-page py-5">
     <div class="container">
 
@@ -12,10 +21,10 @@
             </div>
 
             <div class="col-md-6 fw-semibold fs-6">
-             GRC-101 mentorship program cost and payment details (international supported)
+              GRC-101 mentorship program cost and payment details (international supported)
             </div>
 
-                     </div>
+          </div>
         </div>
       </div>
 
@@ -28,21 +37,15 @@
 
               <div class="mb-3">
                 <div class="btn-group w-100" role="group" aria-label="payment methods">
-                  <label
-                    class="btn btn-outline-secondary text-start"
-                    :class="{ active: selected === 'card' }"
-                    @click="selectMethod('card')"
-                  >
+                  <label class="btn btn-outline-secondary text-start" :class="{ active: selected === 'card' }"
+                    @click="selectMethod('card')">
                     <input type="radio" name="pay" class="d-none" :checked="selected === 'card'" />
                     <div class="fw-semibold">Card</div>
                     <div class="small text-muted">Visa, Mastercard, Amex (multi-currency)</div>
                   </label>
 
-                  <label
-                    class="btn btn-outline-secondary text-start"
-                    :class="{ active: selected === 'paypal' }"
-                    @click="selectMethod('paypal')"
-                  >
+                  <label class="btn btn-outline-secondary text-start" :class="{ active: selected === 'paypal' }"
+                    @click="selectMethod('paypal')">
                     <input type="radio" name="pay" class="d-none" :checked="selected === 'paypal'" />
                     <div class="fw-semibold">PayPal / Checkout</div>
                     <div class="small text-muted">Popular international wallets / PayPal</div>
@@ -60,11 +63,8 @@
                     <div class="small text-muted">(INR only)</div>
                   </label> -->
 
-                  <label
-                    class="btn btn-outline-secondary text-start"
-                    :class="{ active: selected === 'netbanking' }"
-                    @click="selectMethod('netbanking')"
-                  >
+                  <label class="btn btn-outline-secondary text-start" :class="{ active: selected === 'netbanking' }"
+                    @click="selectMethod('netbanking')">
                     <input type="radio" name="pay" class="d-none" :checked="selected === 'netbanking'" />
                     <div class="fw-semibold">Netbanking</div>
                     <div class="small text-muted">Local banks</div>
@@ -98,9 +98,11 @@
               <!-- PayPal -->
               <div v-if="selected === 'paypal'" class="mt-3">
                 <h6 class="mb-2">Pay via PayPal / Checkout</h6>
-                <p class="small text-muted">We will redirect you to the provider's secure checkout (multi-currency supported).</p>
+                <p class="small text-muted">We will redirect you to the provider's secure checkout (multi-currency
+                  supported).</p>
                 <div class="mb-2">
-                  <button class="btn btn-outline-primary" @click="startPaypalFlow" :disabled="isProcessing">Pay via PayPal</button>
+                  <button class="btn btn-outline-primary" @click="startPaypalFlow" :disabled="isProcessing">Pay via
+                    PayPal</button>
                 </div>
               </div>
 
@@ -155,11 +157,11 @@
                   I agree to the <a href="#" @click.prevent>terms & refund policy</a>.
                 </label>
               </div>
-              
+
               <!-- <button class="btn btn-success w-100 mt-4" @click="proceedToPayment" :disabled="isProcessing">
                 Proceed to Payment
               </button> -->
-            
+
             </div>
           </div>
         </div>
@@ -171,7 +173,8 @@
               <div class="d-flex align-items-center justify-content-between mb-2">
                 <h6 class="mb-0">Order Summary</h6>
                 <div>
-                  <select v-model="currency" class="form-select form-select-sm" aria-label="currency" style="min-width:110px;">
+                  <select v-model="currency" class="form-select form-select-sm" aria-label="currency"
+                    style="min-width:110px;">
                     <option v-for="c in supportedCurrencies" :key="c" :value="c">{{ c }}</option>
                   </select>
                 </div>
@@ -216,17 +219,14 @@
               </button> -->
 
               <router-link to="/paymentsuccess">
-  <button
-    class="btn btn-success w-100 mb-2"
-    :disabled="!canProceed || isProcessing"
-  >
-    Pay {{ formatted(totalConverted) }}
-  </button>
-</router-link>
+                <button class="btn btn-success w-100 mb-2" :disabled="!canProceed || isProcessing">
+                  Pay {{ formatted(totalConverted) }}
+                </button>
+              </router-link>
 
 
               <button class="btn btn-outline-secondary w-100" @click="contactSupport">
-                Need help?   
+                Need help?
               </button>
 
               <hr class="my-3" />
@@ -240,7 +240,8 @@
               <h6 class="mb-3">Quick FAQ</h6>
               <div class="small">
                 <p class="mb-2"><strong>Currency:</strong> Choose preferred billing currency.</p>
-                <p class="mb-2"><strong>Conversion:</strong> Exchange rate is a mock — use your backend rate for accuracy.</p>
+                <p class="mb-2"><strong>Conversion:</strong> Exchange rate is a mock — use your backend rate for
+                  accuracy.</p>
                 <p class="mb-0"><strong>Notes:</strong> UPI works only with INR billing.</p>
               </div>
             </div>
@@ -250,11 +251,23 @@
       </div>
     </div>
   </div>
+
+       </div>
+    </div>
+   </main>
+
+
+
+
+
 </template>
 
 <script>
+import Stepper from '@/components/Stepper.vue';
+
 export default {
   name: "PaymentSetupIntlWithLevel",
+  components: {Stepper},
   props: {
     planProp: { type: Object, default: null },
     liveRates: { type: Object, default: null },
@@ -420,9 +433,12 @@ export default {
 <style scoped>
 .payment-page {
   background: radial-gradient(1200px 600px at 10% -10%, rgba(13, 110, 253, 0.08), transparent 40%),
-              #f8f9fb;
+    #f8f9fb;
 }
-.card { border-radius: 12px; }
+
+.card {
+  border-radius: 12px;
+}
 
 /* LEVEL BADGE - small and aligned so it doesn't affect button size/position */
 .level-badge {
@@ -436,18 +452,33 @@ export default {
 }
 
 /* Keep original .btn behavior — DO NOT override .btn here so your global button styles remain */
-.qr-box { width: 90px; height: 90px; border: 1px dashed #e9ecef; display:flex; align-items:center; justify-content:center; border-radius:8px; margin-left:auto; }
-.qr-placeholder { font-weight:700; color:#adb5bd; }
+.qr-box {
+  width: 90px;
+  height: 90px;
+  border: 1px dashed #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-left: auto;
+}
+
+.qr-placeholder {
+  font-weight: 700;
+  color: #adb5bd;
+}
 
 /* Keep .btn-group .btn.active style but do not touch .btn global rules */
 .btn-group .btn.active {
-  background: linear-gradient(90deg,#0d6efd,#20c997);
+  background: linear-gradient(90deg, #0d6efd, #20c997);
   color: #fff;
   border-color: transparent;
-  box-shadow: 0 10px 26px rgba(13,110,253,0.08);
+  box-shadow: 0 10px 26px rgba(13, 110, 253, 0.08);
 }
 
 @media (max-width: 991.98px) {
-  .position-sticky { position: static !important; }
+  .position-sticky {
+    position: static !important;
+  }
 }
 </style>
