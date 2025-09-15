@@ -51,6 +51,10 @@ import ResultView from '@/views/ResultView.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 import PaymentSuccessView from '@/views/PaymentSuccessView.vue'
 import SignupGrc101View from '@/views/SignupGrc101View.vue'
+import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
+import ChangePasswordView from '@/views/ChangePasswordView.vue'
+import Policycomponent from '@/components/Policycomponent.vue'
+import Playground from '@/components/Playground.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -183,6 +187,8 @@ const router = createRouter({
       name: 'iso-27001',
       component: ISO27001View
     },
+
+  
     {
       path: '/mycv',
       name: 'mycv',
@@ -318,19 +324,42 @@ const router = createRouter({
       component: WelcomeView
     },
 
-     {
+    {
       path: '/paymentsuccess',
       name: 'paymentsuccess',
       component: PaymentSuccessView
     },
 
-    
-     {
+
+    {
       path: '/signup-grc101',
       name: 'signup-grc101',
       component: SignupGrc101View
     },
 
+    {
+      path: '/forgotpassword',
+      name: 'forgotpassword',
+      component: ForgotPasswordView
+    },
+
+    {
+      path: '/changepassword',
+      name: 'changepassword',
+      component: ChangePasswordView
+    },
+
+    {
+      path: '/policy-component',
+      name: 'policy-component',
+      component: Policycomponent
+    },
+
+    {
+      path: '/play-ground',
+      name: 'play-ground',
+      component: Playground
+    },
 
     // {
 

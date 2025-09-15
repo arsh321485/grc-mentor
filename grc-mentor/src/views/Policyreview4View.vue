@@ -33,6 +33,12 @@
                                     <i class="bi bi-play-circle-fill p-1"></i> Resources
                                 </span>
                             </div>
+
+                             <router-link to="/policyreview5">
+                                    <button type="button" class="btn btn-signup rounded-pill mt-2 mt-lg-0">
+                                        Next
+                                    </button>
+                                </router-link>
                         </div>
                     </div>
 

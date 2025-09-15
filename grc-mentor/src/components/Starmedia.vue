@@ -1,4 +1,4 @@
- <template>
+<!-- <template>
   <main>
     <div class="sidebar">
 
@@ -174,115 +174,412 @@ export default {
 }
 </style>
 
+ -->
 
 
-<!-- <template>
+<!-- 
+ <template>
+  <main>
+   
+    <button
+      class="toggle-btn"
+      @click="toggleSidebar"
+      :title="isOpen ? 'Close Sidebar' : 'Open Sidebar'"
+    >
+      <i v-if="isOpen" class="bi bi-x-lg"></i>
+      <i v-else class="bi bi-layout-sidebar-inset"></i>
+    </button>
 
+ 
+    <div v-if="isOpen" class="sidebar">
+      <div class="sidebar-header">
+        <h6 class="stepper-title">
+          <span class="dot"></span> GRC Mentor
+        </h6>
+      </div>
 
+      <div>
+        <p class="media-text">Star media</p>
+      </div>
 
-  <div class="d-flex align-items-center mb-5">
-    <div class="blue-circle "></div>
-    <h5 class="mb-0 fw-semibold5">GRC Mentor</h5>
-  </div>
+      <div>
+        <p class="media-sub-text mb-3">
+          About the company <i class="bi bi-info-circle icon-color"></i>
+        </p>
+      </div>
 
+      <div>
+        <p class="media-sub-text">Industry</p>
+        <p class="media-broad-text">Sustainable Products E-commerce</p>
+      </div>
 
-  <h3 class="fw-semibold mb-3">{{ company.name }}</h3>
-  <small class="text-muted">About the company <i class="bi bi-info-circle icon-color"></i></small>
+      <div>
+        <p class="media-sub-text">Annual revenue</p>
+        <p class="media-broad-text">$45 million</p>
+      </div>
 
+      <div>
+        <p class="media-sub-text">Geographic presence</p>
+        <p class="media-broad-text">United States and Canada</p>
+      </div>
 
-  <div class=" mt-4">
-    <div v-for="(item, index) in companyInfo" :key="index" class="mb-3">
-      <small class="text-muted d-block">{{ item.label }}</small>
-      <div class="fw-medium mb-2 info-text">{{ item.value }}</div>
+      <div>
+        <p class="media-sub-text">Name of the project</p>
+        <p class="media-broad-text">ISO 27001</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Description</p>
+        <p class="media-broad-text">
+          ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project.
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Technology stack</p>
+        <p class="media-broad-text">
+          Modern cloud infrastructure with sustainability tracking
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Business model</p>
+        <p class="media-broad-text">
+          Multi-vendor marketplace with focus on sustainability
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Primary focus</p>
+        <p class="media-broad-text">
+          Sustainable business practices and process improvement
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Mandatory laws</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Security Investment</p>
+      </div>
     </div>
-  </div>
-
+  </main>
 </template>
 
-<script>
-export default {
-  name:"Starmedia",
-  props: {
-    company: {
-      type: Object,
-      required: true,
-      default: () => ({
-        name: "Star media",
-        industry: "Sustainable Products E-commerce",
-        revenue: "$45 million",
-        geography: "United States and Canada",
-        project: "ISO 27001",
-        description: "ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project.",
-        technology: "Modern cloud infrastructure with sustainability tracking",
-        businessModel: "Multi-vendor marketplace with focus on sustainability",
-        focus: "Sustainable business practices and process improvement",
-        laws: "Mandatory laws",
-        investment: "Security Investment"
-      })
-    }
+<script lang="ts">
+import { defineComponent, ref } from "vue";
+
+export default defineComponent({
+  name: "Starmedia",
+  setup() {
+    const isOpen = ref(true);
+
+    const toggleSidebar = () => {
+      isOpen.value = !isOpen.value;
+    };
+
+    return {
+      isOpen,
+      toggleSidebar,
+    };
   },
-  computed: {
-    companyInfo() {
-      return [
-        { label: "Industry", value: this.company.industry },
-        { label: "Annual revenue", value: this.company.revenue },
-        { label: "Geographic presence", value: this.company.geography },
-        { label: "Name of the project", value: this.company.project },
-        { label: "Description", value: this.company.description },
-        { label: "Technology stack", value: this.company.technology },
-        { label: "Business model", value: this.company.businessModel },
-        { label: "Primary focus", value: this.company.focus },
-        { label: "Mandatory laws", value: this.company.laws },
-        { label: "Security Investment", value: this.company.investment }
-      ];
-    }
-  }
-};
+});
 </script>
 
 <style scoped>
-.info-text {
-  font-size: 12px;
-  color: #000;
-  margin-bottom: 20;
+
+.toggle-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #0096d6;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 8px 10px;
+  cursor: pointer;
+  z-index: 100;
+}
+.toggle-btn:hover {
+  background: #007bb5;
+}
+.toggle-btn i {
+  font-size: 16px;
+}
+
+
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background-color: #f6f6f8;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.media-text {
+  color: #000000;
+  font-weight: 500;
+  font-size: 25px;
 }
 
 .icon-color {
-  color: #0096D6;
-  width: 16px;
-  height: 16px;
-
+  color: #0096d6;
 }
 
-.blue-circle {
-  width: 30px;
-  height: 30px;
-  background-color: #0096D6;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.sidebar-container {
-  width: 308px;
-  min-height: 100vh;
-  background: #f6f6f6;
-  border-right: 1px solid #e0e0e0;
-  font-family: 'Inter', sans-serif;
-  color: #121212;
-
-}
-
-.sidebar-container h3 {
-  font-size: 28px;
-  color: #000;
-}
-
-.sidebar-container small {
+.media-sub-text {
   font-size: 13px;
+  font-weight: 400;
+  color: #00000099;
+  margin: 0;
 }
 
-.sidebar-container p {
-  font-size: 15px;
-  color: #000;
+.media-broad-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
 }
-</style> -->
+
+
+.stepper-title {
+  display: flex;
+  align-items: center;
+  color: #121212;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background: linear-gradient(180deg, #9fe2ff 0%, #0096d6 100%);
+  border-radius: 50%;
+  margin-right: 8px;
+}
+</style>
+ -->
+
+
+<template>
+  <main>
+    <!-- Sidebar -->
+    <div v-if="isOpen" class="sidebar">
+      <!-- <div class="sidebar-header">
+        <h6 class="stepper-title">
+          <span class="dot"></span> GRC Mentor
+        </h6>
+
+        <button class="close-btn" @click="toggleSidebar" title="Close Sidebar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div> -->
+
+
+      <div>
+        <img src="../assets/logo-img.png" alt="" style="height: 20px; margin-bottom: 20px; ">
+      </div>
+
+      <div>
+        <p class="media-text">Star media</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text mb-3">
+          About the company <i class="bi bi-info-circle icon-color"></i>
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Industry</p>
+        <p class="media-broad-text">Sustainable Products E-commerce</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Annual revenue</p>
+        <p class="media-broad-text">$45 million</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Geographic presence</p>
+        <p class="media-broad-text">United States and Canada</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Name of the project</p>
+        <p class="media-broad-text">ISO 27001</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Description</p>
+        <p class="media-broad-text">
+          ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project,
+          ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project,
+          ISO 27001 is a project.
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Technology stack</p>
+        <p class="media-broad-text">
+          Modern cloud infrastructure with sustainability tracking
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Business model</p>
+        <p class="media-broad-text">
+          Multi-vendor marketplace with focus on sustainability
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Primary focus</p>
+        <p class="media-broad-text">
+          Sustainable business practices and process improvement
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Mandatory laws</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Security Investment</p>
+      </div>
+    </div>
+
+    <!-- Toggle button when sidebar is closed -->
+    <button v-else class="open-btn" @click="toggleSidebar" title="Open Sidebar">
+      <i class="bi bi-layout-sidebar-inset"></i>
+    </button>
+  </main>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref } from "vue";
+
+export default defineComponent({
+  name: "Starmedia",
+  setup() {
+    const isOpen = ref(true);
+
+    const toggleSidebar = () => {
+      isOpen.value = !isOpen.value;
+    };
+
+    return {
+      isOpen,
+      toggleSidebar,
+    };
+  },
+});
+</script>
+
+<style scoped>
+/* Sidebar styles */
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background-color: #f6f6f8;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Close button inside sidebar */
+.close-btn {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #0096d6;
+}
+
+/* Open button (visible only when sidebar is closed) */
+.open-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #0096d6;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 8px 10px;
+  cursor: pointer;
+  z-index: 200;
+}
+
+.open-btn:hover {
+  background: #007bb5;
+}
+
+.open-btn i {
+  font-size: 18px;
+}
+
+/* Typography */
+.media-text {
+  color: #000000;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.icon-color {
+  color: #0096d6;
+}
+
+.media-sub-text {
+  font-size: 13px;
+  font-weight: 400;
+  color: #00000099;
+  margin: 0;
+}
+
+.media-broad-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+}
+
+/* Stepper Title */
+.stepper-title {
+  display: flex;
+  align-items: center;
+  color: #121212;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background: linear-gradient(180deg, #9fe2ff 0%, #0096d6 100%);
+  border-radius: 50%;
+  margin-right: 8px;
+}
+</style>

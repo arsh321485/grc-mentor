@@ -130,11 +130,37 @@
                 </div>
 
                 <!-- BACK (COLOR + ICON + TEXT) -->
-                <div class="flip-card-back d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
+                <!-- <div class="flip-card-back d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
                   :style="{ backgroundColor: item.color }">
                   <i :class="item.icon + ' fs-1'" :style="{ color: item.iconColor }"></i>
                   <p class="mt-3 fw-bold text-center">{{ item.paragraph }}</p>
+                </div> -->
+
+
+                <!-- BACK (IMAGE + ICON + TEXT) -->
+                <div
+                  class="flip-card-back d-flex flex-column justify-content-center align-items-center p-4 rounded-3 text-center"
+                  :style="{
+                    backgroundImage: `url(${item.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }">
+                  <!-- Dark overlay -->
+                  <div class="overlay"></div>
+
+                  <!-- Content above overlay -->
+                  <div class="content">
+                    <i :class="item.icon + ' fs-1'"></i>
+                    <!-- <p class="mt-3 fw-bold">{{ item.paragraph }}</p> -->
+                    <ul class="mt-3 text-start">
+                      <li v-for="(point, idx) in item.paragraph" :key="idx">
+                        {{ point }}
+                      </li>
+                    </ul>
+
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -146,7 +172,7 @@
     <!-- Mentornship benefit section -->
 
     <section class="benefits-section text-center">
-      <small class="industry-text">Industries</small>
+      <!-- <small class="industry-text">Industries</small> -->
       <h1 class="industry-h1 mt-2">Our Mentornship Program</h1>
       <p class="industry-subtext">Our Mentornship Program</p>
 
@@ -201,7 +227,7 @@
     <!-- Testimonials section -->
 
     <section class="testimonials container py-5">
-      <h5 class="text-center industry-text">Testimonials</h5>
+      <!-- <h5 class="text-center industry-text">Testimonials</h5> -->
       <h1 class="text-center industry-h1">Testimonials</h1>
       <p class="industry-subtext text-center"> Testimonials</p>
 
@@ -581,7 +607,15 @@ export default defineComponent({
           iconColor: "#3CACA7",
           color: "#EAFFFE",
           image: new URL('@/assets/technology-img.webp', import.meta.url).href,
-          paragraph: " SaaS companies, Managed Service Providers (MSPs), Cloud hosting providers, Data centers, Software development firms"
+          // paragraph: " SaaS companies, Managed Service Providers (MSPs), Cloud hosting providers, Data centers, Software development firms"
+          paragraph: [
+            "SaaS companies",
+            "Managed Service Providers (MSPs)",
+            "Cloud hosting providers",
+            "Data centers",
+            "Software development firms"
+          ]
+
         },
         {
           title: "Banking & Financial Services",
@@ -589,7 +623,16 @@ export default defineComponent({
           iconColor: "#3460A7",
           color: "#EAF2FF",
           image: new URL('@/assets/banking-financial.jpg', import.meta.url).href,
-          paragraph: "Commercial banks, fintech companies, payment processors, investment firms, insurance providers, and credit rating agencies."
+          // paragraph: "Commercial banks, fintech companies, payment processors, investment firms, insurance providers, and credit rating agencies."
+          paragraph: [
+            "Commercial banks",
+            "Fintech companies",
+            "Payment processors",
+            "Investment firms",
+            "Insurance providers",
+            "Credit rating agencies"
+          ]
+
         },
         {
           title: "Healthcare & Life Sciences",
@@ -597,7 +640,16 @@ export default defineComponent({
           iconColor: "#892318",
           color: "#FFECEA",
           image: new URL('@/assets/health-care.jpg', import.meta.url).href,
-          paragraph: "Hospitals, clinics, HealthTech platforms, pharmaceutical companies, clinical research organizations, and health insurers."
+          // paragraph: "Hospitals, clinics, HealthTech platforms, pharmaceutical companies, clinical research organizations, and health insurers."
+          paragraph: [
+            "Hospitals",
+            "Clinics",
+            "HealthTech platforms",
+            "Pharmaceutical companies",
+            "Clinical research organizations",
+            "Health insurers"
+          ]
+
         },
         {
           title: "Business Process Outsourcing",
@@ -605,7 +657,14 @@ export default defineComponent({
           iconColor: "#60187D",
           color: "#F9EAFF",
           image: new URL('@/assets/outsourcing.webp', import.meta.url).href,
-          paragraph: "Call centers, shared service centers, payroll processors, and legal process outsourcing firms."
+          // paragraph: "Call centers, shared service centers, payroll processors, and legal process outsourcing firms."
+          paragraph: [
+            "Call centers",
+            "Shared service centers",
+            "Payroll processors",
+            "Legal process outsourcing firms"
+          ]
+
         },
         {
           title: "Legal & Consulting Services",
@@ -613,7 +672,13 @@ export default defineComponent({
           iconColor: "#25822E",
           color: "#EAFFEC",
           image: new URL('@/assets/consulting-source.webp', import.meta.url).href,
-          paragraph: "Law firms, CPA firms, and consulting advisors."
+          // paragraph: "Law firms, CPA firms, and consulting advisors."
+          paragraph: [
+            "Law firms",
+            "CPA firms",
+            "Consulting advisors"
+          ]
+
         },
         {
           title: "E-commerce & Retail",
@@ -621,7 +686,13 @@ export default defineComponent({
           iconColor: "#967E17",
           color: "#FFFBEA",
           image: new URL('@/assets/ecommarce-retail.webp', import.meta.url).href,
-          paragraph: "Online marketplaces, e-commerce platforms, and point-of-sale solution providers."
+          // paragraph: "Online marketplaces, e-commerce platforms, and point-of-sale solution providers."
+          paragraph: [
+            "Online marketplaces",
+            "E-commerce platforms",
+            "Point-of-sale solution providers"
+          ]
+
         },
         {
           title: "Manufacturing & Industrial",
@@ -629,7 +700,15 @@ export default defineComponent({
           iconColor: "#C15D16",
           color: "#FFE7FA",
           image: new URL('@/assets/manufacture-industrial.webp', import.meta.url).href,
-          paragraph: "Smart factories with IIoT, automotive and electronics manufacturers, and defense and aerospace contractors."
+          // paragraph: "Smart factories with IIoT, automotive and electronics manufacturers, and defense and aerospace contractors."
+          paragraph: [
+            "Smart factories with IIoT",
+            "Automotive manufacturers",
+            "Electronics manufacturers",
+            "Defense contractors",
+            "Aerospace contractors"
+          ]
+
         },
         {
           title: "Government & Public Sector",
@@ -637,7 +716,13 @@ export default defineComponent({
           iconColor: "#1F7595",
           color: "#FFEAEA",
           image: new URL('@/assets/public-sector.webp', import.meta.url).href,
-          paragraph: "Government ministries, defense and intelligence agencies, and e-governance platforms."
+          // paragraph: "Government ministries, defense and intelligence agencies, and e-governance platforms."
+          paragraph: [
+            "Government ministries",
+            "Defense and intelligence agencies",
+            "E-governance platforms"
+          ]
+
         },
         {
           title: "Transportation & Logistics",
@@ -645,7 +730,14 @@ export default defineComponent({
           iconColor: "#800B5B",
           color: "#EAFFFE",
           image: new URL('@/assets/transport-logistics.webp', import.meta.url).href,
-          paragraph: "Airlines and airports, maritime and shipping companies, and railway and logistics platforms."
+          // paragraph: "Airlines and airports, maritime and shipping companies, and railway and logistics platforms."
+          paragraph: [
+            "Airlines and airports",
+            "Maritime and shipping companies",
+            "Railway platforms",
+            "Logistics platforms"
+          ]
+
         },
         {
           title: "Education & Research",
@@ -653,7 +745,13 @@ export default defineComponent({
           iconColor: "#0A741F",
           color: "#FFECEA",
           image: new URL('@/assets/education-research.jpg', import.meta.url).href,
-          paragraph: "Universities, research institutions, and EdTech platforms."
+          // paragraph: "Universities, research institutions, and EdTech platforms."
+          paragraph: [
+            "Universities",
+            "Research institutions",
+            "EdTech platforms"
+          ]
+
         },
         {
           title: "Media & Telecommunications",
@@ -661,7 +759,13 @@ export default defineComponent({
           iconColor: "#A34545",
           color: "#F9EAFF",
           image: new URL('@/assets/media-telecomunication.webp', import.meta.url).href,
-          paragraph: "ISPs, telecom companies, and digital media providers."
+          // paragraph: "ISPs, telecom companies, and digital media providers."
+          paragraph: [
+            "ISPs",
+            "Telecom companies",
+            "Digital media providers"
+          ]
+
         },
         {
           title: "Energy & Utilities",
@@ -669,7 +773,13 @@ export default defineComponent({
           iconColor: "#1B6494",
           color: "#FFFBEA",
           image: new URL('@/assets/energy-utility.webp', import.meta.url).href,
-          paragraph: "Oil & gas firms, power providers, and smart grid solution companies."
+          // paragraph: "Oil & gas firms, power providers, and smart grid solution companies."
+          paragraph: [
+            "Oil & gas firms",
+            "Power providers",
+            "Smart grid solution companies"
+          ]
+
         }
       ],
 
@@ -847,6 +957,13 @@ export default defineComponent({
 
 
 <style scoped>
+
+main {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #1a1a1a; /* dark gray, similar to the text */
+  line-height: 1.6;
+}
 .carousal-subtext {
   font-weight: 400;
   color: #FFFFFF99;
@@ -891,25 +1008,84 @@ export default defineComponent({
   height: 100%;
   border-radius: 12px;
   backface-visibility: hidden;
+
   /* hides back when not visible */
 }
 
 .flip-card-front {
   z-index: 2;
+  transform: rotateY(0deg);
 }
 
+/* BACK is rotated */
 .flip-card-back {
   transform: rotateY(180deg);
   z-index: 1;
+  /* filter: blur(1px) brightness(0.8);  */
+  opacity: 0.85;
 }
 
-/* Image on back side */
-.flip-card-back img {
+/* Dark overlay */
+.flip-card-back .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  /* adjust opacity */
+  z-index: 1;
 }
+
+/* Content sits above overlay */
+/* .flip-card-back .content {
+  position: relative;
+  z-index: 2;
+  color: white;
+} */
+
+
+.flip-card-back .content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  /* make text white */
+  font-weight: 600;
+  text-align: center;
+
+  /* Highlight / Glow */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8),
+    0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+.flip-card-back .content i {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #fff;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.6));
+}
+
+.flip-card-back .content p {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+
+.flip-card-back ul {
+  list-style: disc;
+  /* bullet style */
+  padding-left: 1.2rem;
+  /* indent */
+  margin: 0;
+}
+
+.flip-card-back li {
+  color: white;
+  /* keep text visible */
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
 
 /* Overlay text on front image */
 .industry-overlay-text {
@@ -919,7 +1095,7 @@ export default defineComponent({
   transform: translateX(-50%);
   color: white;
   text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.6);
-  /* makes text readable */
+
   font-weight: 600;
   text-align: center;
   padding: 0 10px;

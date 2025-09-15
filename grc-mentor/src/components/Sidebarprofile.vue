@@ -1,18 +1,13 @@
-<template>
+<!-- <template>
   <div class="sidebar">
-    <!-- Logo & App Name -->
-    <!-- <div class="sidebar-header">
-      <h6 class="stepper-title">
-        <span class="dot"></span> GRC Mentor
-      </h6>
-    </div> -->
+ 
 
      <div>
       <img  src="../assets/logo-img.png" alt="" style="height: 20px; padding-left: 20px;margin-bottom: 20px; ">
     </div>
 
 
-    <!-- Search Bar -->
+ 
     <div class="search-box">
       <input
         style="border: 0;"
@@ -23,14 +18,14 @@
       <span class="search-icon"><i class="bi bi-search"></i></span>
     </div>
 
-    <!-- Navigation Links -->
+  
     <ul class="nav-links">
       <li
         v-for="(item, index) in navItems"
         :key="index"
         :class="{ active: activeItem === item.name }"
       >
-        <!-- Router link for navigation items -->
+   
       <router-link
   v-if="item.name !== 'Projects'"
   :to="item.route || '#'"
@@ -42,7 +37,7 @@
 </router-link>
 
 
-        <!-- Projects Dropdown -->
+       
         <div
           v-if="item.name === 'Projects'"
           class="nav-item"
@@ -59,7 +54,7 @@
           ></i>
         </div>
 
-        <!-- Projects Submenu -->
+    
         <ul v-if="item.name === 'Projects' && projectDropdownOpen" class="dropdown-list">
           <li
             v-for="(project, i) in projects"
@@ -76,13 +71,13 @@
       </li>
     </ul>
 
-    <!-- Chat & Settings -->
+  
     <div class="d-flex justify-content-end gap-3">
       <i class="bi bi-chat-text fs-5"></i>
       <i class="bi bi-gear fs-5"></i>
     </div>
 
-    <!-- Account Section -->
+   
     <div class="account-section">
       <p class="account-label">ACCOUNT</p>
       <ul>
@@ -92,12 +87,7 @@
             <span>Your CV</span>
           </router-link>
         </li>
-        <!-- <li>
-          <router-link to="/feedback" class="account-link text-decoration-none">
-            <i class="fas fa-comment-dots"></i>
-            <span>Feedback</span>
-          </router-link>
-        </li> -->
+       
         <li>
           <router-link to="/setting" class="account-link text-decoration-none">
             <i class="fas fa-cog"></i>
@@ -107,18 +97,17 @@
       </ul>
     </div>
 
-    <!-- Profile Section -->
+
     <div class="profile">
-      <!-- Gradient Circle Icon -->
+   
       <div class="profile-icon"></div>
 
-      <!-- Name and Email -->
+   
       <div class="profile-info">
         <h4 class="profile-name">Amit Sharma</h4>
         <p class="profile-email">amitsharma@gmail.com</p>
       </div>
 
-      <!-- Dropdown Icon -->
       <i class="fas fa-chevron-down profile-dropdown"></i>
     </div>
   </div>
@@ -162,7 +151,155 @@ export default {
     }
   }
 };
+</script> -->
+
+<template>
+  <div class="sidebar">
+    <!-- Logo -->
+    <div>
+      <img
+        src="../assets/logo-img.png"
+        alt=""
+        style="height: 20px; padding-left: 20px; margin-bottom: 20px"
+      />
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-box">
+      <input
+        style="border: 0"
+        type="text"
+        placeholder="Search for anything..."
+        v-model="searchQuery"
+      />
+      <span class="search-icon"><i class="bi bi-search"></i></span>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+      <li
+        v-for="(item, index) in navItems"
+        :key="index"
+        :class="{ active: activeItem === item.name }"
+      >
+        <!-- Router link for normal items -->
+        <router-link
+          v-if="item.name !== 'Projects'"
+          :to="item.route || '#'"
+          class="nav-item text-decoration-none"
+          @click="handleNavClick(item)"
+        >
+          <i :class="item.icon"></i>
+          <span>{{ item.name }}</span>
+        </router-link>
+
+        <!-- Projects Dropdown -->
+        <div
+          v-if="item.name === 'Projects'"
+          class="nav-item"
+          @click="toggleProjectsDropdown"
+        >
+          <i :class="item.icon"></i>
+          <span>{{ item.name }}</span>
+          <i
+            :class="[
+              'fas',
+              projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
+              'dropdown-arrow',
+            ]"
+          ></i>
+        </div>
+
+        <!-- Projects Submenu -->
+        <ul
+          v-if="item.name === 'Projects' && projectDropdownOpen"
+          class="dropdown-list"
+        >
+          <li v-for="(project, i) in projects" :key="i">
+            <router-link
+              :to="`/projects/${project.toLowerCase().replace(/\s+/g, '-')}`"
+              class="text-decoration-none dropdown-link"
+              @click="activeItem = project"
+            >
+              {{ project }}
+            </router-link>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Chat & Settings -->
+    <div class="d-flex justify-content-end gap-3">
+      <i class="bi bi-chat-text fs-5"></i>
+      <i class="bi bi-gear fs-5"></i>
+    </div>
+
+    <!-- Account Section -->
+    <div class="account-section">
+      <p class="account-label">ACCOUNT</p>
+      <ul>
+        <li>
+          <router-link to="/mycv" class="account-link text-decoration-none">
+            <i class="fas fa-file-alt"></i>
+            <span>Your CV</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/setting" class="account-link text-decoration-none">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile">
+      <div class="profile-icon"></div>
+      <div class="profile-info">
+        <h4 class="profile-name">Amit Sharma</h4>
+        <p class="profile-email">amitsharma@gmail.com</p>
+      </div>
+      <i class="fas fa-chevron-down profile-dropdown"></i>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+export default {
+  name: "Sidebarprofile",
+  data() {
+    return {
+      searchQuery: "",
+      activeItem: "Working Desk",
+      projectDropdownOpen: false,
+      navItems: [
+        { name: "Overview", icon: "fas fa-home", route: "/overview" },
+        { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
+        { name: "Projects", icon: "fas fa-tasks" },
+        { name: "Matching jobs", icon: "fas fa-map", route: "/matchingjobs" },
+        { name: "Badges", icon: "fas fa-award", route: "/badges" },
+        { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
+        { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
+        { name: "Calender", icon: "fas fa-calendar", route: "/calendar" },
+      ],
+      projects: ["ISO 27001", "ISO 27002", "ISO 27003", "ISO 27004"],
+    };
+  },
+  methods: {
+    handleNavClick(item: { name: string; icon?: string; route?: string }) {
+      if (item.name !== "Projects") {
+        this.activeItem = item.name;
+        this.projectDropdownOpen = false;
+      }
+    },
+    toggleProjectsDropdown() {
+      this.projectDropdownOpen = !this.projectDropdownOpen;
+    },
+  },
+};
 </script>
+
 
 
 <style scoped>

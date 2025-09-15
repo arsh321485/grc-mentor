@@ -103,12 +103,18 @@
           </div>
 
           <!-- Status Box -->
-          <div class="status-box text-center  p-4">
+          <div class="status-box text-center  p-4 ms-5">
             <h6 class="fw-semibold mb-2">Checking task status...</h6>
             <p class="text-muted mb-0">
               Your email was sent! The task has been marked as complete.
             </p>
           </div>
+
+            <router-link to="/careergraph">
+                                    <button type="button" class="btn btn-signup rounded-pill mt-2 mt-lg-0">
+                                        Next
+                                    </button>
+                                </router-link>
         </div>
       </div>
       <!-- col-10 -->

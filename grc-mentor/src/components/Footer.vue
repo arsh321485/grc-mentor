@@ -7,7 +7,7 @@
           <!-- <h3 class="logo">
             <span class="text-primary fw-bold">GRC</span><span class="fw-bold text-dark">DEPARTMENT</span>
           </h3> -->
-          <div>
+          <div class="pt-4">
             <img src="../assets/logo-img.png" alt="" style="height: 35px;"> 
           </div>
           <p class="footer-description pt-5">

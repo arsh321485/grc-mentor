@@ -4,6 +4,14 @@
   width: 130px;
 } */
 
+
+body {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #1a1a1a; /* dark gray, similar to the text */
+  line-height: 1.6;
+}
+
 .nav-link {
   color: #000000;
   font-size: 15px;
@@ -102,7 +110,7 @@
 
 }
 
-.testimonials {
+/* .testimonials {
   max-width: 1200px;
 }
 
@@ -113,7 +121,21 @@
 .card {
   border-radius: 10px;
   border: 1px solid #00000029;
+} */
+
+/* Make swiper slides stretch equally */
+.swiper-slide .card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* pushes author section to bottom */
+  min-height: 250px;
 }
+
+.swiper-slide .card p {
+  flex-grow: 1; /* quote text will expand and keep spacing */
+}
+
 
 
 .home-core-right {
