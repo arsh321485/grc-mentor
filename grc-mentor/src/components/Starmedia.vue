@@ -370,20 +370,12 @@ export default defineComponent({
 </style>
  -->
 
-
+<!-- 
 <template>
   <main>
-    <!-- Sidebar -->
+ 
     <div v-if="isOpen" class="sidebar">
-      <!-- <div class="sidebar-header">
-        <h6 class="stepper-title">
-          <span class="dot"></span> GRC Mentor
-        </h6>
-
-        <button class="close-btn" @click="toggleSidebar" title="Close Sidebar">
-          <i class="bi bi-x-lg"></i>
-        </button>
-      </div> -->
+    
 
 
       <div>
@@ -459,7 +451,7 @@ export default defineComponent({
       </div>
     </div>
 
-    <!-- Toggle button when sidebar is closed -->
+
     <button v-else class="open-btn" @click="toggleSidebar" title="Open Sidebar">
       <i class="bi bi-layout-sidebar-inset"></i>
     </button>
@@ -487,7 +479,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Sidebar styles */
+
 .sidebar {
   width: 260px;
   height: 100vh;
@@ -520,7 +512,7 @@ export default defineComponent({
   color: #0096d6;
 }
 
-/* Open button (visible only when sidebar is closed) */
+
 .open-btn {
   position: absolute;
   top: 20px;
@@ -541,6 +533,173 @@ export default defineComponent({
 .open-btn i {
   font-size: 18px;
 }
+
+
+.media-text {
+  color: #000000;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.icon-color {
+  color: #0096d6;
+}
+
+.media-sub-text {
+  font-size: 13px;
+  font-weight: 400;
+  color: #00000099;
+  margin: 0;
+}
+
+.media-broad-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+}
+
+
+.stepper-title {
+  display: flex;
+  align-items: center;
+  color: #121212;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background: linear-gradient(180deg, #9fe2ff 0%, #0096d6 100%);
+  border-radius: 50%;
+  margin-right: 8px;
+}
+</style> -->
+
+
+
+
+<template>
+  <main>
+    <!-- Sidebar -->
+    <div  class="sidebar">
+      <div class="sidebar-header">
+        <h6 class="stepper-title">
+          <span class="dot"></span> GRC Mentor
+        </h6>
+       
+      </div>
+
+      <div>
+        <p class="media-text">Star media</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text mb-3">
+          About the company <i class="bi bi-info-circle icon-color"></i>
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Industry</p>
+        <p class="media-broad-text">Sustainable Products E-commerce</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Annual revenue</p>
+        <p class="media-broad-text">$45 million</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Geographic presence</p>
+        <p class="media-broad-text">United States and Canada</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Name of the project</p>
+        <p class="media-broad-text">ISO 27001</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Description</p>
+        <p class="media-broad-text">
+          ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project,
+          ISO 27001 is a project, ISO 27001 is a project, ISO 27001 is a project,
+          ISO 27001 is a project.
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Technology stack</p>
+        <p class="media-broad-text">
+          Modern cloud infrastructure with sustainability tracking
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Business model</p>
+        <p class="media-broad-text">
+          Multi-vendor marketplace with focus on sustainability
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Primary focus</p>
+        <p class="media-broad-text">
+          Sustainable business practices and process improvement
+        </p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Mandatory laws</p>
+      </div>
+
+      <div>
+        <p class="media-sub-text">Security Investment</p>
+      </div>
+    </div>
+
+    <!-- Toggle button when sidebar is closed -->
+  
+  </main>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref } from "vue";
+
+export default defineComponent({
+  name: "Starmedia",
+  setup() {
+    const isOpen = ref(true);
+
+    const toggleSidebar = () => {
+      isOpen.value = !isOpen.value;
+    };
+
+    return {
+      isOpen,
+      toggleSidebar,
+    };
+  },
+});
+</script>
+
+<style scoped>
+/* Sidebar styles */
+.sidebar {
+  /* width: 260px; */
+  height: 100vh;
+  background-color: #f6f6f8;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+
 
 /* Typography */
 .media-text {
