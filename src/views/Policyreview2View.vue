@@ -72,7 +72,7 @@
                             <li>
                               <!-- Methods -->
                               <a href="#" @click.prevent="toggleSubmenu('methods-sub')">
-                                <span class="color">
+                                <span class="color m-auto">
                                   <i class="bi bi-file-earmark-ruled p-1"></i>
                                   Methods
                                 </span>
@@ -82,7 +82,7 @@
 
                               <!-- Level 2 -->
                               <ul v-if="openSubmenu === 'methods-sub'" class="submenu-content">
-                                <li class="ps-3 ">Design and Development</li>
+                                <li class="ps-3 small ">Design and Development</li>
 
                                 <!-- Tools -->
                                 <li class=" ">
@@ -98,7 +98,7 @@
                                   <!-- Level 3 -->
                                   <ul v-if="openActionSubmenu" class="submenu-content">
                                     <li class="ps-3 pe-3">
-                                     <span> Develop and create security tools,
+                                     <span  class="small"> Develop and create security tools,
                                       processes, and documentation</span>
                                     </li>
                                     <!-- Action -->
