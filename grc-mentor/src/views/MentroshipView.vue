@@ -1,336 +1,479 @@
 <template>
-    <main>
-        <div class="container-fluid row">
-            <div class="col-2 col-md-2">
-                <Stepper :currentStep="3" />
+  <main class="mentorship-page">
+    <div class="container-fluid">
+      <div class="row g-4">
+        <!-- Stepper Left Column -->
+        <div class="col-2 col-md-2">
+          <Stepper :currentStep="3" />
+        </div>
+
+        <!-- Right Main Column -->
+        <div class="col-10 col-md-10">
+          <!-- Banner -->
+          <div class="banner mb-5">
+            <div class="banner-left">
+              <h6 class="banner-title">About your mentor</h6>
+              <p class="banner-sub">Review your mentorship details below.</p>
+            </div>
+            <div class="banner-right">GRC 101</div>
+          </div>
+
+          <!-- Industries + Responsibilities Row -->
+          <div class="row g-4 mb-4">
+            <!-- Industries -->
+            <div class="col-md-6">
+              <section class="industries-card glass-card h-100">
+                <h6 class="section-title mb-3 d-flex align-items-center justify-content-center">
+                  Your mentorship will include:
+                </h6>
+                <div class="industries-grid">
+                  <div
+                    v-for="(industry, index) in industries"
+                    :key="index"
+                    class="industry-box"
+                    @click="openModal(industry)"
+                  >
+                    <div class="icon-wrapper" :class="industry.class">
+                      <i :class="industry.icon"></i>
+                    </div>
+                    <h6 class="industry-title">{{ industry.name }}</h6>
+                    <p class="industry-company">{{ industry.company }}</p>
+                  </div>
+                </div>
+              </section>
             </div>
 
-            <div class="col-10 col-md-10">
+            <!-- Responsibilities -->
+            <div class="col-md-6">
+              <section class="roles-card glass-card h-100">
+                <h6 class="section-title">You will be responsible for:</h6>
+                <ul class="roles-list">
+                  <li v-for="(role, index) in roles" :key="index" class="role-item">
+                    <i class="fas fa-check-circle role-icon"></i>
+                    <span>{{ role }}</span>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
 
-                <!-- Header -->
-                <h2 class="mentor-text mt-5 pt-4">About your mentorship:</h2>
-                <p class="sub-text pt-2">Please wait while we set things up for you...</p>
-
-                <!-- Industries -->
-                <p class="text-mentor pt-4">Your mentorship will include these 4 industries:</p>
-                <div class="industries pt-4">
-                    <div class="industry">
-                        <div class="top">
-                            <div class="icon-wrapper media">
-                                <i class="fas fa-play"></i>
-                            </div>
-
-                            <h6>Media</h6>
-                        </div>
-                        <p>Company name</p>
-                    </div>
-
-                    <div class="industry">
-                        <div class="top">
-                            <div class="icon-wrapper legal">
-                                <i class="fas fa-gavel"></i>
-                            </div>
-
-                            <h6>Legal</h6>
-                        </div>
-                        <p>Company name</p>
-                    </div>
-
-                    <div class="industry">
-                        <div class="top">
-                            <div class="icon-wrapper education">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-
-                            <h6>Education</h6>
-                        </div>
-                        <p>Company name</p>
-                    </div>
-
-                    <div class="industry">
-                        <div class="top">
-                            <div class="icon-wrapper ecommerce">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-
-                            <h6>E-commerce</h6>
-                        </div>
-                        <p>Company name</p>
-                    </div>
+          <!-- Projects -->
+          <section class="projects-card glass-card mb-4">
+            <h6 class="section-title">Projects</h6>
+            <p class="subtitle">You'll be working on these project/tasks:</p>
+            <div class="accordion custom-accordion" id="projectAccordion">
+              <div
+                class="accordion-item"
+                v-for="(project, index) in projects"
+                :key="index"
+              >
+                <h2 class="accordion-header" :id="'heading' + index">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    :data-bs-target="'#collapse' + index"
+                  >
+                    <i class="fas fa-folder me-2"></i> {{ project.title }}
+                  </button>
+                </h2>
+                <div
+                  :id="'collapse' + index"
+                  class="accordion-collapse collapse"
+                  :aria-labelledby="'heading' + index"
+                  data-bs-parent="#projectAccordion"
+                >
+                  <div class="accordion-body">
+                    {{ project.details }}
+                  </div>
                 </div>
+              </div>
+            </div>
+          </section>
 
-                <!-- Project/Tasks -->
-                <p class="text-mentor pt-4">You'll be working on this project/tasks:</p>
-                <div class="project-box">
-                    <div class="project-placeholder"></div>
-                    <p class="text-project ">Project name</p>
-                </div>
+          <!-- Policy -->
+          <section class="policy-card glass-card text-center">
+            <p class="mt-2">
+              <a href="javascript:void(0)" @click="openPolicyModal" class="policy-link">
+                Read Acceptance Usage Policy
+              </a>
+            </p>
 
-                <!-- Responsibilities -->
-                <p class="placeholder-text mt-3 pt-4">Your responsibilities will be:</p>
+            <button class="btn btn-submit mt-4" :disabled="!agree">
+              Setup your communication
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
 
-                <!-- Policy -->
+    <!-- Right Side Modal (Industries) -->
+    <div
+      v-if="activeIndustry"
+      class="custom-modal-overlay"
+      @click.self="closeModal"
+    >
+      <div class="custom-modal glass-card">
+        <div class="modal-header">
+          <h6>{{ activeIndustry.name }}</h6>
+          <button class="close-btn" @click="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>{{ activeIndustry.details }}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" @click="closeModal">
+            Close
+          </button>
+          <button class="btn btn-primary btn-sm">Save Changes</button>
+        </div>
+      </div>
+    </div>
 
-                <p class="pt-4 mt-5 placeholder-text">Acceptance usage policy</p>
-                <label class="checkbox">
-                    <input type="checkbox" v-model="agree" />
-                    I agree to the terms
-                </label>
-
-                <!-- Button -->
-                <!-- <button class="submit-btn" :disabled="!agree">
-                    Setup your email
-                </button> -->
-                <router-link to="/mattermost" class="emial-btn">
-                    Setup your email
-                </router-link>
-
+    <!-- Center Modal (Policy) -->
+    <div v-if="showPolicyModal" class="center-modal-overlay" @click.self="closePolicyModal">
+      <div class="center-modal glass-card">
+        <div class="modal-header">
+          <h6>Acceptance Usage Policy</h6>
+          <button class="close-btn" @click="closePolicyModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            By participating in this mentorship program, you agree to follow
+            the community guidelines, complete assigned tasks responsibly,
+            and maintain respectful collaboration with mentors and peers.
+          </p>
+          <p>
+            Any misuse of resources, breach of confidentiality, or violation
+            of ethical standards may result in removal from the program.
+          </p>
+            <div class="form-check  gap-2">
+              <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree"/>
+              <label class="form-check-label small-text" for="agreeTerms">
+                I agree to the terms
+              </label>
             </div>
 
         </div>
-
-    </main>
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" @click="closePolicyModal">Close</button>
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
+
 <script lang="ts">
 import Stepper from '@/components/Stepper.vue';
-
 export default {
   name: "MentorshipView",
   components: { Stepper },
   data() {
     return {
-      agree: false, // ✅ Declare the variable here
+      industries: [
+        { name: "Media", company: "Company name", icon: "fas fa-play", class: "media", details: "Details about Media mentorship go here." },
+        { name: "Legal", company: "Company name", icon: "fas fa-gavel", class: "legal", details: "Details about Legal mentorship go here." },
+        { name: "Education", company: "Company name", icon: "fas fa-graduation-cap", class: "education", details: "Details about Education mentorship go here." },
+        { name: "E-commerce", company: "Company name", icon: "fas fa-shopping-cart", class: "ecommerce", details: "Details about E-commerce mentorship go here." },
+      ],
+      roles: [
+        "Collaborate with mentors and peers on assigned projects",
+        "Contribute innovative ideas to industry challenges",
+        "Complete tasks within deadlines and maintain quality",
+        "Document your learnings and share with the community",
+        "Participate in weekly review meetings and feedback sessions",
+      ],
+      projects: [
+        { title: "Project 1", details: "Details of Project 1 go here." },
+        { title: "Project 2", details: "Details of Project 2 go here." },
+        { title: "Project 3", details: "Details of Project 3 go here." },
+        { title: "Project 4", details: "Details of Project 4 go here." },
+        { title: "Project 5", details: "Details of Project 5 go here." },
+      ],
+      activeIndustry: null as null | { name: string; company: string; icon: string; class: string; details: string },
+      showPolicyModal: false,
+      agree: false,
     };
+  },
+  methods: {
+    openModal(industry: any) {
+      this.activeIndustry = industry;
+    },
+    closeModal() {
+      this.activeIndustry = null;
+    },
+    openPolicyModal() {
+      this.showPolicyModal = true;
+    },
+    closePolicyModal() {
+      this.showPolicyModal = false;
+    },
   },
 };
 </script>
 
-
-
-<style>
-.mentorship-container h2 {
-
-    font-weight: 500;
-    font-style: Medium;
-    font-size: 42px;
-    line-height: 100%;
-    letter-spacing: -2.3%;
-    color: #000000;
-
+<style scoped>
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 100vh;
+  padding: 30px;
+  font-family: "Inter", sans-serif;
 }
 
-.mentorship-container h3 {
-
-    font-family: Inter;
-    font-weight: 600;
-    font-style: Semi Bold;
-    font-size: 18px;
-    color: #000000;
-    line-height: 100%;
-    letter-spacing: -0.7%;
-
-
+/* Glass Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 22px;
 }
 
-.mentorship-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    font-family: Inter;
-    text-align: left;
+/* Banner */
+.banner {
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+  margin: 2px 0 0 0;
+}
+.banner-right {
+  font-size: 15px;
+  font-weight: 600;
 }
 
-.mediatxt {
-
-    font-weight: 500;
-    font-style: Medium;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: -0.6%;
-
+/* Section Title */
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #222;
 }
 
-.mentor-text {
-    color: #000000;
-    font-weight: 500;
+/* Industries Grid */
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 25px 40px; /* vertical + horizontal spacing */
+  justify-items: center;
 }
 
-.sub-text {
-    color: #00000099;
-    font-size: 14px;
+.industry-box {
+  width: 160px;
+  height: 160px;
+  /* background: #f0f5ff; */
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
 }
 
-.text-mentor {
-    font-size: 18px;
-    color: #000000;
-    font-weight: 600;
-}
-
-.mediacompany {
-
-    font-weight: 500;
-    font-style: Medium;
-    font-size: 13px;
-    color: #000000;
-    line-height: 24px;
-    letter-spacing: -0.6%;
-}
-
-input {
-    font-weight: 500;
-    font-style: Medium;
-    font-size: 13px;
-    color: #000000;
-    line-height: 100%;
-    letter-spacing: -0.5%;
-
-}
-
-.top h6 {
-    font-weight: 500;
-    color: #000000;
-    padding-top: 8px;
-}
-
-.text-project {
-    font-size: 15px;
-    font-weight: 600;
-    color: #000000DE;
-}
-
-.sub-text {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-/* .top-text{
-    font-size: 18px;
-    font-weight: 500;
-} */
-
-.industries {
-    display: flex;
-    /* justify-content: space-between; */
-    flex-wrap: wrap;
-    gap: 80px;
-    margin-top: 20px;
-}
-
-.industry {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
-
-.industry .top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.industry-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
 .icon-wrapper {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 10px;
 }
 
-.icon-wrapper.media {
-    background: #c7f5c7;
-    color: #008000;
+.industry-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
 }
 
-.icon-wrapper.legal {
-    background: #f5c7a7;
-    color: #6b2f00;
+.industry-company {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
 }
 
-.icon-wrapper.education {
-    background: #a7d2f5;
-    color: #003f6b;
+/* Icon Colors */
+.icon-wrapper.media { background: #56ab2f; }
+.icon-wrapper.legal { background: #ff5e62; }
+.icon-wrapper.education { background: #5b86e5; }
+.icon-wrapper.ecommerce { background: #fbc2eb; }
+
+/* Roles Section */
+.roles-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.role-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+}
+.role-item:last-child {
+  border-bottom: none;
+}
+.role-icon {
+  color: #2d9cdb;
+  font-size: 16px;
 }
 
-.icon-wrapper.ecommerce {
-    background: #c7c7f5;
-    color: #2f2f8b;
+/* Projects */
+.subtitle {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 14px;
+}
+.custom-accordion .accordion-item {
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.custom-accordion .accordion-button {
+  background: #f9f9f9;
+  font-size: 14px;
+  font-weight: 500;
+}
+.custom-accordion .accordion-button:not(.collapsed) {
+  background: #eaf5ff;
+  color: #2d7dd2;
+  font-weight: 600;
 }
 
-.industry strong {
-    font-size: 14px;
-    font-weight: 600;
+/* Policy */
+.small-text {
+  font-size: 13px;
+}
+.btn-submit {
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  border: none;
+  border-radius: 22px;
+  padding: 10px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+.btn-submit:hover {
+  background: linear-gradient(90deg, #2f80ed, #2d9cdb);
+}
+.btn-submit:disabled {
+  background: #b3d7e6;
+  cursor: not-allowed;
 }
 
-.industry p {
-    margin-top: 8px;
-    font-size: 13px;
-    color: #000000;
-    font-weight: 500;
+/* Right-Side Modal */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  z-index: 1000;
+}
+.custom-modal {
+  width: 380px;
+  max-width: 90%;
+  background: #fff;
+  height: 100%;
+  border-radius: 0;
+  box-shadow: -6px 0 18px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease forwards;
+}
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.modal-header,
+.modal-footer {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-body {
+  padding: 15px;
+  font-size: 13px;
+  color: #444;
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
 }
 
-
-
-.project-box {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin: 15px 0;
-
+/* Center Modal */
+.center-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 }
-
-
-
-.project-placeholder {
-    width: 96px;
-    height: 80px;
-    background-color: #D9D9D9;
-    border-radius: 6px;
+.center-modal {
+  width: 500px;
+  max-width: 95%;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  animation: fadeIn 0.3s ease;
 }
-
-.placeholder-text {
-    color: #000000;
-    font-weight: 600;
-    font-size: 18px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
-
-.checkbox {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 15px 0;
+.modal-header, .modal-footer {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-
-.emial-btn {
-    background-color: #007BAF;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 12px 40px;
-    bottom: 20px;
-    /* Distance from bottom */
-    left: 25%;
-    text-decoration: none;
-
+.modal-body {
+  padding: 15px;
+  font-size: 14px;
+  color: #444;
 }
-
-/* ✅ Responsive */
-@media (max-width: 768px) {
-    .industries {
-        flex-direction: column;
-    }
-
-    .industry {
-        flex: 1 1 100%;
-    }
-
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
 }
 </style>

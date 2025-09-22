@@ -439,7 +439,7 @@ export default {
         <div class="container signup-container">
             <div class="row w-100 form-section mt-2">
 
-             
+
                 <div class="col-lg-6 col-md-12 left">
                     <router-link to="/" class="d-block mb-3 text-decoration-none"
                         style="color: #005E86; font-weight: 600;">
@@ -491,7 +491,7 @@ export default {
                     </form>
                 </div>
 
-               
+
                 <div class="col-lg-6 right p-0 d-none d-lg-block">
                     <img src="../assets/signup-img.png" alt="Signup Image" style="border-radius: 30px;">
                 </div>
@@ -548,7 +548,7 @@ export default {
 
 
 
-                    <h4 style="font-weight: 600;">Get started now</h4>
+                    <h4 style="font-weight: 600;">Signup</h4>
 
                     <!-- <p class="mb-4" style="font-weight: 500; color: #00000099; font-size: 12px;">
 
@@ -599,7 +599,7 @@ export default {
 
 
                     <!-- Divider -->
-                    <!-- 
+                    <!--
                     <div class="or-divider">
 
                         <span>or</span>
@@ -629,7 +629,7 @@ export default {
                                 placeholder="Enter your last name">
 
                         </div>
-                        <!-- 
+                        <!--
                         <div class="mb-1">
 
                             <label class="form-label">Email</label>
@@ -718,7 +718,7 @@ export default {
 
                         <router-link to="/welcome" class="btn w-100 btn-submit">
 
-                            Get started with GRC Department
+                            Get started
 
                         </router-link>
 

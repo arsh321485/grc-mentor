@@ -55,6 +55,7 @@ import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import Policycomponent from '@/components/Policycomponent.vue'
 import Playground from '@/components/Playground.vue'
+import InstructionView from '@/views/InstructionView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -188,7 +189,7 @@ const router = createRouter({
       component: ISO27001View
     },
 
-  
+
     {
       path: '/mycv',
       name: 'mycv',
@@ -359,6 +360,11 @@ const router = createRouter({
       path: '/play-ground',
       name: 'play-ground',
       component: Playground
+    },
+    {
+      path: '/instruction',
+      name: 'instruction',
+      component: InstructionView
     },
 
     // {
