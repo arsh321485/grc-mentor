@@ -62,12 +62,12 @@ export default {
   <main class="welcome-page">
     <div class="container-fluid row">
       <!-- Stepper Section -->
-      <div class="col-2 col-md-2">
+      <!-- <div class="col-2 col-md-2"> -->
         <!-- <Stepper :currentStep="1" /> -->
-      </div>
+      <!-- </div> -->
 
       <!-- Card Section -->
-      <div class="col-10 col-md-10 d-flex justify-content-center align-items-center vh-100">
+      <div class="col-12 col-md-12 d-flex justify-content-center align-items-center vh-100 ms-2">
         <div class="card shadow-lg p-5 text-center welcome-card">
           <!-- Logo -->
           <div class="mb-4">
@@ -113,7 +113,9 @@ export default {
 /* Background like your screenshot */
 .welcome-page {
   min-height: 100vh;
-  background: linear-gradient(to right, #8EC5FC, #E0C3FC);
+  /* background: linear-gradient(to right, #8EC5FC, #E0C3FC); */
+    /* background: linear-gradient(90deg, #2d9cdb, #56ccf2, #418ff5); */
+    background: linear-gradient( 135deg, #81b0f7 0%, #8fb8f5 45%, #20c997 120%);
   /* padding: 20px; */
 }
 
@@ -135,9 +137,11 @@ export default {
   padding: 14px 40px;
   font-size: 18px;
   font-weight: 600;
-  background-color: #0096D6;
-  color: #FFFFFF;
+   color: #FFFFFF;
   transition: all 0.3s ease-in-out;
+   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+
+
 }
 
 .btn-submit:hover {

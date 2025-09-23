@@ -118,8 +118,8 @@ const router = createRouter({
       component: PaymentprocessView,
     },
     {
-      path: '/mentornship',
-      name: 'mentornship',
+      path: '/mentorship',
+      name: 'mentorship',
       component: MentroshipView,
     },
     {

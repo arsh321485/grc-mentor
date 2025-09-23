@@ -12,7 +12,7 @@
           <!-- Banner -->
           <div class="banner mb-5">
             <div class="banner-left">
-              <h6 class="banner-title">About your mentor</h6>
+              <h6 class="banner-title">Onboarding</h6>
               <p class="banner-sub">Review your mentorship details below.</p>
             </div>
             <div class="banner-right">GRC 101</div>
@@ -30,14 +30,13 @@
                   <div
                     v-for="(industry, index) in industries"
                     :key="index"
-                    class="industry-box"
+                    class="industry-card"
+                    :style="{ backgroundImage: 'url(' + industry.image + ')' }"
                     @click="openModal(industry)"
                   >
-                    <div class="icon-wrapper" :class="industry.class">
-                      <i :class="industry.icon"></i>
+                    <div class="industry-overlay">
+                      <h6 class="industry-title">{{ industry.name }}</h6>
                     </div>
-                    <h6 class="industry-title">{{ industry.name }}</h6>
-                    <p class="industry-company">{{ industry.company }}</p>
                   </div>
                 </div>
               </section>
@@ -53,6 +52,19 @@
                     <span>{{ role }}</span>
                   </li>
                 </ul>
+                <div class=" justify-content-end d-flex">
+                  <div>
+                <p class="mt-3">
+                  <a href="javascript:void(0)" @click="openPolicyModal" class="policy-link">
+                    Read Acceptance Usage Policy
+                  </a>
+                </p>
+
+                <button
+                  class="btn btn-submit " :disabled="!agree" @click="goToCommunication">Setup your communication
+                </button>
+                </div>
+                </div>
               </section>
             </div>
           </div>
@@ -91,18 +103,6 @@
             </div>
           </section>
 
-          <!-- Policy -->
-          <section class="policy-card glass-card text-center">
-            <p class="mt-2">
-              <a href="javascript:void(0)" @click="openPolicyModal" class="policy-link">
-                Read Acceptance Usage Policy
-              </a>
-            </p>
-
-            <button class="btn btn-submit mt-4" :disabled="!agree">
-              Setup your communication
-            </button>
-          </section>
         </div>
       </div>
     </div>
@@ -147,13 +147,12 @@
             Any misuse of resources, breach of confidentiality, or violation
             of ethical standards may result in removal from the program.
           </p>
-            <div class="form-check  gap-2">
-              <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree"/>
-              <label class="form-check-label small-text" for="agreeTerms">
-                I agree to the terms
-              </label>
-            </div>
-
+          <div class="form-check gap-2">
+            <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree"/>
+            <label class="form-check-label small-text" for="agreeTerms">
+              I agree to the terms
+            </label>
+          </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary btn-sm" @click="closePolicyModal">Close</button>
@@ -171,10 +170,11 @@ export default {
   data() {
     return {
       industries: [
-        { name: "Media", company: "Company name", icon: "fas fa-play", class: "media", details: "Details about Media mentorship go here." },
-        { name: "Legal", company: "Company name", icon: "fas fa-gavel", class: "legal", details: "Details about Legal mentorship go here." },
-        { name: "Education", company: "Company name", icon: "fas fa-graduation-cap", class: "education", details: "Details about Education mentorship go here." },
-        { name: "E-commerce", company: "Company name", icon: "fas fa-shopping-cart", class: "ecommerce", details: "Details about E-commerce mentorship go here." },
+        { name: "Media", company: "Company name", icon: "fas fa-play", class: "media", details: "Details about Media mentorship go here.", image: new URL('@/assets/media-telecomunication.webp', import.meta.url).href },
+
+        { name: "Legal", company: "Company name", icon: "fas fa-gavel", class: "legal", details: "Details about Legal mentorship go here.", image: new URL('@/assets/outsourcing.webp', import.meta.url).href },
+        { name: "Education", company: "Company name", icon: "fas fa-graduation-cap", class: "education", details: "Details about Education mentorship go here.", image: new URL('@/assets/education-research.jpg', import.meta.url).href },
+        { name: "E-commerce", company: "Company name", icon: "fas fa-shopping-cart", class: "ecommerce", details: "Details about E-commerce mentorship go here.", image: new URL('@/assets/ecommarce-retail.webp', import.meta.url).href },
       ],
       roles: [
         "Collaborate with mentors and peers on assigned projects",
@@ -190,13 +190,13 @@ export default {
         { title: "Project 4", details: "Details of Project 4 go here." },
         { title: "Project 5", details: "Details of Project 5 go here." },
       ],
-      activeIndustry: null as null | { name: string; company: string; icon: string; class: string; details: string },
+      activeIndustry: null,
       showPolicyModal: false,
       agree: false,
     };
   },
   methods: {
-    openModal(industry: any) {
+    openModal(industry) {
       this.activeIndustry = industry;
     },
     closeModal() {
@@ -208,11 +208,17 @@ export default {
     closePolicyModal() {
       this.showPolicyModal = false;
     },
+    goToCommunication() {
+      if (this.agree) {
+        this.$router.push({ name: "mattermost" });
+      }
+    }
   },
 };
 </script>
 
 <style scoped>
+
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
@@ -476,4 +482,39 @@ export default {
   font-size: 18px;
   cursor: pointer;
 }
+
+/* Industries Card */
+.industry-card {
+  width: 100%;
+  height: 150px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.industry-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: #fff;
+  text-align: center;
+}
+
+.industry-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
 </style>
