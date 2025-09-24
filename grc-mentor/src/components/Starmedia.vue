@@ -177,10 +177,10 @@ export default {
  -->
 
 
-<!-- 
+<!--
  <template>
   <main>
-   
+
     <button
       class="toggle-btn"
       @click="toggleSidebar"
@@ -190,7 +190,7 @@ export default {
       <i v-else class="bi bi-layout-sidebar-inset"></i>
     </button>
 
- 
+
     <div v-if="isOpen" class="sidebar">
       <div class="sidebar-header">
         <h6 class="stepper-title">
@@ -370,12 +370,12 @@ export default defineComponent({
 </style>
  -->
 
-<!-- 
+<!--
 <template>
   <main>
- 
+
     <div v-if="isOpen" class="sidebar">
-    
+
 
 
       <div>
@@ -580,14 +580,15 @@ export default defineComponent({
 
 
 <template>
+    <div>
+      <img  src="../assets/logo-img.png" alt="" style="height: 30px;  margin-left: 20px; margin-top: 20px;"/>
+    </div>
   <main>
     <!-- Sidebar -->
     <div  class="sidebar">
       <div class="sidebar-header">
-        <h6 class="stepper-title">
-          <span class="dot"></span> GRC Mentor
-        </h6>
-       
+
+
       </div>
 
       <div>
@@ -660,7 +661,7 @@ export default defineComponent({
     </div>
 
     <!-- Toggle button when sidebar is closed -->
-  
+
   </main>
 </template>
 

@@ -1,7 +1,7 @@
 
 <template>
      <div>
-      <img  src="../assets/logo-img.png" alt="" style="height: 30px;  ">
+      <img  src="../assets/logo-img.png" alt="" style="height: 30px;  margin-left: 20px; margin-top: 20px;"/>
     </div>
   <div class="stepper-container">
     <!-- <h6 class="stepper-title">
@@ -52,10 +52,11 @@ export default {
     return {
       steps: [
         "Upload your CV",
-        "Mentornship Payment",
-        "Your mentorship",
+        "Assessment",
+        "Mentorship Payment",
+        "Onboarding",
         "Connect Mattermost",
-        "Mentornship setup",
+        "Mentorship setup",
       ],
     };
   },
@@ -70,7 +71,7 @@ export default {
   width: 100%;
   max-width: 300px;
   margin: auto;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,7 +89,7 @@ export default {
 .dot {
   height: 16px;
   width: 16px;
-  background: linear-gradient(180deg, #9FE2FF 0%, #0096D6 100%);
+ background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   border-radius: 50%;
   margin-right: 8px;
   margin-left: 20px;
@@ -100,7 +101,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-    margin-top: -10em;
+    margin-top: 5em;
 }
 
 .step {
@@ -124,7 +125,8 @@ export default {
   background: #fff;
 }
 .circle.active {
-  background: #0083BB;
+  /* background: #0083BB; */
+ background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   color: #fff;
   border: none;
 }
@@ -137,7 +139,13 @@ p {
 
 }
 .active-text {
-  color: #0083BB;
+  /* color: #0083BB; */
+ /* color: linear-gradient(90deg, #2d9cdb, #2f80ed); */
+ background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  -webkit-background-clip: text;  /* For Chrome, Safari */
+  -webkit-text-fill-color: transparent;
+  background-clip: text;          /* Standard */
+  color: transparent;
   font-weight: 600;
 }
 

@@ -4,7 +4,7 @@
       <div class="row g-4">
         <!-- Stepper Left Column -->
         <div class="col-2 col-md-2">
-          <Stepper :currentStep="3" />
+          <Stepper :currentStep="4" />
         </div>
 
         <!-- Right Main Column -->
@@ -12,7 +12,7 @@
           <!-- Banner -->
           <div class="banner mb-5">
             <div class="banner-left">
-              <h6 class="banner-title">About your mentor</h6>
+              <h6 class="banner-title">Onboarding</h6>
               <p class="banner-sub">Review your mentorship details below.</p>
             </div>
             <div class="banner-right">GRC 101</div>
@@ -27,13 +27,16 @@
                   Your mentorship will include:
                 </h6>
                 <div class="industries-grid">
-                  <div v-for="(industry, index) in industries" :key="index" class="industry-box"
-                    @click="openModal(industry)">
-                    <div class="icon-wrapper" :class="industry.class">
-                      <i :class="industry.icon"></i>
+                  <div
+                    v-for="(industry, index) in industries"
+                    :key="index"
+                    class="industry-card"
+                    :style="{ backgroundImage: 'url(' + industry.image + ')' }"
+                    @click="openModal(industry)"
+                  >
+                    <div class="industry-overlay">
+                      <h6 class="industry-title">{{ industry.name }}</h6>
                     </div>
-                    <h6 class="industry-title">{{ industry.name }}</h6>
-                    <p class="industry-company">{{ industry.company }}</p>
                   </div>
                 </div>
               </section>
@@ -49,6 +52,19 @@
                     <span>{{ role }}</span>
                   </li>
                 </ul>
+                <div class=" justify-content-end d-flex">
+                  <div>
+                <p class="mt-3">
+                  <a href="javascript:void(0)" @click="openPolicyModal" class="policy-link">
+                    Read Acceptance Usage Policy
+                  </a>
+                </p>
+
+                <button
+                  class="btn btn-submit " :disabled="!agree" @click="goToCommunication">Setup your communication
+                </button>
+                </div>
+                </div>
               </section>
             </div>
           </div>
@@ -58,15 +74,27 @@
             <h6 class="section-title">Projects</h6>
             <p class="subtitle">You'll be working on these project/tasks:</p>
             <div class="accordion custom-accordion" id="projectAccordion">
-              <div class="accordion-item" v-for="(project, index) in projects" :key="index">
+              <div
+                class="accordion-item"
+                v-for="(project, index) in projects"
+                :key="index"
+              >
                 <h2 class="accordion-header" :id="'heading' + index">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    :data-bs-target="'#collapse' + index">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    :data-bs-target="'#collapse' + index"
+                  >
                     <i class="fas fa-folder me-2"></i> {{ project.title }}
                   </button>
                 </h2>
-                <div :id="'collapse' + index" class="accordion-collapse collapse" :aria-labelledby="'heading' + index"
-                  data-bs-parent="#projectAccordion">
+                <div
+                  :id="'collapse' + index"
+                  class="accordion-collapse collapse"
+                  :aria-labelledby="'heading' + index"
+                  data-bs-parent="#projectAccordion"
+                >
                   <div class="accordion-body">
                     {{ project.details }}
                   </div>
@@ -75,31 +103,16 @@
             </div>
           </section>
 
-          <!-- Policy -->
-          <section class="policy-card glass-card text-center">
-            <p class="mt-2">
-              <a href="javascript:void(0)" @click="openPolicyModal" class="policy-link">
-                Read Acceptance Usage Policy
-              </a>
-            </p>
-
-            <!-- <button class="btn btn-submit mt-4" :disabled="!agree">
-              Setup your communication
-            </button> -->
-
-            <router-link :to="agree ? '/mattermost' : ''" custom v-slot="{ navigate }">
-              <button class="btn btn-submit mt-4" :disabled="!agree" @click="navigate">
-                Setup your communication
-              </button>
-            </router-link>
-
-          </section>
         </div>
       </div>
     </div>
 
     <!-- Right Side Modal (Industries) -->
-    <div v-if="activeIndustry" class="custom-modal-overlay" @click.self="closeModal">
+    <div
+      v-if="activeIndustry"
+      class="custom-modal-overlay"
+      @click.self="closeModal"
+    >
       <div class="custom-modal glass-card">
         <div class="modal-header">
           <h6>{{ activeIndustry.name }}</h6>
@@ -134,13 +147,12 @@
             Any misuse of resources, breach of confidentiality, or violation
             of ethical standards may result in removal from the program.
           </p>
-          <div class="form-check  gap-2">
-            <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree" />
+          <div class="form-check gap-2">
+            <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree"/>
             <label class="form-check-label small-text" for="agreeTerms">
               I agree to the terms
             </label>
           </div>
-
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary btn-sm" @click="closePolicyModal">Close</button>
@@ -158,10 +170,11 @@ export default {
   data() {
     return {
       industries: [
-        { name: "Media", company: "Company name", icon: "fas fa-play", class: "media", details: "Details about Media mentorship go here." },
-        { name: "Legal", company: "Company name", icon: "fas fa-gavel", class: "legal", details: "Details about Legal mentorship go here." },
-        { name: "Education", company: "Company name", icon: "fas fa-graduation-cap", class: "education", details: "Details about Education mentorship go here." },
-        { name: "E-commerce", company: "Company name", icon: "fas fa-shopping-cart", class: "ecommerce", details: "Details about E-commerce mentorship go here." },
+        { name: "Media", company: "Company name", icon: "fas fa-play", class: "media", details: "Details about Media mentorship go here.", image: new URL('@/assets/media-telecomunication.webp', import.meta.url).href },
+
+        { name: "Legal", company: "Company name", icon: "fas fa-gavel", class: "legal", details: "Details about Legal mentorship go here.", image: new URL('@/assets/outsourcing.webp', import.meta.url).href },
+        { name: "Education", company: "Company name", icon: "fas fa-graduation-cap", class: "education", details: "Details about Education mentorship go here.", image: new URL('@/assets/education-research.jpg', import.meta.url).href },
+        { name: "E-commerce", company: "Company name", icon: "fas fa-shopping-cart", class: "ecommerce", details: "Details about E-commerce mentorship go here.", image: new URL('@/assets/ecommarce-retail.webp', import.meta.url).href },
       ],
       roles: [
         "Collaborate with mentors and peers on assigned projects",
@@ -177,13 +190,13 @@ export default {
         { title: "Project 4", details: "Details of Project 4 go here." },
         { title: "Project 5", details: "Details of Project 5 go here." },
       ],
-      activeIndustry: null as null | { name: string; company: string; icon: string; class: string; details: string },
+      activeIndustry: null,
       showPolicyModal: false,
       agree: false,
     };
   },
   methods: {
-    openModal(industry: any) {
+    openModal(industry) {
       this.activeIndustry = industry;
     },
     closeModal() {
@@ -195,11 +208,17 @@ export default {
     closePolicyModal() {
       this.showPolicyModal = false;
     },
+    goToCommunication() {
+      if (this.agree) {
+        this.$router.push({ name: "mattermost" });
+      }
+    }
   },
 };
 </script>
 
 <style scoped>
+
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
@@ -227,19 +246,16 @@ export default {
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
-
 .banner-title {
   font-size: 16px;
   font-weight: 600;
   margin: 0;
 }
-
 .banner-sub {
   font-size: 13px;
   opacity: 0.9;
   margin: 2px 0 0 0;
 }
-
 .banner-right {
   font-size: 15px;
   font-weight: 600;
@@ -256,10 +272,8 @@ export default {
 /* Industries Grid */
 .industries-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* 2 columns */
-  gap: 25px 40px;
-  /* vertical + horizontal spacing */
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 25px 40px; /* vertical + horizontal spacing */
   justify-items: center;
 }
 
@@ -273,14 +287,14 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
 }
 
 .industry-box:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
 .icon-wrapper {
@@ -308,21 +322,10 @@ export default {
 }
 
 /* Icon Colors */
-.icon-wrapper.media {
-  background: #56ab2f;
-}
-
-.icon-wrapper.legal {
-  background: #ff5e62;
-}
-
-.icon-wrapper.education {
-  background: #5b86e5;
-}
-
-.icon-wrapper.ecommerce {
-  background: #fbc2eb;
-}
+.icon-wrapper.media { background: #56ab2f; }
+.icon-wrapper.legal { background: #ff5e62; }
+.icon-wrapper.education { background: #5b86e5; }
+.icon-wrapper.ecommerce { background: #fbc2eb; }
 
 /* Roles Section */
 .roles-list {
@@ -330,7 +333,6 @@ export default {
   margin: 0;
   padding: 0;
 }
-
 .role-item {
   display: flex;
   align-items: center;
@@ -340,11 +342,9 @@ export default {
   color: #333;
   border-bottom: 1px solid #f0f0f0;
 }
-
 .role-item:last-child {
   border-bottom: none;
 }
-
 .role-icon {
   color: #2d9cdb;
   font-size: 16px;
@@ -356,7 +356,6 @@ export default {
   color: #666;
   margin-bottom: 14px;
 }
-
 .custom-accordion .accordion-item {
   border: none;
   margin-bottom: 10px;
@@ -364,13 +363,11 @@ export default {
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
-
 .custom-accordion .accordion-button {
   background: #f9f9f9;
   font-size: 14px;
   font-weight: 500;
 }
-
 .custom-accordion .accordion-button:not(.collapsed) {
   background: #eaf5ff;
   color: #2d7dd2;
@@ -381,7 +378,6 @@ export default {
 .small-text {
   font-size: 13px;
 }
-
 .btn-submit {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   border: none;
@@ -391,11 +387,9 @@ export default {
   font-size: 14px;
   color: #fff;
 }
-
 .btn-submit:hover {
   background: linear-gradient(90deg, #2f80ed, #2d9cdb);
 }
-
 .btn-submit:disabled {
   background: #b3d7e6;
   cursor: not-allowed;
@@ -414,7 +408,6 @@ export default {
   align-items: stretch;
   z-index: 1000;
 }
-
 .custom-modal {
   width: 380px;
   max-width: 90%;
@@ -424,17 +417,10 @@ export default {
   box-shadow: -6px 0 18px rgba(0, 0, 0, 0.15);
   animation: slideIn 0.3s ease forwards;
 }
-
 @keyframes slideIn {
-  from {
-    transform: translateX(100%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }
-
 .modal-header,
 .modal-footer {
   padding: 12px;
@@ -443,13 +429,11 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-
 .modal-body {
   padding: 15px;
   font-size: 13px;
   color: #444;
 }
-
 .close-btn {
   background: none;
   border: none;
@@ -460,57 +444,77 @@ export default {
 /* Center Modal */
 .center-modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
 }
-
 .center-modal {
   width: 500px;
   max-width: 95%;
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   animation: fadeIn 0.3s ease;
 }
-
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
-
-.modal-header,
-.modal-footer {
+.modal-header, .modal-footer {
   padding: 12px;
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .modal-body {
   padding: 15px;
   font-size: 14px;
   color: #444;
 }
-
 .close-btn {
   background: none;
   border: none;
   font-size: 18px;
   cursor: pointer;
 }
+
+/* Industries Card */
+.industry-card {
+  width: 100%;
+  height: 150px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.industry-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: #fff;
+  text-align: center;
+}
+
+.industry-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
 </style>

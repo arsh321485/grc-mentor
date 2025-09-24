@@ -47,8 +47,7 @@
       <div class="d-flex justify-content-between align-items-center mt-5">
         <router-link
           to="/welcome"
-          class="text-decoration-none fw-semibold"
-          style="color:#005E86;">
+          class="text-decoration-none fw-semibold active-text">
           &larr; Back
         </router-link>
         <router-link to="/assessment" class="btn btn-submit px-4">
@@ -66,6 +65,16 @@ export default {
 </script>
 
 <style scoped>
+.active-text {
+  /* color: #0083BB; */
+ /* color: linear-gradient(90deg, #2d9cdb, #2f80ed); */
+ background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  -webkit-background-clip: text;  /* For Chrome, Safari */
+  -webkit-text-fill-color: transparent;
+  background-clip: text;          /* Standard */
+  color: transparent;
+  font-weight: 600;
+}
 .instructions-page {
   min-height: 100vh;
   /* background:  #cad1f8; */
@@ -97,11 +106,12 @@ export default {
 }
 
 .btn-submit {
+
     border-radius: 30px;
     padding: 12px;
     font-size: 16px;
     font-weight: 600;
-    background-color: #0096D6;
+    background: linear-gradient(90deg, #2d9cdb, #2f80ed);
     color: #FFFFFF;
 }
 
