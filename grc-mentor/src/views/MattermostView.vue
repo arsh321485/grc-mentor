@@ -18,7 +18,7 @@
 
                 <!-- heading -->
                  <p class="mattermost-text mt-5 pt-4">Please setup your email with Mattermost and check back to continue...</p>
-
+                 <h1>HIIIIIIIIIIIIIIIIIIIIIIIII</h1>
                 <!-- Status Box -->
                 <div class="status-box">
                     <div class="loading-icon">
