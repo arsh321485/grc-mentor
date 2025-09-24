@@ -402,7 +402,7 @@ export default {
     </div>
 
     <div class="container position-relative pt-3">
-      <!-- Gradient header / hero -->
+      <!-- Gradient headerek / hero -->
       <div class="hero card border-0 shadow-sm mb-4 overflow-hidden">
         <div class="hero-bg"></div>
         <div class="card-body position-relative text-white">
