@@ -7,7 +7,7 @@
       </h6>
     </div>
 
-    <!-- Search Bar -->
+    <!-- Search Barr -->
     <div class="search-box">
       <input
         style="border: 0;"
