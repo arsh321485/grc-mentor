@@ -56,7 +56,7 @@ export default {
         "Mentorship Payment",
         "Onboarding",
         "Connect Mattermost",
-        "Mentorship setup",
+
       ],
     };
   },
