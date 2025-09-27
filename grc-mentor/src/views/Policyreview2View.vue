@@ -18,6 +18,7 @@
           <div class="ms-auto fw-bold">
             <router-link to="/grc101">
               <button type="button" class="btn text-decoration-none text-light banner-title mt-2 mt-lg-0">
+                <i class="fas fa-arrow-left"></i>
                 Back to task menu
               </button>
             </router-link>
