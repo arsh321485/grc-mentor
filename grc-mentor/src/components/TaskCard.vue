@@ -1,5 +1,5 @@
 <template>
-  <div class="task-card p-3 rounded shadow-sm mb-3">
+  <div class="task-card p-3 rounded shadow-sm mb-3" style="background: #f9f9f9;">
     <!-- Project Code & Arrow -->
     <div class="d-flex">
       <div class="d-flex align-items-center mb-2">

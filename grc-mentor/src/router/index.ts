@@ -56,10 +56,16 @@ import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import Policycomponent from '@/components/Policycomponent.vue'
 import Playground from '@/components/Playground.vue'
 import InstructionView from '@/views/InstructionView.vue'
+import NestedDropdown from '@/components/NestedDropdown.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/nested-dropdown',
+      name: 'nested-dropdown',
+      component: NestedDropdown
+    },
     {
       path: '/stepper',
       name: 'stepper',
