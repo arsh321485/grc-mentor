@@ -1,12 +1,11 @@
-
 <template>
-     <div>
-      <img  src="../assets/logo-img.png" alt="" style="height: 30px;  margin-left: 20px; margin-top: 20px;"/>
-    </div>
   <div class="stepper-container">
-    <!-- <h6 class="stepper-title">
-      <span class="dot"></span> GRC Mentor
-    </h6> -->
+    <!-- Logo -->
+    <div class="stepper-logo">
+      <img src="../assets/logo-img.png" alt="Logo" />
+    </div>
+
+    <!-- Steps -->
     <div class="steps">
       <div
         v-for="(step, index) in steps"
@@ -18,22 +17,19 @@
           class="circle"
           :class="{ active: currentStep === index + 1 }"
         >
-          <span v-if="currentStep === index + 1"><i class="bi bi-check2"></i></span>
+          <span v-if="currentStep === index + 1">
+            <i class="bi bi-check2"></i>
+          </span>
           <span v-else>{{ index + 1 }}</span>
         </div>
 
         <!-- Step Text -->
-        <p
-          :class="{ 'active-text': currentStep === index + 1 }"
-        >
+        <p :class="{ 'active-text': currentStep === index + 1 }">
           {{ step }}
         </p>
 
-        <!-- Dotted line (except last step) -->
-        <div
-          v-if="index !== steps.length - 1"
-          class="line"
-        ></div>
+        <!-- Line -->
+        <div v-if="index !== steps.length - 1" class="line"></div>
       </div>
     </div>
   </div>
@@ -41,11 +37,11 @@
 
 <script lang="ts">
 export default {
-  name: "Stepper",
+  name: "StepperBar",
   props: {
     currentStep: {
       type: Number,
-      default: 1, // Default first step active
+      default: 1,
     },
   },
   data() {
@@ -56,7 +52,6 @@ export default {
         "Mentorship Payment",
         "Onboarding",
         "Connect Mattermost",
-
       ],
     };
   },
@@ -64,36 +59,26 @@ export default {
 </script>
 
 <style scoped>
-/* Container */
+/* Stepper Wrapper */
 .stepper-container {
-  background: #F6F6F8;
-  /* padding: 20px; */
+  background: #f6f6f8;
   width: 100%;
   max-width: 300px;
-  margin: auto;
-  /* min-height: 100vh; */
+  min-height: 100vh; /* Full height sidebar look */
+  padding: 20px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 
-/* Title */
-.stepper-title {
-  display: flex;
-  align-items: center;
-   color: #121212;
-  font-size: 17px;
-  font-weight: 650;
+/* Logo */
+.stepper-logo {
   margin-bottom: 40px;
 }
-.dot {
-  height: 16px;
-  width: 16px;
- background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  border-radius: 50%;
-  margin-right: 8px;
-  margin-left: 20px;
-
+.stepper-logo img {
+  height: 32px;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 /* Steps */
@@ -101,7 +86,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-    margin-top: 5em;
+  width: 100%;
 }
 
 .step {
@@ -109,10 +94,9 @@ export default {
   flex-direction: column;
   align-items: center;
   text-align: center;
-
 }
 
-/* Step Circle */
+/* Circle */
 .circle {
   height: 34px;
   width: 34px;
@@ -125,31 +109,25 @@ export default {
   background: #fff;
 }
 .circle.active {
-  /* background: #0083BB; */
- background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   color: #fff;
   border: none;
 }
 
-/* Step Text */
+/* Text */
 p {
-  font-size: 16px;
+  font-size: 15px;
   color: #00000099;
   margin-top: 6px;
-
 }
 .active-text {
-  /* color: #0083BB; */
- /* color: linear-gradient(90deg, #2d9cdb, #2f80ed); */
- background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  -webkit-background-clip: text;  /* For Chrome, Safari */
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;          /* Standard */
-  color: transparent;
   font-weight: 600;
 }
 
-/* Dotted Line */
+/* Line */
 .line {
   border-left: 2px dotted #bbb;
   height: 30px;
@@ -159,17 +137,34 @@ p {
 /* Responsive */
 @media (max-width: 768px) {
   .stepper-container {
+    flex-direction: row;
+    min-height: auto;
     max-width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
     padding: 15px;
+    overflow-x: auto;
   }
-  .circle {
-    height: 28px;
-    width: 28px;
-    font-size: 12px;
+  .stepper-logo {
+    margin: 0 20px 0 0;
+    flex-shrink: 0;
+  }
+  .steps {
+    flex-direction: row;
+  }
+  .step {
+    flex: 1;
+    min-width: 80px;
+  }
+  .line {
+    border-left: none;
+    border-top: 2px dotted #bbb;
+    width: 40px;
+    height: 2px;
+    margin: 16px auto;
   }
   p {
-    font-size: 13px;
+    font-size: 12px;
   }
 }
 </style>
-
