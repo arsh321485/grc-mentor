@@ -8,7 +8,7 @@
         </div>
 
         <!-- Right Main Column -->
-        <div class="col-10 col-md-10">
+        <div class="col-10 col-md-10 mt-5">
           <!-- Banner -->
           <div class="banner mb-5">
             <div class="banner-left">
@@ -408,7 +408,7 @@ export default {
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
-  padding: 30px;
+  /* padding: 30px; */
   font-family: "Inter", sans-serif;
 }
 

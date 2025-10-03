@@ -3,12 +3,12 @@
     <div class="container-fluid">
       <div class="row g-4">
         <!-- Stepper Left Column -->
-        <div class="col-12 col-md-2 mb-4 mb-md-0">
+        <div class="col-12 col-md-2  mb-md-0">
           <Stepper :currentStep="2" />
         </div>
 
         <!-- Right Main Column -->
-        <div class="col-12 col-md-10">
+        <div class="col-12 col-md-10 mt-5">
           <!-- Banner -->
           <div class="banner mb-4 flex-wrap">
             <div class="banner-left mb-3 mb-md-0">
@@ -190,7 +190,7 @@
   </main>
 </template>
 
-<script>
+<script lang="ts">
 import Stepper from "@/components/Stepper.vue";
 
 export default {
@@ -199,41 +199,66 @@ export default {
   data() {
     return {
       currentIndex: 0,
-      answers: [],
+      answers: [] as (number | null)[],
       isSubmitting: false,
       timeLeft: 5,
-      timer: null,
+      timer: null as any,
       questions: [
-        { id: 1, text: "Which domain does GRC primarily relate to?", options: ["Marketing", "Governance, Risk & Compliance", "DevOps", "UI/UX"], correctIndex: 1 },
-        { id: 2, text: "A key purpose of risk assessment is to:", options: ["Eliminate all risks", "Identify, analyze, and prioritize risks", "Approve budgets", "Hire auditors"], correctIndex: 1 },
-        { id: 3, text: "Which is commonly used in compliance frameworks?", options: ["ISO 27001", "CSS Grid", "JWT", "TCP/IP"], correctIndex: 0 },
-        { id: 4, text: "Internal controls are designed to:", options: ["Increase UI animations", "Reduce risk and ensure policy adherence", "Speed up frontend builds", "Replace audits"], correctIndex: 1 },
-        { id: 5, text: "Which role typically owns overall GRC strategy?", options: ["CFO", "CIO", "CISO/Chief Risk Officer", "UI Lead"], correctIndex: 2 },
+        {
+          id: 1,
+          text: "Which domain does GRC primarily relate to?",
+          options: ["Marketing", "Governance, Risk & Compliance", "DevOps", "UI/UX"],
+          correctIndex: 1
+        },
+        {
+          id: 2,
+          text: "A key purpose of risk assessment is to:",
+          options: ["Eliminate all risks", "Identify, analyze, and prioritize risks", "Approve budgets", "Hire auditors"],
+          correctIndex: 1
+        },
+        {
+          id: 3,
+          text: "Which is commonly used in compliance frameworks?",
+          options: ["ISO 27001", "CSS Grid", "JWT", "TCP/IP"],
+          correctIndex: 0
+        },
+        {
+          id: 4,
+          text: "Internal controls are designed to:",
+          options: ["Increase UI animations", "Reduce risk and ensure policy adherence", "Speed up frontend builds", "Replace audits"],
+          correctIndex: 1
+        },
+        {
+          id: 5,
+          text: "Which role typically owns overall GRC strategy?",
+          options: ["CFO", "CIO", "CISO/Chief Risk Officer", "UI Lead"],
+          correctIndex: 2
+        }
       ],
-      selectedOptionIndex: null,
-      FULL_DASH_ARRAY: 283,
+      selectedOptionIndex: null as number | null,
+      FULL_DASH_ARRAY: 283
     };
   },
   computed: {
     currentQuestion() {
       return this.questions[this.currentIndex];
     },
-    isLast() {
+    isLast(): boolean {
       return this.currentIndex === this.questions.length - 1;
     },
-    progressPercent() {
+    progressPercent(): number {
       const filled = Math.min(this.currentIndex + 1, this.questions.length);
       return Math.round((filled / this.questions.length) * 100);
     },
-    dasharray() {
+    dasharray(): string {
       const rawTimeFraction = this.timeLeft / 5;
       return `${(rawTimeFraction * this.FULL_DASH_ARRAY).toFixed(0)} ${this.FULL_DASH_ARRAY}`;
     },
-    remainingPathColor() {
+    remainingPathColor(): string {
       if (this.timeLeft <= 2) return "red";
       if (this.timeLeft <= 3) return "orange";
       return "green";
-    },
+    }
   },
   created() {
     this.answers = Array(this.questions.length).fill(null);
@@ -280,20 +305,36 @@ export default {
     submitAssessment() {
       this.isSubmitting = true;
       this.answers[this.currentIndex] = this.selectedOptionIndex;
-      const score = this.answers.reduce((acc, ans, idx) => acc + (ans === this.questions[idx].correctIndex ? 1 : 0), 0);
-      const level = score >= Math.ceil(this.questions.length * 0.7) ? "GRC 301" : "GRC 101";
-      this.$router.push({ name: "result", query: { score: String(score), total: String(this.questions.length), level } });
+
+      const score = this.answers.reduce(
+        (acc, ans, idx) => acc + (ans === this.questions[idx].correctIndex ? 1 : 0),
+        0
+      );
+
+      const level =
+        score >= Math.ceil(this.questions.length * 0.7) ? "GRC 301" : "GRC 101";
+
+      this.$router.push({
+        name: "result",
+        query: {
+          score: String(score),
+          total: String(this.questions.length),
+          level
+        }
+      });
+
       this.isSubmitting = false;
-    },
-  },
+    }
+  }
 };
 </script>
+
 
 <style scoped>
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
-  padding: 30px;
+  /* padding: 30px; */
   font-family: "Inter", sans-serif;
 }
 
@@ -388,36 +429,105 @@ export default {
 .base-timer__path-remaining.red {
   color: #e74c3c;
 }
+@media (min-width: 1000px) and (max-width: 2000px) {
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 100vh;
+  /* padding: 30px; */
+  font-family: "Inter", sans-serif;
+}
 
-/* Responsive Adjustments */
-@media (max-width: 1200px) {
-  .banner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .col-lg-8,
-  .col-lg-4 {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-  .timer-box {
-    margin-top: 20px;
-    height: auto !important;
-  }
+/* Banner */
+.banner {
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
-@media (max-width: 768px) {
-  .banner-title {
-    font-size: 14px;
-  }
-  .banner-sub {
-    font-size: 12px;
-  }
-  .base-timer {
-    width: 100px;
-    height: 100px;
-  }
-  .base-timer__label {
-    font-size: 18px;
-  }
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
 }
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* Status Dot */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ced4da;
+}
+.status-dot.online {
+  background: #20c997;
+}
+
+/* Buttons */
+.btn-submit {
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  border: none;
+  border-radius: 22px;
+  padding: 10px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Timer Box */
+.timer-box {
+  background: #fff;
+  min-height: 100%;
+}
+.base-timer {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: auto;
+}
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: #f0f0f0;
+}
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+.base-timer__label {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+.base-timer__path-remaining.green {
+  color: #20c997;
+}
+.base-timer__path-remaining.orange {
+  color: #f1c40f;
+}
+.base-timer__path-remaining.red {
+  color: #e74c3c;
+}
+}
+
 </style>

@@ -1,14 +1,13 @@
 <template>
   <main>
     <div class="container signup-container">
-      <div class="row w-100 form-section mt-2 g-4">
-        <!-- Logo -->
+      <div class="row w-100 form-section  justify-content-center">
         <div class="mt-5 mb-0">
           <img src="../assets/logo-img.png" alt="" style="height: 35px;" />
         </div>
 
         <!-- Left Side (Form) -->
-        <div class="col-12 col-sm-12 col-md-10 col-lg-6 mx-auto left">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-6 left">
           <router-link
             to="/home"
             class="d-block mb-1 text-decoration-none"
@@ -30,7 +29,6 @@
                 placeholder="Enter your first name"
               />
             </div>
-
             <div class="mb-1">
               <label class="form-label">Last name</label>
               <input
@@ -40,7 +38,6 @@
                 placeholder="Enter your last name"
               />
             </div>
-
             <div class="mb-1">
               <label class="form-label">Email</label>
               <div class="input-group">
@@ -53,7 +50,6 @@
                 <span class="input-group-text">@gmail.com</span>
               </div>
             </div>
-
             <div class="mb-1">
               <label class="form-label">Password</label>
               <input
@@ -63,7 +59,6 @@
                 placeholder="Enter your password"
               />
             </div>
-
             <div class="mb-1">
               <label class="form-label">Confirm Password</label>
               <input
@@ -74,21 +69,32 @@
               />
             </div>
 
-            <!-- Captcha -->
-            <div class="captcha-box">
-              <div class="captcha-left">
+            <!-- Fake Recaptcha -->
+            <div
+              style="
+                padding: 10px;
+                margin-top: 12px;
+                margin-bottom: 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                width: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div style="display: flex; align-items: center; gap: 10px;">
                 <input
                   type="checkbox"
                   id="captcha-check"
-                  style="width:20px;height:20px;cursor:pointer;"
+                  style="width: 20px; height: 20px; cursor: pointer;"
                 />
-                <label for="captcha-check" style="cursor:pointer;"
-                  >I'm not a robot</label
-                >
+                <label for="captcha-check" style="cursor: pointer;">I'm not a robot</label>
               </div>
               <img
                 src="https://www.gstatic.com/recaptcha/api2/logo_48.png"
                 alt="recaptcha"
+                style="height: 30px;"
               />
             </div>
 
@@ -100,15 +106,11 @@
                 id="termsCheck"
                 v-model="form.agree"
               />
-              <label class="form-check-label" for="termsCheck"
-                >I agree to the terms</label
-              >
+              <label class="form-check-label" for="termsCheck">I agree to the terms</label>
             </div>
 
             <!-- Submit -->
-            <router-link to="/welcome" class="btn w-100 btn-submit">
-              Get started
-            </router-link>
+            <router-link to="/welcome" class="btn w-100 btn-submit">Get started</router-link>
 
             <!-- Already have account -->
             <p class="have-account">
@@ -119,14 +121,8 @@
         </div>
 
         <!-- Right Side (Image) -->
-        <div
-          class="col-12 col-lg-6 right d-none d-lg-flex justify-content-center align-items-center"
-        >
-          <img
-            src="../assets/signup-img.png"
-            alt="Signup Image"
-            class="img-fluid signup-img"
-          />
+        <div class="col-lg-6 d-none d-lg-block right p-0">
+          <img src="../assets/signup-img.png" alt="Signup Image" class="img-fluid" style="border-radius: 30px;" />
         </div>
       </div>
     </div>
@@ -138,14 +134,12 @@ export default {
   name: "SignupView",
   data() {
     return {
-      captcha: Math.floor(1000 + Math.random() * 9000),
       form: {
         firstName: "",
         lastName: "",
         emailUsername: "",
         password: "",
         confirmPassword: "",
-        captchaInput: "",
         agree: false,
       },
     };
@@ -159,10 +153,6 @@ export default {
     handleSubmit() {
       if (this.form.password !== this.form.confirmPassword) {
         alert("Passwords do not match!");
-        return;
-      }
-      if (Number(this.form.captchaInput) !== this.captcha) {
-        alert("Captcha is incorrect!");
         return;
       }
       if (!this.form.agree) {
@@ -200,43 +190,86 @@ export default {
   text-decoration: underline;
 }
 
-/* Captcha */
-.captcha-box {
-  padding: 10px;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  max-width: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.captcha-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+
 
 /* Image */
 .signup-img {
-  max-width: 90%;
+  max-width: 80%;
   border-radius: 30px;
 }
+/* --- Global fix: prevent horizontal scroll --- */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
-/* Responsive */
-@media (max-width: 991px) {
-  .signup-img {
-    max-width: 70%;
-    margin-top: 20px;
+/* Bootstrap container fix */
+.container-fluid {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Ensure UI boxes don’t exceed parent width */
+.dropzone,
+.captcha-box,
+.card,
+.banner {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* --- Media Queries for Specific Desktop Sizes --- */
+
+/* 1366×768 (budget laptop screens) */
+@media screen and (max-width: 1366px) {
+  .container-fluid {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  .dropzone, .captcha-box {
+    font-size: 14px;
+    min-height: 150px;
+  }
+  .banner-title {
+    font-size: 14px;
   }
 }
-@media (max-width: 575.98px) {
-  .captcha-box {
-    flex-direction: column;
-    align-items: flex-start;
+
+/* 1920×1080 (Full HD office monitors) */
+@media screen and (min-width: 1367px) and (max-width: 1920px) {
+  .container-fluid {
+    max-width: 1600px; /* center content */
   }
 }
+
+/* 2560×1440 (QHD monitors) */
+@media screen and (min-width: 1921px) and (max-width: 2560px) {
+  .container-fluid {
+    max-width: 1800px;
+  }
+  .dropzone {
+    min-height: 200px;
+  }
+}
+
+/* 3840×2160 (4K displays) */
+@media screen and (min-width: 2561px) {
+  .container-fluid {
+    max-width: 2000px; /* readability */
+  }
+  .banner-title {
+    font-size: 20px;
+  }
+  .dropzone {
+    min-height: 220px;
+  }
+}
+
+
+
 </style>

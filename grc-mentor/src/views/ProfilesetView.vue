@@ -1,16 +1,14 @@
 <template>
-  <main class="mentorship-page">
+  <main class="mentorship-page ">
     <div class="container-fluid">
-      <div class="row g-3 g-md-4">
+      <div class="row g-4">
         <!-- Stepper Left Column -->
         <div class="col-12 col-md-3 col-lg-2">
-          <div class="stepper-wrapper">
-            <Stepper :currentStep="1" />
-          </div>
+          <Stepper :currentStep="1" />
         </div>
 
         <!-- Right Main Column -->
-        <div class="col-12 col-md-9 col-lg-10">
+        <div class="col-12 col-md-9 col-lg-10  mt-5">
           <!-- Banner -->
           <div class="banner mb-4">
             <div class="banner-left">
@@ -122,9 +120,9 @@
 
               <!-- Action Buttons -->
               <div class="d-flex flex-wrap justify-content-end gap-2 mt-4">
-                <button class="btn btn-outline-secondary" @click="cancel">
+                <!-- <button class="btn btn-outline-secondary" @click="cancel">
                   Cancel
-                </button>
+                </button> -->
 
                 <router-link :to="{ name: 'instruction' }">
                   <button
@@ -168,7 +166,9 @@ export default {
     };
   },
   methods: {
-    onDrag(state: boolean) { this.isDragOver = state; },
+    onDrag(state: boolean) {
+      this.isDragOver = state;
+    },
     onDrop(e: DragEvent) {
       this.isDragOver = false;
       const f = e.dataTransfer?.files?.[0];
@@ -194,7 +194,11 @@ export default {
       }
       this.file = f;
     },
-    clearFile() { this.file = null; this.error = ""; this.progress = 0; },
+    clearFile() {
+      this.file = null;
+      this.error = "";
+      this.progress = 0;
+    },
     prettySize(bytes: number) {
       const kb = 1024, mb = kb * 1024;
       return bytes >= mb
@@ -211,20 +215,14 @@ export default {
 <style scoped>
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
-  min-height: 100vh;
+  min-height: 90vh;
   font-family: "Inter", sans-serif;
-  overflow-x: hidden; /* ✅ Prevent horizontal scroll */
+
 }
 
-.container-fluid {
-  padding: 15px; /* ✅ Balanced padding */
-}
-
-/* Stepper Sticky */
-.stepper-wrapper {
-  position: sticky;
-  top: 20px;
-}
+/* .container-fluid {
+  padding: 20px;
+} */
 
 /* Banner */
 .banner {
@@ -237,8 +235,14 @@ export default {
   align-items: center;
   flex-wrap: wrap;
 }
-.banner-title { font-size: 16px; font-weight: 600; }
-.banner-sub { font-size: 13px; opacity: 0.9; }
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+}
 
 /* Dropzone */
 .dropzone {
@@ -247,23 +251,20 @@ export default {
   transition: all 180ms ease;
   min-height: 180px;
   width: 100%;
-  max-width: 100%;
 }
 .dropzone.is-dragover {
   border-style: dashed;
   background: rgba(13, 110, 253, 0.05);
 }
-.dropzone.has-file { border-color: #20c997 !important; }
-
+.dropzone.has-file {
+  border-color: #20c997 !important;
+}
 .file-chip {
   background: #f8f9fa;
   border-radius: 999px;
   padding: 0.35rem 0.75rem;
   border: 1px solid #eef1f4;
   max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* Buttons */
@@ -276,15 +277,78 @@ export default {
   font-size: 14px;
   color: #fff;
 }
-.btn-submit:hover { background: linear-gradient(90deg, #2f80ed, #2d9cdb); }
-
-/* Responsive tweaks */
-@media (max-width: 767.98px) {
-  .banner {
-    text-align: center;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .dropzone { min-height: 150px; }
+.btn-submit:hover {
+  background: linear-gradient(90deg, #2f80ed, #2d9cdb);
 }
+/* For screens wider than 1000px but less than 2000px */
+@media (min-width: 1000px) and (max-width: 2000px) {
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 90vh;
+  font-family: "Inter", sans-serif;
+
+}
+
+/* .container-fluid {
+  padding: 20px;
+} */
+
+/* Banner */
+.banner {
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* Dropzone */
+.dropzone {
+  background: #fff;
+  border: 2px solid #e9ecef;
+  transition: all 180ms ease;
+  min-height: 180px;
+  width: 100%;
+}
+.dropzone.is-dragover {
+  border-style: dashed;
+  background: rgba(13, 110, 253, 0.05);
+}
+.dropzone.has-file {
+  border-color: #20c997 !important;
+}
+.file-chip {
+  background: #f8f9fa;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #eef1f4;
+  max-width: 100%;
+}
+
+/* Buttons */
+.btn-submit {
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  border: none;
+  border-radius: 22px;
+  padding: 8px 22px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+.btn-submit:hover {
+  background: linear-gradient(90deg, #2f80ed, #2d9cdb);
+}
+}
+
 </style>

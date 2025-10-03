@@ -8,7 +8,7 @@
         </div>
 
         <!-- Right Main Column -->
-        <div class="col-10 col-md-10">
+        <div class="col-10 col-md-10 mt-5">
           <!-- Banner -->
           <div class="banner mb-5">
             <div class="banner-left">
@@ -430,7 +430,7 @@ export default {
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
-  padding: 30px;
+  /* padding: 30px; */
   font-family: "Inter", sans-serif;
 }
 
@@ -475,8 +475,24 @@ export default {
   border-color: transparent;
   box-shadow: 0 10px 26px rgba(13,110,253,0.08);
 }
+.btn-submit {
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  border: none;
+  border-radius: 22px;
+  padding: 10px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+.btn-submit:hover {
+  background: linear-gradient(90deg, #2f80ed, #2d9cdb);
+}
+.btn-submit:disabled {
+  background: #b3d7e6;
+  cursor: not-allowed;
+}
 
-@media (max-width: 991.98px) {
+/* @media (max-width: 991.98px) {
   .position-sticky { position: static !important; }
 }
 
@@ -495,7 +511,7 @@ export default {
 .btn-submit:disabled {
   background: #b3d7e6;
   cursor: not-allowed;
-}
+} */
 
 
 
