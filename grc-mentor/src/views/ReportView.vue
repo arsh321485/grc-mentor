@@ -30,25 +30,71 @@
                   <ul class="list-unstyled mb-4">
                     <li class="d-flex align-items-center mb-2">
                       <span class="dot me-2"></span>
-                      Domain Name: <strong class="ms-1">{{ domainName }}</strong>
+                      Domain : <h6 class="ms-1">{{ currentModule.domainName }}</h6>
+                    </li>
+                    <li class="d-flex align-items-center mb-2">
+                      <span class="dot me-2 "></span>
+                      Industry :
+                      <select
+                        v-model="selectedModule"
+                        class="form-select ms-2 px-5"
+                        style="width: auto; display: inline-block; font-size: 14px; padding: 4px 6px;"
+                      >
+                        <option v-for="mod in modules" :key="mod" :value="mod">{{ mod }}</option>
+                      </select>
                     </li>
                     <li class="d-flex align-items-center mb-2">
                       <span class="dot me-2"></span>
-                      Task: <strong class="ms-1">{{ taskName }}</strong>
+                      Task: <h6 class="ms-1">{{ currentModule.taskName }}</h6>
                     </li>
                     <li class="d-flex align-items-center mb-2">
                       <span class="dot me-2"></span>
-                      Sub-task: <strong class="ms-1">{{ subTask }}</strong>
+                      Sub-task: <h6 class="ms-1">{{ currentModule.subTask }}</h6>
                     </li>
                     <li class="d-flex align-items-center mb-2">
                       <span class="dot me-2"></span>
-                      Skill Developed: <strong class="ms-1">{{ skill }}</strong>
+                      Skill Developed: <h6 class="ms-1">{{ currentModule.skill }}</h6>
                     </li>
                   </ul>
 
+                  <!-- Progress Circle -->
+                  <div class="col-md-5 text-center mx-auto mb-4">
+                    <div class=" p-4 rounded-4">
+                      <div class="score-ring mx-auto mb-3">
+                        <svg viewBox="0 0 120 120" class="d-block">
+                          <defs>
+                            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stop-color="#2d9cdb" />
+                              <stop offset="50%" stop-color="#56ccf2" />
+                              <stop offset="100%" stop-color="#2f80ed" />
+                            </linearGradient>
+                          </defs>
+
+                          <circle cx="60" cy="60" r="52" class="track" />
+                          <circle
+                            cx="60"
+                            cy="60"
+                            r="52"
+                            class="progress"
+                            :style="circleStyle"
+                          />
+                          <text x="60" y="64" text-anchor="middle" class="score-text">
+                            {{ currentModule.progress }}%
+                          </text>
+                        </svg>
+                      </div>
+                      <div class="h6 mb-1">
+                        {{ selectedModule === 'Overall' ? 'Overall Progress' : 'Module Progress' }}
+                      </div>
+                      <div class="small text-muted">
+                        You’ve completed {{ currentModule.progress }}% of your learning journey
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="alert alert-info border-0 rounded-3 shadow-sm mt-auto">
-                    <strong>📘 Feedback Summary:</strong>
-                    <p class="mb-0 mt-1">{{ recommendation }}</p>
+                    <h6>📘 Feedback Summary:</h6>
+                    <p class="mb-0 mt-1">{{ currentModule.recommendation }}</p>
                   </div>
                 </div>
               </div>
@@ -81,6 +127,7 @@
                               <th>Control Name</th>
                               <th>Purpose</th>
                               <th>Task</th>
+                                <th>Score</th> <!-- New Column Added -->
                             </tr>
                           </thead>
                           <tbody>
@@ -90,6 +137,7 @@
                               <td>{{ item.controlName }}</td>
                               <td>{{ item.purpose }}</td>
                               <td>{{ item.task }}</td>
+                               <td><strong>{{ item.score }}/10</strong></td>
                             </tr>
                           </tbody>
                         </table>
@@ -114,12 +162,46 @@ export default {
   components: { Sidebarprofile },
   data() {
     return {
-      domainName: "Media",
-      taskName: "Policy Implementation",
-      subTask: "Access Control Review",
-      skill: "Risk Analysis & Compliance",
-      recommendation:
-        "You’ve shown consistent effort throughout your modules. Continue focusing on accuracy and structure in your reports.",
+      selectedModule: "Overall",
+      modules: ["Overall", "Legal", "Education", "Media", "E-commerce"],
+
+      moduleData: {
+        Legal: {
+          progress: 82,
+          domainName: "GRC101",
+          taskName: "Compliance Review",
+          subTask: "Policy Drafting",
+          skill: "Legal Analysis",
+          recommendation: "Excellent understanding of compliance frameworks.",
+        },
+        Education: {
+          progress: 69,
+          domainName: "GRC101",
+          taskName: "Curriculum Design",
+          subTask: "Module Mapping",
+          skill: "Instructional Planning",
+          recommendation: "Good conceptual clarity; improve content flow.",
+        },
+        Media: {
+          progress: 76,
+          domainName: "GRC101",
+          taskName: "Policy Implementation",
+          subTask: "Access Control Review",
+          skill: "Risk Analysis & Compliance",
+          recommendation:
+            "You’ve shown consistent effort throughout your modules. Continue focusing on accuracy and structure in your reports.",
+        },
+        "E-commerce": {
+          progress: 88,
+          domainName: "GRC101",
+          taskName: "Transaction Security",
+          subTask: "Payment Gateway Setup",
+          skill: "Cybersecurity Implementation",
+          recommendation:
+            "h6 understanding of secure payment systems; keep refining encryption techniques.",
+        },
+      },
+
       activeTab: "ISO 27001",
       tabs: ["ISO 27001", "ISO 27002", "ISO 27003", "ISO 27004"],
 
@@ -132,6 +214,7 @@ export default {
             purpose:
               "Ensure continuing suitability, adequacy, and effectiveness of management direction for information security compliance.",
             task: "Develop a comprehensive information security policy framework.",
+             score: 8,
           },
           {
             category: "Organizational",
@@ -140,6 +223,7 @@ export default {
             purpose:
               "Define roles and responsibilities for effective governance of information security.",
             task: "Establish accountability and assign security-related responsibilities.",
+             score: 9,
           },
         ],
         "ISO 27002": [
@@ -150,6 +234,7 @@ export default {
             purpose:
               "Ensure assets are properly identified and managed throughout their lifecycle.",
             task: "Implement asset inventory with defined ownership and classification.",
+              score: 8,
           },
           {
             category: "Technical",
@@ -158,6 +243,7 @@ export default {
             purpose:
               "Provide authorized user access and prevent unauthorized access to systems.",
             task: "Design access control policy and review user privileges regularly.",
+            score: 9,
           },
         ],
         "ISO 27003": [
@@ -168,6 +254,7 @@ export default {
             purpose:
               "Ensure proper and effective use of cryptography to protect data confidentiality and integrity.",
             task: "Develop and implement cryptographic key management procedures.",
+              score: 70,
           },
           {
             category: "Planning",
@@ -176,6 +263,7 @@ export default {
             purpose:
               "Prevent unauthorized physical access to sensitive areas and information systems.",
             task: "Establish security zones and controlled access measures.",
+              score: 5,
           },
         ],
         "ISO 27004": [
@@ -186,6 +274,7 @@ export default {
             purpose:
               "Ensure proper management and monitoring of information systems operations.",
             task: "Develop operational security processes and implement change management.",
+              score: 6,
           },
           {
             category: "Monitoring",
@@ -194,16 +283,77 @@ export default {
             purpose:
               "Protect data in transit and ensure secure exchange between organizations.",
             task: "Implement encryption and secure transfer protocols for external data exchange.",
+              score: 8,
           },
         ],
       },
     };
+  },
+  computed: {
+    currentModule() {
+      if (this.selectedModule === "Overall") {
+        const values = Object.values(this.moduleData);
+        const avgProgress =
+          values.reduce((acc, m) => acc + m.progress, 0) / values.length;
+        return {
+          progress: Math.round(avgProgress),
+          domainName: "GRC101",
+          taskName: "All Modules Combined",
+          subTask: "Comprehensive Review",
+          skill: "Interdisciplinary Learning",
+          recommendation:
+            "Overall consistent performance across all modules. Great job!",
+        };
+      }
+      return this.moduleData[this.selectedModule];
+    },
+
+    circleStyle() {
+      const r = 52;
+      const c = 2 * Math.PI * r;
+      const dash = (this.currentModule.progress / 100) * c;
+      return { strokeDasharray: `${dash} ${c}` };
+    },
   },
 };
 </script>
 
 <style scoped>
 /* General Layout */
+
+/* Progress Circle */
+.score-card {
+  background: #ffffff;
+  border: 1px solid #eef1f4;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+.score-ring {
+  width: 180px;
+  height: 180px;
+}
+svg {
+  width: 100%;
+  height: 100%;
+}
+.track {
+  fill: none;
+  stroke: #eef1f4;
+  stroke-width: 10;
+}
+.progress {
+  fill: none;
+  stroke: url(#grad);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 60px 60px;
+  transition: stroke-dasharray 400ms ease;
+}
+.score-text {
+  font-size: 28px;
+  fill: #0d1b2a;
+  font-weight: 700;
+}
 
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);

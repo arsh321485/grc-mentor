@@ -1,200 +1,230 @@
-
 <template>
-  <div class="container-fluid row">
-    <div class="col-2 col-md-2">
-      <Sidebargrc2 />
-    </div>
-
-    <div class="col-10 col-md-10">
-      <!-- Header -->
-      <div class="mb-4 career-text">
-        <h2 class="mt-5">Career graph</h2>
-        <p class="text-muted">A snapshot of your career graph</p>
+  <main class="career-page">
+    <div class="container-fluid row g-0">
+      <!-- Sidebar -->
+      <div class="col-2 col-md-2 sidebar-col">
+        <Sidebargrc2 />
       </div>
 
-      <div class="career-graph">
-        <!-- Left Skills Card -->
-        <div class="skills-card card shadow-sm p-3">
-          <p class="skill-text">Skills acquired:</p>
-          <p class="skill-sub-text">ISO 27001, ISO 27002, ISO 27003</p>
-
-          <p class="skill-text">Probable designations:</p>
-          <p class="skill-sub-text">Designation 1, Designation 2</p>
-
-          <h6 class="skill-text">Badges attained:</h6>
-          <div class="d-flex flex-column gap-2">
-            <span class="badge-item">
-              <img src="../assets/expert-mentee.png" alt="" class="me-2 badge-img" />
-              <p>Expert Mentee</p>
-            </span>
-            <span class="badge-item">
-              <img src="../assets/expert-mentee.png" alt="" class="me-2 badge-img" />
-              <p>Expert Mentee</p>
-            </span>
-            <span class="badge-item">
-              <img src="../assets/expert-mentee.png" alt="" class="me-2 badge-img" />
-              <p>Expert Mentee</p>
-            </span>
+      <!-- Main -->
+      <div class="col-10 col-md-10 main-col">
+        <!-- Banner -->
+        <div class="banner mb-5">
+          <div class="banner-left">
+            <h6 class="banner-title">Career Page</h6>
+            <p class="banner-sub">A snapshot of your career page</p>
           </div>
         </div>
 
-        <!-- Right Graph Area -->
-        <div class="graph-area">
-          <!-- Diagonal line -->
-          <div class="graph-line"></div>
+        <!-- Graph Section -->
+        <section class="graph-layout">
+          <!-- Grc101 -->
+          <div class="glass-card active">
+            <div class="box-header">
+              <h4>GRC101</h4>
+            </div>
+            <div class="box-content">
+              <p class="section-title">Skills acquired:</p>
+              <p class="section-text">ISO 27001, ISO 27002, ISO 27003</p>
 
-          <!-- Milestones -->
-          <div
-            v-for="(milestone, index) in milestones"
-            :key="index"
-            class="milestone"
-            :style="milestone.position"
-          >
-            <div :class="['circle', milestone.status]"></div>
-            <div class="milestone-label text-center">
-              <p class="fw-bold mb-0">{{ milestone.title }}</p>
-              <small class="text-muted">Completed on July 23, 2025</small>
+              <p class="section-title">Probable designations:</p>
+              <p class="section-text">Designation 1, Designation 2</p>
+            </div>
+            <div class="box-footer">
+              <p class="section-title">Badges attained:</p>
+              <div class="badges">
+                <div class="badge-item">
+                  <img :src="expertMentee" alt="badge" class="badge-img" />
+                  <p>Expert Mentee</p>
+                </div>
+                <div class="badge-item">
+                  <img :src="expertMentee" alt="badge" class="badge-img" />
+                  <p>Expert Mentee</p>
+                </div>
+                <div class="badge-item">
+                  <img :src="expertMentee" alt="badge" class="badge-img" />
+                  <p>Expert Mentee</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+
+          <!-- Grc301 -->
+          <div class="graph-box inactive">
+            <p class="placeholder-text">Grc301</p>
+          </div>
+
+          <!-- Grc501 -->
+          <div class="graph-box inactive">
+            <p class="placeholder-text">Grc501</p>
+          </div>
+
+          <!-- Grc701 -->
+          <div class="graph-box inactive">
+            <p class="placeholder-text">Grc701</p>
+          </div>
+        </section>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script lang="ts">
-
 import Sidebargrc2 from "@/components/Sidebargrc2.vue";
+import expertMentee from "@/assets/expert-mentee.png";
 
 export default {
   name: "CareergraphView",
   components: { Sidebargrc2 },
   data() {
     return {
-      milestones: [
-        {
-          title: "GRC 101",
-          status: "filled", // fully filled blue
-          position: { bottom: "0%", left: "5%" },
-        },
-        {
-          title: "GRC 301",
-          status: "bordered", // blue border only
-          position: { bottom: "25%", left: "25%" },
-        },
-        {
-          title: "GRC 501",
-          status: "upcoming", // gray hollow
-          position: { bottom: "50%", left: "50%" },
-        },
-        {
-          title: "GRC 701",
-          status: "upcoming", // gray hollow
-          position: { bottom: "75%", left: "75%" },
-        },
-      ],
+      expertMentee,
     };
   },
 };
 </script>
 
 <style scoped>
-.career-text {
-  margin-left: 30px;
+.career-page {
+  background: #f8fbff;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
 }
-.career-text h2 {
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 22px;
+}
+
+/* Banner */
+.banner {
+  margin-top: 30px;
+  width: 99%;
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 10px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.banner-title {
+  font-size: 16px;
   font-weight: 600;
 }
-.career-text p {
-  font-size: 14px;
-  color: #00000099;
-}
-
-.career-graph {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.skills-card {
-  flex: 1;
-  min-width: 250px;
-  max-width: 300px;
-  border-radius: 12px;
-  margin-left: 30px;
-  margin-top: 155px;
-  border: 0;
-}
-
-.skill-text {
+.banner-sub {
   font-size: 13px;
-  font-weight: 500;
-  color: #00000099;
-}
-.skill-sub-text {
-  font-size: 16px;
-  color: #000000de;
-  font-weight: 500;
+  opacity: 0.9;
 }
 
-/* Graph */
-.graph-area {
-  flex: 2;
-  position: relative;
-  min-height: 500px;
+
+
+/* Graph Layout */
+.graph-layout {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
   width: 100%;
-}
-.graph-line {
-  position: absolute;
-  left: 5%;
-  bottom: 0;
-  width: 90%;
-  height: 2px;
-  background: #ddd;
-  transform: rotate(-45deg);
-  transform-origin: left bottom;
+  padding: 0 40px;
+  gap: 25px;
 }
 
-/* Milestones */
-.milestone {
-  position: absolute;
+/* Graph Boxes */
+.graph-box {
+  flex: 1;
+  border: 1px solid #2f80ed;
+  border-radius: 3px;
+  min-height: 620px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-.circle {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  margin-bottom: 6px;
-}
-/* Different Circle Types */
-.circle.filled {
-  background: #008AC5;
-  border: 2px solid #008AC5;
-}
-.circle.bordered {
-  border: 2px solid #008AC5;
-  background: #fff;
-}
-.circle.upcoming {
-  border: 2px solid #ccc;
-  background: #fff;
+  background: #d9d9d9;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.milestone-label {
-  font-size: 0.9rem;
+.graph-box.active {
+  background: #ffffff;
+  border: 1px solid #2f80ed;
 }
 
+/* Active Box (Grc101) structure */
+.box-header {
+  border-bottom: 0.3px solid #d3dff0;
+  padding: 20px;
+  /* text-align: center; */
+  font-weight: 700;
+  font-size: 22px;
+  color: #000;
+}
+
+.box-content {
+  flex: 1;
+  border-bottom: 0.3px solid #d3dff0;
+  padding: 30px;
+}
+.section-title {
+  font-weight: 600;
+  font-size: 19px;
+  margin-bottom: 5px;
+}
+.section-text {
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.box-footer {
+  padding: 20px;
+}
+.badges {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .badge-item {
   display: flex;
   align-items: center;
-  font-size: 16px;
-  color: #000000de;
+  gap: 8px;
 }
 .badge-img {
-  height: 40px;
-  width: 50px;
+  width: 35px;
+  height: 35px;
+}
+.badge-item p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Inactive (Grey) Boxes */
+.graph-box.inactive {
+  background: #d9d9d9;
+  border: 1px solid #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.placeholder-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  font-size: 22px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .graph-layout {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .graph-box {
+    flex: 1 1 45%;
+    min-height: 480px;
+  }
+}
+@media (max-width: 768px) {
+  .graph-box {
+    flex: 1 1 100%;
+  }
 }
 </style>
-

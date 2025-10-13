@@ -1,19 +1,31 @@
 <template>
-    <main>
-         <div class="container-fluid row">
- <div class="col-2 col-md-2">
-                <Sidebarprofile />
-            </div>
-            <div class="col-10 col-md-10">
- <div class="container my-5">
-        <!-- Title -->
-        <h3 class="fw-bold mb-3">Overview</h3>
+  <main class="mentorship-page">
+    <div class="container-fluid row g-0">
+      <!-- Sidebar -->
+      <div class="col-2 col-md-2 sidebar-col">
+             <Sidebarprofile />
+      </div>
 
-        <!-- Current Mentorship -->
+      <!-- Main -->
+      <div class="col-10 col-md-10 main-col">
+        <!-- Banner -->
+        <div class="banner mb-5">
+          <div class="banner-left">
+            <h6 class="banner-title">Overview</h6>
+            <p class="banner-sub">
+           Current mentorship
+            </p>
+
+          </div>
+        </div>
+
+     <!--  Section -->
+        <section>
+                <!-- Current Mentorship -->
         <p class="text-muted mb-1">Current mentorship</p>
         <h5 class="fw-semibold mb-5">GRC 301</h5>
+         <div class="overviewbox">
 
-        <div class="overviewbox">
             <!-- How it works -->
             <p class="text-muted mb-5">How GRC Mentor works</p>
 
@@ -29,11 +41,15 @@
                 </div>
             </div>
         </div>
+        </section>
+      </div>
     </div>
-            </div>            
-         </div>
-    </main>
+  </main>
 </template>
+
+
+
+
 
 
 <script lang="ts">
@@ -55,6 +71,49 @@ export default {
 </script>
 
 <style scoped>
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+.sidebar-col {
+  padding-left: 0;
+  padding-right: 0;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.main-col {
+  margin-left: 16.5%; /* push main content after fixed sidebar */
+  padding: 0 2rem;
+}
+
+.banner {
+  margin-top: 30px;
+  width: 100%;
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+  margin: 2px 0 0 0;
+}
 .circle {
     width: 40px;
     height: 40px;

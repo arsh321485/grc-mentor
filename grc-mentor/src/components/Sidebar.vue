@@ -1,42 +1,123 @@
+
 <template>
   <div class="sidebar">
-
-
+    <!-- Logo -->
     <div>
-      <img src="../assets/logo-img.png" alt="" style="height: 20px; padding-left: 20px;margin-bottom: 20px; ">
+      <img
+        src="../assets/logo-img.png"
+        alt="logo"
+        style="height: 20px; padding-left: 20px; margin-bottom: 20px"
+      />
     </div>
-
 
     <!-- Search Bar -->
     <div class="search-box">
-      <input style="border: 0;" type="text" placeholder="Search for anything..." v-model="searchQuery" />
+      <input
+        type="text"
+        placeholder="Search for anything..."
+        v-model="searchQuery"
+      />
       <span class="search-icon"> <i class="bi bi-search"></i></span>
     </div>
 
     <!-- Navigation Links -->
     <ul class="nav-links">
-      <li v-for="(item, index) in navItems" :key="index" :class="{ active: activeItem === item.name }">
-        <router-link :to="item.route" class="nav-item" @click.native="handleNavClick(item)">
+      <li
+        v-for="(item, index) in navItems"
+        :key="index"
+        :class="{ active: activeItem === item.name }"
+      >
+        <!-- Regular nav item -->
+        <router-link
+          v-if="item.name !== 'Projects' && item.name !== 'Task View'"
+          :to="item.route"
+          class="nav-item"
+          @click="handleNavClick(item)"
+        >
           <i :class="item.icon"></i>
           <span>{{ item.name }}</span>
-
-          <!-- Dropdown arrow only for Projects -->
-          <i v-if="item.name === 'Projects'" :class="[
-            'fas',
-            projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
-            'dropdown-arrow'
-          ]"></i>
         </router-link>
 
-        <!-- Dropdown Submenu for Projects -->
-        <ul v-if="item.name === 'Projects' && projectDropdownOpen" class="dropdown-list">
-          <li v-for="(project, i) in projects" :key="i">
-            {{ project }}
-          </li>
-        </ul>
+        <!-- Projects Dropdown -->
+        <div
+          v-else-if="item.name === 'Projects'"
+          class="nav-item"
+          @click="toggleDropdown('projects')"
+        >
+          <i :class="item.icon"></i>
+          <span>{{ item.name }}</span>
+          <i
+            :class="[
+              'fas',
+              projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
+              'dropdown-arrow',
+            ]"
+          ></i>
+        </div>
+
+        <!-- Task View Dropdown -->
+        <div
+          v-else-if="item.name === 'Task View'"
+          class="nav-item"
+          @click="toggleDropdown('task')"
+        >
+          <i :class="item.icon"></i>
+          <span>{{ item.name }}</span>
+          <i
+            :class="[
+              'fas',
+              taskDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
+              'dropdown-arrow',
+            ]"
+          ></i>
+        </div>
+
+        <!-- Projects Dropdown List -->
+        <transition name="slide">
+          <ul
+            v-if="item.name === 'Projects' && projectDropdownOpen"
+            class="dropdown-list"
+          >
+            <li v-for="(project, i) in projects" :key="i">
+              <router-link
+                :to="`/projects/${project.toLowerCase().replace(/\s+/g, '-')}`"
+                class="text-decoration-none dropdown-link"
+                @click="setActiveSubItem(project)"
+              >
+                {{ project }}
+              </router-link>
+            </li>
+          </ul>
+        </transition>
+
+        <!-- Task View Dropdown List -->
+        <transition name="slide">
+          <ul
+            v-if="item.name === 'Task View' && taskDropdownOpen"
+            class="dropdown-list"
+          >
+            <li>
+              <router-link
+                to="/policyreview2"
+                class="text-decoration-none dropdown-link"
+                @click="setActiveSubItem('Task List')"
+              >
+                Task List
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                to="/calender"
+                class="text-decoration-none dropdown-link"
+                @click="setActiveSubItem('Calendar')"
+              >
+                Calendar
+              </router-link>
+            </li>
+          </ul>
+        </transition>
       </li>
     </ul>
-
 
     <!-- Chat & Settings -->
     <div class="d-flex justify-content-end gap-3">
@@ -48,23 +129,17 @@
     <div class="account-section">
       <p class="account-label">ACCOUNT</p>
       <ul>
-        <!-- <li><i class="fas fa-comment-dots"></i> <span>Feedback</span></li> -->
         <li><i class="fas fa-cog"></i> <span>Settings</span></li>
       </ul>
     </div>
 
     <!-- Profile Section -->
     <div class="profile">
-      <!-- Gradient Circle Icon -->
       <div class="profile-icon"></div>
-
-      <!-- Name and Email -->
       <div class="profile-info">
         <h4 class="profile-name">Amit Sharma</h4>
         <p class="profile-email">amitsharma@gmail.com</p>
       </div>
-
-      <!-- Dropdown Icon -->
       <i class="fas fa-chevron-down profile-dropdown"></i>
     </div>
   </div>
@@ -78,55 +153,51 @@ export default {
       searchQuery: "",
       activeItem: "Working Desk",
       projectDropdownOpen: false,
+      taskDropdownOpen: false,
       navItems: [
         { name: "Overview", icon: "fas fa-home", route: "/overview" },
         { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
         { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
+        { name: "Task View", icon: "fas fa-list-check", route: "/taskview" },
         { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
         { name: "Badges", icon: "fas fa-award", route: "/badges" },
         { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
         { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
       ],
-      projects: [
-        "Project Apollo",
-        "Project Orion",
-        "Project Gemini",
-        "Project Phoenix",
-      ],
+      projects: ["ISO 27001", "ISO 27002", "ISO 27003", "ISO 27004"],
     };
   },
   methods: {
-    handleNavClick(item: { name: string; icon?: string; route?: string }) {
-      if (item.name === "Projects") {
+    handleNavClick(item: { name: string }) {
+      this.activeItem = item.name;
+      this.projectDropdownOpen = false;
+      this.taskDropdownOpen = false;
+    },
+    toggleDropdown(type: string) {
+      if (type === "projects") {
         this.projectDropdownOpen = !this.projectDropdownOpen;
-      } else {
-        this.activeItem = item.name;
+        this.taskDropdownOpen = false;
+      } else if (type === "task") {
+        this.taskDropdownOpen = !this.taskDropdownOpen;
         this.projectDropdownOpen = false;
       }
+    },
+    setActiveSubItem(name: string) {
+      this.activeItem = name;
+      this.projectDropdownOpen = false;
+      this.taskDropdownOpen = false;
     },
   },
 };
 </script>
 
 
-<style scoped>
-/* Title */
-.stepper-title {
-  display: flex;
-  align-items: center;
-  color: #121212;
-  font-size: 17px;
-  font-weight: 600;
-}
 
-.dot {
-  height: 20px;
-  width: 20px;
-  background: linear-gradient(180deg, #9FE2FF 0%, #0096D6 100%);
-  border-radius: 50%;
-  margin-right: 8px;
-  margin-left: 20px;
-}
+
+<style scoped>
+
+
+
 
 /* Sidebar Container */
 .sidebar {
@@ -245,6 +316,8 @@ export default {
   list-style: none;
   padding-left: 40px;
   margin-top: 5px;
+   color: black;
+
 }
 
 .dropdown-list li {
@@ -260,8 +333,30 @@ export default {
 }
 
 .dropdown-list li:hover {
-  color: #008AC5;
+  color: #101111;
 }
+/* Dropdown Link Styles */
+.dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #555; /* default text color */
+  transition: color 0.2s ease;
+}
+
+/* Hover & Active Styles */
+/* .dropdown-link:hover {
+  color: #008ac5;
+} */
+
+/* Active Route Highlight */
+.router-link-active {
+  color: #555 !important;
+  /* font-weight: 600; */
+}
+
+
 
 /* Account Section */
 .account-section {

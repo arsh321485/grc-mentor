@@ -7,11 +7,18 @@
             </div>
 
             <!-- Main Content -->
-            <div class="col-10 col-md-10">
-                <div class="d-flex justify-content-end pt-3 calender-icon">
-                  <i class="bi bi-calendar"></i>  Calendar view
-                </div>
-                <p class="mb-4 ps-5 pt-3 content-title">Your certificate</p>
+             <div class="col-10 col-md-10 main-col">
+        <!-- Banner -->
+        <div class="banner mb-5">
+          <div class="banner-left">
+            <h6 class="banner-title">Your certificate</h6>
+            <p class="banner-sub">
+              You have successfully completed the GRC 101 program.
+            </p>
+          </div>
+        </div>
+
+                <!-- <p class="mb-4 ps-5 pt-3 content-title">Your certificate</p> -->
 
                 <!-- Certificate Preview -->
                 <div class="certificate-preview mb-3 text-center">
@@ -27,7 +34,7 @@
 
                     <!-- Print Certificate -->
                     <button class="btn action-btn  d-flex align-items-center" @click="printCertificate">
-                        <i class="fas fa-print me-2"></i> Print certificate
+                        <i class="fas fa-print me-2"></i> Download certificate
                     </button>
                 </div>
             </div>
@@ -95,6 +102,50 @@ export default {
 </script>
 
 <style scoped>
+
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+.sidebar-col {
+  padding-left: 0;
+  padding-right: 0;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.main-col {
+  margin-left: 16.5%; /* push main content after fixed sidebar */
+  padding: 0 2rem;
+}
+
+.banner {
+  margin-top: 30px;
+  width: 100%;
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+  margin: 2px 0 0 0;
+}
 .content-title {
     font-weight: 600;
     font-size: 46px;

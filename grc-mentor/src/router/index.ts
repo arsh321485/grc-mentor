@@ -57,14 +57,33 @@ import Policycomponent from '@/components/Policycomponent.vue'
 import Playground from '@/components/Playground.vue'
 import InstructionView from '@/views/InstructionView.vue'
 import NestedDropdown from '@/components/NestedDropdown.vue'
+import test from '@/views/test.vue'
+import ReportView from '@/views/ReportView.vue'
+import MyLearningsView from '@/views/MyLearningsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/my-learnings',
+      name: 'my-learnings',
+      component: MyLearningsView
+    },
+    {
+      path: '/report',
+      name: 'report',
+      component: ReportView
+    },
+    {
       path: '/nested-dropdown',
       name: 'nested-dropdown',
       component: NestedDropdown
+    },
+
+    {
+      path: '/test',
+      name: 'test',
+      component: test,
     },
     {
       path: '/stepper',

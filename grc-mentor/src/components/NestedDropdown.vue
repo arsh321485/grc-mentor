@@ -1,177 +1,98 @@
 <template>
   <main class="mentorship-page">
-    <div class="container-fluid row g-0">
-      <!-- Sidebar -->
-      <div class="col-2 col-md-2 sidebar-col">
-        <Sidebar class="sidebar" />
-      </div>
-
-      <!-- Main -->
-      <div class="col-10 col-md-10 main-col">
-        <!-- Banner -->
-        <div class="banner mb-4">
-          <div class="banner-left">
-            <h6 class="banner-title">Media</h6>
-            <p class="banner-sub">Policy Review</p>
-          </div>
-          <div class="ms-auto fw-bold">
-            <router-link to="/grc101">
-              <button
-                type="button"
-                class="btn text-decoration-none text-light banner-title mt-2 mt-lg-0"
-              >
-                <i class="fas fa-arrow-left"></i> Back to task menu
-              </button>
-            </router-link>
-          </div>
+    <div class="container-fluid">
+      <div class="row g-4">
+        <!-- Sidebar -->
+        <div class="col-2 col-md-2">
+          <Sidebarprofile />
         </div>
 
-        <!-- Projects Section -->
-        <section class="projects-card glass-card mb-4 mt-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="section-title mb-0">Projects</h6>
-            <button class="btn px-4 py-2 btn-submit" @click="showModal = true">
-              Industry
-            </button>
-          </div>
-          <p class="subtitle">You'll be working on these project/tasks:</p>
-
-          <div class="accordion custom-accordion" id="projectAccordion">
-            <div
-              class="accordion-item"
-              v-for="(project, index) in projects"
-              :key="index"
-            >
-              <!-- Header -->
-              <h2
-                class="accordion-header d-flex justify-content-between align-items-center"
-                :id="'heading' + index"
-              >
-                <button
-                  class="accordion-button collapsed flex-grow-1"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  :data-bs-target="'#collapse' + index"
-                  :aria-controls="'collapse' + index"
-                  @click="toggleAccordion(index)"
-                >
-                  <i class="fas fa-folder me-2"></i> {{ project.title }}
-                </button>
-
-                <!-- How to button only visible when open -->
-                <div class="position-relative ms-2" v-if="activeAccordion === index">
-                  <button
-                    class="btn btn-submit dropdown-toggle"
-                    @click.stop="toggleDropdown(index)"
-                  >
-                    How to ?
-                  </button>
-
-                  <!-- Dropdown -->
-                  <ul v-show="openDropdown === index" class="dropdown-menu show">
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bi bi-file-earmark-ruled p-1"></i> Method
-                      </a>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Design and Development</a></li>
-
-                    <!-- Tools Submenu -->
-                    <li class="dropdown-submenu">
-                      <a
-                        href="#"
-                        class="dropdown-item"
-                        @click.prevent="toggleSubmenu('tools', index)"
-                      >
-                        <i class="bi bi-tools p-1"></i> Tools »
-                      </a>
-                      <ul
-                        class="dropdown-menu"
-                        v-show="openSubmenu === 'tools' && openDropdown === index"
-                      >
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            Develop and create security tools,<br />
-                            processes, and documentation
-                          </a>
-                        </li>
-
-                        <!-- Action Submenu -->
-                        <li class="dropdown-submenu">
-                          <a
-                            href="#"
-                            class="dropdown-item"
-                            @click.prevent="toggleSubmenu('action', index)"
-                          >
-                            <i class="bi bi-check2-square"></i> Action »
-                          </a>
-                          <ul
-                            class="dropdown-menu"
-                            v-show="openSubmenu === 'action' && openDropdown === index"
-                          >
-                            <li>
-                              <a
-                                href="#"
-                                class="dropdown-item"
-                                @click.prevent="
-                                  openDoc(
-                                    'https://docs.google.com/document/d/YOUR_DOC_ID/pub?embedded=true'
-                                  )
-                                "
-                              >
-                                Lets Go <i class="bi bi-box-arrow-up-right"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </h2>
-
-              <!-- Accordion Body -->
-              <div
-                :id="'collapse' + index"
-                class="accordion-collapse collapse"
-                :class="{ show: activeAccordion === index }"
-                data-bs-parent="#projectAccordion"
-              >
-                <div class="accordion-body">
-                  {{ project.details }}
-                </div>
-              </div>
+        <!-- Main Content -->
+        <div class="col-10 col-md-10">
+          <!-- Banner -->
+          <div class="banner">
+            <div class="banner-left">
+              <h6 class="banner-title">Performance Report</h6>
+              <p class="banner-sub">Detailed summary of your learning progress</p>
             </div>
           </div>
-        </section>
 
-        <!-- Google Docs Side Panel -->
-        <div
-          v-if="selectedDoc"
-          class="doc-panel"
-          :class="{ fullscreen: isFullscreen }"
-        >
-          <div class="doc-header">
-            <button
-              class="doc-btn"
-              @click="toggleFullscreen"
-              title="Toggle Fullscreen"
-            >
-              <i
-                class="bi"
-                :class="isFullscreen ? 'bi-fullscreen-exit' : 'bi-arrows-fullscreen'"
-              ></i>
-            </button>
-            <button class="doc-btn" @click="selectedDoc = null" title="Close">
-              <i class="bi bi-x-circle-fill"></i>
-            </button>
-          </div>
-          <iframe
-            :src="selectedDoc"
-            width="100%"
-            height="100%"
-            style="border: none; flex: 1"
-          ></iframe>
+          <!-- Section -->
+          <section>
+            <div class="">
+              <div class="card-body p-4 p-md-5">
+                <div class="row g-4 align-items-center">
+                  <!-- Progress Circle -->
+                  <div class="col-md-5 text-center">
+                    <div class="score-card p-4 rounded-4">
+                      <div class="score-ring mx-auto mb-3">
+                        <svg viewBox="0 0 120 120" class="d-block">
+                          <defs>
+                            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stop-color="#2d9cdb" />
+                              <stop offset="50%" stop-color="#56ccf2" />
+                              <stop offset="100%" stop-color="#2f80ed" />
+                            </linearGradient>
+                          </defs>
+
+                          <circle cx="60" cy="60" r="52" class="track" />
+                          <circle
+                            cx="60"
+                            cy="60"
+                            r="52"
+                            class="progress"
+                            :style="circleStyle"
+                          />
+                          <text x="60" y="64" text-anchor="middle" class="score-text">
+                            {{ progress }}%
+                          </text>
+                        </svg>
+                      </div>
+                      <div class="h6 mb-1">Overall Progress</div>
+                      <div class="small text-muted">
+                        You’ve completed {{ progress }}% of your learning journey
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Summary -->
+                  <div class="col-md-7">
+                    <div class="report-info">
+                      <h6 class="fw-semibold mb-3 section-title">
+                        Here’s your learning summary based on performance and activities.
+                      </h6>
+
+                      <ul class="list-unstyled mb-4">
+                        <li class="d-flex align-items-center mb-2">
+                          <span class="dot me-2"></span>
+                          Domain Name: <strong class="ms-1">{{ domainName }}</strong>
+                        </li>
+                        <li class="d-flex align-items-center mb-2">
+                          <span class="dot me-2"></span>
+                          Task: <strong class="ms-1">{{ taskName }}</strong>
+                        </li>
+                        <li class="d-flex align-items-center mb-2">
+                          <span class="dot me-2"></span>
+                          Sub-task: <strong class="ms-1">{{ subTask }}</strong>
+                        </li>
+                        <li class="d-flex align-items-center mb-2">
+                          <span class="dot me-2"></span>
+                          Skill Developed: <strong class="ms-1">{{ skill }}</strong>
+                        </li>
+                      </ul>
+
+                      <div class="alert alert-info border-0 rounded-3 shadow-sm">
+                        <strong>📘 Feedback Summary:</strong>
+                        <p class="mb-0 mt-1">{{ recommendation }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
@@ -179,51 +100,55 @@
 </template>
 
 <script lang="ts">
-import Sidebar from "@/components/Sidebar.vue";
+import Sidebarprofile from '@/components/Sidebarprofile.vue';
 
 export default {
-  name: "IndustryModalPage",
-  components: { Sidebar },
+  name: "ReportView",
+  components: { Sidebarprofile },
   data() {
     return {
-      showModal: false,
-      activeAccordion: null as number | null,
-      openDropdown: null as number | null,
-      openSubmenu: null as string | null,
-      selectedDoc: null as string | null,
-      isFullscreen: false,
-      projects: [
-        { title: "Project 1", details: "Details of Project 1 go here." },
-        { title: "Project 2", details: "Details of Project 2 go here." },
-        { title: "Project 3", details: "Details of Project 3 go here." },
-      ],
+      progress: 76,
+      domainName: "Media",
+      taskName: "Policy Implementation",
+      subTask: "Access Control Review",
+      skill: "Risk Analysis & Compliance",
+      recommendation:
+        "You’ve shown consistent effort throughout your modules. Continue focusing on accuracy and structure in your reports.",
+      taskSummary: {
+        title: "Create a Cyber Risk Assessment Policy",
+        submittedOnTime: false,
+        date: "October 5, 2025",
+        quality: "Good",
+        qualityExplanation:
+          "You demonstrated strong conceptual understanding and structure. To improve, include more real-world compliance examples and evidence of implementation.",
+        feedback: "Good understanding, but work can be more detailed.",
+        comment:
+          "Submitted slightly after the deadline. Try to manage your research time efficiently for future tasks.",
+      },
     };
   },
-  methods: {
-    toggleAccordion(index: number) {
-      this.activeAccordion = this.activeAccordion === index ? null : index;
-      this.openDropdown = null; // reset when accordion changes
-      this.openSubmenu = null;
-    },
-    toggleDropdown(index: number) {
-      this.openDropdown = this.openDropdown === index ? null : index;
-      this.openSubmenu = null;
-    },
-    toggleSubmenu(name: string, index: number) {
-      if (this.openDropdown !== index) return;
-      this.openSubmenu = this.openSubmenu === name ? null : name;
-    },
-    openDoc(link: string) {
-      this.selectedDoc = link;
-    },
-    toggleFullscreen() {
-      this.isFullscreen = !this.isFullscreen;
+  computed: {
+    circleStyle() {
+      const r = 52;
+      const c = 2 * Math.PI * r;
+      const dash = (this.progress / 100) * c;
+      return { strokeDasharray: `${dash} ${c}` };
     },
   },
 };
 </script>
 
 <style scoped>
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+.sidebar-col {
+  padding-left: 0;
+  padding-right: 0;
+}
 .sidebar {
   position: fixed;
   top: 0;
@@ -231,137 +156,103 @@ export default {
   height: 100vh;
 }
 
-.mentorship-page {
-  background: linear-gradient(135deg, #f7faff, #eef3fb);
-  min-height: 100vh;
-  padding: 30px;
-  font-family: "Inter", sans-serif;
-}
-
-/* Glass Cards */
-.glass-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  padding: 22px;
-}
-
 /* Banner */
 .banner {
+  margin-top: 30px;
+  width: 100%;
   background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
   border-radius: 12px;
   padding: 18px 25px;
   color: #fff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
-
 .banner-title {
   font-size: 16px;
   font-weight: 600;
   margin: 0;
 }
-
 .banner-sub {
   font-size: 13px;
   opacity: 0.9;
   margin: 2px 0 0 0;
 }
 
-/* Buttons */
-.btn-submit {
-  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  border: none;
-  border-radius: 22px;
-  padding: 8px 18px;
-  font-weight: 600;
-  font-size: 14px;
-  color: #fff;
-  white-space: nowrap;
+/* Progress Circle */
+.score-card {
+  background: #ffffff;
+  border: 1px solid #eef1f4;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
-
-.btn-submit:hover {
-  background: linear-gradient(90deg, #2f80ed, #2d9cdb);
+.score-ring {
+  width: 180px;
+  height: 180px;
 }
-
-/* Dropdown */
-.dropdown-menu {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  background: white;
-  border: 1px solid #ddd;
-  min-width: 200px;
-  border-radius: 6px;
-  padding: 5px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1050;
-}
-
-.dropdown-item {
-  padding: 8px 14px;
-  font-size: 14px;
-  color: #333;
-}
-
-.dropdown-item:hover {
-  background: #f4f9ff;
-  color: #2d7dd2;
-}
-
-/* Submenu */
-.dropdown-submenu {
-  position: relative;
-}
-
-.dropdown-submenu > .dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-left: 0.25rem;
-}
-
-/* Doc Panel */
-.doc-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: #fff;
-  box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2);
-  z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease-in-out;
-}
-
-.doc-panel.fullscreen {
+svg {
   width: 100%;
+  height: 100%;
+}
+.track {
+  fill: none;
+  stroke: #eef1f4;
+  stroke-width: 10;
+}
+.progress {
+  fill: none;
+  stroke: url(#grad);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 60px 60px;
+  transition: stroke-dasharray 400ms ease;
+}
+.score-text {
+  font-size: 28px;
+  fill: #0d1b2a;
+  font-weight: 700;
 }
 
-.doc-header {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  background: #f9fafb;
+/* Dots */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2f80ed;
+  display: inline-block;
 }
 
-.doc-btn {
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  color: #0096d6;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+/* Alert */
+.alert {
+  font-size: 14px;
+  background-color: #eaf6ff;
+  color: #004085;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.doc-btn:hover {
-  transform: scale(1.2);
-  color: #e63946;
+/* Task Summary Box */
+.course-box {
+  background: #ffffff;
+  border: 1px solid #eef1f4;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0d1b2a;
+}
+.task-summary-content {
+  background: #f8fbff;
+  border-radius: 10px;
+  padding: 15px 20px;
+}
+.badge {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+.text-muted.small {
+  color: #6c757d;
+  font-size: 13px;
 }
 </style>

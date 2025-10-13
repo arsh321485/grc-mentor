@@ -1,24 +1,30 @@
 <template>
-    <main>
-        <div class="container-fluid row">
-            <div class="col-2 col-md-2">
-                <Logoutsidebar />
-            </div>
+  <main class="mentorship-page">
+    <div class="container-fluid row g-0">
+      <!-- Sidebar -->
+      <div class="col-2 col-md-2 sidebar-col">
+        <Logoutsidebar />
+      </div>
 
-            <div class="col-10 col-md-10">
-                <!-- Header Section -->
-                <div class="d-flex justify-content-end align-items-center mb-4 pt-3">
-                    <button class="btn btn-link calendar-btn">
-                        <i class="fas fa-calendar-alt me-2"></i>
-                        Calendar view
-                    </button>
-                </div>
-                <div class="ps-5">
+      <!-- Main -->
+      <div class="col-10 col-md-10 main-col">
+        <!-- Banner -->
+        <div class="banner mb-5">
+          <div class="banner-left">
+            <h6 class="banner-title">Who's viewed my profile</h6>
+            <p class="banner-sub">
+            Who's viewed my profile
+            </p>
+          </div>
+        </div>
+
+     <!-- Badges Section -->
+        <section>
+        <!-- Badges Grid
+         <div class="ps-5">
                     <h1 class="page-title">Who's viewed my profile</h1>
                     <p class="page-subtitle">Who's viewed my profile</p>
-                </div>
-
-
+                </div> -->
 
                 <!-- Profile List -->
                 <div class="profile-list ps-5">
@@ -39,11 +45,12 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
-        </div>
-    </main>
+        </section>
+      </div>
+    </div>
+  </main>
 </template>
+
 
 
 
@@ -87,33 +94,49 @@ export default {
 </script>
 
 <style scoped>
-/* Page Header */
-.page-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #000;
-    margin-bottom: 5px;
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
 }
 
-.page-subtitle {
-    font-size: 14px;
-    color: #00000099;
-    font-weight: 500;
-    margin: 0;
+.sidebar-col {
+  padding-left: 0;
+  padding-right: 0;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
 }
 
-/* Calendar Button */
-.calendar-btn {
-    font-size: 15px;
-    font-weight: 500;
-    color: #0082B9;
-    text-decoration: none;
+.main-col {
+  margin-left: 16.5%; /* push main content after fixed sidebar */
+  padding: 0 2rem;
 }
 
-.calendar-btn:hover {
-    text-decoration: underline;
+.banner {
+  margin-top: 30px;
+  width: 100%;
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
-
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+  margin: 2px 0 0 0;
+}
 /* Profile List */
 .profile-list {
     margin-top: 20px;
