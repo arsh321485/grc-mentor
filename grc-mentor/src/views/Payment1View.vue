@@ -145,17 +145,15 @@
                       </div>
 
                       <!-- Terms -->
-                      <div class="mb-3 mt-4">
-                        <a
-                          href="javascript:void(0)"
-                          class="text-primary small"
-                          @click="openPolicyModal"
-                        >
-                          Accept Terms & Conditions
-                        </a>
-                      </div>
-
-
+                     <div class="mb-3">
+              <a
+                href="javascript:void(0)"
+                class="text-primary small"
+                @click="openPolicyModal"
+              >
+              Accept Terms & Conditions
+              </a>
+            </div>
                       <!-- <button class="btn btn-success w-100 mt-4" @click="proceedToPayment" :disabled="isProcessing">
                   Proceed to Payment
                 </button> -->
@@ -269,7 +267,7 @@
             <input
               class="form-check-input"
               type="checkbox"
-              id="agreeTerms"
+              id="agree"
               v-model="agreed"
             />
             <label class="form-check-label small-text" for="agreeTerms">
