@@ -149,7 +149,7 @@
                         to="/mentorship"
                         class="btn btn-submit ms-sm-auto d-flex align-items-center"
                       >
-                        Your Mentorship
+                        Start Your Mentorship
                       </router-link>
                     </div>
 
@@ -164,7 +164,7 @@
                 </div>
 
                 <!-- Support Buttons -->
-                <div class="d-flex gap-2 flex-column flex-md-row">
+                <!-- <div class="d-flex gap-2 flex-column flex-md-row">
                   <button
                     class="btn btn-outline-secondary w-100"
                     @click="contactSupport"
@@ -177,7 +177,7 @@
                   >
                     View Invoices
                   </button>
-                </div>
+                </div> -->
               </div>
             </div>
 
