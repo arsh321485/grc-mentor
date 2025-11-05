@@ -12,7 +12,7 @@
           <!-- Banner -->
           <div class="banner">
             <div class="banner-left">
-              <h6 class="banner-title">Performance Report</h6>
+              <h6 class="banner-title">Report</h6>
               <p class="banner-sub">Detailed summary of your learning progress</p>
             </div>
           </div>

@@ -1,4 +1,3 @@
-
 <template>
   <div class="sidebar">
     <!-- Logo -->
@@ -38,23 +37,6 @@
           <span>{{ item.name }}</span>
         </router-link>
 
-        <!-- Projects Dropdown -->
-        <div
-          v-else-if="item.name === 'Projects'"
-          class="nav-item"
-          @click="toggleDropdown('projects')"
-        >
-          <i :class="item.icon"></i>
-          <span>{{ item.name }}</span>
-          <i
-            :class="[
-              'fas',
-              projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
-              'dropdown-arrow',
-            ]"
-          ></i>
-        </div>
-
         <!-- Task View Dropdown -->
         <div
           v-else-if="item.name === 'Task View'"
@@ -64,31 +46,9 @@
           <i :class="item.icon"></i>
           <span>{{ item.name }}</span>
           <i
-            :class="[
-              'fas',
-              taskDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
-              'dropdown-arrow',
-            ]"
+            :class="[ 'fas', taskDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down', 'dropdown-arrow' ]"
           ></i>
         </div>
-
-        <!-- Projects Dropdown List -->
-        <transition name="slide">
-          <ul
-            v-if="item.name === 'Projects' && projectDropdownOpen"
-            class="dropdown-list"
-          >
-            <li v-for="(project, i) in projects" :key="i">
-              <router-link
-                :to="`/projects/${project.toLowerCase().replace(/\s+/g, '-')}`"
-                class="text-decoration-none dropdown-link"
-                @click="setActiveSubItem(project)"
-              >
-                {{ project }}
-              </router-link>
-            </li>
-          </ul>
-        </transition>
 
         <!-- Task View Dropdown List -->
         <transition name="slide">
@@ -96,7 +56,7 @@
             v-if="item.name === 'Task View' && taskDropdownOpen"
             class="dropdown-list"
           >
-            <li>
+            <li :class="{ active: activeItem === 'Task List' }">
               <router-link
                 to="/policyreview2"
                 class="text-decoration-none dropdown-link"
@@ -105,7 +65,7 @@
                 Task List
               </router-link>
             </li>
-            <li>
+            <li :class="{ active: activeItem === 'Calendar' }">
               <router-link
                 to="/calender"
                 class="text-decoration-none dropdown-link"
@@ -152,53 +112,42 @@ export default {
     return {
       searchQuery: "",
       activeItem: "Working Desk",
-      projectDropdownOpen: false,
       taskDropdownOpen: false,
       navItems: [
         { name: "Overview", icon: "fas fa-home", route: "/overview" },
         { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
-        { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
         { name: "Task View", icon: "fas fa-list-check", route: "/taskview" },
-        { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
         { name: "Badges", icon: "fas fa-award", route: "/badges" },
         { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
         { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
       ],
-      projects: ["ISO 27001", "ISO 27002", "ISO 27003", "ISO 27004"],
     };
   },
   methods: {
     handleNavClick(item: { name: string }) {
       this.activeItem = item.name;
-      this.projectDropdownOpen = false;
       this.taskDropdownOpen = false;
     },
     toggleDropdown(type: string) {
-      if (type === "projects") {
-        this.projectDropdownOpen = !this.projectDropdownOpen;
-        this.taskDropdownOpen = false;
-      } else if (type === "task") {
+      if (type === "task") {
         this.taskDropdownOpen = !this.taskDropdownOpen;
-        this.projectDropdownOpen = false;
       }
     },
     setActiveSubItem(name: string) {
       this.activeItem = name;
-      this.projectDropdownOpen = false;
-      this.taskDropdownOpen = false;
+      this.taskDropdownOpen = true;
     },
+  },
+  mounted() {
+    // Keep active highlight after page refresh
+    const currentRoute = this.$route.path;
+    const activeItem = this.navItems.find(item => item.route === currentRoute);
+    if (activeItem) this.activeItem = activeItem.name;
   },
 };
 </script>
 
-
-
-
 <style scoped>
-
-
-
-
 /* Sidebar Container */
 .sidebar {
   width: 260px;
@@ -212,13 +161,14 @@ export default {
   font-family: Arial, sans-serif;
 }
 
-/* Logo & App Name */
+/* Logo */
 .sidebar-header {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+/* Search Bar */
 .search-box {
   position: relative;
   width: 200px;
@@ -277,30 +227,22 @@ export default {
   color: #00000099;
 }
 
+/* Active Tab Color */
 .nav-links li.active .nav-item {
   background-color: #fff;
   color: #008AC5;
   border-radius: 20px;
 }
 
-.nav-links .nav-item {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 15px;
-  color: inherit;
-}
-
-.nav-links .nav-item:hover {
-  background-color: #f1f1f1;
-  border-radius: 8px;
-}
-
-
 .nav-links li.active i,
 .nav-links li.active span {
   color: #008AC5;
+}
+
+/* Hover Effects */
+.nav-links .nav-item:hover {
+  background-color: #f1f1f1;
+  border-radius: 8px;
 }
 
 /* Dropdown Arrow */
@@ -316,8 +258,7 @@ export default {
   list-style: none;
   padding-left: 40px;
   margin-top: 5px;
-   color: black;
-
+  color: black;
 }
 
 .dropdown-list li {
@@ -332,31 +273,14 @@ export default {
   list-style: disc;
 }
 
+.dropdown-list li.active .dropdown-link {
+  color: #008AC5;
+  font-weight: 600;
+}
+
 .dropdown-list li:hover {
   color: #101111;
 }
-/* Dropdown Link Styles */
-.dropdown-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: #555; /* default text color */
-  transition: color 0.2s ease;
-}
-
-/* Hover & Active Styles */
-/* .dropdown-link:hover {
-  color: #008ac5;
-} */
-
-/* Active Route Highlight */
-.router-link-active {
-  color: #555 !important;
-  /* font-weight: 600; */
-}
-
-
 
 /* Account Section */
 .account-section {

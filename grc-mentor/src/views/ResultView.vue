@@ -12,7 +12,7 @@
           <!-- Banner -->
           <div class="banner mb-5">
             <div class="banner-left">
-              <h6 class="banner-title">Your Qualification Results</h6>
+              <h6 class="banner-title">Your Assessment  Results</h6>
               <p class="banner-sub">Great job completing the assessment!</p>
             </div>
             <div class="banner-right">{{ displayLevel }}</div>

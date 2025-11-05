@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="container signup-container">
-      <div class="row w-100 form-section  justify-content-center">
+      <div class="row w-100 form-section justify-content-center">
         <div class="mt-5 mb-0">
           <img src="../assets/logo-img.png" alt="" style="height: 35px;" />
         </div>
@@ -99,18 +99,25 @@
             </div>
 
             <!-- Terms -->
-            <div class="mb-3 form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="termsCheck"
-                v-model="form.agree"
-              />
-              <label class="form-check-label" for="termsCheck">I agree to the terms</label>
+            <div class="mb-3">
+              <a
+                href="javascript:void(0)"
+                class="text-primary small"
+                @click="openPolicyModal"
+              >
+              Accept Terms & Conditions
+              </a>
             </div>
 
             <!-- Submit -->
-            <router-link to="/welcome" class="btn w-100 btn-submit">Get started</router-link>
+            <router-link
+              to="/welcome"
+              class="btn w-100 btn-submit"
+              :class="{ disabled: !form.agree }"
+              :aria-disabled="!form.agree"
+            >
+              Get started
+            </router-link>
 
             <!-- Already have account -->
             <p class="have-account">
@@ -122,7 +129,52 @@
 
         <!-- Right Side (Image) -->
         <div class="col-lg-6 d-none d-lg-block right p-0">
-          <img src="../assets/signup-img.png" alt="Signup Image" class="img-fluid" style="border-radius: 30px;" />
+          <img
+            src="../assets/signup-img.png"
+            alt="Signup Image"
+            class="img-fluid"
+            style="border-radius: 30px;"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ Center Modal (Policy) -->
+    <div
+      v-if="showPolicyModal"
+      class="center-modal-overlay"
+      @click.self="closePolicyModal"
+    >
+      <div class="center-modal glass-card">
+        <div class="modal-header">
+          <h6>Acceptance Usage Policy</h6>
+          <button class="close-btn" @click="closePolicyModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            By signing up, you agree to follow the platform guidelines, respect user privacy,
+            and responsibly use all provided resources.
+          </p>
+          <p>
+            Any misuse of information or violation of community standards may result in
+            termination of your account.
+          </p>
+          <div class="form-check gap-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="agreeTerms"
+              v-model="form.agree"
+            />
+            <label class="form-check-label small-text" for="agreeTerms">
+              I agree to the terms
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" @click="closePolicyModal">
+            Close
+          </button>
         </div>
       </div>
     </div>
@@ -142,12 +194,8 @@ export default {
         confirmPassword: "",
         agree: false,
       },
+      showPolicyModal: false,
     };
-  },
-  computed: {
-    fullEmail() {
-      return this.form.emailUsername + "@gmail.com";
-    },
   },
   methods: {
     handleSubmit() {
@@ -161,12 +209,18 @@ export default {
       }
       alert("Form submitted successfully!");
     },
+    openPolicyModal() {
+      this.showPolicyModal = true;
+    },
+    closePolicyModal() {
+      this.showPolicyModal = false;
+    },
   },
 };
 </script>
 
 <style scoped>
-/* Buttons */
+/* --- Your Existing Styles --- */
 .btn-submit {
   border-radius: 30px;
   padding: 12px;
@@ -174,10 +228,18 @@ export default {
   font-weight: 600;
   background-color: #0096d6;
   color: #ffffff;
+  text-align: center;
+  display: block;
+  text-decoration: none;
 }
 .btn-submit:hover {
   background-color: #007bb5;
   color: #ffffff;
+}
+.btn-submit.disabled {
+  background-color: #a0cde1;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .login-link {
@@ -190,86 +252,64 @@ export default {
   text-decoration: underline;
 }
 
-
-
-/* Image */
-.signup-img {
-  max-width: 80%;
-  border-radius: 30px;
-}
-/* --- Global fix: prevent horizontal scroll --- */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-/* Bootstrap container fix */
-.container-fluid {
-  padding-left: 15px !important;
-  padding-right: 15px !important;
-  margin-left: auto;
-  margin-right: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
+/* ✅ Modal Styles (same as Mentorship Page) */
+.center-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 }
 
-/* Ensure UI boxes don’t exceed parent width */
-.dropzone,
-.captcha-box,
-.card,
-.banner {
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
+.center-modal {
+  width: 500px;
+  max-width: 95%;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
 }
 
-/* --- Media Queries for Specific Desktop Sizes --- */
-
-/* 1366×768 (budget laptop screens) */
-@media screen and (max-width: 1366px) {
-  .container-fluid {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
-  .dropzone, .captcha-box {
-    font-size: 14px;
-    min-height: 150px;
-  }
-  .banner-title {
-    font-size: 14px;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-/* 1920×1080 (Full HD office monitors) */
-@media screen and (min-width: 1367px) and (max-width: 1920px) {
-  .container-fluid {
-    max-width: 1600px; /* center content */
-  }
+.modal-header,
+.modal-footer {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* 2560×1440 (QHD monitors) */
-@media screen and (min-width: 1921px) and (max-width: 2560px) {
-  .container-fluid {
-    max-width: 1800px;
-  }
-  .dropzone {
-    min-height: 200px;
-  }
+.modal-body {
+  padding: 15px;
+  font-size: 14px;
+  color: #444;
 }
 
-/* 3840×2160 (4K displays) */
-@media screen and (min-width: 2561px) {
-  .container-fluid {
-    max-width: 2000px; /* readability */
-  }
-  .banner-title {
-    font-size: 20px;
-  }
-  .dropzone {
-    min-height: 220px;
-  }
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
 }
 
-
-
+.small-text {
+  font-size: 13px;
+  color: #555;
+}
 </style>

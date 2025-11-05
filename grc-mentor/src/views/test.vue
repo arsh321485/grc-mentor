@@ -1,99 +1,158 @@
 <template>
   <main class="mentorship-page">
     <div class="container-fluid">
-      <div class="row g-0">
-        <!-- Sidebar -->
+      <div class="row g-4">
         <div class="col-2 col-md-2">
-          <Sidebarprofile />
+          <Stepper :currentStep="3" />
         </div>
 
-        <!-- Main Content -->
-        <div class="col-10 col-md-10">
-          <!-- Banner -->
-          <div class="banner">
+        <div class="col-10 col-md-10 mt-5">
+          <div class="banner mb-5">
             <div class="banner-left">
-              <h6 class="banner-title">Performance Report</h6>
-              <p class="banner-sub">Detailed summary of your learning progress</p>
+              <h6 class="banner-title">Payment Setup</h6>
+              <p class="banner-sub">
+                GRC-101 mentorship program cost and payment details (international supported)
+              </p>
             </div>
+            <div class="banner-right">{{ displayLevel }}</div>
           </div>
 
-          <!-- Full Height Section -->
-          <section class="mt-4 full-section">
-            <div class="row h-100">
-              <!-- Left Column (Summary) -->
-              <div class="col-md-5 col-lg-5 h-100">
-                <div class="report-info full-box shadow-sm p-4 rounded-4 bg-white h-100">
-                  <h6 class="fw-semibold mb-3 section-title">
-                    Here’s your learning summary based on performance and activities.
-                  </h6>
+          <section>
+            <div class="row g-4">
+              <div class="col-lg-8">
+                <div class="card border-0 shadow-sm mb-4">
+                  <div class="card-body p-4">
+                    <h5 class="mb-3">Choose payment method</h5>
 
-                  <ul class="list-unstyled mb-4">
-                    <li class="d-flex align-items-center mb-2">
-                      <span class="dot me-2"></span>
-                      Domain Name: <strong class="ms-1">{{ domainName }}</strong>
-                    </li>
-                    <li class="d-flex align-items-center mb-2">
-                      <span class="dot me-2"></span>
-                      Task: <strong class="ms-1">{{ taskName }}</strong>
-                    </li>
-                    <li class="d-flex align-items-center mb-2">
-                      <span class="dot me-2"></span>
-                      Sub-task: <strong class="ms-1">{{ subTask }}</strong>
-                    </li>
-                    <li class="d-flex align-items-center mb-2">
-                      <span class="dot me-2"></span>
-                      Skill Developed: <strong class="ms-1">{{ skill }}</strong>
-                    </li>
-                  </ul>
+                    <div class="mb-3">
+                      <div class="btn-group w-100" role="group">
+                        <label
+                          class="btn btn-outline-secondary text-start"
+                          :class="{ active: selected === 'card' }"
+                          @click="selectMethod('card')"
+                        >
+                          <div class="fw-semibold">Card</div>
+                          <div class="small text-muted">Visa, Mastercard, Amex (multi-currency)</div>
+                        </label>
 
-                  <div class="alert alert-info border-0 rounded-3 shadow-sm mt-auto">
-                    <strong>📘 Feedback Summary:</strong>
-                    <p class="mb-0 mt-1">{{ recommendation }}</p>
+                        <label
+                          class="btn btn-outline-secondary text-start"
+                          :class="{ active: selected === 'paypal' }"
+                          @click="selectMethod('paypal')"
+                        >
+                          <div class="fw-semibold">PayPal / Checkout</div>
+                          <div class="small text-muted">Popular international wallets / PayPal</div>
+                        </label>
+
+                        <label
+                          class="btn btn-outline-secondary text-start"
+                          :class="{ active: selected === 'netbanking' }"
+                          @click="selectMethod('netbanking')"
+                        >
+                          <div class="fw-semibold">Netbanking</div>
+                          <div class="small text-muted">Local banks</div>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div v-if="selected === 'card'" class="mt-3">
+                      <h6 class="mb-2">Card details</h6>
+                      <div class="row g-2">
+                        <div class="col-md-8">
+                          <input v-model="card.number" maxlength="19" placeholder="Card number" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                          <input v-model="card.name" placeholder="Name on card" class="form-control" />
+                        </div>
+                        <div class="col-md-3 mt-2">
+                          <input v-model="card.exp" placeholder="MM/YY" class="form-control" />
+                        </div>
+                        <div class="col-md-3 mt-2">
+                          <input v-model="card.cvv" placeholder="CVV" maxlength="4" class="form-control" />
+                        </div>
+                      </div>
+                      <div v-if="cardError" class="text-danger small mt-2">{{ cardError }}</div>
+                    </div>
+
+                    <div v-if="selected === 'paypal'" class="mt-3">
+                      <h6 class="mb-2">Pay via PayPal / Checkout</h6>
+                      <p class="small text-muted">You will be redirected to PayPal for secure checkout.</p>
+                      <button class="btn btn-outline-primary" @click="startPaypalFlow" :disabled="isProcessing">
+                        Pay via PayPal
+                      </button>
+                    </div>
+
+                    <div v-if="selected === 'netbanking'" class="mt-3">
+                      <h6 class="mb-2">Netbanking</h6>
+                      <select v-model="bank" class="form-select">
+                        <option value="">Select bank</option>
+                        <option>State Bank of India</option>
+                        <option>HDFC Bank</option>
+                        <option>ICICI Bank</option>
+                        <option>Axis Bank</option>
+                      </select>
+                    </div>
+
+                    <div class="mt-4">
+                      <label class="form-label small">Have a coupon?</label>
+                      <div class="input-group">
+                        <input v-model="coupon" class="form-control" placeholder="Enter coupon code" />
+                        <button class="btn btn-outline-primary" @click="applyCoupon" :disabled="isApplying">
+                          Apply
+                        </button>
+                      </div>
+                      <div
+                        v-if="couponMsg"
+                        class="small mt-2"
+                        :class="couponSuccess ? 'text-success' : 'text-danger'"
+                      >
+                        {{ couponMsg }}
+                      </div>
+                    </div>
+
+                    <div class="form-check mt-4">
+                      <input class="form-check-input" type="checkbox" id="agree" v-model="agreed" />
+                      <label class="form-check-label small" for="agree">
+                        I agree to the
+                        <a href="javascript:void(0)" class="text-primary" @click="openPolicyModal">
+                          terms & refund policy
+                        </a>.
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Right Column (Tabs + Table) -->
-              <div class="col-md-7 col-lg-7 h-100">
-                <div class="tabs-container full-box shadow-sm p-4 rounded-4 bg-white h-100">
-                  <!-- Material Tabs -->
-                  <div class="tabs">
-                    <button
-                      v-for="(tab, index) in tabs"
-                      :key="index"
-                      :class="['tab-btn', { active: activeTab === tab }]"
-                      @click="activeTab = tab"
-                    >
-                      {{ tab }}
-                    </button>
-                  </div>
-
-                  <!-- Tab Content -->
-                  <div class="tab-content mt-4 p-3 rounded-4 bg-white table-wrapper">
-                    <div v-if="activeTab">
-                      <h5 class="mb-3 fw-semibold">Domain: Access Control</h5>
-                      <div class="table-responsive table-container">
-                        <table class="table table-bordered align-middle">
-                          <thead class="table-light">
-                            <tr>
-                              <th>Category</th>
-                              <th>Control Number</th>
-                              <th>Control Name</th>
-                              <th>Purpose</th>
-                              <th>Task</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr v-for="(item, index) in tableData[activeTab]" :key="index">
-                              <td>{{ item.category }}</td>
-                              <td>{{ item.controlNumber }}</td>
-                              <td>{{ item.controlName }}</td>
-                              <td>{{ item.purpose }}</td>
-                              <td>{{ item.task }}</td>
-                            </tr>
-                          </tbody>
-                        </table>
+              <div class="col-lg-4">
+                <div class="card border-0 shadow-sm position-sticky" style="top: 90px;">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <h6 class="mb-0">Order Summary</h6>
+                      <div>
+                        <select
+                          v-model="currency"
+                          class="form-select form-select-sm"
+                          style="min-width: 110px;"
+                        >
+                          <option v-for="c in supportedCurrencies" :key="c" :value="c">{{ c }}</option>
+                        </select>
                       </div>
+                    </div>
+
+                    <div class="fs-4 fw-bold mb-1">{{ formatted(totalConverted) }}</div>
+                    <div class="text-muted small mb-3">Mentorship Fee ({{ currency }})</div>
+
+                    <router-link to="/paymentsuccess">
+                      <button
+                        class="btn btn-submit w-100 mb-2"
+                        :disabled="!canProceed || isProcessing"
+                      >
+                        Pay {{ formatted(totalConverted) }}
+                      </button>
+                    </router-link>
+
+                    <div class="small text-muted">
+                      Secure payment via Stripe / PayPal / local gateway.
                     </div>
                   </div>
                 </div>
@@ -103,248 +162,133 @@
         </div>
       </div>
     </div>
+
+    <!-- ✅ Terms Modal -->
+    <div v-if="showPolicyModal" class="center-modal-overlay" @click.self="closePolicyModal">
+      <div class="center-modal glass-card">
+        <div class="modal-header">
+          <h6>Terms & Refund Policy</h6>
+          <button class="close-btn" @click="closePolicyModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            By continuing with this payment, you agree to follow our payment and refund policy.
+            Refunds are only applicable before mentorship commencement. For any disputes, contact support.
+          </p>
+          <p>All transactions are processed securely via Stripe/PayPal/local gateways.</p>
+          <div class="form-check gap-2">
+            <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agreed" />
+            <label class="form-check-label small-text" for="agreeTerms">
+              I agree to the terms
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" @click="closePolicyModal">Close</button>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
 <script lang="ts">
-import Sidebarprofile from '@/components/Sidebarprofile.vue';
-
+import Stepper from '@/components/Stepper.vue';
 export default {
-  name: "ReportView",
-  components: { Sidebarprofile },
+  name: "PaymentSetupIntlWithLevel",
+  components: { Stepper },
   data() {
     return {
-      domainName: "Media",
-      taskName: "Policy Implementation",
-      subTask: "Access Control Review",
-      skill: "Risk Analysis & Compliance",
-      recommendation:
-        "You’ve shown consistent effort throughout your modules. Continue focusing on accuracy and structure in your reports.",
-      activeTab: "ISO 27001",
-      tabs: ["ISO 27001", "ISO 27002", "ISO 27003", "ISO 27004"],
-
-      tableData: {
-        "ISO 27001": [
-          {
-            category: "Organizational",
-            controlNumber: "A.5.1",
-            controlName: "Policies for Information Security",
-            purpose:
-              "Ensure continuing suitability, adequacy, and effectiveness of management direction for information security compliance.",
-            task: "Develop a comprehensive information security policy framework.",
-          },
-          {
-            category: "Organizational",
-            controlNumber: "A.6.1",
-            controlName: "Information Security Roles and Responsibilities",
-            purpose:
-              "Define roles and responsibilities for effective governance of information security.",
-            task: "Establish accountability and assign security-related responsibilities.",
-          },
-        ],
-        "ISO 27002": [
-          {
-            category: "Technical",
-            controlNumber: "A.8.1",
-            controlName: "Asset Management",
-            purpose:
-              "Ensure assets are properly identified and managed throughout their lifecycle.",
-            task: "Implement asset inventory with defined ownership and classification.",
-          },
-          {
-            category: "Technical",
-            controlNumber: "A.9.2",
-            controlName: "Access Control Management",
-            purpose:
-              "Provide authorized user access and prevent unauthorized access to systems.",
-            task: "Design access control policy and review user privileges regularly.",
-          },
-        ],
-        "ISO 27003": [
-          {
-            category: "Planning",
-            controlNumber: "A.10.1",
-            controlName: "Cryptographic Controls",
-            purpose:
-              "Ensure proper and effective use of cryptography to protect data confidentiality and integrity.",
-            task: "Develop and implement cryptographic key management procedures.",
-          },
-          {
-            category: "Planning",
-            controlNumber: "A.11.1",
-            controlName: "Physical Security Perimeter",
-            purpose:
-              "Prevent unauthorized physical access to sensitive areas and information systems.",
-            task: "Establish security zones and controlled access measures.",
-          },
-        ],
-        "ISO 27004": [
-          {
-            category: "Monitoring",
-            controlNumber: "A.12.1",
-            controlName: "Operational Procedures and Responsibilities",
-            purpose:
-              "Ensure proper management and monitoring of information systems operations.",
-            task: "Develop operational security processes and implement change management.",
-          },
-          {
-            category: "Monitoring",
-            controlNumber: "A.13.2",
-            controlName: "Information Transfer Policies",
-            purpose:
-              "Protect data in transit and ensure secure exchange between organizations.",
-            task: "Implement encryption and secure transfer protocols for external data exchange.",
-          },
-        ],
-      },
+      selected: "card",
+      card: { number: "", name: "", exp: "", cvv: "" },
+      cardError: "",
+      bank: "",
+      coupon: "",
+      couponMsg: "",
+      couponSuccess: false,
+      isApplying: false,
+      isProcessing: false,
+      supportedCurrencies: ["INR", "USD", "EUR", "GBP"],
+      currency: "INR",
+      totalConverted: 9999,
+      agreed: false,
+      showPolicyModal: false,
     };
+  },
+  computed: {
+    canProceed() {
+      return this.agreed;
+    },
+  },
+  methods: {
+    formatted(a: number) {
+      return new Intl.NumberFormat("en-IN", { style: "currency", currency: this.currency }).format(a);
+    },
+    selectMethod(m: string) {
+      this.selected = m;
+    },
+    applyCoupon() {
+      this.couponMsg = this.coupon === "MENTOR20" ? "Coupon applied (20% off)" : "Invalid coupon";
+      this.couponSuccess = this.coupon === "MENTOR20";
+    },
+    openPolicyModal() {
+      this.showPolicyModal = true;
+    },
+    closePolicyModal() {
+      this.showPolicyModal = false;
+    },
+    startPaypalFlow() {
+      alert("Redirecting to PayPal...");
+    },
   },
 };
 </script>
 
 <style scoped>
-/* General Layout */
-
-.mentorship-page {
-  background: linear-gradient(135deg, #f7faff, #eef3fb);
-  min-height: 100vh;
-  font-family: "Inter", sans-serif;
-}
-.sidebar-col {
-  padding: 0;
-}
-
-/* Banner */
-.banner {
-  margin-top: 30px;
-  width: 99%;
-  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
-  border-radius: 12px;
-  padding: 18px 25px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-.banner-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
-}
-.banner-sub {
-  font-size: 13px;
-  opacity: 0.9;
-  margin: 2px 0 0 0;
-}
-/* Full Section */
-.full-section {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 130px);
-}
-.full-box {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-/* Dots + Text */
-.section-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #0d1b2a;
-}
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #2f80ed;
-  display: inline-block;
-}
-.alert {
-  font-size: 14px;
-  background-color: #eaf6ff;
-  color: #004085;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-/* Tabs */
-.tabs-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.tabs {
-  display: flex;
-  border-bottom: 1px solid #ddd;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.tab-btn {
-  background: transparent;
-  border: none;
-  font-weight: 500;
-  font-size: 15px;
-  color: #6c757d;
-  padding-bottom: 10px;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.tab-btn.active {
-  color: #2f80ed;
-}
-.tab-btn.active::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
+.center-modal-overlay {
+  position: fixed;
+  top: 0;
   left: 0;
-  height: 2px;
   width: 100%;
-  background: #2f80ed;
-  border-radius: 2px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 }
-.tab-btn:hover {
-  color: #2f80ed;
+.center-modal {
+  width: 500px;
+  max-width: 95%;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
 }
-
-/* Table Styling */
-.table-wrapper {
-  flex-grow: 1;
-  overflow-y: auto;
-  max-height: 70vh;
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
-.table {
-  font-size: 15px;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
+.modal-header,
+.modal-footer {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.table th {
-  background: #f3f7fc;
-  color: #333;
-  font-weight: 600;
-  text-align: left;
-  padding: 14px 10px;
-}
-.table td {
+.modal-body {
+  padding: 15px;
+  font-size: 14px;
   color: #444;
-  vertical-align: middle;
-  padding: 12px 10px;
-  line-height: 1.5;
 }
-.table-bordered th,
-.table-bordered td {
-  border: 1px solid #e3e6ec;
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
 }
-
-/* Responsive */
-@media (max-width: 992px) {
-  .full-section {
-    height: auto;
-  }
-  .table {
-    font-size: 13px;
-  }
+.small-text {
+  font-size: 13px;
+  color: #555;
 }
 </style>

@@ -132,16 +132,16 @@ const router = createRouter({
       name: 'uploadcv',
       component: UploadcvView,
     },
-    {
-      path: '/cvadded',
-      name: 'cvadded',
-      component: CvaddedView,
-    },
-    {
-      path: '/paymentprocess',
-      name: 'paymentprocess',
-      component: PaymentprocessView,
-    },
+    // {
+    //   path: '/cvadded',
+    //   name: 'cvadded',
+    //   component: CvaddedView,
+    // },
+    // {
+    //   path: '/paymentprocess',
+    //   name: 'paymentprocess',
+    //   component: PaymentprocessView,
+    // },
     {
       path: '/mentorship',
       name: 'mentorship',
@@ -208,11 +208,11 @@ const router = createRouter({
       name: 'policyreview7',
       component: Policyreview7View,
     },
-    {
-      path: '/iso-27001',
-      name: 'iso-27001',
-      component: ISO27001View
-    },
+    // {
+    //   path: '/iso-27001',
+    //   name: 'iso-27001',
+    //   component: ISO27001View
+    // },
 
 
     {
@@ -235,16 +235,16 @@ const router = createRouter({
       name: 'badges',
       component: BadgesView,
     },
-    {
-      path: '/profileview',
-      name: 'profileview',
-      component: ViewprofileView,
-    },
-    {
-      path: '/profilelogout',
-      name: 'profilelogout',
-      component: ProfileLogoutView,
-    },
+    // {
+    //   path: '/profileview',
+    //   name: 'profileview',
+    //   component: ViewprofileView,
+    // },
+    // {
+    //   path: '/profilelogout',
+    //   name: 'profilelogout',
+    //   component: ProfileLogoutView,
+    // },
     {
       path: '/calender',
       name: 'calender',
@@ -285,29 +285,29 @@ const router = createRouter({
       component: ExperienceGainView,
     },
 
-    {
-      path: '/careerpath',
-      name: 'careerpath',
-      component: CareerPathView,
-    },
+    // {
+    //   path: '/careerpath',
+    //   name: 'careerpath',
+    //   component: CareerPathView,
+    // },
 
-    {
-      path: '/pay-card',
-      name: 'pay-card',
-      component: CardPayment,
-    },
+    // {
+    //   path: '/pay-card',
+    //   name: 'pay-card',
+    //   component: CardPayment,
+    // },
 
-    {
-      path: '/pay-paypal',
-      name: 'pay-paypal',
-      component: PayPalPayment,
-    },
+    // {
+    //   path: '/pay-paypal',
+    //   name: 'pay-paypal',
+    //   component: PayPalPayment,
+    // },
 
-    {
-      path: '/pay-netbanking',
-      name: 'pay-netbanking',
-      component: NetBankingPayment,
-    },
+    // {
+    //   path: '/pay-netbanking',
+    //   name: 'pay-netbanking',
+    //   component: NetBankingPayment,
+    // },
 
     {
       path: '/assessment',
@@ -321,11 +321,11 @@ const router = createRouter({
       component: MentorshipprogramView
     },
 
-    {
-      path: '/onboarding',
-      name: 'onboarding',
-      component: OnboardingView
-    },
+    // {
+    //   path: '/onboarding',
+    //   name: 'onboarding',
+    //   component: OnboardingView
+    // },
 
     {
       path: '/payment1',
@@ -375,17 +375,17 @@ const router = createRouter({
       component: ChangePasswordView
     },
 
-    {
-      path: '/policy-component',
-      name: 'policy-component',
-      component: Policycomponent
-    },
+    // {
+    //   path: '/policy-component',
+    //   name: 'policy-component',
+    //   component: Policycomponent
+    // },
 
-    {
-      path: '/play-ground',
-      name: 'play-ground',
-      component: Playground
-    },
+    // {
+    //   path: '/play-ground',
+    //   name: 'play-ground',
+    //   component: Playground
+    // },
     {
       path: '/instruction',
       name: 'instruction',
