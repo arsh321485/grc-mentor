@@ -1,4 +1,3 @@
-
 <template>
   <div class="sidebar">
     <!-- Logo -->
@@ -29,7 +28,7 @@
       >
         <!-- Regular nav item -->
         <router-link
-          v-if="item.name !== 'Projects' && item.name !== 'Task View'"
+          v-if="item.name !== 'Projects' && item.name !== 'Task View' && item.name !== 'My Profile'"
           :to="item.route"
           class="nav-item"
           @click="handleNavClick(item)"
@@ -37,23 +36,6 @@
           <i :class="item.icon"></i>
           <span>{{ item.name }}</span>
         </router-link>
-
-        <!-- Projects Dropdown -->
-        <!-- <div
-          v-else-if="item.name === 'Projects'"
-          class="nav-item"
-          @click="toggleDropdown('projects')"
-        >
-          <i :class="item.icon"></i>
-          <span>{{ item.name }}</span>
-          <i
-            :class="[
-              'fas',
-              projectDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
-              'dropdown-arrow',
-            ]"
-          ></i>
-        </div> -->
 
         <!-- Task View Dropdown -->
         <div
@@ -72,50 +54,69 @@
           ></i>
         </div>
 
-        <!-- Projects Dropdown List -->
-        <!-- <transition name="slide">
-          <ul
-            v-if="item.name === 'Projects' && projectDropdownOpen"
-            class="dropdown-list"
-          >
-            <li v-for="(project, i) in projects" :key="i">
-              <router-link
-                :to="`/projects/${project.toLowerCase().replace(/\s+/g, '-')}`"
-                class="text-decoration-none dropdown-link"
-                @click="setActiveSubItem(project)"
-              >
-                {{ project }}
-              </router-link>
-            </li>
-          </ul>
-        </transition> -->
+        <!-- My Profile Dropdown -->
+        <div
+          v-else-if="item.name === 'My Profile'"
+          class="nav-item"
+          @click="toggleDropdown('profile')"
+        >
+          <i :class="item.icon"></i>
+          <span>{{ item.name }}</span>
+          <i
+            :class="[
+              'fas',
+              profileDropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down',
+              'dropdown-arrow',
+            ]"
+          ></i>
+        </div>
 
-        <!-- Task View Dropdown List -->
-        <transition name="slide">
-          <ul
-            v-if="item.name === 'Task View' && taskDropdownOpen"
-            class="dropdown-list"
-          >
-            <li>
-              <router-link
-                to="/policyreview2"
-                class="text-decoration-none dropdown-link"
-                @click="setActiveSubItem('Task List')"
-              >
-                Task List
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                to="/calender"
-                class="text-decoration-none dropdown-link"
-                @click="setActiveSubItem('Calendar')"
-              >
-                Calendar
-              </router-link>
-            </li>
-          </ul>
-        </transition>
+      <!-- Task View Dropdown List -->
+<transition name="slide">
+  <ul
+    v-if="item.name === 'Task View' && taskDropdownOpen"
+    class="dropdown-list"
+  >
+    <li
+      v-for="(task, i) in taskSubRoutes"
+      :key="i"
+      :class="{ 'active-sub': activeSubItem === task.name }"
+    >
+      <router-link
+        :to="task.route"
+        class="text-decoration-none dropdown-link"
+        @click="setActiveSubItem(task.name)"
+      >
+        <i :class="task.icon"></i>
+        {{ task.name }}
+      </router-link>
+    </li>
+  </ul>
+</transition>
+
+<!-- My Profile Dropdown List -->
+<transition name="slide">
+  <ul
+    v-if="item.name === 'My Profile' && profileDropdownOpen"
+    class="dropdown-list"
+  >
+    <li
+      v-for="(tab, i) in profileSubRoutes"
+      :key="i"
+      :class="{ 'active-sub': activeSubItem === tab.name }"
+    >
+      <router-link
+        :to="tab.route"
+        class="text-decoration-none dropdown-link"
+        @click="setActiveSubItem(tab.name)"
+      >
+        <i :class="tab.icon"></i>
+        {{ tab.name }}
+      </router-link>
+    </li>
+  </ul>
+</transition>
+
       </li>
     </ul>
 
@@ -129,7 +130,10 @@
     <div class="account-section">
       <p class="account-label">ACCOUNT</p>
       <ul>
-        <li><i class="fas fa-cog"></i> <span>Settings</span></li>
+        <li>
+          <i class="fas fa-cog text-decoration-none text-muted"></i>
+          <router-link class="text-decoration-none text-muted" to="/setting">Settings</router-link>
+        </li>
       </ul>
     </div>
 
@@ -151,42 +155,96 @@ export default {
   data() {
     return {
       searchQuery: "",
-      activeItem: "Working Desk",
+      activeItem: "", // Parent highlight
+      activeSubItem: "", // ✅ NEW - highlight specific sub-tab
       projectDropdownOpen: false,
       taskDropdownOpen: false,
+      profileDropdownOpen: false,
+
       navItems: [
-        { name: "Overview", icon: "fas fa-home", route: "/overview" },
+        { name: "About Mentorship", icon: "fas fa-home", route: "/aboutmentorship" },
         { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
-        { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
         { name: "Task View", icon: "fas fa-list-check", route: "/taskview" },
-        // { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
         { name: "Badges", icon: "fas fa-award", route: "/badges" },
         { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
-        { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
+        { name: "My Profile", icon: "fas fa-user", route: "/mycv" },
+        { name: "Matching Jobs", icon: "fas fa-briefcase", route: "/matchingjobs" },
       ],
-      projects: ["ISO 27001", "ISO 27002", "ISO 27003", "ISO 27004"],
+
+      taskSubRoutes: [
+        { name: "Task List", route: "/policyreview2", icon: "fas fa-list" },
+        { name: "Calendar", route: "/calender", icon: "fas fa-calendar" },
+      ],
+      profileSubRoutes: [
+        { name: "My CV", route: "/mycv", icon: "fas fa-file-alt" },
+        { name: "My Learnings", route: "/my-learnings", icon: "fas fa-book" },
+        { name: "Reports", route: "/report", icon: "fas fa-clipboard-list" },
+        { name: "Certificate", route: "/certificate", icon: "fas fa-certificate" },
+      ],
     };
   },
+
   methods: {
     handleNavClick(item: { name: string }) {
       this.activeItem = item.name;
-      this.projectDropdownOpen = false;
+      this.activeSubItem = "";
       this.taskDropdownOpen = false;
+      this.profileDropdownOpen = false;
     },
+
     toggleDropdown(type: string) {
-      if (type === "projects") {
-        this.projectDropdownOpen = !this.projectDropdownOpen;
-        this.taskDropdownOpen = false;
-      } else if (type === "task") {
+      if (type === "task") {
         this.taskDropdownOpen = !this.taskDropdownOpen;
-        this.projectDropdownOpen = false;
+        this.profileDropdownOpen = false;
+      } else if (type === "profile") {
+        this.profileDropdownOpen = !this.profileDropdownOpen;
+        this.taskDropdownOpen = false;
       }
     },
+
     setActiveSubItem(name: string) {
-      this.activeItem = name;
-      this.projectDropdownOpen = false;
-      this.taskDropdownOpen = false;
+      this.activeSubItem = name;
     },
+
+    checkDropdownActive(path: string) {
+      const taskMatch = this.taskSubRoutes.find((t) => t.route === path);
+      const profileMatch = this.profileSubRoutes.find((p) => p.route === path);
+
+      if (taskMatch) {
+        this.activeItem = "Task View";
+        this.taskDropdownOpen = true;
+        this.activeSubItem = taskMatch.name;
+      } else if (profileMatch) {
+        this.activeItem = "My Profile";
+        this.profileDropdownOpen = true;
+        this.activeSubItem = profileMatch.name;
+      }
+    },
+  },
+
+  watch: {
+    $route(to) {
+      const matchedItem = this.navItems.find((item) => item.route === to.path);
+
+      if (matchedItem) {
+        this.activeItem = matchedItem.name;
+        this.activeSubItem = "";
+      } else {
+        this.checkDropdownActive(to.path);
+      }
+    },
+  },
+
+  mounted() {
+    const matchedItem = this.navItems.find(
+      (item) => item.route === this.$route.path
+    );
+
+    if (matchedItem) {
+      this.activeItem = matchedItem.name;
+    } else {
+      this.checkDropdownActive(this.$route.path);
+    }
   },
 };
 </script>
@@ -195,11 +253,17 @@ export default {
 
 
 <style scoped>
+/* ✅ Highlight active sub item (Task List, Calendar, etc.) */
+.active-sub .dropdown-link {
+  color: #008AC5 !important;
+  font-weight: 600;
+}
 
+.active-sub i {
+  color: #008AC5 !important;
+}
 
-
-
-/* Sidebar Container */
+/* ✅ No changes here – keeping your full original design */
 .sidebar {
   width: 260px;
   height: 100vh;
@@ -212,7 +276,6 @@ export default {
   font-family: Arial, sans-serif;
 }
 
-/* Logo & App Name */
 .sidebar-header {
   display: flex;
   align-items: center;
@@ -243,7 +306,6 @@ export default {
   pointer-events: none;
 }
 
-/* Navigation Links */
 .nav-links {
   list-style: none;
   padding: 0;
@@ -297,13 +359,11 @@ export default {
   border-radius: 8px;
 }
 
-
 .nav-links li.active i,
 .nav-links li.active span {
   color: #008AC5;
 }
 
-/* Dropdown Arrow */
 .dropdown-arrow {
   margin-left: auto;
   font-size: 12px;
@@ -311,13 +371,11 @@ export default {
   transition: transform 0.3s;
 }
 
-/* Dropdown List */
 .dropdown-list {
   list-style: none;
   padding-left: 40px;
   margin-top: 5px;
-   color: black;
-
+  color: black;
 }
 
 .dropdown-list li {
@@ -335,30 +393,20 @@ export default {
 .dropdown-list li:hover {
   color: #101111;
 }
-/* Dropdown Link Styles */
+
 .dropdown-link {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  color: #555; /* default text color */
+  color: #555;
   transition: color 0.2s ease;
 }
 
-/* Hover & Active Styles */
-/* .dropdown-link:hover {
-  color: #008ac5;
-} */
-
-/* Active Route Highlight */
 .router-link-active {
   color: #555 !important;
-  /* font-weight: 600; */
 }
 
-
-
-/* Account Section */
 .account-section {
   margin-top: 20px;
 }
@@ -397,7 +445,6 @@ export default {
   background-color: #f1f1f1;
 }
 
-/* Profile Section */
 .profile {
   display: flex;
   align-items: center;
@@ -410,7 +457,6 @@ export default {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Gradient Circle Icon */
 .profile-icon {
   width: 32px;
   height: 32px;
@@ -418,7 +464,6 @@ export default {
   background: linear-gradient(180deg, #B0A0FF 0%, #4023CF 100%);
 }
 
-/* Name and Email Container */
 .profile-info {
   flex: 1;
   line-height: 1.2;

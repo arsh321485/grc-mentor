@@ -4,7 +4,7 @@
       <div class="row g-0">
         <!-- Sidebar -->
         <div class="col-2 col-md-2 sidebar-col">
-          <Sidebarprofile />
+          <Sidebar class="sidebar" />
         </div>
 
         <!-- Main Area -->
@@ -126,11 +126,11 @@
 </template>
 
 <script lang="ts">
-import Sidebarprofile from "@/components/Sidebarprofile.vue";
+import Sidebar from "@/components/Sidebar.vue";
 
 export default {
   name: "LearningView",
-  components: { Sidebarprofile },
+  components: { Sidebar },
   data() {
     return {
       showModal: false,

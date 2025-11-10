@@ -3,7 +3,7 @@
     <div class="container-fluid row g-0">
       <!-- Sidebar -->
       <div class="col-2 col-md-2 sidebar-col">
-        <Sidebargrc2 />
+        <Sidebar class="sidebar" />
       </div>
 
       <!-- Main -->
@@ -70,12 +70,12 @@
 </template>
 
 <script lang="ts">
-import Sidebargrc2 from "@/components/Sidebargrc2.vue";
+import Sidebar from "@/components/Sidebar.vue";
 import expertMentee from "@/assets/expert-mentee.png";
 
 export default {
   name: "CareergraphView",
-  components: { Sidebargrc2 },
+  components: { Sidebar },
   data() {
     return {
       expertMentee,

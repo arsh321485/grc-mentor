@@ -3,8 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import SignupView from '../views/SignupView.vue'
 import Stepper from '../components/Stepper.vue'
 import UploadcvView from '../views/UploadcvView.vue'
-import CvaddedView from '../views/CvaddedView.vue'
-import PaymentprocessView from '../views/PaymentprocessView.vue'
+// import CvaddedView from '../views/CvaddedView.vue'
+// import PaymentprocessView from '../views/PaymentprocessView.vue'
 import WelcomementorView from '../views/WelcomementorView.vue'
 import MattermostView from '../views/MattermostView.vue'
 import Sidebar from '../components/Sidebar.vue'
@@ -17,8 +17,6 @@ import GrcsecondView from '../views/GrcsecondView.vue'
 import Policyreview1View from '../views/Policyreview1View.vue'
 import BadgesView from '../views/BadgesView.vue'
 import Sidebarprofile from '../components/Sidebarprofile.vue'
-import ViewprofileView from '../views/ViewprofileView.vue'
-import ProfileLogoutView from '../views/ProfileLogoutView.vue'
 import CalenderView from '../views/CalenderView.vue'
 import MatchingjobsView from '../views/MatchingjobsView.vue'
 import CertificateView from '../views/CertificateView.vue'
@@ -28,7 +26,7 @@ import Policyreview4View from '@/views/Policyreview4View.vue'
 import Policyreview5View from '@/views/Policyreview5View.vue'
 import Policyreview6View from '@/views/Policyreview6View.vue'
 import Policyreview7View from '@/views/Policyreview7View.vue'
-import ISO27001View from '@/views/ISO27001View.vue'
+// import ISO27001View from '@/views/ISO27001View.vue'
 import MycvView from '@/views/MycvView.vue'
 import SettingView from '@/views/SettingView.vue'
 import OverviewView from '@/views/OverviewView.vue'
@@ -37,14 +35,9 @@ import AienabledView from '@/views/AienabledView.vue'
 import PlatformView from '@/views/PlatformView.vue'
 import WhatToExceptView from '@/views/WhatToExceptView.vue'
 import ExperienceGainView from '@/views/ExperienceGainView.vue'
-import CareerPathView from '@/views/CareerPathView.vue'
-import CardPayment from '@/views/CardPayment.vue'
-import PayPalPayment from '@/views/PayPalPayment.vue'
-import NetBankingPayment from '@/views/NetBankingPayment.vue'
 import AssesmentView from '@/views/AssesmentView.vue'
 import Signin from '@/components/Signin.vue'
 import MentorshipprogramView from '@/views/MentorshipprogramView.vue'
-import OnboardingView from '@/views/OnboardingView.vue'
 import Payment1View from '@/views/Payment1View.vue'
 import ProfilesetView from '@/views/ProfilesetView.vue'
 import ResultView from '@/views/ResultView.vue'
@@ -53,13 +46,12 @@ import PaymentSuccessView from '@/views/PaymentSuccessView.vue'
 import SignupGrc101View from '@/views/SignupGrc101View.vue'
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
-import Policycomponent from '@/components/Policycomponent.vue'
-import Playground from '@/components/Playground.vue'
 import InstructionView from '@/views/InstructionView.vue'
 import NestedDropdown from '@/components/NestedDropdown.vue'
 import test from '@/views/test.vue'
 import ReportView from '@/views/ReportView.vue'
 import MyLearningsView from '@/views/MyLearningsView.vue'
+import AboutMentorshipView from '@/views/AboutMentorshipView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -146,6 +138,11 @@ const router = createRouter({
       path: '/mentorship',
       name: 'mentorship',
       component: MentroshipView,
+    },
+    {
+      path: '/aboutmentorship',
+      name: 'aboutmentorship',
+      component: AboutMentorshipView,
     },
     {
       path: '/welcomementor',
@@ -235,16 +232,7 @@ const router = createRouter({
       name: 'badges',
       component: BadgesView,
     },
-    // {
-    //   path: '/profileview',
-    //   name: 'profileview',
-    //   component: ViewprofileView,
-    // },
-    // {
-    //   path: '/profilelogout',
-    //   name: 'profilelogout',
-    //   component: ProfileLogoutView,
-    // },
+
     {
       path: '/calender',
       name: 'calender',

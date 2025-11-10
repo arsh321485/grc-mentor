@@ -2,7 +2,7 @@
     <main>
         <div class="container-fluid row">
             <div class="col-2 col-md-2">
-                <Sidebarprofile />
+                <Sidebar class="sidebar" />
             </div>
             <div class="col-10 col-md-10">
                 <div class="container-fluid">
@@ -98,11 +98,11 @@
 
 <script lang="ts">
 
-import Sidebarprofile from '@/components/Sidebarprofile.vue';
+import Sidebar from '@/components/Sidebar.vue';
 
 export default {
     name: "MycvView",
-    components: {Sidebarprofile},
+    components: {Sidebar},
     data() {
         return {
             engagements: [{

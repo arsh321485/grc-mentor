@@ -10,7 +10,7 @@
     <div class="container-fluid row g-0">
       <!-- Sidebar -->
       <div class="col-2 col-md-2 sidebar-col">
-          <Sidebargrc2 />
+           <Sidebar class="sidebar" />
       </div>
 
       <!-- Main -->
@@ -166,7 +166,7 @@
 </template>
 
 <script lang="ts">
-import Sidebargrc2 from '@/components/Sidebargrc2.vue';
+import Sidebar from "@/components/Sidebar.vue";
 import { ref, computed } from "vue";
 
 type ViewKey = "day" | "workWeek" | "week" | "month";
@@ -174,7 +174,7 @@ type Ev = { id: string; title: string; start: string; end: string; };
 
 export default {
   name: "CalendarStatic",
-  components: { Sidebargrc2 },
+  components: { Sidebar },
   setup() {
     const current = ref(new Date());
     const view = ref<ViewKey>("week");

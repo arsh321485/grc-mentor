@@ -84,7 +84,7 @@
     <div class="account-section">
       <p class="account-label">ACCOUNT</p>
       <ul>
-        <li><i class="fas fa-cog"></i> <span>Settings</span></li>
+        <li><i class="fas fa-cog"></i><router-link to="/settings"><span>Settings</span></router-link></li>
       </ul>
     </div>
 
@@ -111,21 +111,16 @@ export default {
       taskDropdownOpen: false,
       navItems: [
 
-       { name: "Overview", icon: "fas fa-home", route: "/overview" },
+      //  { name: "Overview", icon: "fas fa-home", route: "/overview" },
+       { name: "About Mentorship", icon: "fas fa-home", route: "/mentorship" },
         { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
         { name: "Task View", icon: "fas fa-list-check", route: "/taskview" },
         { name: "Badges", icon: "fas fa-award", route: "/badges" },
         { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
         { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
-        // { name: "Overview", icon: "fas fa-home", route: "/overview" },
-        // { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101" },
-        // { name: "Projects", icon: "fas fa-tasks", route: "/projects" },
         // ✅ Fixed icon below — visible now!
-        // { name: "Reports", icon: "fas fa-clipboard-list", route: "/report" },
-        // { name: "Roadmap", icon: "fas fa-map", route: "/roadmap" },
-        // { name: "Badges", icon: "fas fa-award", route: "/badges" },
-        // { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph" },
-        // { name: "Profile views", icon: "fas fa-user", route: "/profileview" },
+         { name: "Reports", icon: "fas fa-clipboard-list", route: "/report" },
+        { name: "My Profile", icon: "fas fa-user", route: "/mycv" },
       ],
       projects: ["ISO 27001", "ISO 27002", "ISO 27003", "ISO 27004"],
     };

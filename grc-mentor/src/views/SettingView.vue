@@ -3,118 +3,212 @@
     <div class="container-fluid row g-0">
       <!-- Sidebar -->
       <div class="col-2 col-md-2 sidebar-col">
-        <Sidebarprofile />
+        <Sidebar class="sidebar" />
       </div>
 
       <!-- Main Content -->
-      <div class="col-10 col-md-10 ">
+      <div class="col-10 col-md-10 main-col">
         <!-- Banner -->
         <div class="banner mb-5">
           <div>
-            <h5 class="banner-title"> Settings & Preferences</h5>
-            <p class="banner-sub">Update your email, password, and check your payment history</p>
+            <h5 class="banner-title">Settings & Preferences</h5>
+            <p class="banner-sub">
+              Manage your account information, password, and subscription details.
+            </p>
           </div>
         </div>
 
-        <!-- Settings Section -->
-        <section class="settings-section">
+        <!-- Account Section -->
+        <section class="account-section glass-card mb-5">
+          <h6 class="fw-semibold mb-4">Account</h6>
 
-          <!-- Change Email -->
-          <div class="card glass-cardshadow-lg mb-5 border-0">
-            <div class="card-header bg-transparent border-0 d-flex align-items-center">
-              <i class="bi bi-envelope-fill icon me-2"></i>
-              <h6 class="fw-semibold mb-0">Change Email</h6>
+          <div class="row align-items-center mb-4">
+            <div class="col-md-2 text-center">
+              <img
+                :src="avatarUrl"
+                alt="Avatar"
+                class="avatar-img rounded-circle shadow-sm"
+              />
             </div>
-            <div class="card-body">
-              <p class="text-muted small mb-3">Keep your contact email up to date.</p>
-              <div class="mb-3">
-                <label class="form-label fw-medium">New Email Address</label>
-                <input type="email" class="form-control modern-input" placeholder="Enter your new email" />
-              </div>
-              <button class="btn-gradient">Update Email</button>
+            <div class="col-md-7">
+              <h6 class="fw-bold mb-0">{{ fullName }}</h6>
+              <p class="text-muted mb-1">@{{ username }}</p>
+              <p class="text-muted small">{{ email }}</p>
+            </div>
+            <div class="col-md-3 d-flex flex-column align-items-end gap-2">
+              <button class="btn-outline" @click="openModal('avatar')">
+                Change Avatar
+              </button>
+              <button class="btn-outline" @click="openModal('password')">
+                Change Password
+              </button>
             </div>
           </div>
-
-          <!-- Change Password -->
-          <div class="card glass-cardshadow-lg mb-5 border-0">
-            <div class="card-header bg-transparent border-0 d-flex align-items-center">
-              <i class="bi bi-lock-fill icon me-2"></i>
-              <h6 class="fw-semibold mb-0">Change Password</h6>
-            </div>
-            <div class="card-body">
-              <p class="text-muted small mb-3">Make sure your password is strong and secure.</p>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label class="form-label fw-medium">Old Password</label>
-                  <input type="password" class="form-control modern-input" placeholder="Enter old password" />
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label class="form-label fw-medium">New Password</label>
-                  <input type="password" class="form-control modern-input" placeholder="Enter new password" />
-                </div>
-              </div>
-              <button class="btn-gradient">Update Password</button>
-            </div>
-          </div>
-
-          <!-- Payment History -->
-          <div class="card glass-cardshadow-lg mb-5 border-0">
-            <div class="card-header bg-transparent border-0 d-flex align-items-center">
-              <i class="bi bi-credit-card-2-front-fill icon me-2"></i>
-              <h6 class="fw-semibold mb-0">Payment History</h6>
-            </div>
-            <div class="card-body">
-              <p class="text-muted small mb-3">Review your recent payment transactions.</p>
-              <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                  <thead>
-                    <tr>
-                      <th>Amount</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Method</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(payment, idx) in payments" :key="idx">
-                      <td>{{ payment.amount }}</td>
-                      <td>{{ payment.date }}</td>
-                      <td>
-                        <span
-                          class="badge rounded-pill"
-                          :class="payment.status === 'Paid' ? 'bg-success' : 'bg-warning text-dark'"
-                        >
-                          {{ payment.status }}
-                        </span>
-                      </td>
-                      <td>{{ payment.method }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
         </section>
+
+        <!-- Subscription Section -->
+        <section class="glass-card mb-5 subscription-card">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-semibold mb-0">Your Subscription</h6>
+            <span class="badge bg-gradient text-white px-3 py-2 fw-medium">Active</span>
+          </div>
+
+          <div class="subscription-info mb-4">
+            <p class="text-muted small mb-1">Current Plan</p>
+            <h5 class="fw-bold text-primary mb-3">GRC 101</h5>
+
+            <p class="text-muted small mb-2">Included Standards:</p>
+            <ul class="list-unstyled d-flex flex-wrap gap-3 mb-3">
+              <li v-for="(standard, i) in includedStandards" :key="i" class="standard-pill">
+                <i class="fas fa-shield-alt me-1"></i> {{ standard }}
+              </li>
+            </ul>
+
+            <p class="text-muted small mb-1">
+              Complete the current phase to unlock advanced compliance modules.
+            </p>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="progress mb-3" style="height: 8px;">
+            <div
+              class="progress-bar bg-gradient"
+              role="progressbar"
+              :style="{ width: progress + '%' }"
+              :aria-valuenow="progress"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+
+          <p class="small text-muted mb-3">
+            {{ progress }}% completed towards your next upgrade.
+          </p>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="text-muted small mb-0">
+              Upgrade to unlock ISO 27017, PCI-DSS, HIPAA & more.
+            </p>
+            <button class="btn-gradient">Upgrade Plan</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Change Avatar Modal -->
+    <div
+      class="modal fade"
+      id="changeAvatarModal"
+      tabindex="-1"
+      aria-labelledby="changeAvatarModalLabel"
+      aria-hidden="true"
+      ref="avatarModal"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-glass">
+          <div class="modal-header border-0">
+            <h6 class="modal-title fw-semibold">Change Avatar</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img
+              :src="avatarUrl"
+              class="rounded-circle shadow-sm mb-3"
+              style="width: 90px; height: 90px; object-fit: cover;"
+            />
+            <input type="file" class="form-control mb-3" @change="handleAvatarUpload" />
+            <button class="btn-gradient">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div
+      class="modal fade"
+      id="changePasswordModal"
+      tabindex="-1"
+      aria-labelledby="changePasswordModalLabel"
+      aria-hidden="true"
+      ref="passwordModal"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-glass">
+          <div class="modal-header border-0">
+            <h6 class="modal-title fw-semibold">Change Password</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label fw-medium">Old Password</label>
+              <input
+                type="password"
+                class="form-control modern-input"
+                placeholder="Enter old password"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-medium">New Password</label>
+              <input
+                type="password"
+                class="form-control modern-input"
+                placeholder="Enter new password"
+              />
+            </div>
+            <button class="btn-gradient w-100">Save</button>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import Sidebarprofile from '@/components/Sidebarprofile.vue';
+import Sidebar from "@/components/Sidebar.vue";
+import { Modal } from "bootstrap";
 
 export default {
   name: "SettingView",
-  components: { Sidebarprofile },
+  components: { Sidebar },
   data() {
     return {
-      payments: [
-        { amount: "$300.30", date: "23rd July, 2025", status: "Paid", method: "Credit Card" },
-        { amount: "$120.99", date: "10th Aug, 2025", status: "Pending", method: "PayPal" },
-        { amount: "$499.00", date: "1st Sept, 2025", status: "Paid", method: "Debit Card" },
-      ],
+      fullName: "Vishakha Prajapati",
+      username: "vishakhapr6385",
+      email: "vishakhaprajapati0502@gmail.com",
+      avatarUrl: "https://i.pravatar.cc/150?img=47",
+      includedStandards: ["ISO 27001", "SOC 2", "NIST CSF", "GDPR"],
+      progress: 0, // will animate on load
+      modals: {
+        avatar: null as Modal | null,
+        password: null as Modal | null,
+      },
     };
+  },
+  methods: {
+    openModal(type: "avatar" | "password") {
+      if (type === "avatar") this.modals.avatar?.show();
+      else this.modals.password?.show();
+    },
+    handleAvatarUpload(event: any) {
+      const file = event.target.files[0];
+      if (file) this.avatarUrl = URL.createObjectURL(file);
+    },
+  },
+  mounted() {
+    this.modals.avatar = new Modal(this.$refs.avatarModal as HTMLElement);
+    this.modals.password = new Modal(this.$refs.passwordModal as HTMLElement);
+
+    // Animate progress bar
+    const target = 68;
+    let current = 0;
+    const interval = setInterval(() => {
+      if (current < target) {
+        current++;
+        this.progress = current;
+      } else {
+        clearInterval(interval);
+      }
+    }, 20);
   },
 };
 </script>
@@ -136,12 +230,12 @@ export default {
   left: 0;
   height: 100vh;
 }
-
 .main-col {
-  margin-left: 16.5%; /* push main content after fixed sidebar */
+  margin-left: 16.5%;
   padding: 0 2rem;
 }
 
+/* Banner */
 .banner {
   margin-top: 30px;
   width: 99%;
@@ -166,22 +260,47 @@ export default {
 
 /* Glass Cards */
 .glass-card {
-  flex: 1;
-   min-height: 701px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   border-radius: 14px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   padding: 22px;
-  display: flex;
-  flex-direction: column;
 }
 
+/* Avatar */
+.avatar-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border: 3px solid #e3f2fd;
+}
 
+/* Buttons */
+.btn-gradient {
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.btn-gradient:hover {
+  background: linear-gradient(90deg, #56ccf2, #2f80ed);
+  transform: translateY(-2px);
+}
 
-
-.icon {
-  font-size: 1.3rem;
+.btn-outline {
+  background: #fff;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  color: #333;
+  font-size: 14px;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  border-color: #2d9cdb;
   color: #2d9cdb;
 }
 
@@ -197,30 +316,44 @@ export default {
   box-shadow: 0 0 0 0.15rem rgba(86, 204, 242, 0.25);
 }
 
-/* Gradient Button */
-.btn-gradient {
-  background: linear-gradient(90deg, #2d9cdb, #56ccf2);
+/* Modal Glass Style */
+.modal-glass {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
   border: none;
-  color: #fff;
-  border-radius: 8px;
-  padding: 8px 20px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-.btn-gradient:hover {
-  background: linear-gradient(90deg, #56ccf2, #2f80ed);
-  transform: translateY(-2px);
+  padding: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Table */
-.table thead {
-  background-color: #f2f6fb;
-  font-size: 14px;
-  font-weight: 600;
-  color: #555;
+/* Subscription */
+.subscription-card {
+  position: relative;
 }
-.table td {
-  font-size: 15px;
-  color: #333;
+.bg-gradient {
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2);
+}
+.progress-bar.bg-gradient {
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  transition: width 1s ease-in-out;
+  border-radius: 4px;
+}
+.subscription-info h5 {
+  color: #2d9cdb;
+}
+.subscription-info strong {
+  color: #2f80ed;
+}
+.standard-pill {
+  background-color: #f0f7ff;
+  color: #2d9cdb;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+.standard-pill i {
+  color: #2f80ed;
 }
 </style>

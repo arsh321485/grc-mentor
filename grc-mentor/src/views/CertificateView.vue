@@ -3,7 +3,7 @@
         <div class="container-fluid row">
             <!-- Sidebar -->
             <div class="col-2 col-md-2">
-                <Sidebarprofile />
+                <Sidebar class="sidebar" />
             </div>
 
             <!-- Main Content -->
@@ -43,13 +43,13 @@
 </template>
 
 <script lang="ts">
-import Sidebarprofile from '@/components/Sidebarprofile.vue';
+import Sidebar from '@/components/Sidebar.vue';
 // ✅ Import image properly for Vite/Webpack
 import certificateImage from '../assets/certificate.png';
 
 export default {
     name: "CertificateView",
-    components: { Sidebarprofile },
+    components: { Sidebar },
 
     data() {
         return {
