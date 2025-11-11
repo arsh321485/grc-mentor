@@ -11,52 +11,56 @@
         <!-- Banner -->
         <div class="banner mb-4">
           <div class="banner-left">
-            <h6 class="banner-title">Media</h6>
+            <h6 class="banner-title"> Industry: Media</h6>
             <p class="banner-sub">Policy Review</p>
           </div>
           <!-- back Button -->
-          <div class="ms-auto fw-bold">
-            <router-link to="/grc101">
-              <button type="button" class="btn text-decoration-none text-light banner-title mt-2 mt-lg-0">
-                <i class="fas fa-arrow-left"></i>
-                Back to task menu
-              </button>
-            </router-link>
+          <div class="ms-auto">
+            <button class="btn about-btn" @click="showModal = true">
+              <i class="bi bi-info-circle me-2"></i> About the Company
+            </button>
           </div>
         </div>
 
         <!-- Star Media Modal -->
-        <div v-if="showModal" class="modal-overlay">
-          <div class="modal-content">
-            <div class="modal-header d-flex justify-content-between align-items-center">
-              <h5 class="fw-bold">Star Media</h5>
-              <button class="btn-close" @click="showModal = false">✕</button>
-            </div>
+        <!-- Right-Side About Company Modal -->
+<div v-if="showModal" class="right-modal-overlay">
+  <div class="right-modal">
+    <!-- Header -->
+    <div class="modal-header d-flex justify-content-between align-items-center">
+      <h5 class="fw-bold mb-0">Star Media</h5>
+      <button class="btn-close" @click="showModal = false">✕</button>
+    </div>
 
-            <div class="modal-body">
-              <div class="row">
-                <div v-for="(item, i) in companyDetails" :key="i" class="col-12 col-md-6 col-lg-4 mb-4">
-                  <p class="detail-label">{{ item.label }}</p>
-                  <p class="detail-value">{{ item.value }}</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="modal-footer">
-              <button class="btn btn-secondary" @click="showModal = false">
-                Close
-              </button>
-            </div>
-          </div>
+    <!-- Body -->
+    <div class="modal-body">
+      <div class="row">
+        <div
+          v-for="(item, i) in companyDetails"
+          :key="i"
+          class="col-12 col-md-6 col-lg-4 mb-3"
+        >
+          <p class="detail-label fw-semibold text-muted small mb-1">{{ item.label }}</p>
+          <p class="detail-value text-dark mb-0">{{ item.value }}</p>
         </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button class="btn btn-secondary" @click="showModal = false">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
 
         <!-- Projects Section -->
         <section class="projects-card glass-card mb-4 mt-5">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="section-title mb-0">Projects</h6>
-            <button class="btn px-4 py-2 btn-submit" @click="showModal = true">
-              Industry
-            </button>
+
           </div>
           <p class="subtitle">You'll be working on these project/tasks:</p>
 
@@ -222,10 +226,45 @@ export default {
   top: 0;
   left: 0;
   height: 100vh;
+
+/* About Company Button — clearly visible */
+.about-btn {
+  background: #ffffff;
+  color: #1d3557;
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 8px 20px;
+  font-size: 14px;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+.about-btn:hover {
+  background: #f1f1f1;
+  color: #0d47a1;
+  transform: scale(1.05);
+}
 }
 
 
 
+/* About Company Button — clearly visible */
+.about-btn {
+  background: #ffffff;
+  color: #1d3557;
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 8px 20px;
+  font-size: 14px;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+.about-btn:hover {
+  background: #f1f1f1;
+  color: #0d47a1;
+  transform: scale(1.05);
+}
 
 
 .mentorship-page {
@@ -333,61 +372,79 @@ export default {
   cursor: not-allowed;
 }
 
-/* Right-Side Modal */
-.custom-modal-overlay {
+/* 🌟 Right-Side Slide Modal */
+.right-modal-overlay {
   position: fixed;
   top: 0;
   right: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.4);
+  z-index: 1050;
   display: flex;
   justify-content: flex-end;
   align-items: stretch;
-  z-index: 1000;
+  animation: fadeIn 0.3s ease forwards;
 }
 
-.custom-modal {
-  width: 380px;
-  max-width: 90%;
+/* The white panel sliding from right */
+.right-modal {
   background: #fff;
-  height: 100%;
+  width: 420px;
+  max-width: 90%;
+  height: 100vh;
   border-radius: 0;
-  box-shadow: -6px 0 18px rgba(0, 0, 0, 0.15);
-  animation: slideIn 0.3s ease forwards;
+  overflow-y: auto;
+  box-shadow: -6px 0 16px rgba(0, 0, 0, 0.25);
+  animation: slideInRight 0.4s ease forwards;
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes slideIn {
+/* Slide animation */
+@keyframes slideInRight {
   from {
     transform: translateX(100%);
   }
-
   to {
     transform: translateX(0);
   }
 }
 
-.modal-header,
-.modal-footer {
-  padding: 12px;
+/* Overlay fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal parts */
+.right-modal .modal-header,
+.right-modal .modal-footer {
+  padding: 15px 20px;
   border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background: #f9fafb;
 }
 
-.modal-body {
-  padding: 15px;
-  font-size: 13px;
-  color: #444;
+.right-modal .modal-body {
+  padding: 20px;
 }
 
-.close-btn {
-  background: none;
+.btn-close {
   border: none;
-  font-size: 18px;
+  background: transparent;
+  font-size: 20px;
   cursor: pointer;
+  color: #555;
+  transition: color 0.2s;
 }
+.btn-close:hover {
+  color: #000;
+}
+
 
 
 

@@ -23,7 +23,7 @@
             <div class="row g-4 mb-4">
               <!-- Left Card -->
               <div class="col-md-6">
-                <section class="industries-card glass-card">
+                <section class=" glass-card">
                   <div class="d-flex flex-column">
                     <div class="reporting-header pt-4">
                       <h6 class="mb-1 pt-0"> I'm your reporting manager</h6>
@@ -427,7 +427,7 @@ export default {
 /* Glass Cards */
 .glass-card {
   flex: 1;
-   min-height: 701px;
+   min-height: 301px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   border-radius: 14px;
@@ -727,4 +727,50 @@ export default {
     transform: scale(1);
   }
 }
+@media (max-width: 768px) {
+  .col-2.col-md-2 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .col-10.col-md-10 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+html, body, .mentorship-page {
+  overflow-x: hidden;
+}
+.container-fluid {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  box-sizing: border-box;
+}
+@media (max-width: 576px) {
+  .time-options {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .time-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+@media (max-width: 576px) {
+  .mattermost-text, .status-text {
+    font-size: 14px;
+  }
+}
+@media (min-width: 1367px) and (max-width: 1920px) {
+  .glass-card {
+    padding: 30px;
+  }
+  .banner-title {
+    font-size: 18px;
+  }
+  .mattermost-text {
+    font-size: 17px;
+  }
+}
+
 </style>

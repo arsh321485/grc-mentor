@@ -29,7 +29,6 @@ import Policyreview7View from '@/views/Policyreview7View.vue'
 // import ISO27001View from '@/views/ISO27001View.vue'
 import MycvView from '@/views/MycvView.vue'
 import SettingView from '@/views/SettingView.vue'
-import OverviewView from '@/views/OverviewView.vue'
 import Login from '@/components/Login.vue'
 import AienabledView from '@/views/AienabledView.vue'
 import PlatformView from '@/views/PlatformView.vue'
@@ -222,11 +221,7 @@ const router = createRouter({
       name: 'setting',
       component: SettingView
     },
-    {
-      path: '/overview',
-      name: 'overview',
-      component: OverviewView
-    },
+
     {
       path: '/badges',
       name: 'badges',

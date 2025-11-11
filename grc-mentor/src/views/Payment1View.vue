@@ -144,16 +144,23 @@
                         </div>
                       </div>
 
-                      <!-- Terms -->
-                     <div class="mb-3">
-              <a
-                href="javascript:void(0)"
-                class="text-primary small"
-                @click="openPolicyModal"
-              >
-              Accept Terms & Conditions
-              </a>
-            </div>
+
+              <div class="form-check gap-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="agreeTerms"
+              v-model="agreed"
+            />
+            <label class="form-check-label small-text" for="agreeTerms">
+              I agree to  &nbsp;
+            </label>
+            <span   class="text-primary small text-decoration-underline "
+                @click="openPolicyModal">
+
+             terms & conditions
+            </span>
+          </div>
                       <!-- <button class="btn btn-success w-100 mt-4" @click="proceedToPayment" :disabled="isProcessing">
                   Proceed to Payment
                 </button> -->
@@ -263,17 +270,7 @@
             Any misuse of the platform or violation of ethical standards may lead to
             termination of your account.
           </p>
-          <div class="form-check gap-2">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="agree"
-              v-model="agreed"
-            />
-            <label class="form-check-label small-text" for="agreeTerms">
-              I agree to the terms
-            </label>
-          </div>
+
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary btn-sm" @click="closePolicyModal">

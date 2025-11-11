@@ -1,5 +1,5 @@
 <template>
-  <main class="mentorship-page">
+  <main class="page">
     <div class="container-fluid">
       <div class="row g-4">
         <!-- Stepper Left Column -->
@@ -54,14 +54,25 @@
                 </ul>
                 <div class=" justify-content-end d-flex">
                   <div>
-                <p class="mt-3">
+                <!-- <p class="mt-3">
                   <a href="javascript:void(0)" @click="openPolicyModal" class="policy-link">
                     Read Acceptance Usage Policy
                   </a>
-                </p>
+                </p> -->
+                  <div class="form-check gap-2">
+            <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree"/>
+            <label class="form-check-label small-text" for="agreeTerms">
+              I agree to  &nbsp;
+            </label>
+            <span   class="text-primary small text-decoration-underline "
+                @click="openPolicyModal">
+
+             terms & conditions
+            </span>
+          </div>
 
                 <button
-                  class="btn btn-submit " :disabled="!agree" @click="goToCommunication">Setup your communication
+                  class=" btn-submit " :disabled="!agree" @click="goToCommunication">Setup your communication
                 </button>
                 </div>
                 </div>
@@ -147,12 +158,7 @@
             Any misuse of resources, breach of confidentiality, or violation
             of ethical standards may result in removal from the program.
           </p>
-          <div class="form-check gap-2">
-            <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree"/>
-            <label class="form-check-label small-text" for="agreeTerms">
-              I agree to the terms
-            </label>
-          </div>
+
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary btn-sm" @click="closePolicyModal">Close</button>
@@ -169,6 +175,7 @@ export default {
   components: { Stepper },
   data() {
     return {
+
       industries: [
         { name: "Media", company: "Company name", icon: "fas fa-play", class: "media", details: "Details about Media mentorship go here.", image: new URL('@/assets/media-telecomunication.webp', import.meta.url).href },
 
@@ -219,47 +226,9 @@ export default {
 
 <style scoped>
 
-.mentorship-page {
-  background: linear-gradient(135deg, #f7faff, #eef3fb);
-  min-height: 100vh;
-  padding: 30px;
-  font-family: "Inter", sans-serif;
-}
 
-/* Glass Cards */
-.glass-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  padding: 22px;
-}
 
-/* Banner */
-.banner {
-  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
-  border-radius: 12px;
-  padding: 18px 25px;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-.banner-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
-}
-.banner-sub {
-  font-size: 13px;
-  opacity: 0.9;
-  margin: 2px 0 0 0;
-}
-.banner-right {
-  font-size: 15px;
-  font-weight: 600;
-}
+
 
 /* Section Title */
 .section-title {

@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <div class="container signup-container">
+  <main class="page">
+    <div class="container ">
       <div class="row w-100 form-section justify-content-center">
         <div class="mt-5 mb-0">
           <img src="../assets/logo-img.png" alt="" style="height: 35px;" />
@@ -10,8 +10,8 @@
         <div class="col-12 col-sm-12 col-md-10 col-lg-6 left">
           <router-link
             to="/home"
-            class="d-block mb-1 text-decoration-none"
-            style="color: #005E86; font-weight: 600;"
+            class="d-block mb-1 text-decoration-none back-link"
+
           >
             &larr; Back to homepage
           </router-link>
@@ -99,20 +99,28 @@
             </div>
 
             <!-- Terms -->
-            <div class="mb-3">
-              <a
-                href="javascript:void(0)"
-                class="text-primary small"
-                @click="openPolicyModal"
-              >
-              Accept Terms & Conditions
-              </a>
-            </div>
+              <div class="form-check gap-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="agreeTerms"
+              v-model="form.agree"
+            />
+            <label class="form-check-label small-text" for="agreeTerms">
+              I agree to  &nbsp;
+            </label>
+            <span   class="text-primary small text-decoration-underline "
+                @click="openPolicyModal">
+
+             terms & conditions
+            </span>
+          </div>
+
 
             <!-- Submit -->
             <router-link
               to="/welcome"
-              class="btn w-100 btn-submit"
+              class=" w-100 btn-submit"
               :class="{ disabled: !form.agree }"
               :aria-disabled="!form.agree"
             >
@@ -159,17 +167,7 @@
             Any misuse of information or violation of community standards may result in
             termination of your account.
           </p>
-          <div class="form-check gap-2">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="agreeTerms"
-              v-model="form.agree"
-            />
-            <label class="form-check-label small-text" for="agreeTerms">
-              I agree to the terms
-            </label>
-          </div>
+
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary btn-sm" @click="closePolicyModal">
@@ -182,6 +180,7 @@
 </template>
 
 <script lang="ts">
+import '../assets/main.css';
 export default {
   name: "SignupView",
   data() {
@@ -219,8 +218,8 @@ export default {
 };
 </script>
 
-<style scoped>
-/* --- Your Existing Styles --- */
+<!-- <style scoped>
+
 .btn-submit {
   border-radius: 30px;
   padding: 12px;
@@ -242,74 +241,4 @@ export default {
   cursor: not-allowed;
 }
 
-.login-link {
-  color: #005e86;
-  font-weight: 600;
-  text-decoration: none;
-  margin-left: 3px;
-}
-.login-link:hover {
-  text-decoration: underline;
-}
-
-/* ✅ Modal Styles (same as Mentorship Page) */
-.center-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-.center-modal {
-  width: 500px;
-  max-width: 95%;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.modal-header,
-.modal-footer {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-body {
-  padding: 15px;
-  font-size: 14px;
-  color: #444;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.small-text {
-  font-size: 13px;
-  color: #555;
-}
-</style>
+</style> -->

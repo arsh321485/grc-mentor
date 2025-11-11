@@ -213,12 +213,7 @@ export default {
 </script>
 
 <style scoped>
-.mentorship-page {
-  background: linear-gradient(135deg, #f7faff, #eef3fb);
-  min-height: 90vh;
-  font-family: "Inter", sans-serif;
 
-}
 
 /* .container-fluid {
   padding: 20px;
