@@ -1,7 +1,7 @@
 <template>
   <main class="mentorship-page">
     <div class="container-fluid">
-      <div class="row g-4">
+      <div class="row matter-row g-4">
         <!-- Stepper Left Column -->
         <div class="col-2 col-md-2">
           <Stepper :currentStep="5" />
@@ -20,10 +20,10 @@
 
           <!-- Two Cards Section -->
           <section>
-            <div class="row g-4 mb-4">
+            <div class="row matter-row g-4 mb-4">
               <!-- Left Card -->
-              <div class="col-md-6">
-                <section class=" glass-card">
+              <div class="col-md-6 matter-col-md-6">
+                <section class=" matter-glass-card">
                   <div class="d-flex flex-column">
                     <div class="reporting-header pt-4">
                       <h6 class="mb-1 pt-0"> I'm your reporting manager</h6>
@@ -42,7 +42,7 @@
                     <div class="status-box mt-5 mx-auto">
                       <div class="loading-icon" v-if="status === 'pending'">
                         <div class="blue-circle">
-                          <div class="dots">
+                          <div class="matter-dots">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -58,7 +58,7 @@
                         Status: {{ status === 'pending' ? 'Pending' : 'Successful' }}
                       </p>
 
-                      <p class="sub-text text-center">
+                      <p class="matter-sub-text text-center">
                         {{
                           status === "pending"
                             ? "You haven’t set up your email with Mattermost yet."
@@ -95,14 +95,14 @@
               </div>
 
               <!-- Right Card -->
-              <div class="col-md-6">
-                <section class="roles-card glass-card shadow-lg">
+              <div class="col-md-6 matter-col-md-6">
+                <section class="roles-card matter-glass-card shadow-lg">
                   <div class="reporting-header pt-4">
                     <h6 class="mb-1 pt-0"> I'm your reporting manager</h6>
                     <p class="text-muted mb-0">Let's set up your reporting time</p>
                   </div>
                   <hr />
-                  <hr class="divider" />
+                  <hr class="matter-divider" />
 
                   <!-- Step 1: Time Zone (AUTO-DETECT, no dropdown) -->
                   <h6 class="time-label"> Your location is:</h6>
@@ -254,7 +254,7 @@ export default {
       return null;
     },
 
-    // Detect timezone via browser
+    // Detect timezone via brow matter-rowser
     detectTimezone() {
       try {
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
@@ -285,21 +285,6 @@ export default {
 
 
 
-/* Card */
-.reporting-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 35px;
-  max-width: 650px;
-  width: 100%;
-  transition: all 0.3s ease-in-out;
-}
-
-.reporting-card:hover {
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  transform: translateY(-3px);
-}
 
 /* Header */
 .reporting-header {
@@ -317,8 +302,8 @@ export default {
   color: #6c757d;
 }
 
-/* Divider */
-.divider {
+/* matter-divider */
+.matter-divider {
   margin: -1px 0;
   border-top: 1px solid #e0e6ed;
 }
@@ -349,7 +334,7 @@ export default {
 .time-options {
   display: flex !important;       /* make sure flex is applied */
   flex-wrap: wrap;
-  gap: 12px !important;           /* space between buttons (modern browsers) */
+  gap: 12px !important;           /* space between buttons (modern brow matter-rowsers) */
   padding-left: 8px;              /* left padding so first button is not flush to edge */
   align-items: center;
 }
@@ -396,36 +381,22 @@ export default {
 }
 
 
-.btn-submit {
-  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  border: none;
-  border-radius: 22px;
-  padding: 10px 28px;
-  font-weight: 600;
-  font-size: 14px;
-  color: #fff;
-}
-.mentorship-page {
-  background: linear-gradient(135deg, #f7faff, #eef3fb);
-  min-height: 100vh;
-  /* padding: 30px; */
-  font-family: "Inter", sans-serif;
-}
 
-/* Row: make equal height cards */
-.row.g-4 {
+
+/* row matter-row: make equal height cards */
+.matter-row.g-4 {
   /* display: flex;
   align-items: stretch; */
       display: flex;
   align-items: stretch;
 }
 
-.col-md-6 {
+.matter-col-md-6 {
   display: flex;
 }
 
 /* Glass Cards */
-.glass-card {
+.matter-glass-card {
   flex: 1;
    min-height: 301px;
   background: rgba(255, 255, 255, 0.95);
@@ -437,53 +408,15 @@ export default {
   flex-direction: column;
 }
 
-/* Banner */
-.banner {
-  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
-  border-radius: 12px;
-  padding: 18px 25px;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
 
-.banner-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
-}
 
-.banner-sub {
-  font-size: 13px;
-  opacity: 0.9;
-  margin: 2px 0 0 0;
-}
-
-.banner-right {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.cvadd-head {
-  color: #000000;
-  font-weight: 500;
-}
-
-.sub-text {
+.matter-sub-text {
   color: #00000099;
   font-size: 14px;
   font-weight: 400;
 }
 
-.info-text {
-  font-size: 15px;
-  color: #000000;
-  line-height: 1.6;
-  max-width: 600px;
-  font-weight: 500;
-}
+
 
 .mattermost-text {
   font-size: 16px;
@@ -519,7 +452,7 @@ export default {
   align-items: center;
 }
 
-.dots {
+.matter-dots {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -531,7 +464,7 @@ export default {
   padding: 3px;
 }
 
-.dots span {
+.matter-dots span {
   width: 5px;
   height: 5px;
   background-color: white;
@@ -539,11 +472,11 @@ export default {
   animation: blink 1s infinite;
 }
 
-.dots span:nth-child(2) {
+.matter-dots span:nth-child(2) {
   animation-delay: 0.2s;
 }
 
-.dots span:nth-child(3) {
+.matter-dots span:nth-child(3) {
   animation-delay: 0.4s;
 }
 
@@ -573,32 +506,7 @@ export default {
   border-radius: 8px;
 }
 
-/* Next Button */
-.next-btn {
-  /* position: fixed;
-  bottom: 90px;
-  left: 30rem;
-  transform: translateX(-50%);
-  margin-top: 30rem;
-  padding: 12px 40px;
-  background-color: #007baf;
-  color: #ffffff;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 600;
-  transition: background 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000; */
- /* ensure previous positioning rules don't pull button elsewhere */
 
-  position: static !important;
-  transform: none !important;
-  left: auto !important;
-  bottom: auto !important;
-  margin-left: 0;
-}
 
 .next-btn:hover {
   background-color: #4a9dcf;
@@ -762,7 +670,7 @@ html, body, .mentorship-page {
   }
 }
 @media (min-width: 1367px) and (max-width: 1920px) {
-  .glass-card {
+  .matter-glass-card {
     padding: 30px;
   }
   .banner-title {

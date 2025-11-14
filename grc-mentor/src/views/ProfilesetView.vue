@@ -38,7 +38,7 @@
                     <i class="bi bi-file-earmark-arrow-up display-6 mb-2"></i>
                     <div class="h6 mb-1">Drag & drop your CV here</div>
                     <p class="text-muted small mb-3">or</p>
-                    <label class="btn btn-submit mb-2">
+                    <label class="btn profileset-btn-submit mb-2">
                       Choose File
                       <input
                         type="file"
@@ -126,7 +126,7 @@
 
                 <router-link :to="{ name: 'instruction' }">
                   <button
-                    class="btn btn-submit"
+                    class="btn profileset-btn-submit"
                     :disabled="!file || !!error || isUploading"
                   >
                     Save & Continue
@@ -212,14 +212,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 90vh;
+  font-family: "Inter", sans-serif;
+
+}
 
 
-/* .container-fluid {
-  padding: 20px;
-} */
 
-/* Banner */
+
 .banner {
   background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
   border-radius: 12px;
@@ -263,7 +266,7 @@ export default {
 }
 
 /* Buttons */
-.btn-submit {
+.profileset-btn-submit {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   border: none;
   border-radius: 22px;
@@ -272,7 +275,7 @@ export default {
   font-size: 14px;
   color: #fff;
 }
-.btn-submit:hover {
+.profileset-btn-submit:hover {
   background: linear-gradient(90deg, #2f80ed, #2d9cdb);
 }
 /* For screens wider than 1000px but less than 2000px */
@@ -332,7 +335,7 @@ export default {
 }
 
 /* Buttons */
-.btn-submit {
+.profileset-btn-submit {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   border: none;
   border-radius: 22px;
@@ -341,9 +344,9 @@ export default {
   font-size: 14px;
   color: #fff;
 }
-.btn-submit:hover {
+.profileset-btn-submit:hover {
   background: linear-gradient(90deg, #2f80ed, #2d9cdb);
 }
 }
 
-</style>
+</style> -->

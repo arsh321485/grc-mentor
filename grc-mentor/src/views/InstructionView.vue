@@ -64,7 +64,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .active-text {
   /* color: #0083BB; */
  /* color: linear-gradient(90deg, #2d9cdb, #2f80ed); */
@@ -123,4 +123,4 @@ export default {
     background-color: #0096D6;
     color: #FFFFFF;
 }
-</style>
+</style> -->

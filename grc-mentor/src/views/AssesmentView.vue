@@ -62,7 +62,7 @@
                     <!-- Question -->
                     <div class="mb-4">
                       <div class="d-flex align-items-start gap-2 mb-2">
-                        <span class="q-num">{{ currentIndex + 1 }}</span>
+                        <span class="">{{ currentIndex + 1 }}</span>
                         <h5 class="mb-0">{{ currentQuestion.text }}</h5>
                       </div>
 
@@ -330,7 +330,7 @@ export default {
 </script>
 
 
-<style scoped>
+<!-- <style scoped>
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
@@ -530,4 +530,4 @@ export default {
 }
 }
 
-</style>
+</style> -->

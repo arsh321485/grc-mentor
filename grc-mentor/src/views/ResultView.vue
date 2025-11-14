@@ -43,7 +43,7 @@
                             cx="60"
                             cy="60"
                             r="52"
-                            class="progress"
+                            class="result-progress"
                             :style="circleStyle"
                           />
                           <!-- Text -->
@@ -183,7 +183,7 @@ export default {
   },
 };
 </script>
-
+<!--
 <style scoped>
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
@@ -375,4 +375,4 @@ svg {
   border: none;
 }
 }
-</style>
+</style> -->

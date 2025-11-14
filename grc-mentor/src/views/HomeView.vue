@@ -69,40 +69,6 @@
 
 
     <!-- industries section -->
-
-    <!-- <section class="container my-5">
-      <div class="text-center mb-5">
-      
-        <h1 class="industry-h1">Industries you’ll work with:</h1>
-        <p class="industry-subtext">Industries you’ll work with:</p>
-      </div>
-      <div class="container">
-        <div class="row g-4">
-          <div v-for="(item, index) in industries" :key="index" class="col-12 col-md-6 col-lg-4">
-            <div class="flip-card">
-              <div class="flip-card-inner">
-               
-                <div class="flip-card-front d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
-                  :style="{ backgroundColor: item.color }">
-                  <i :class="item.icon + ' fs-1'" :style="{ color: item.iconColor }"></i>
-                  <h5 class="mt-3 fw-bold">{{ item.title }}</h5>
-                </div>
-
-              
-                <div class="flip-card-back">
-                  <img :src="item.image" class="img-fluid rounded-3" :alt="item.title" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-
-    </section> -->
-
-
     <section class="container my-5">
       <div class="text-center mb-5">
         <h1 class="industry-h1">Industries you’ll work with:</h1>
@@ -128,14 +94,6 @@
                     <h5 class="fw-bold text-white">{{ item.title }}</h5>
                   </div>
                 </div>
-
-                <!-- BACK (COLOR + ICON + TEXT) -->
-                <!-- <div class="flip-card-back d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
-                  :style="{ backgroundColor: item.color }">
-                  <i :class="item.icon + ' fs-1'" :style="{ color: item.iconColor }"></i>
-                  <p class="mt-3 fw-bold text-center">{{ item.paragraph }}</p>
-                </div> -->
-
 
                 <!-- BACK (IMAGE + ICON + TEXT) -->
                 <div
@@ -300,11 +258,6 @@
           </div>
 
         </div>
-
-
-
-
-
         <div class="col-lg-6 col-md-6 mb-4">
           <div class="home-core-benifts-widget">
             <img class="main-img" src="../assets/course-img.png" alt="">
@@ -367,11 +320,7 @@
         </div>
       </div>
     </div>
-
-
-
     <!-- Faq's  Section-->
-
     <section class=" faq-section" id="faq">
       <div class="container">
         <div class="row justify-content-center mx-0">
@@ -386,10 +335,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="faq-container">
-
               <div class="tab-content  mt-5 ">
-
-
                 <div class="tab-pane fade show active tabFaq2" id="tabFaq2">
                   <div class="row">
                     <div class="col-lg-12">
@@ -816,6 +762,10 @@ export default defineComponent({
         1024: { slidesPerView: 3, slidesPerGroup: 3 },
       },
     });
+    document.body.classList.add("scroll-enabled"); // enable scroll
+  },
+  unmounted() {
+    document.body.classList.remove("scroll-enabled"); // clean up when you leave
   },
   beforeUnmount() {
     if (this.swiper) {
@@ -829,7 +779,7 @@ export default defineComponent({
 
 
 
-<!-- 
+<!--
 <style scoped>
 
 .carousal-subtext{
@@ -887,11 +837,11 @@ export default defineComponent({
 
 
 .industry-overlay-text {
-  bottom: 15px; 
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
-  text-shadow: 0px 2px 6px rgba(0,0,0,0.6); 
+  text-shadow: 0px 2px 6px rgba(0,0,0,0.6);
 }
 
 
@@ -903,9 +853,9 @@ export default defineComponent({
   left: 10%;
   right: 10%;
   text-align: left;
- 
+
   transform: translateY(-10%);
-   max-width: 700px; 
+   max-width: 700px;
 }
 
 
@@ -916,10 +866,10 @@ export default defineComponent({
 
 .carousel-caption.custom-caption p {
   display: block;
-  white-space: normal; 
-  word-wrap: break-word; 
+  white-space: normal;
+  word-wrap: break-word;
   font-size: 1.1rem;
-  line-height: 1.6; 
+  line-height: 1.6;
   margin-top: 0.5rem;
   font-weight: 500
 }
@@ -946,8 +896,8 @@ export default defineComponent({
   .carousel-caption.custom-caption {
     top: 35%;
     text-align: center;
-     max-width: 95%; 
- 
+     max-width: 95%;
+
   }
     .carousel-caption.custom-caption p {
     font-size: 0.95rem;

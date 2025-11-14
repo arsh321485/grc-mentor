@@ -171,13 +171,12 @@
 
                 <!-- Right: Order summary + currency -->
                 <div class="col-lg-4">
-                  <div class="card border-0 shadow-sm position-sticky" style="top: 90px;">
+                  <div class="card border-0 shadow-sm position-sticky">
                     <div class="card-body p-4">
                       <div class="d-flex align-items-center justify-content-between mb-2">
                         <h6 class="mb-0">Order Summary</h6>
                         <div>
-                          <select v-model="currency" class="form-select form-select-sm" aria-label="currency"
-                            style="min-width:110px;">
+                          <select v-model="currency" class="form-select form-select-sm" aria-label="currency">
                             <option v-for="c in supportedCurrencies" :key="c" :value="c">{{ c }}</option>
                           </select>
                         </div>
@@ -459,7 +458,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
@@ -617,4 +616,4 @@ export default {
     background: #b3d7e6;
     cursor: not-allowed;
   }
-</style>
+</style> -->

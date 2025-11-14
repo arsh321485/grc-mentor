@@ -1,19 +1,19 @@
 <template>
-  <main class="page">
-    <div class="container">
-      <div class="row w-100 form-section mt-2">
+  <main class="signup-page">
+    <div class="container signup-container">
+      <div class="row w-100 form-section justify-content-center">
         <!-- Logo -->
-        <div class="mt-5 mb-0 text-center text-lg-start">
-          <img src="../assets/logo-img.png" alt="Logo" class="signin-logo" />
+         <div class="signup-logo mt-5 mb-0">
+          <img src="../assets/logo-img.png" alt="GRCMENTOR Logo" />
         </div>
 
         <!-- Left Side -->
-        <div class="col-lg-6 col-md-12 left">
-          <router-link to="/home" class="d-block mb-2 back-link">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-6 left">
+          <router-link to="/home" class="d-block mb-1 text-decoration-none login-link ">
             &larr; Back to homepage
           </router-link>
 
-          <h4 class="fw-semibold">Welcome back</h4>
+          <h4 class="signup-form-heading">Welcome back</h4>
           <p class="subtitle">
             Sign in to continue learning with the GRC Mentor.
           </p>
@@ -118,4 +118,5 @@ export default {
   },
 };
 </script>
+
 
