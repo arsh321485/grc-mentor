@@ -86,8 +86,8 @@ export default {
 /* ====== LAYOUT ====== */
 .career-page {
   background: #f9fafc;
-  min-height: 100vh;
-  font-family: "Inter", sans-serif;
+  /* min-height: 100vh;
+  font-family: "Inter", sans-serif; */
 }
 
 .sidebar-col {

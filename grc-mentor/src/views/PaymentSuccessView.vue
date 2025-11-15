@@ -23,7 +23,7 @@
             <div class="row">
               <div class="col-12">
                 <!-- Payment Success Card -->
-                <div class="card card-pay border-0 shadow-sm overflow-hidden mb-4">
+                <div class="card border-0 shadow-sm overflow-hidden mb-4">
                   <div
                     class="hero p-4 d-flex flex-column flex-md-row align-items-center gap-3"
                   >
@@ -70,7 +70,7 @@
                 </div>
 
                 <!-- Receipt Card -->
-                <div class="card card-pay border-0 shadow-sm mb-4">
+                <div class="card border-0 shadow-sm mb-4">
                   <div class="card-body p-4">
                     <div
                       class="d-flex justify-content-between align-items-start mb-3"
@@ -163,7 +163,21 @@
                   </div>
                 </div>
 
-
+                <!-- Support Buttons -->
+                <!-- <div class="d-flex gap-2 flex-column flex-md-row">
+                  <button
+                    class="btn btn-outline-secondary w-100"
+                    @click="contactSupport"
+                  >
+                    Contact Support
+                  </button>
+                  <button
+                    class="btn btn-light w-100"
+                    @click="viewInvoices"
+                  >
+                    View Invoices
+                  </button>
+                </div> -->
               </div>
             </div>
 
@@ -334,11 +348,55 @@ export default {
 };
 </script>
 
-<!-- <style scoped>
+<style scoped>
+.btn-submit {
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
 
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 100vh;
+  /* padding: 30px; */
+  font-family: "Inter", sans-serif;
+}
+
+/* Banner */
+.banner {
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+  margin: 2px 0 0 0;
+}
+
+.banner-right {
+  font-size: 15px;
+  font-weight: 600;
+}
 
 /* Cards */
-.card-pay {
+.card {
   border-radius: 12px;
   width: 100%; /* full width responsive */
   max-width: 100%;
@@ -402,9 +460,41 @@ export default {
   margin-right: 6px;
 }
 
+/* Confetti */
+.confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  pointer-events: none;
+}
 
+.confetti-piece {
+  position: absolute;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  opacity: 0.95;
+  transform-origin: center;
+  animation: confettiFall 1.8s cubic-bezier(0.16, 0.84, 0.49, 1) forwards;
+}
 
-
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(40vh) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(80vh) rotate(720deg);
+    opacity: 0;
+  }
+}
 
 @media (max-width: 767.98px) {
   .hero {
@@ -429,4 +519,4 @@ export default {
     margin-right: auto;
   }
 }
-</style> -->
+</style>

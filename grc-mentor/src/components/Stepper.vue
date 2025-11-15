@@ -1,5 +1,6 @@
 <template>
   <div class="stepper-container">
+
     <!-- Logo -->
     <div class="stepper-logo">
       <img src="../assets/logo-img.png" alt="Logo" />
@@ -7,16 +8,10 @@
 
     <!-- Steps -->
     <div class="steps">
-      <div
-        v-for="(step, index) in steps"
-        :key="index"
-        class="step"
-      >
+      <div class="step" v-for="(step, index) in steps" :key="index">
+
         <!-- Step Circle -->
-        <div
-          class="circle"
-          :class="{ active: currentStep === index + 1 }"
-        >
+        <div class="circle" :class="{ active: currentStep === index + 1 }">
           <span v-if="currentStep === index + 1">
             <i class="bi bi-check2"></i>
           </span>
@@ -28,10 +23,12 @@
           {{ step }}
         </p>
 
-        <!-- Line -->
-        <div v-if="index !== steps.length - 1" class="line"></div>
+        <!-- Connecting Line -->
+        <div class="line" v-if="index !== steps.length - 1"></div>
+
       </div>
     </div>
+
   </div>
 </template>
 
@@ -59,13 +56,34 @@ export default {
 </script>
 
 <style scoped>
-/* Stepper Wrapper */
+
+/* ----------------------------------------
+   📌 DEFAULT DESKTOP – Vertical Stepper
+---------------------------------------- */
+
 .stepper-container {
   background: #f6f6f8;
   width: 100%;
   max-width: 300px;
-  min-height: 100vh; /* Full height sidebar look */
   padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .stepper-container {
+    min-height: 100vh;
+  }
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,53 +91,44 @@ export default {
 
 /* Logo */
 .stepper-logo {
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 }
+
 .stepper-logo img {
-  height: 32px;
-  max-width: 100%;
+  height: 22px;
   object-fit: contain;
 }
 
-/* Steps */
-.steps {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-/* Circle */
+/* Step Circle */
 .circle {
-  height: 34px;
-  width: 34px;
+  height: 36px;
+  width: 36px;
   border-radius: 50%;
-  border: 2px solid #bbb;
+  border: 2px solid #ccc;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #00000099;
   background: #fff;
+  color: #777;
+  font-size: 14px;
+  transition: 0.25s ease;
 }
+
 .circle.active {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  color: #fff;
+  color: white;
   border: none;
 }
 
-/* Text */
-p {
-  font-size: 15px;
-  color: #00000099;
+/* Step Text */
+.step p {
   margin-top: 6px;
+  font-size: 15px;
+  color: #777;
+  text-align: center;
+  max-width: 160px;
 }
+
 .active-text {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   -webkit-background-clip: text;
@@ -127,44 +136,87 @@ p {
   font-weight: 600;
 }
 
-/* Line */
+/* Vertical Line */
 .line {
-  border-left: 2px dotted #bbb;
   height: 30px;
+  border-left: 2px dotted #ccc;
   margin: 4px 0;
 }
 
-/* Responsive */
+
+/* ----------------------------------------
+   📱 MOBILE & TABLET – Horizontal Stepper
+---------------------------------------- */
+
 @media (max-width: 768px) {
   .stepper-container {
     flex-direction: row;
-    min-height: auto;
     max-width: 100%;
-    justify-content: flex-start;
-    align-items: flex-start;
     padding: 15px;
     overflow-x: auto;
+    gap: 20px;
   }
+
   .stepper-logo {
-    margin: 0 20px 0 0;
+    margin: 0;
     flex-shrink: 0;
   }
+
   .steps {
     flex-direction: row;
+    align-items: flex-start;
+    gap: 25px;
   }
+
   .step {
-    flex: 1;
-    min-width: 80px;
+    min-width: 90px;
+    flex-direction: column;
+    align-items: center;
   }
+
+  /* Horizontal Line */
   .line {
     border-left: none;
-    border-top: 2px dotted #bbb;
+    border-top: 2px dotted #ccc;
     width: 40px;
     height: 2px;
-    margin: 16px auto;
+    margin: 10px auto 0;
   }
-  p {
+
+  /* Smaller fonts on small screens */
+  .step p {
     font-size: 12px;
+    max-width: 90px;
+  }
+
+  .circle {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+/* ----------------------------------------
+   📱 EXTRA SMALL DEVICES (below 480px)
+---------------------------------------- */
+
+@media (max-width: 480px) {
+
+  .step {
+    min-width: 75px;
+  }
+
+  .step p {
+    font-size: 11px;
+    max-width: 70px;
+  }
+
+  .circle {
+    height: 28px;
+    width: 28px;
+  }
+
+  .line {
+    width: 25px;
   }
 }
 </style>

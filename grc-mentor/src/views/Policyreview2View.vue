@@ -7,9 +7,9 @@
       </div>
 
       <!-- Main -->
-      <div class="col-10 col-md-10 main-col">
+      <div class="col-10 col-md-10">
         <!-- Banner -->
-        <div class="banner mb-4">
+        <div class="banner mb-4 ms-5">
           <div class="banner-left">
             <h6 class="banner-title"> Industry: Media</h6>
             <p class="banner-sub">Policy Review</p>
@@ -24,41 +24,37 @@
 
         <!-- Star Media Modal -->
         <!-- Right-Side About Company Modal -->
-<div v-if="showModal" class="right-modal-overlay">
-  <div class="right-modal">
-    <!-- Header -->
-    <div class="modal-header d-flex justify-content-between align-items-center">
-      <h5 class="fw-bold mb-0">Star Media</h5>
-      <button class="btn-close" @click="showModal = false">✕</button>
-    </div>
+        <div v-if="showModal" class="right-modal-overlay">
+          <div class="right-modal">
+            <!-- Header -->
+            <div class="modal-header d-flex justify-content-between align-items-center">
+              <h5 class="fw-bold mb-0">Star Media</h5>
+              <button class="btn-close" @click="showModal = false">✕</button>
+            </div>
 
-    <!-- Body -->
-    <div class="modal-body">
-      <div class="row">
-        <div
-          v-for="(item, i) in companyDetails"
-          :key="i"
-          class="col-12 col-md-6 col-lg-4 mb-3"
-        >
-          <p class="detail-label fw-semibold text-muted small mb-1">{{ item.label }}</p>
-          <p class="detail-value text-dark mb-0">{{ item.value }}</p>
+            <!-- Body -->
+            <div class="modal-body">
+              <div class="row">
+                <div v-for="(item, i) in companyDetails" :key="i" class="col-12 col-md-6 col-lg-4 mb-3">
+                  <p class="detail-label fw-semibold text-muted small mb-1">{{ item.label }}</p>
+                  <p class="detail-value text-dark mb-0">{{ item.value }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+              <button class="btn btn-secondary" @click="showModal = false">
+                Close
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="modal-footer">
-      <button class="btn btn-secondary" @click="showModal = false">
-        Close
-      </button>
-    </div>
-  </div>
-</div>
 
 
         <!-- Projects Section -->
-        <section class="projects-card glass-card mb-4 mt-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
+        <section class=" glass-card mb-4 mt-5 ms-5">
+          <div class="d-flex justify-content-between align-items-center mb-3 ">
             <h6 class="section-title mb-0">Projects</h6>
 
           </div>
@@ -81,10 +77,7 @@
                   </button>
 
                   <ul v-show="openDropdown === index" class="dropdown-menu show">
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bi bi-file-earmark-ruled p-1"></i> Method
-                      </a>
+                    <li> <i class="bi bi-file-earmark-ruled p-3"></i> Method
                     </li>
                     <li><a class="dropdown-item" href="#">Design and Development</a></li>
 
@@ -227,23 +220,24 @@ export default {
   left: 0;
   height: 100vh;
 
-/* About Company Button — clearly visible */
-.about-btn {
-  background: #ffffff;
-  color: #1d3557;
-  border-radius: 25px;
-  font-weight: 600;
-  padding: 8px 20px;
-  font-size: 14px;
-  border: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease-in-out;
-}
-.about-btn:hover {
-  background: #f1f1f1;
-  color: #0d47a1;
-  transform: scale(1.05);
-}
+  /* About Company Button — clearly visible */
+  .about-btn {
+    background: #ffffff;
+    color: #1d3557;
+    border-radius: 25px;
+    font-weight: 600;
+    padding: 8px 20px;
+    font-size: 14px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .about-btn:hover {
+    background: #f1f1f1;
+    color: #0d47a1;
+    transform: scale(1.05);
+  }
 }
 
 
@@ -260,6 +254,7 @@ export default {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;
 }
+
 .about-btn:hover {
   background: #f1f1f1;
   color: #0d47a1;
@@ -280,17 +275,18 @@ export default {
   backdrop-filter: blur(8px);
   border-radius: 14px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  padding: 22px;
+  padding: 19px;
 }
 
 /* Banner */
 .banner {
+  margin-top: 30px;
+  width: 95%;
   background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
   border-radius: 12px;
   padding: 18px 25px;
   color: #fff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
@@ -305,11 +301,6 @@ export default {
   font-size: 13px;
   opacity: 0.9;
   margin: 2px 0 0 0;
-}
-
-.banner-right {
-  font-size: 15px;
-  font-weight: 600;
 }
 
 /* Section Title */
@@ -406,6 +397,7 @@ export default {
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -416,6 +408,7 @@ export default {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -441,6 +434,7 @@ export default {
   color: #555;
   transition: color 0.2s;
 }
+
 .btn-close:hover {
   color: #000;
 }
@@ -456,21 +450,13 @@ export default {
   font-size: 14px;
 }
 
-/* Dropdown */
-/* .dropdown-menu {
+
+.dropdown-menu {
   position: absolute;
-  background: white;
-  border: 1px solid #ddd;
-  min-width: 200px;
-  border-radius: 6px;
-  padding: 5px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  display: none;
-} */
- .dropdown-menu {
-  position: absolute;
-  right: 0;          /* stick to right edge of button */
-  transform: translateX(-0%); /* shift a little left */
+  right: 0;
+  /* stick to right edge of button */
+  transform: translateX(-0%);
+  /* shift a little left */
   background: white;
   border: 1px solid #ddd;
   min-width: 200px;
@@ -581,4 +567,109 @@ export default {
   transform: scale(1.2);
   color: #e63946;
 }
+/* ==========================================================
+   📱 TABLET (768px – 1024px) RESPONSIVE FIX PACK
+   ========================================================== */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* Sidebar – take 25% of screen */
+  .sidebar-col {
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
+  }
+
+  /* Main content – 75% */
+  .col-10.col-md-10 {
+    flex: 0 0 75% !important;
+    max-width: 75% !important;
+  }
+
+  /* Fix all components with ms-5 that were overflowing */
+  .banner,
+  .glass-card,
+  .projects-card,
+  .top-banner,
+  .accordion,
+  section,
+  .industry-row {
+    margin-left: 20px !important;
+    width: calc(100% - 20px) !important;
+  }
+
+  /* Banner adjustments */
+  .banner {
+    padding: 14px 18px !important;
+    width: calc(100% - 20px) !important;
+  }
+
+  .banner-title {
+    font-size: 14px !important;
+  }
+
+  .banner-sub {
+    font-size: 12px !important;
+  }
+
+  /* About company button smaller */
+  .about-btn {
+    font-size: 12px !important;
+    padding: 6px 14px !important;
+  }
+
+  /* Accordion items fit inside tablet width */
+  .accordion-button {
+    font-size: 13px !important;
+    padding: 10px !important;
+  }
+
+  .accordion-body {
+    font-size: 13px !important;
+  }
+
+  /* Dropdown inside accordion */
+  .dropdown-menu {
+    min-width: 160px !important;
+    font-size: 13px !important;
+  }
+
+  /* Industry modal (right side panel) */
+  .right-modal {
+    width: 320px !important;
+  }
+
+  /* Company details text */
+  .detail-value {
+    font-size: 13px !important;
+  }
+
+  /* Glass card padding reduced */
+  .glass-card {
+    padding: 16px !important;
+  }
+
+  /* Projects title text */
+  .section-title {
+    font-size: 14px !important;
+  }
+
+  /* Subtitle adjustment */
+  .subtitle {
+    font-size: 12px !important;
+  }
+
+  /* Right-side DOC panel */
+  .doc-panel {
+    width: 60% !important;    /* instead of 50% → better for tablet */
+  }
+
+  .doc-panel.fullscreen {
+    width: 100% !important;
+  }
+
+  /* Buttons in doc panel */
+  .doc-btn {
+    font-size: 18px !important;
+  }
+}
+
 </style>

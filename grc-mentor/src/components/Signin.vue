@@ -1,94 +1,68 @@
 <template>
-  <main class="signup-page">
-    <div class="container signup-container">
-      <div class="row w-100 form-section justify-content-center">
-        <!-- Logo -->
-         <div class="signup-logo mt-5 mb-0">
-          <img src="../assets/logo-img.png" alt="GRCMENTOR Logo" />
-        </div>
+  <main class="signin-wrapper">
+    <div class="signin-card">
+      <div class="row g-0 align-items-center">
 
-        <!-- Left Side -->
-        <div class="col-12 col-sm-12 col-md-10 col-lg-6 left">
-          <router-link to="/home" class="d-block mb-1 text-decoration-none login-link ">
-            &larr; Back to homepage
+        <!-- LEFT SIDE -->
+        <div class="col-12 col-lg-6 px-5 ">
+
+          <!-- LOGO -->
+          <img src="../assets/logo-img.png" alt="Logo" class="signin-logo " />
+
+          <router-link to="/home" class="d-block  back-link text-decoration-none py-2">
+            ← Back to homepage
           </router-link>
 
-          <h4 class="signup-form-heading">Welcome back</h4>
-          <p class="subtitle">
-            Sign in to continue learning with the GRC Mentor.
-          </p>
+          <h6 class="my-2">Welcome back</h6>
+          <p class="subtitle">Sign in to continue learning with the GRC Mentor.</p>
 
-          <!-- Login Form -->
+          <!-- FORM -->
           <form @submit.prevent="handleLogin">
-            <div class="mb-2">
+            <div class="mb-1">
               <label class="form-label">Email</label>
-              <input
-                type="email"
-                v-model.trim="form.email"
-                class="form-control"
-                placeholder="Enter your email address"
-              />
+              <input type="email" v-model="form.email" class="form-control" placeholder="Enter your email" />
             </div>
-            <div class="mb-2">
+
+            <div class="mb-1">
               <label class="form-label">Password</label>
-              <input
-                type="password"
-                v-model="form.password"
-                class="form-control"
-                placeholder="Enter your password"
-              />
+              <input type="password" v-model="form.password" class="form-control" placeholder="Enter password" />
             </div>
 
-            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="rememberMe"
-                  v-model="form.remember"
-                />
-                <label class="form-check-label" for="rememberMe"
-                  >Remember me</label
-                >
+            <div class="d-flex justify-content-between align-items-center  flex-wrap">
+              <div class="d-flex align-items-center gap-1 py-2">
+                <input type="checkbox" v-model="form.remember" />
+                <label class="form-label">Remember me</label>
               </div>
-              <router-link to="/forgotpassword" class="forgot-link">
-                Forgot password?
-              </router-link>
+
+              <router-link to="/forgotpassword" class="forgot-link form-label">Forgot password?</router-link>
             </div>
 
-            <!-- Fake Recaptcha -->
-            <div class="fake-recaptcha mb-3">
+            <!-- CAPTCHA -->
+            <div class="captcha-box d-flex align-items-center justify-content-between mb-2">
               <div class="d-flex align-items-center gap-2">
-                <input type="checkbox" id="captcha-check" />
-                <label for="captcha-check">I'm not a robot</label>
+                <input type="checkbox" />
+                <label class="form-label">I'm not a robot</label>
               </div>
-              <img
-                src="https://www.gstatic.com/recaptcha/api2/logo_48.png"
-                alt="recaptcha"
-              />
+              <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" class="captcha-img" />
             </div>
 
-            <!-- Submit -->
-            <button type="submit" class=" w-100 btn-submit">
-              Sign in
-            </button>
+            <!-- SUBMIT -->
+            <button type="submit" class="btn-submit w-100 mb-2">Sign in</button>
 
-            <!-- No account -->
-            <p class="have-account">
+            <p class="form-label pb-2">
               Don’t have an account?
               <router-link to="/signup" class="login-link">Create one</router-link>
             </p>
           </form>
         </div>
 
-        <!-- Right Side (Image) -->
-        <div class="col-lg-6 right p-0 d-none d-lg-block">
-          <img
-            src="../assets/signup-img.png"
-            alt="Login Image"
-            class="img-fluid rounded-4 right-img"
-          />
+        <!-- RIGHT IMAGE -->
+        <div class="col-lg-6 d-none d-lg-flex right">
+          <div class="image-wrapper">
+            <img src="../assets/signup-img.png" class="right-img" alt="Signin Image" />
+          </div>
         </div>
+
       </div>
     </div>
   </main>
@@ -108,15 +82,85 @@ export default {
   },
   methods: {
     handleLogin() {
-      if (!this.form.email) return alert("Please enter your email.");
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.email);
-      if (!emailOk) return alert("Please enter a valid email.");
-      if (!this.form.password) return alert("Please enter your password.");
+      if (!this.form.email) return alert("Enter email");
+      if (!this.form.password) return alert("Enter password");
       alert("Logged in successfully!");
       this.$router.push("/welcome");
-    },
-  },
+    }
+  }
 };
 </script>
 
+<style scoped>
+.signin-logo{
+  height: 25px;
+}
 
+/* Same wrapper style as Signup */
+.signin-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  padding: 30px;
+}
+
+/* Same card style */
+.signin-card {
+  height: 610px;
+  max-width: 1100px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
+
+/* Typography & spacing same as Signup */
+.form-label { font-size: 14px; }
+.form-control { font-size: 14px; }
+
+.subtitle {
+  font-size: 13px;
+  color: #5a5a5a;
+  margin-bottom: 8px;
+}
+
+.btn-submit {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #0096d6;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+  border: none;
+}
+
+/* CAPTCHA */
+.captcha-box {
+  padding: 9px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.captcha-img { height: 22px; }
+
+/* RIGHT IMAGE SAME AS SIGNUP */
+.right { padding: 24px; }
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.right-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .right { display: none !important; }
+}
+
+</style>

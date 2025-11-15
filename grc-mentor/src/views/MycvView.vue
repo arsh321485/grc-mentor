@@ -5,43 +5,44 @@
                 <Sidebar class="sidebar" />
             </div>
             <div class="col-10 col-md-10">
-                <div class="container-fluid">
-                    <div class="row align-items-center mt-3">
+                <div class="container-fluid ">
+                   <div class="row align-items-center g-3 px-4">
 
-                        <!-- Profile -->
-                        <div class="col-4 d-flex align-items-center">
-                            <img src="../assets/avtar-profile-img.jpg" class="rounded-circle profile-img" alt="avatar" />
-                            <div class="ms-3">
-                                <h6 class="fw-bold mb-0">Amit Sharma</h6>
-                                <small class="text-muted">Product Designer</small>
-                            </div>
-                        </div>
+  <!-- Profile -->
+  <div class="col-12 col-md-5 d-flex align-items-center">
+    <img src="../assets/avtar-profile-img.jpg" class="rounded-circle profile-img" alt="avatar" />
+    <div class="ms-3">
+      <h6 class="fw-bold mb-0">Amit Sharma</h6>
+      <small class="text-muted">Product Designer</small>
+    </div>
+  </div>
 
-                        <!-- Badges -->
-                        <div class="col-4 d-flex align-items-center">
-                            <div class="text-center me-4">
-                                <img src="../assets/badges-img.png" alt="badges" class="badges-img" />
-                                <p class="text-muted small mb-0">50+ tasks completed</p>
-                            </div>
-                            <div class="text-center">
-                                <img src="../assets/badges-img.png" alt="badges" class="badges-img" />
-                                <p class="text-muted small mb-0">50+ tasks completed</p>
-                            </div>
-                        </div>
+  <!-- Badges -->
+  <div class="col-12 col-md-5 d-flex justify-content-md-center justify-content-start gap-4">
+    <div class="text-center">
+      <img src="../assets/badges-img.png" alt="" class="badges-img" />
+      <p class="text-muted small mb-0">50+ tasks completed</p>
+    </div>
+    <div class="text-center">
+      <img src="../assets/badges-img.png" alt="" class="badges-img" />
+      <p class="text-muted small mb-0">50+ tasks completed</p>
+    </div>
+  </div>
 
-                        <!-- Notification Bell -->
-                        <div class="col-2 d-flex justify-content-center ">
-                            <button class="btn  rounded-pill pe-4">Share</button>
-                            <div class="bell-wrapper">
-                                <i class="bi bi-bell"></i>
-                            </div>
-                        </div>
+  <!-- Buttons -->
+  <div class="col-12 col-md-2 d-flex justify-content-md-end justify-content-start align-items-center gap-3">
+    <button class="btn btn-primary rounded-pill px-4">Share</button>
+    <div class="bell-wrapper">
+      <i class="bi bi-bell"></i>
+    </div>
+  </div>
 
-                    </div>
+</div>
+
 
                     <!-- Area of Expertise -->
                     <div class="ms-5">
-                        <div class="mt-5">
+                        <div class="mt-3">
                             <h6 class="fw-bold">Area of expertise :</h6>
                             <div class="d-flex flex-wrap gap-2 mt-2">
                                 <span class="h6 me-4 ">• KSA PDPL</span>
@@ -50,9 +51,9 @@
                         </div>
 
                         <!-- Professional Experience -->
-                        <div class="mt-4">
+                        <div class="mt-2">
                             <h6 class="">Professional experience -</h6>
-                            <ul class="mt-2  small">
+                            <ul class="small">
                                 <li>
                                     Ashish has over 20 years of rich experience working in cross-functional areas,
                                     which include ISO 27001, ISO 27701, ISO 27017, ISO 22301, ISO 20000, ISO 9001, GDPR,
@@ -116,23 +117,14 @@ export default {
                 industry: "Media",
                 years: "2022-2023",
                 description: "Project leader for development of Data governance framework including compliance roadmap and UCL to comply to the requirements of the KSA PDPL, NDMO, ISO 27701 & GDPR for a large bank in KSA."
-            }, {
-                title: "Data Governance Framework:",
-                industry: "Media",
-                years: "2022-2023",
-                description: "Project leader for development of Data governance framework including compliance roadmap and UCL to comply to the requirements of the KSA PDPL, NDMO, ISO 27701 & GDPR for a large bank in KSA."
-            }, {
-                title: "Data Governance Framework:",
-                industry: "Media",
-                years: "2022-2023",
-                description: "Project leader for development of Data governance framework including compliance roadmap and UCL to comply to the requirements of the KSA PDPL, NDMO, ISO 27701 & GDPR for a large bank in KSA."
             },
             {
                 title: "Data Governance Framework:",
                 industry: "Media",
                 years: "2022-2023",
                 description: "Project leader for development of Data governance framework including compliance roadmap and UCL to comply to the requirements of the KSA PDPL, NDMO, ISO 27701 & GDPR for a large bank in KSA."
-            }
+            },
+
             ]
         };
     }
@@ -144,6 +136,12 @@ export default {
     color: #696767de;
 }
 
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
 /* Area of Expertise Badges */
 .expertise-badge {
     background-color: #007bff;
@@ -198,4 +196,38 @@ button {
     color: white;
 
 }
+/* Tablet Fix (768–1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .profile-img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .badges-img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .main-col {
+    margin-left: 0 !important;
+    padding-left: 20px !important;
+  }
+}
+
+/* Mobile Fix */
+@media (max-width: 767px) {
+  .profile-img {
+    width: 48px;
+    height: 48px;
+  }
+  .badges-img {
+    width: 48px;
+    height: 48px;
+  }
+  button {
+    width: 100%;
+  }
+}
+
 </style>

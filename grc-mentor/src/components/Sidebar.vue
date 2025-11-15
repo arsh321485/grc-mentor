@@ -268,8 +268,8 @@ export default {
   width: 260px;
   height: 100vh;
   background-color: #F6F6F8;
-  padding: 20px;
-  display: flex;
+  padding: 20px 20px 20px 20px;
+ /* padding-top: 20px; */
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);

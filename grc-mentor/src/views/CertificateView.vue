@@ -7,9 +7,9 @@
             </div>
 
             <!-- Main Content -->
-             <div class="col-10 col-md-10 main-col">
+             <div class="col-10 col-md-10">
         <!-- Banner -->
-        <div class="banner mb-5">
+        <div class="banner mb-5 ms-5">
           <div class="banner-left">
             <h6 class="banner-title">Your certificate</h6>
             <p class="banner-sub">
@@ -21,14 +21,14 @@
                 <!-- <p class="mb-4 ps-5 pt-3 content-title">Your certificate</p> -->
 
                 <!-- Certificate Preview -->
-                <div class="certificate-preview mb-3 text-center">
-                    <img :src="certificatePath" alt="Certificate" class="certificate-image shadow" />
+                <div class="mb-3">
+                    <img :src="certificatePath" alt="Certificate" class="ms-5 w-50" />
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="d-flex gap-3 justify-content-start ps-3">
+                <div class="d-flex gap-3 justify-content-start ps-3 ms-5">
                     <!-- Share on LinkedIn -->
-                    <button class="btn action-btn d-flex align-items-center" @click="shareOnLinkedIn">
+                    <button class="btn action-btn   d-flex align-items-center" @click="shareOnLinkedIn">
                         <i class="bi bi-box-arrow-up me-2"></i> Share on LinkedIn
                     </button>
 
@@ -109,10 +109,6 @@ export default {
   font-family: "Inter", sans-serif;
 }
 
-.sidebar-col {
-  padding-left: 0;
-  padding-right: 0;
-}
 .sidebar {
   position: fixed;
   top: 0;
@@ -120,14 +116,9 @@ export default {
   height: 100vh;
 }
 
-.main-col {
-  margin-left: 16.5%; /* push main content after fixed sidebar */
-  padding: 0 2rem;
-}
-
 .banner {
   margin-top: 30px;
-  width: 100%;
+  width: 95%;
   background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
   border-radius: 12px;
   padding: 18px 25px;
@@ -145,32 +136,6 @@ export default {
   font-size: 13px;
   opacity: 0.9;
   margin: 2px 0 0 0;
-}
-.content-title {
-    font-weight: 600;
-    font-size: 46px;
-}
-
-/* .certificate-container {
-    text-align: center;
-} */
-
-/* .certificate-preview {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.certificate-image {
-    width: 100%;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-} */
-
-.certificate-preview {
-  max-width: 100%;
-  margin: 0;              /* ✅ No centering */
-  text-align: left;       /* ✅ Align content to left */
-  padding-left: 12px;
 }
 
 .certificate-image {
@@ -193,15 +158,13 @@ export default {
     transition: all 0.3s ease;
 }
 .action-btn {
-    border-radius: 25px;
+    border-radius: 10px;
     border: 1px solid #0082B9;
     color: #0082B9;
     font-size: 15px;
 }
-.calender-icon{
-    color: #0082B9;
-    font-size: 15px;
-    font-weight: 500;
-}
+
+
+
 
 </style>

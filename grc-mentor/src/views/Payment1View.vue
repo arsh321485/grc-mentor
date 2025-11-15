@@ -10,7 +10,7 @@
           <!-- Right Main Column -->
           <div class="col-10 col-md-10 mt-5">
             <!-- Banner -->
-            <div class="banner mb-5">
+            <div class="banner mb-4">
               <div class="banner-left">
                 <h6 class="banner-title">Payment Setup</h6>
                 <p class="banner-sub"> GRC-101 mentorship program cost and payment details (international supported)</p>
@@ -23,8 +23,8 @@
               <div class="row g-4">
                 <!-- Left: payment form/details -->
                 <div class="col-lg-8">
-                  <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body p-4">
+                  <div class="card border-0 shadow-sm">
+                    <div class="card-body ">
                       <h5 class="mb-3">Choose payment method</h5>
 
                       <div class="mb-3">
@@ -42,19 +42,6 @@
                             <div class="fw-semibold">PayPal / Checkout</div>
                             <div class="small text-muted">Popular international wallets / PayPal</div>
                           </label>
-
-                          <!-- <label
-                      class="btn btn-outline-secondary text-start"
-                      :class="{ active: selected === 'upi' }"
-                      @click="selectMethod('upi')"
-                      :disabled="currency !== 'INR'"
-                      title="UPI available only for INR"
-                    >
-                      <input type="radio" name="pay" class="d-none" :checked="selected === 'upi'" />
-                      <div class="fw-semibold">UPI</div>
-                      <div class="small text-muted">(INR only)</div>
-                    </label> -->
-
                           <label class="btn btn-outline-secondary text-start"
                             :class="{ active: selected === 'netbanking' }" @click="selectMethod('netbanking')">
                             <input type="radio" name="pay" class="d-none" :checked="selected === 'netbanking'" />
@@ -171,12 +158,13 @@
 
                 <!-- Right: Order summary + currency -->
                 <div class="col-lg-4">
-                  <div class="card border-0 shadow-sm position-sticky">
+                  <div class="card border-0 shadow-sm position-sticky" style="top: 90px;">
                     <div class="card-body p-4">
-                      <div class="d-flex align-items-center justify-content-between mb-2">
-                        <h6 class="mb-0">Order Summary</h6>
+                      <div class="d-flex align-items-center justify-content-between ">
+                        <div class="mb-0 fs-5">Order Summary</div>
                         <div>
-                          <select v-model="currency" class="form-select form-select-sm" aria-label="currency">
+                          <select v-model="currency" class="form-select form-select-sm" aria-label="currency"
+                            style="min-width:110px;">
                             <option v-for="c in supportedCurrencies" :key="c" :value="c">{{ c }}</option>
                           </select>
                         </div>
@@ -229,7 +217,7 @@
                     </div>
                   </div>
 
-                  <!-- Mini FAQ -->
+                  <!-- Mini FAQ
                   <div class="card border-0 shadow-sm mt-4">
                     <div class="card-body p-4">
                       <h6 class="mb-3">Quick FAQ</h6>
@@ -240,7 +228,7 @@
                         <p class="mb-0"><strong>Notes:</strong> UPI works only with INR billing.</p>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -458,7 +446,7 @@ export default {
 };
 </script>
 
-<!-- <style scoped>
+<style scoped>
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
@@ -580,7 +568,7 @@ export default {
 .btn-submit {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   border: none;
-  border-radius: 22px;
+  border-radius: 10px;
   padding: 10px 28px;
   font-weight: 600;
   font-size: 14px;
@@ -603,7 +591,7 @@ export default {
   .btn-submit {
     background: linear-gradient(90deg, #2d9cdb, #2f80ed);
     border: none;
-    border-radius: 22px;
+    border-radius: 10px;
     padding: 10px 28px;
     font-weight: 600;
     font-size: 14px;
@@ -616,4 +604,4 @@ export default {
     background: #b3d7e6;
     cursor: not-allowed;
   }
-</style> -->
+</style>

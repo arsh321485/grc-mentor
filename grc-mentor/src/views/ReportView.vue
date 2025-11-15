@@ -3,64 +3,62 @@
     <div class="container-fluid">
       <div class="row g-0">
         <!-- Sidebar -->
-        <div class="col-2 col-md-2">
-          <Sidebar class="sidebar" />
-        </div>
+         <div class="col-2 col-md-2 sidebar-col">
+         <Sidebar class="sidebar" />
+      </div>
 
         <!-- Main Content -->
         <div class="col-10 col-md-10">
           <!-- Banner -->
-          <div class="banner">
-            <div class="banner-left">
+          <div class="banner ms-5">
+            <div class="">
               <h6 class="banner-title">Report</h6>
               <p class="banner-sub">Detailed summary of your learning progress</p>
             </div>
           </div>
 
           <!-- Full Height Section -->
-          <section class="mt-4 full-section">
-            <div class="row h-100">
+          <section class="mt-3 ps-5">
+            <div class="row">
               <!-- Left Column (Summary) -->
-              <div class="col-md-5 col-lg-5 h-100">
-                <div class="report-info full-box shadow-sm p-4 rounded-4 bg-white h-100">
-                  <h6 class="fw-semibold mb-3 section-title">
+              <div class="col-md-5 col-lg-5  ">
+                <div class="p-4 rounded-4 bg-white ">
+                  <h6 class="fw-bold ">
                     Here’s your learning summary based on performance and activities.
                   </h6>
 
-                  <ul class="list-unstyled mb-4">
-                    <li class="d-flex align-items-center mb-2">
-                      <span class="dot me-2"></span>
-                      Domain : <h6 class="ms-1">{{ currentModule.domainName }}</h6>
+                  <ul class="list-group text-size  mt-lg-3 ">
+                    <li class="d-flex align-items-center  ">
+                      <span class=" dot me-2"></span>
+                      Domain : <span class="text-size">{{ currentModule.domainName }}</span>
                     </li>
-                    <li class="d-flex align-items-center mb-2">
+                    <li class="d-flex align-items-center pt-1">
                       <span class="dot me-2 "></span>
                       Industry :
                       <select
                         v-model="selectedModule"
-                        class="form-select ms-2 px-5"
-                        style="width: auto; display: inline-block; font-size: 14px; padding: 4px 6px;"
-                      >
+                        class="ms-2 dropdown-list">
                         <option v-for="mod in modules" :key="mod" :value="mod">{{ mod }}</option>
                       </select>
                     </li>
-                    <li class="d-flex align-items-center mb-2">
+                    <li class="d-flex align-items-center pt-1 ">
                       <span class="dot me-2"></span>
-                      Task: <h6 class="ms-1">{{ currentModule.taskName }}</h6>
+                      Task: <span class=" ms-1 text-size">{{ currentModule.taskName }}</span>
                     </li>
-                    <li class="d-flex align-items-center mb-2">
+                    <li class="d-flex align-items-center pt-1">
                       <span class="dot me-2"></span>
-                      Sub-task: <h6 class="ms-1">{{ currentModule.subTask }}</h6>
+                      Sub-task: <h6 class="ms-1 text-size">{{ currentModule.subTask }}</h6>
                     </li>
-                    <li class="d-flex align-items-center mb-2">
+                    <li class="d-flex align-items-center pt-1">
                       <span class="dot me-2"></span>
-                      Skill Developed: <h6 class="ms-1">{{ currentModule.skill }}</h6>
+                      Skill Developed: <h6 class="ms-1 text-size">{{ currentModule.skill }}</h6>
                     </li>
                   </ul>
 
                   <!-- Progress Circle -->
-                  <div class="col-md-5 text-center mx-auto mb-4">
-                    <div class=" p-4 rounded-4">
-                      <div class="score-ring mx-auto mb-3">
+                  <div class="col-md-5 text-center mx-auto pt-3 pb-3">
+                    <div class="rounded-4">
+                      <div class="score-ring mb-3">
                         <svg viewBox="0 0 120 120" class="d-block">
                           <defs>
                             <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -78,15 +76,15 @@
                             class="progress"
                             :style="circleStyle"
                           />
-                          <text x="60" y="64" text-anchor="middle" class="score-text">
+                          <text x="60" y="64" text-anchor="middle" class="score-text ">
                             {{ currentModule.progress }}%
                           </text>
                         </svg>
                       </div>
-                      <div class="h6 mb-1">
+                      <div class="h6 mb-1 text-size ">
                         {{ selectedModule === 'Overall' ? 'Overall Progress' : 'Module Progress' }}
                       </div>
-                      <div class="small text-muted">
+                      <div class="text-size text-muted">
                         You’ve completed {{ currentModule.progress }}% of your learning journey
                       </div>
                     </div>
@@ -94,20 +92,20 @@
 
                   <div class="alert alert-info border-0 rounded-3 shadow-sm mt-auto">
                     <h6>📘 Feedback Summary:</h6>
-                    <p class="mb-0 mt-1">{{ currentModule.recommendation }}</p>
+                    <p class="mb-0  text-size">{{ currentModule.recommendation }}</p>
                   </div>
                 </div>
               </div>
 
               <!-- Right Column (Tabs + Table) -->
-              <div class="col-md-7 col-lg-7 h-100">
-                <div class="tabs-container full-box shadow-sm p-4 rounded-4 bg-white h-100">
+              <div class="col-md-7 col-lg-7 ">
+                <div class="tab-content p-3 rounded-4 bg-white ">
                   <!-- Material Tabs -->
-                  <div class="tabs">
+                  <div class="tabs ">
                     <button
                       v-for="(tab, index) in tabs"
                       :key="index"
-                      :class="['tab-btn', { active: activeTab === tab }]"
+                      :class="['tab-btn ', { active: activeTab === tab }]"
                       @click="activeTab = tab"
                     >
                       {{ tab }}
@@ -115,29 +113,29 @@
                   </div>
 
                   <!-- Tab Content -->
-                  <div class="tab-content mt-4 p-3 rounded-4 bg-white table-wrapper">
+                  <div class="tab-content mt-4">
                     <div v-if="activeTab">
-                      <h5 class="mb-3 fw-semibold">Domain: Access Control</h5>
-                      <div class="table-responsive table-container">
-                        <table class="table table-bordered align-middle">
-                          <thead class="table-light">
+                      <h6 class="mt-5  ms-3 fw-bold">Domain: Access Control</h6>
+                      <div class="tab-content p-3 rounded-4 bg-white h-100">
+                        <table class="table table-bordered align-middle ">
+                          <thead class="table-light ">
                             <tr>
-                              <th>Category</th>
-                              <th>Control Number</th>
-                              <th>Control Name</th>
-                              <th>Purpose</th>
-                              <th>Task</th>
-                                <th>Score</th> <!-- New Column Added -->
+                              <th class="text-size">Category</th>
+                              <th class="text-size">Control Number</th>
+                              <th class="text-size">Control Name</th>
+                              <th class="text-size">Purpose</th>
+                              <th class="text-size">Task</th>
+                              <th class="text-size">Score</th> <!-- New Column Added -->
                             </tr>
                           </thead>
                           <tbody>
                             <tr v-for="(item, index) in tableData[activeTab]" :key="index">
-                              <td>{{ item.category }}</td>
-                              <td>{{ item.controlNumber }}</td>
-                              <td>{{ item.controlName }}</td>
-                              <td>{{ item.purpose }}</td>
-                              <td>{{ item.task }}</td>
-                               <td><strong>{{ item.score }}/10</strong></td>
+                              <td class="text-size-table">{{ item.category }}</td>
+                              <td class="text-size-table">{{ item.controlNumber }}</td>
+                              <td class="text-size-table">{{ item.controlName }}</td>
+                              <td class="text-size-table">{{ item.purpose }}</td>
+                              <td class="text-size-table">{{ item.task }}</td>
+                               <td  class="text-size-table"><strong>{{ item.score }}/10</strong></td>
                             </tr>
                           </tbody>
                         </table>
@@ -226,6 +224,8 @@ export default {
              score: 9,
           },
         ],
+
+
         "ISO 27002": [
           {
             category: "Technical",
@@ -319,7 +319,34 @@ export default {
 </script>
 
 <style scoped>
-/* General Layout */
+.full-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.full-section {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 130px);
+}
+.report-card{
+  background-color:  #ffffff;
+  height: 420px;
+}
+.dropdown-list{
+  border-radius: 5px;
+  border:1px solid gainsboro;
+  width: auto;
+ display: inline-block;
+ font-size: small;
+  padding: 4px 4px;
+}
+.text-size{
+font-size: 14px;
+}
+.text-size-table{
+font-size: 13px;
+}
 
 /* Progress Circle */
 .score-card {
@@ -328,8 +355,8 @@ export default {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
 .score-ring {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 120px;
 }
 svg {
   width: 100%;
@@ -361,13 +388,19 @@ svg {
   font-family: "Inter", sans-serif;
 }
 .sidebar-col {
-  padding: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
-
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
 /* Banner */
 .banner {
   margin-top: 30px;
-  width: 99%;
+  width: 95%;
   background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
   border-radius: 12px;
   padding: 18px 25px;
@@ -386,24 +419,8 @@ svg {
   opacity: 0.9;
   margin: 2px 0 0 0;
 }
-/* Full Section */
-.full-section {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 130px);
-}
-.full-box {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
 
-/* Dots + Text */
-.section-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #0d1b2a;
-}
+
 .dot {
   width: 8px;
   height: 8px;
@@ -419,11 +436,7 @@ svg {
 }
 
 /* Tabs */
-.tabs-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+
 .tabs {
   display: flex;
   border-bottom: 1px solid #ddd;
@@ -445,7 +458,7 @@ svg {
   color: #2f80ed;
 }
 .tab-btn.active::after {
-  content: "";
+
   position: absolute;
   bottom: 0;
   left: 0;
@@ -458,17 +471,13 @@ svg {
   color: #2f80ed;
 }
 
-/* Table Styling */
-.table-wrapper {
-  flex-grow: 1;
-  overflow-y: auto;
-  max-height: 70vh;
-}
+
 .table {
   font-size: 15px;
   background: white;
   border-radius: 10px;
   overflow: hidden;
+
 }
 .table th {
   background: #f3f7fc;
@@ -490,11 +499,112 @@ svg {
 
 /* Responsive */
 @media (max-width: 992px) {
-  .full-section {
+  /* .full-section {
     height: auto;
-  }
+  } */
   .table {
     font-size: 13px;
   }
+
 }
+/* 🌟 TABLET FIX (768px – 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* --- SIDEBAR FIX --- */
+  .sidebar-col {
+    flex: 0 0 26% !important;
+    max-width: 26% !important;
+  }
+
+  .col-10.col-md-10 {
+    flex: 0 0 74% !important;
+    max-width: 74% !important;
+  }
+
+  /* --- BANNER FIX --- */
+  .banner {
+    width: 90% !important;
+    margin-left: 20px !important;
+    padding: 14px 20px !important;
+  }
+
+  .banner-title {
+    font-size: 16px !important;
+  }
+
+  .banner-sub {
+    font-size: 12px !important;
+  }
+
+  /* --- SECTION SPACING --- */
+  section.ps-5 {
+    padding-left: 20px !important;
+  }
+
+  /* --- LEFT SUMMARY BOX --- */
+  .col-md-5,
+  .col-lg-5 {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+
+  .p-4 {
+    padding: 18px !important;
+  }
+
+  .text-size {
+    font-size: 13px !important;
+  }
+
+  .text-size-table {
+    font-size: 12px !important;
+  }
+
+  /* Progress circle resizing */
+  .score-ring {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .score-text {
+    font-size: 22px !important;
+  }
+
+  /* --- RIGHT TABLE / TAB SECTION --- */
+  .col-md-7,
+  .col-lg-7 {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+
+  .tab-btn {
+    font-size: 14px !important;
+  }
+
+  /* Fit table inside tablet width */
+  .table {
+    font-size: 12px !important;
+    overflow-x: auto !important;
+    display: block !important;
+  }
+
+  th,
+  td {
+    padding: 10px 6px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Parent container scroll */
+  .tab-content {
+    overflow-x: auto !important;
+  }
+
+  /* Spacing for top text */
+  h6.mt-5.ms-3.fw-bold {
+    margin-top: 20px !important;
+    margin-left: 0 !important;
+    font-size: 15px !important;
+  }
+}
+
 </style>

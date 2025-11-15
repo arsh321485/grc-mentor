@@ -1,163 +1,158 @@
-<!-- <template>
-  <main class="calendar-static-page">
-    <div class="container row g-0">
 
-    </div>
-  </main>
-</template> -->
 <template>
   <main class="mentorship-page">
     <div class="container-fluid row g-0">
       <!-- Sidebar -->
       <div class="col-2 col-md-2 sidebar-col">
-           <Sidebar class="sidebar" />
+        <Sidebar class="sidebar" />
       </div>
 
       <!-- Main -->
-      <div class="col-10 col-md-10 main-col">
+      <div class="col-10 col-md-10">
         <!-- Banner -->
-        <div class="banner mb-5">
+        <div class="banner mb-5 ms-5">
           <div class="banner-left">
             <h6 class="banner-title">Calendar</h6>
             <p class="banner-sub">
-           Your Calendar
+              Your Calendar
             </p>
           </div>
         </div>
 
-     <!-- Section -->
+        <!-- Section -->
         <section>
-          <div class="">
+          <div class=" ms-5 p-2">
 
-        <!-- Toolbar top row: Prev / Today / Next / Header -->
-        <div class="toolbar">
-          <div class="left">
-            <button class="icon-btn" @click="goPrev" aria-label="Previous">‹</button>
-            <button class="today-btn" @click="goToday">Today</button>
-            <button class="icon-btn" @click="goNext" aria-label="Next">›</button>
-            <div class="header-label">{{ headerLabel }}</div>
-          </div>
+            <!-- Toolbar top row: Prev / Today / Next / Header -->
+            <div class="toolbar">
+              <div class="left">
+                <button class="icon-btn" @click="goPrev" aria-label="Previous">‹</button>
+                <button class="today-btn" @click="goToday">Today</button>
+                <button class="icon-btn" @click="goNext" aria-label="Next">›</button>
+                <div class="header-label">{{ headerLabel }}</div>
+              </div>
 
-          <!-- right area: main action buttons -->
-          <div class="right">
-            <!-- view button group (new) -->
-            <div class="view-buttons" role="tablist" aria-label="Calendar views">
-              <button
-                :class="['vb', view === 'day' ? 'active' : '']"
-                @click="setView('day')"
-                title="Day"
-                role="tab"
-                :aria-selected="view === 'day'"
-              >
-                <svg class="vb-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="7" y="8" width="3" height="3" fill="currentColor"/></svg>
-                <span class="vb-label">Day</span>
-              </button>
+              <!-- right area: main action buttons -->
+              <div class="right">
+                <!-- view button group (new) -->
+                <div class="view-buttons" role="tablist" aria-label="Calendar views">
+                  <button :class="['vb', view === 'day' ? 'active' : '']" @click="setView('day')" title="Day" role="tab"
+                    :aria-selected="view === 'day'">
+                    <svg class="vb-icon" viewBox="0 0 24 24">
+                      <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor"
+                        stroke-width="1.6" />
+                      <rect x="7" y="8" width="3" height="3" fill="currentColor" />
+                    </svg>
+                    <span class="vb-label">Day</span>
+                  </button>
 
-              <button
-                :class="['vb', view === 'workWeek' ? 'active' : '']"
-                @click="setView('workWeek')"
-                title="Work week"
-                role="tab"
-                :aria-selected="view === 'workWeek'"
-              >
-                <svg class="vb-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="6" y="8" width="3" height="3" fill="currentColor"/><rect x="11" y="8" width="3" height="3" fill="currentColor"/><rect x="16" y="8" width="3" height="3" fill="currentColor"/></svg>
-                <span class="vb-label">Work Week</span>
-              </button>
+                  <button :class="['vb', view === 'workWeek' ? 'active' : '']" @click="setView('workWeek')"
+                    title="Work week" role="tab" :aria-selected="view === 'workWeek'">
+                    <svg class="vb-icon" viewBox="0 0 24 24">
+                      <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor"
+                        stroke-width="1.6" />
+                      <rect x="6" y="8" width="3" height="3" fill="currentColor" />
+                      <rect x="11" y="8" width="3" height="3" fill="currentColor" />
+                      <rect x="16" y="8" width="3" height="3" fill="currentColor" />
+                    </svg>
+                    <span class="vb-label">Work Week</span>
+                  </button>
 
-              <button
-                :class="['vb', view === 'week' ? 'active' : '']"
-                @click="setView('week')"
-                title="Week"
-                role="tab"
-                :aria-selected="view === 'week'"
-              >
-                <svg class="vb-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="6" y="8" width="3" height="3" fill="currentColor"/><rect x="11" y="8" width="3" height="3" fill="currentColor"/><rect x="16" y="8" width="3" height="3" fill="currentColor"/></svg>
-                <span class="vb-label">Week</span>
-              </button>
+                  <button :class="['vb', view === 'week' ? 'active' : '']" @click="setView('week')" title="Week"
+                    role="tab" :aria-selected="view === 'week'">
+                    <svg class="vb-icon" viewBox="0 0 24 24">
+                      <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor"
+                        stroke-width="1.6" />
+                      <rect x="6" y="8" width="3" height="3" fill="currentColor" />
+                      <rect x="11" y="8" width="3" height="3" fill="currentColor" />
+                      <rect x="16" y="8" width="3" height="3" fill="currentColor" />
+                    </svg>
+                    <span class="vb-label">Week</span>
+                  </button>
 
-              <button
-                :class="['vb', view === 'month' ? 'active' : '']"
-                @click="setView('month')"
-                title="Month"
-                role="tab"
-                :aria-selected="view === 'month'"
-              >
-                <svg class="vb-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="7" y="7" width="3" height="3" fill="currentColor"/><rect x="14" y="7" width="3" height="3" fill="currentColor"/></svg>
-                <span class="vb-label">Month</span>
-              </button>
-            </div>
-
-            <!-- legacy dropdown + New button (kept for convenience) -->
-            <div class="view-dropdown">
-              <button class="view-btn" @click="toggleViewMenu">
-                <span>{{ viewLabel }}</span>
-                <svg width="12" height="12" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#333" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <ul v-if="viewMenuOpen" class="view-list">
-                <li v-for="opt in viewOptions" :key="opt.key" @click="setView(opt.key)">{{ opt.label }}</li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- calendar area -->
-        <div class="calendar-area">
-          <!-- time grid (day/workWeek/week) -->
-          <div v-if="isTimeGrid" class="time-grid" :style="{ '--hour-height': hourPx + 'px' }">
-            <div class="time-axis">
-              <div v-for="h in 24" :key="'label-'+h" class="time-label">{{ (h<10? '0'+h : h) }}:00</div>
-            </div>
-
-            <div class="columns">
-              <div v-for="(d, idx) in visibleDays" :key="'col-'+idx" class="day-column">
-                <div class="day-header">
-                  <div class="day-number">{{ d.getDate() }}</div>
-                  <div class="day-week">{{ weekdayShort(d) }}</div>
+                  <button :class="['vb', view === 'month' ? 'active' : '']" @click="setView('month')" title="Month"
+                    role="tab" :aria-selected="view === 'month'">
+                    <svg class="vb-icon" viewBox="0 0 24 24">
+                      <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor"
+                        stroke-width="1.6" />
+                      <rect x="7" y="7" width="3" height="3" fill="currentColor" />
+                      <rect x="14" y="7" width="3" height="3" fill="currentColor" />
+                    </svg>
+                    <span class="vb-label">Month</span>
+                  </button>
                 </div>
 
-                <div class="grid-lines">
-                  <div v-for="h in 24" :key="'line-'+h" class="grid-line"></div>
+                <!-- legacy dropdown + New button (kept for convenience) -->
+                <div class="view-dropdown">
+                  <button class="view-btn" @click="toggleViewMenu">
+                    <span class="">{{ viewLabel }}</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24">
+                      <path d="M6 9l6 6 6-6" stroke="#333" stroke-width="1.6" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg>
+                  </button>
+                  <ul v-if="viewMenuOpen" class="view-list">
+                    <li v-for="opt in viewOptions" :key="opt.key" @click="setView(opt.key)">{{ opt.label }}</li>
+                  </ul>
                 </div>
 
-                <div class="events">
-                  <div
-                    v-for="ev in eventsForDay(d)"
-                    :key="ev.id"
-                    class="event-card"
-                    :style="styleForEvent(ev, d)"
-                    @click="openEvent(ev)"
-                  >
-                    <div class="ev-title">{{ ev.title }}</div>
-                    <div class="ev-time">{{ formatTime(ev.start) }} - {{ formatTime(ev.end) }}</div>
-                  </div>
-                </div>
               </div>
             </div>
-          </div>
 
-          <!-- month grid -->
-          <div v-else class="month-grid">
-            <div class="month-header">
-              <div v-for="wd in ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']" :key="wd" class="month-weekday">{{ wd }}</div>
-            </div>
+            <!-- calendar area -->
+            <div class="calendar-area">
+              <!-- time grid (day/workWeek/week) -->
+              <div v-if="isTimeGrid" class="time-grid" :style="{ '--hour-height': hourPx + 'px' }">
+                <div class="time-axis">
+                  <div v-for="h in 24" :key="'label-' + h" class="time-label">{{ (h < 10 ? '0' + h : h) }}:00</div>
+                  </div>
 
-            <div class="month-body">
-              <div v-for="(cell, cidx) in monthCells" :key="cidx" :class="['month-cell', { 'other-month': cell.other }]">
-                <div class="cell-top">
-                  <span class="cell-daynum">{{ cell.date.getDate() }}</span>
-                </div>
-                <div class="cell-events">
-                  <div v-for="ev in eventsForMonthCell(cell.date)" :key="ev.id" class="cell-ev">
-                    <span class="dot"></span>
-                    <span class="cell-ev-title">{{ ev.title }}</span>
+                  <div class="columns">
+                    <div v-for="(d, idx) in visibleDays" :key="'col-' + idx" class="day-column">
+                      <div class="day-header">
+                        <div class="day-number">{{ d.getDate() }}</div>
+                        <div class="day-week">{{ weekdayShort(d) }}</div>
+                      </div>
+
+                      <div class="grid-lines">
+                        <div v-for="h in 24" :key="'line-' + h" class="grid-line"></div>
+                      </div>
+
+                      <div class="events">
+                        <div v-for="ev in eventsForDay(d)" :key="ev.id" class="event-card" :style="styleForEvent(ev, d)"
+                          @click="openEvent(ev)">
+                          <div class="ev-title">{{ ev.title }}</div>
+                          <div class="ev-time">{{ formatTime(ev.start) }} - {{ formatTime(ev.end) }}</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+
+                <!-- month grid -->
+                <div v-else class="month-grid">
+                  <div class="month-header">
+                    <div v-for="wd in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']" :key="wd" class="month-weekday">{{ wd
+                      }}</div>
+                  </div>
+
+                  <div class="month-body">
+                    <div v-for="(cell, cidx) in monthCells" :key="cidx"
+                      :class="['month-cell', { 'other-month': cell.other }]">
+                      <div class="cell-top">
+                        <span class="cell-daynum">{{ cell.date.getDate() }}</span>
+                      </div>
+                      <div class="cell-events">
+                        <div v-for="ev in eventsForMonthCell(cell.date)" :key="ev.id" class="cell-ev">
+                          <span class="dot"></span>
+                          <span class="cell-ev-title">{{ ev.title }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- calendar-area -->
             </div>
-          </div>
-        </div> <!-- calendar-area -->
-      </div>
 
         </section>
       </div>
@@ -202,7 +197,7 @@ export default {
     function generateSampleEvents(): Ev[] {
       const now = new Date();
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const mk = (dayOffset:number, hhmm:string, durMin = 30, title="Event") => {
+      const mk = (dayOffset: number, hhmm: string, durMin = 30, title = "Event") => {
         const d = new Date(today);
         d.setDate(today.getDate() + dayOffset);
         const [hh, mm] = hhmm.split(":").map((n) => parseInt(n, 10));
@@ -334,8 +329,8 @@ export default {
       return { top: topPx + "px", height: heightPx + "px" };
     }
     function openEvent(ev: Ev) { alert(`Event:\n${ev.title}\n${new Date(ev.start).toLocaleString()} - ${new Date(ev.end).toLocaleString()}`); }
-    function formatTime(iso:string) { const d = new Date(iso); return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
-    function weekdayShort(d:Date) { return d.toLocaleString("en-US", { weekday: "short" }); }
+    function formatTime(iso: string) { const d = new Date(iso); return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`; }
+    function weekdayShort(d: Date) { return d.toLocaleString("en-US", { weekday: "short" }); }
 
     return {
       view, viewMenuOpen, viewOptions, viewLabel, toggleViewMenu, setView,
@@ -350,7 +345,6 @@ export default {
 </script>
 
 <style scoped>
-
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
@@ -361,6 +355,7 @@ export default {
   padding-left: 0;
   padding-right: 0;
 }
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -368,15 +363,11 @@ export default {
   height: 100vh;
 }
 
-.main-col {
-  margin-left: 16.5%; /* push main content after fixed sidebar */
-  padding: 0 2rem;
-}
+
 
 .banner {
-
-  margin-top: 30px;
-  width: 100%;
+   margin-top: 30px;
+  width: 95%;
   background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
   border-radius: 12px;
   padding: 18px 25px;
@@ -393,82 +384,526 @@ export default {
 .banner-sub {
   font-size: 13px;
   opacity: 0.9;
-  margin: 2px 0 0 0;
+    margin: 2px 0 0 0;
 }
+
 /* Top-level layout */
-.calendar-static-page { background: #f7faff; min-height:100vh; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-.container { padding: 22px 48px; }
+.calendar-static-page {
+  background: #f7faff;
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.container {
+  padding: 22px 48px;
+}
 
 /* Banner */
-.banner { background: linear-gradient(90deg,#2d9cdb,#56ccf2,#2f80ed); color:#fff; border-radius:10px; padding:14px 18px; box-shadow:0 6px 18px rgba(0,0,0,.06); margin-bottom:14px; }
-.banner h6 { margin:0; font-size:16px; font-weight:600; }
-.banner p { margin:3px 0 0; font-size:13px; opacity:0.95; }
+
+.banner h6 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.banner p {
+  margin: 3px 0 0;
+  font-size: 13px;
+  opacity: 0.95;
+}
 
 /* Toolbar */
-.toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; margin: 10px 0 18px; }
-.toolbar .left { display:flex; align-items:center; gap:8px; }
-.icon-btn, .today-btn, .view-btn, .new-btn { border-radius:8px; border:1px solid #e6e6e6; background:#fff; padding:8px 12px; cursor:pointer; font-weight:600; }
-.icon-btn { padding:8px 10px; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; }
-.header-label { margin-left:10px; font-weight:700; color:#333; }
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 18px;
+}
+
+.toolbar .left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn,
+.today-btn,
+.view-btn,
+.new-btn {
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.icon-btn {
+  padding: 8px 10px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-label {
+  margin-left: 10px;
+  font-weight: 700;
+  color: #333;
+}
 
 /* Right toolbar */
-.toolbar .right { display:flex; align-items:center; gap:10px; position:relative; }
+.toolbar .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
 
 /* View buttons row (new) */
-.view-buttons { display:flex; gap:8px; align-items:center; }
-.vb { display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid #e8e8e8; border-radius:8px; background:#fff; cursor:pointer; color:#333; font-weight:600; }
-.vb .vb-icon { width:18px; height:18px; color:#333; }
-.vb .vb-label { font-size:13px; }
-.vb:hover { background:#f6f9ff; color:var(--accent); }
-.vb.active { background:#fff; border:1px solid #cfdfff; box-shadow: 0 2px 6px rgba(51,103,214,0.08); color:#173a8a; }
+.view-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.vb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  color: #333;
+  font-weight: 400;
+}
+
+.vb .vb-icon {
+  width: 18px;
+  height: 18px;
+  color: #333;
+}
+
+.vb .vb-label {
+  font-size: 13px;
+}
+
+.vb:hover {
+  background: #f6f9ff;
+  color: var(--accent);
+}
+
+.vb.active {
+  background: #fff;
+  border: 1px solid #cfdfff;
+  box-shadow: 0 2px 6px rgba(51, 103, 214, 0.08);
+  color: #173a8a;
+}
 
 /* legacy dropdown */
-.view-dropdown { position:relative; }
-.view-list { position:absolute; right:0; top:calc(100% + 8px); background:#fff; border:1px solid #ececec; box-shadow:0 8px 18px rgba(0,0,0,0.06); border-radius:8px; padding:6px 0; list-style:none; z-index:20; min-width:140px; }
-.view-list li { padding:8px 12px; cursor:pointer; }
-.view-list li:hover { background:#f3f7ff; color:#2f80ed; font-weight:700; }
+.view-dropdown {
+  position: relative;
+  font-size: 13px;
+}
+
+.view-list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #fff;
+  border: 1px solid #ececec;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 6px 0;
+  list-style: none;
+  z-index: 20;
+  min-width: 140px;
+}
+
+.view-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.view-list li:hover {
+  background: #f3f7ff;
+  color: #2f80ed;
+  font-weight: 700;
+}
 
 /* New button */
-.new-btn { background:#5b4bd6; color:white; border-radius:8px; padding:8px 12px; border:none; cursor:pointer; }
+.new-btn {
+  background: #5b4bd6;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+}
 
 /* Calendar area */
-.calendar-area { background:white; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.04); padding:12px; }
+.calendar-area {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  padding: 12px;
+}
 
 /* Time grid */
-.time-grid { display:flex; gap:8px; --hour-height:48px; overflow:auto; padding:6px; }
-.time-axis { width:84px; border-right:1px solid #f0f0f0; padding-right:8px; }
-.time-label { height: var(--hour-height); display:flex; align-items:flex-start; padding-top:4px; color:#666; font-size:13px; }
+.time-grid {
+  display: flex;
+  gap: 8px;
+  --hour-height: 48px;
+  overflow: auto;
+  padding: 6px;
+}
 
-.columns { flex:1; display:flex; gap:8px; min-width:600px; }
-.day-column { flex:1; position:relative; border-left:1px dashed #f2f2f2; overflow:visible; }
-.day-header { position:sticky; top:0; background:white; z-index:2; padding:6px 8px; display:flex; gap:8px; align-items:center; border-bottom:1px solid #f5f5f5; }
-.day-number { font-weight:700; font-size:14px; }
-.day-week { font-size:12px; color:#666; margin-left:6px; }
+.time-axis {
+  width: 84px;
+  border-right: 1px solid #f0f0f0;
+  padding-right: 8px;
+}
 
-.grid-lines { position:relative; }
-.grid-line { height: var(--hour-height); border-top:1px solid #f5f5f5; }
+.time-label {
+  height: var(--hour-height);
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+  color: #666;
+  font-size: 13px;
+}
 
-.events { position:absolute; left:8px; right:8px; top:0; bottom:0; pointer-events:none; }
-.event-card { position:absolute; left:2px; right:2px; background:#eef3ff; border-left:4px solid #3b7ddd; padding:6px 8px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.06); pointer-events:auto; cursor:pointer; overflow:hidden; }
-.ev-title { font-weight:700; font-size:13px; color:#0b2546; }
-.ev-time { font-size:12px; color:#3b4b63; margin-top:4px; }
+.columns {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  min-width: 600px;
+}
+
+.day-column {
+  flex: 1;
+  position: relative;
+  border-left: 1px dashed #f2f2f2;
+  overflow: visible;
+}
+
+.day-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+  padding: 6px 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.day-number {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.day-week {
+  font-size: 12px;
+  color: #666;
+  margin-left: 6px;
+}
+
+.grid-lines {
+  position: relative;
+}
+
+.grid-line {
+  height: var(--hour-height);
+  border-top: 1px solid #f5f5f5;
+}
+
+.events {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.event-card {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  background: #eef3ff;
+  border-left: 4px solid #3b7ddd;
+  padding: 6px 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  pointer-events: auto;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.ev-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #0b2546;
+}
+
+.ev-time {
+  font-size: 12px;
+  color: #3b4b63;
+  margin-top: 4px;
+}
 
 /* Month grid */
-.month-grid { display:block; }
-.month-header { display:grid; grid-template-columns:repeat(7,1fr); gap:0; border-bottom:1px solid #f5f5f5; padding-bottom:6px; margin-bottom:8px; }
-.month-weekday { text-align:left; padding:4px 8px; font-weight:700; color:#666; font-size:13px; }
-.month-body { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
-.month-cell { min-height:120px; border-radius:6px; border:1px solid #f1f1f1; padding:8px; background:#fff; position:relative; }
-.month-cell.other-month { background:#fafafa; opacity:0.85; }
-.cell-top { position:absolute; top:6px; left:8px; right:8px; display:flex; justify-content:flex-end; }
-.cell-daynum { font-weight:700; color:#333; font-size:12px; }
-.cell-events { margin-top:22px; display:flex; flex-direction:column; gap:6px; }
-.cell-ev { display:flex; gap:8px; align-items:center; font-size:13px; color:#264067; }
-.cell-ev .dot { width:8px; height:8px; border-radius:50%; background:#3b7ddd; display:inline-block; }
+.month-grid {
+  display: block;
+}
+
+.month-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.month-weekday {
+  text-align: left;
+  padding: 4px 8px;
+  font-weight: 700;
+  color: #666;
+  font-size: 13px;
+}
+
+.month-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.month-cell {
+  min-height: 120px;
+  border-radius: 6px;
+  border: 1px solid #f1f1f1;
+  padding: 8px;
+  background: #fff;
+  position: relative;
+}
+
+.month-cell.other-month {
+  background: #fafafa;
+  opacity: 0.85;
+}
+
+.cell-top {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cell-daynum {
+  font-weight: 700;
+  color: #333;
+  font-size: 12px;
+}
+
+.cell-events {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cell-ev {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  color: #264067;
+}
+
+.cell-ev .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3b7ddd;
+  display: inline-block;
+}
 
 @media (max-width: 1000px) {
-  .columns { min-width:420px; }
-  .time-axis { width:64px; }
-  :root { --hour-height:40px; }
+  .columns {
+    min-width: 420px;
+  }
+
+  .time-axis {
+    width: 64px;
+  }
+
+  :root {
+    --hour-height: 40px;
+  }
 }
+/* ============================================================================
+   📱 TABLET RESPONSIVE FIX (768px – 1024px)
+   ============================================================================ */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* Adjust Sidebar: 25% of screen */
+  .sidebar-col {
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
+  }
+
+  /* Main content: 75% */
+  .col-10.col-md-10 {
+    flex: 0 0 75% !important;
+    max-width: 75% !important;
+  }
+
+  /* Fix margin-left(ms-5) causing overflow */
+  .banner,
+  section,
+  .calendar-area,
+  .toolbar,
+  .ms-5,
+  .p-2 {
+    margin-left: 15px !important;
+    width: calc(100% - 15px) !important;
+  }
+
+  /* Banner Resize */
+  .banner {
+    padding: 14px 20px !important;
+  }
+  .banner-title {
+    font-size: 14px !important;
+  }
+  .banner-sub {
+    font-size: 12px !important;
+  }
+
+  /* Toolbar spacing trimmed */
+  .toolbar {
+    flex-wrap: wrap;
+    gap: 8px !important;
+  }
+
+  .toolbar .left {
+    gap: 6px !important;
+  }
+
+  .header-label {
+    font-size: 13px !important;
+    margin-left: 6px !important;
+  }
+
+  .icon-btn,
+  .today-btn {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+  }
+
+  /* View Buttons */
+  .view-buttons {
+    gap: 6px !important;
+  }
+  .vb {
+    padding: 6px 8px !important;
+  }
+  .vb-label {
+    font-size: 11px !important;
+  }
+  .vb-icon {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Dropdown menu */
+  .view-dropdown .view-btn {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+  }
+  .view-list li {
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+  }
+
+  /* Calendar container */
+  .calendar-area {
+    padding: 10px !important;
+  }
+
+  /* Time-grid for week/day/workWeek */
+  .time-grid {
+    --hour-height: 40px !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+  }
+
+  /* Reduce time-axis width */
+  .time-axis {
+    width: 65px !important;
+  }
+
+  .time-label {
+    font-size: 11px !important;
+  }
+
+  /* Week/Work-week columns minimum width */
+  .columns {
+    min-width: 520px !important;
+    gap: 6px !important;
+  }
+
+  /* Day headers */
+  .day-header {
+    padding: 4px 6px !important;
+  }
+  .day-number {
+    font-size: 13px !important;
+  }
+  .day-week {
+    font-size: 11px !important;
+  }
+
+  /* Events */
+  .event-card {
+    padding: 4px 6px !important;
+  }
+  .ev-title {
+    font-size: 12px !important;
+  }
+  .ev-time {
+    font-size: 11px !important;
+  }
+
+  /* Month View */
+  .month-body {
+    gap: 4px !important;
+  }
+  .month-cell {
+    min-height: 90px !important;
+    padding: 6px !important;
+  }
+  .cell-daynum {
+    font-size: 11px !important;
+  }
+  .cell-ev-title {
+    font-size: 11px !important;
+  }
+
+  /* Overflow fix so no horizontal scroll */
+  .mentorship-page {
+    overflow-x: hidden !important;
+  }
+}
+
 </style>

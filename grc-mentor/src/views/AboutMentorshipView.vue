@@ -3,14 +3,14 @@
     <div class="container-fluid">
       <div class="row g-4">
         <!-- Sidebar -->
-      <div class="col-2 col-md-2 sidebar-col">
+      <div class="col-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2 sidebar-col">
         <Sidebar class="sidebar" />
       </div>
 
         <!-- Right Main Column -->
-        <div class="col-10 col-md-10">
+        <div class="col-10 col-md-10 col-lg-10 col-xl-10 col-xxl-10">
           <!-- Banner -->
-          <div class="banner mb-5">
+          <div class="banner mb-4 ms-5">
             <div class="banner-left">
               <h6 class="banner-title">About Your Mentorship</h6>
               <p class="banner-sub">Review your mentorship details below.</p>
@@ -22,7 +22,7 @@
           <div class="row g-4 mb-4">
             <!-- Industries -->
             <div class="col-md-6">
-              <section class="industries-card glass-card h-100">
+              <section class="glass-card h-100 ms-5">
                 <h6 class="section-title mb-3 d-flex align-items-center justify-content-center">
                   Your mentorship will include:
                 </h6>
@@ -58,7 +58,7 @@
           </div>
 
           <!-- Projects -->
-          <section class="projects-card glass-card mb-4">
+          <section class="projects-card glass-card mb-4 ms-5">
             <h6 class="section-title">Projects</h6>
             <p class="subtitle">You'll be working on these project/tasks:</p>
             <div class="accordion custom-accordion" id="projectAccordion">
@@ -185,6 +185,12 @@ export default {
   padding: 30px;
   font-family: "Inter", sans-serif;
 }
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 
 /* Glass Cards */
 .glass-card {
@@ -205,6 +211,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
 }
 .banner-title {
   font-size: 16px;
@@ -476,5 +483,84 @@ export default {
   font-weight: 600;
   margin: 0;
 }
+
+/* ===========================================
+   🔵 TABLET RESPONSIVE (768px – 1024px)
+   =========================================== */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* Fix sidebar width */
+  .sidebar-col {
+    flex: 0 0 26% !important;
+    max-width: 26% !important;
+  }
+
+  /* Fix main column */
+  .col-10.col-md-10.col-lg-10.col-xl-10.col-xxl-10 {
+    flex: 0 0 74% !important;
+    max-width: 74% !important;
+  }
+
+  /* Fix the margin-left problem (ms-5 overflow) */
+  .banner,
+  .glass-card,
+  .projects-card,
+  .top-banner {
+    margin-left: 20px !important;
+    width: calc(100% - 20px) !important;
+  }
+
+  /* Fix industries grid */
+  .industries-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  /* Reduce card padding */
+  .glass-card {
+    padding: 16px !important;
+  }
+
+  /* Banner text adjustments */
+  .banner-title {
+    font-size: 14px !important;
+  }
+
+  .banner-sub {
+    font-size: 12px !important;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-size: 14px !important;
+  }
+
+  /* Role list spacing */
+  .role-item {
+    font-size: 13px !important;
+    gap: 8px !important;
+  }
+
+  /* Accordion text */
+  .accordion-button {
+    font-size: 13px !important;
+  }
+
+  /* Industry card height reduces */
+  .industry-card {
+    height: 130px !important;
+  }
+
+  /* Fix project card width */
+  .projects-card {
+    width: calc(100% - 20px) !important;
+  }
+
+  /* Fix padding for main content */
+  .mentorship-page {
+    padding: 10px !important;
+  }
+}
+
 
 </style>

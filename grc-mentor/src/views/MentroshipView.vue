@@ -1,7 +1,6 @@
-
 <template>
-  <main class=" onboard-page mentorship-page">
-    <div class=" onboard-content container-fluid">
+  <main class="page">
+    <div class="container-fluid">
       <div class="row g-4">
         <!-- Stepper Left Column -->
         <div class="col-2 col-md-2">
@@ -9,9 +8,9 @@
         </div>
 
         <!-- Right Main Column -->
-        <div class="col-10 col-md-10 mt-5">
+        <div class="col-10 col-md-10">
           <!-- Banner -->
-          <div class="banner mb-5">
+          <div class="banner mt-4 mb-3">
             <div class="banner-left">
               <h6 class="banner-title">Onboarding</h6>
               <p class="banner-sub">Review your mentorship details below.</p>
@@ -23,20 +22,20 @@
           <div class="row g-4 mb-4">
             <!-- Industries -->
             <div class="col-md-6">
-              <section class="onboard-industries-card glass-card h-100">
-                <h6 class="onboard-title mb-3 d-flex align-items-center justify-content-center">
+              <section class="industries-card glass-card h-100">
+                <h6 class="section-title mb-3 d-flex align-items-center justify-content-center">
                   Your mentorship will include:
                 </h6>
-                <div class="onboard-industries-grid">
+                <div class="industries-grid">
                   <div
                     v-for="(industry, index) in industries"
                     :key="index"
-                    class="onboard-industry-card"
+                    class="industry-card"
                     :style="{ backgroundImage: 'url(' + industry.image + ')' }"
                     @click="openModal(industry)"
                   >
-                    <div class="onboard-industry-overlay">
-                      <h6 class="onboard-industry-title">{{ industry.name }}</h6>
+                    <div class="industry-overlay">
+                      <h6 class="industry-title">{{ industry.name }}</h6>
                     </div>
                   </div>
                 </div>
@@ -46,7 +45,7 @@
             <!-- Responsibilities -->
             <div class="col-md-6">
               <section class="roles-card glass-card h-100">
-                <h6 class="onboard-title">You will be responsible for:</h6>
+                <h6 class="section-title">You will be responsible for:</h6>
                 <ul class="roles-list">
                   <li v-for="(role, index) in roles" :key="index" class="role-item">
                     <i class="fas fa-check-circle role-icon"></i>
@@ -55,7 +54,11 @@
                 </ul>
                 <div class=" justify-content-end d-flex">
                   <div>
-
+                <!-- <p class="mt-3">
+                  <a href="javascript:void(0)" @click="openPolicyModal" class="policy-link">
+                    Read Acceptance Usage Policy
+                  </a>
+                </p> -->
                   <div class="form-check gap-2">
             <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree"/>
             <label class="form-check-label small-text" for="agreeTerms">
@@ -79,7 +82,7 @@
 
           <!-- Projects -->
           <section class="projects-card glass-card mb-4">
-            <h6 class="onboard-title">Projects</h6>
+            <h6 class="section-title">Projects</h6>
             <p class="subtitle">You'll be working on these project/tasks:</p>
             <div class="accordion custom-accordion" id="projectAccordion">
               <div
@@ -193,11 +196,6 @@ export default {
         { title: "Project 3", details: "Details of Project 3 go here." },
         { title: "Project 4", details: "Details of Project 4 go here." },
         { title: "Project 5", details: "Details of Project 5 go here." },
-        { title: "Project 6", details: "Details of Project 6 go here." },
-        { title: "Project 7", details: "Details of Project 7 go here." },
-        { title: "Project 8", details: "Details of Project 8 go here." },
-        { title: "Project 9", details: "Details of Project 9 go here." },
-        { title: "Project 10", details: "Details of Project 10 go here." },
       ],
       activeIndustry: null,
       showPolicyModal: false,
@@ -226,14 +224,59 @@ export default {
 };
 </script>
 
-<!-- <style scoped>
+<style scoped>
+
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 100vh;
+  padding: 30px;
+  font-family: "Inter", sans-serif;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 
 
+/* Glass Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 22px;
+}
 
+/* Banner */
+.banner {
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 
+}
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+  margin: 2px 0 0 0;
+}
+.banner-right {
+  font-size: 15px;
+  font-weight: 600;
+}
 
 /* Section Title */
-.onboard-title {
+.section-title {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 12px;
@@ -241,7 +284,7 @@ export default {
 }
 
 /* Industries Grid */
-.onboard-industries-grid {
+.industries-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columns */
   gap: 25px 40px; /* vertical + horizontal spacing */
@@ -280,7 +323,7 @@ export default {
   margin-bottom: 10px;
 }
 
-.onboard-industry-title {
+.industry-title {
   font-size: 14px;
   font-weight: 600;
   margin: 0;
@@ -352,7 +395,7 @@ export default {
 .btn-submit {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   border: none;
-  border-radius: 22px;
+  border-radius: 10px;
   padding: 10px 28px;
   font-weight: 600;
   font-size: 14px;
@@ -455,7 +498,7 @@ export default {
 }
 
 /* Industries Card */
-.onboard-industry-card {
+.industry-card {
   width: 100%;
   height: 150px;
   border-radius: 12px;
@@ -467,12 +510,12 @@ export default {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.onboard-industry-card:hover {
+.industry-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
-.onboard-industry-overlay {
+.industry-overlay {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -482,10 +525,10 @@ export default {
   text-align: center;
 }
 
-.onboard-industry-title {
+.industry-title {
   font-size: 14px;
   font-weight: 600;
   margin: 0;
 }
 
-</style> -->
+</style>

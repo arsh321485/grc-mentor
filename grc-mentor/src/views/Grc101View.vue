@@ -9,7 +9,7 @@
       <!-- Main -->
       <div class="col-10 col-md-10 main-col">
         <!-- Banner -->
-        <div class="banner mb-4">
+        <div class="banner mb-4 ms-5">
           <div class="banner-left">
             <h6 class="banner-title">GRC 101</h6>
             <p class="banner-sub">
@@ -19,14 +19,14 @@
         </div>
 
         <!-- 🟢 Top Banner -->
-        <div class="top-banner mb-4">
+        <div class="top-banner mb-4 ms-5">
           <div class="banner-content">
             <h4 class="banner-title">Industries</h4>
           </div>
         </div>
 
         <!-- 🟢 Tabs -->
-        <div class="tab-buttons mb-4 d-flex flex-wrap gap-2">
+        <div class="tab-buttons mb-4 d-flex flex-wrap gap-2 ms-5">
           <button
             v-for="(industry, index) in industries"
             :key="index"
@@ -41,7 +41,7 @@
         <!-- 🟩 Industry Section -->
         <section>
           <div class="container-fluid">
-            <div class="row industry-row">
+            <div class="row industry-row ms-5">
               <div
                 v-for="(industry, index) in filteredIndustries"
                 :key="index"
@@ -216,9 +216,10 @@ export default {
 }
 
 /* === Banner === */
+/* Banner */
 .banner {
   margin-top: 30px;
-  width: 100%;
+  width: 95%;
   background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
   border-radius: 12px;
   padding: 18px 25px;
@@ -228,7 +229,7 @@ export default {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 .banner-title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   margin: 0;
 }
@@ -250,10 +251,10 @@ export default {
   border: 1px solid #2d9cdb;
   color: #2d9cdb;
   border-radius: 8px;
-  padding: 10px 120px;
+  padding: 10px 100px;
   font-weight: 500;
   transition: all 0.3s ease;
-  min-width: 180px;
+  min-width: 120px;
   text-align: center;
 }
 .tab-btn:hover {
@@ -363,4 +364,70 @@ export default {
   color: #666;
   font-weight: 500;
 }
+/* =======================================
+   🔵 1024px Responsive Fix
+   ======================================= */
+@media (max-width: 1024px) {
+
+  /* Sidebar width stays correct */
+  .sidebar-col {
+    flex: 0 0 26% !important;
+    max-width: 26% !important;
+  }
+
+  /* Main area adjusts */
+  .main-col {
+    margin-left: 26% !important;
+    padding: 0 1.2rem !important;
+  }
+
+  /* Fix banner overflow caused by ms-5 */
+  .banner,
+  .top-banner,
+  .tab-buttons,
+  .industry-row {
+    margin-left: 20px !important;
+    width: calc(91% - 20px) !important;
+  }
+
+  /* Tabs shrink to avoid going out of screen */
+  .tab-btn {
+    padding: 8px 40px !important;
+    font-size: 14px !important;
+  }
+
+  /* Industry grid full width */
+  .industry-col {
+    padding-right: 20px !important;
+  }
+
+  /* 3 cards per row on 1024px */
+  .col-lg-3 {
+    flex: 0 0 33.33% !important;
+    max-width: 33.33% !important;
+  }
+
+  /* Task card fits perfectly */
+  .task-card {
+    width: 95% !important;
+    margin: auto !important;
+  }
+
+  /* Progress and tags spacing */
+  .task-title {
+    font-size: 15px !important;
+  }
+
+  .task-subtitle {
+    font-size: 12px !important;
+  }
+
+  /* Fix footer alignment */
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
 </style>

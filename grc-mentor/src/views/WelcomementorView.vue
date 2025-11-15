@@ -23,8 +23,8 @@
 
                 <!-- Start Learning Button -->
                <div class="start-btn-container">
-  <router-link
-      to="/grc101"
+  <router-link 
+      to="/grc101" 
       class="start-btn"
   >
       Start learning

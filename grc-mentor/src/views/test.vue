@@ -210,7 +210,7 @@ export default {
 };
 </script>
 
-<!-- <style scoped>
+<style scoped>
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;
@@ -299,4 +299,4 @@ export default {
   font-size: 13px;
   color: #555;
 }
-</style> -->
+</style>

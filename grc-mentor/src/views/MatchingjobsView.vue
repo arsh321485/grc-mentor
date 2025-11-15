@@ -2,14 +2,15 @@
   <main class="mentorship-page">
     <div class="container-fluid row g-0">
       <!-- Sidebar -->
-      <div class="col-2 col-md-2 sidebar-col">
+
+      <div class="col-12 col-md-3 col-lg-2 sidebar-col">
          <Sidebar class="sidebar" />
       </div>
 
       <!-- Main -->
-      <div class="col-10 col-md-10">
+      <div class="col-12 col-md-9 col-lg-10">
         <!-- Banner -->
-        <div class="banner mb-5">
+        <div class="banner mt-3 ms-5 mb-5">
           <div class="">
             <h6 class="banner-title">GRC Matching Jobs</h6>
             <p class="banner-sub">
@@ -164,7 +165,7 @@ export default {
             "Responsible for evaluating organizational risk exposure and ensuring compliance with ISO 27001 and SOC2 frameworks.",
           image:
             "https://images.unsplash.com/photo-1665686300783-447b174a23e9?auto=format&fit=crop&w=800&q=60",
-          tags: ["GRC", "Risk", "ISO 27001", "Compliance"],
+          tags: ["GRC", "Risk", "ISO 27001"],
           salary: "₹8,50,000",
           days: 5,
           progress: 75,
@@ -175,12 +176,12 @@ export default {
           company: "RiskXpert",
           location: "Bangalore, India",
           description:
-            "Implement and optimize GRC solutions across enterprise environments.",
+            "Implement and optimize GRC  across enterprise environments.",
           longDesc:
-            "Work with global clients to deploy and enhance GRC frameworks, map controls, and automate compliance tracking.",
+            "Work with global clients to deploy and  GRC frameworks, map controls, and automate compliance tracking.",
           image:
             "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=60",
-          tags: ["Governance", "Risk Management", "Automation"],
+          tags: ["Governance", "Risk", "Automation"],
           salary: "₹14,00,000",
           days: 15,
           progress: 30,
@@ -191,9 +192,9 @@ export default {
           company: "CyberWave",
           location: "Mumbai, India",
           description:
-            "Lead compliance monitoring and policy management for InfoSec programs.",
+            "Lead compliance monitoring for InfoSec programs.",
           longDesc:
-            "Manage and monitor all information security operations. Ensure timely reporting of audit findings and continuous compliance improvement.",
+            "Manage and monitor all information security operations. Ensure timely reporting of audit findings compliance improvement.",
           image:
             "https://images.unsplash.com/photo-1605902711622-cfb43c4437d3?auto=format&fit=crop&w=800&q=60",
           tags: ["InfoSec", "Governance", "Audit"],
@@ -238,7 +239,7 @@ export default {
           company: "CyberFort",
           location: "Remote",
           description:
-            "Identify and analyze security vulnerabilities across enterprise assets.",
+            "Identify vulnerabilities across enterprise assets.",
           longDesc:
             "Perform vulnerability scanning, threat modeling, and remediation recommendations for enterprise environments.",
           image:
@@ -291,10 +292,10 @@ export default {
   font-family: "Inter", sans-serif;
 }
 
-.sidebar-col {
+/* .sidebar-col {
   padding-left: 0;
   padding-right: 0;
-}
+} */
 .sidebar {
   position: fixed;
   top: 0;
@@ -305,9 +306,7 @@ export default {
 /* --- Banner --- */
 
 .banner {
-
-  margin-top: 30px;
-  width: 99%;
+  width: 95%;
   background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
   border-radius: 12px;
   padding: 18px 25px;
@@ -476,4 +475,198 @@ export default {
   border-radius: 0;
   border-left: 2px solid #e0e0e0;
 }
+
+/* ==========================================================
+   🔥 GLOBAL ANTI-SCROLL FIX
+   (Prevents layout overflow for all screens)
+========================================================== */
+@media (min-width: 600px) {
+  body, html {
+    overflow-x: hidden !important;
+  }
+
+  .container-fluid,
+  .row,
+  .mentorship-page {
+    overflow-x: hidden !important;
+  }
+}
+
+
+
+/* ==========================================================
+   📌 600–767px (Small Tablets)
+========================================================== */
+@media (min-width: 600px) and (max-width: 767px) {
+
+  .sidebar-col {
+    flex: 0 0 26% !important;
+    max-width: 26% !important;
+  }
+
+  .col-12.col-md-9.col-lg-10 {
+    flex: 0 0 74% !important;
+    max-width: 74% !important;
+  }
+
+  /* Banner */
+  .banner {
+    width: 92% !important;
+    margin-left: 15px !important;
+    padding: 16px 18px !important;
+  }
+
+  /* Filter section */
+  .filter-section {
+    padding-left: 18px !important;
+  }
+
+  /* Cards: 2 per row */
+  .col-12.col-sm-6.col-lg-3 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  .job-card {
+    width: 90% !important;
+    margin: auto !important;
+  }
+}
+
+
+
+/* ==========================================================
+   📌 768–1024px (Tablets)
+========================================================== */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .sidebar-col {
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
+  }
+
+  .col-12.col-md-9.col-lg-10 {
+    flex: 0 0 75% !important;
+    max-width: 75% !important;
+  }
+
+  .banner {
+    width: 89% !important;
+    margin-left: 35px !important;
+  }
+
+  .filter-section {
+    padding-left: 30px !important;
+  }
+
+  /* 2 cards per row */
+  .col-12.col-sm-6.col-lg-3 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  .job-card {
+    width: 88% !important;
+    margin: auto !important;
+  }
+}
+
+
+
+/* ==========================================================
+   📌 1025–1280px (Small Laptops) — YOUR MAIN PROBLEM AREA
+========================================================== */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+  .sidebar-col {
+    flex: 0 0 22% !important;
+    max-width: 22% !important;
+  }
+
+  .col-12.col-md-9.col-lg-10 {
+    flex: 0 0 78% !important;
+    max-width: 78% !important;
+  }
+
+  .banner {
+    width: 88% !important;
+    margin-left: 40px !important;
+  }
+
+  .filter-section {
+    padding-left: 40px !important;
+  }
+
+  /* Prevent job grid overflow */
+  section.ps-5,
+  .filter-section.ps-5 {
+    padding-left: 0 !important;
+  }
+
+  .col-12.col-sm-6.col-lg-3 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  .job-card {
+    width: 92% !important;
+    margin: auto !important;
+  }
+}
+
+
+
+/* ==========================================================
+   📌 1281–1440px (Laptops)
+========================================================== */
+@media (min-width: 1281px) and (max-width: 1440px) {
+
+  .banner {
+    width: 92% !important;
+    margin-left: 50px !important;
+  }
+
+  section.ps-5,
+  .filter-section.ps-5 {
+    padding-left: 20px !important;
+  }
+
+  .job-card {
+    width: 94% !important;
+  }
+}
+
+
+
+/* ==========================================================
+   📌 1441–1920px (Large Monitors)
+========================================================== */
+@media (min-width: 1441px) and (max-width: 1920px) {
+
+  .banner {
+    width: 94% !important;
+  }
+
+  .job-card {
+    width: 92% !important;
+  }
+}
+
+
+
+/* ==========================================================
+   📌 1921px+ (Ultra-wide / 4K)
+========================================================== */
+@media (min-width: 1921px) {
+
+  .banner {
+    width: 96% !important;
+  }
+
+  .job-card {
+    width: 90% !important;
+  }
+}
+
+
 </style>

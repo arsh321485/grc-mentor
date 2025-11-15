@@ -76,7 +76,7 @@ export default{
 
 
 
-   <style>
+   <style scoped>
     .hero-section {
       background: linear-gradient(to right, #e6f0ff, #f0f9ff);
       padding: 70px 0;

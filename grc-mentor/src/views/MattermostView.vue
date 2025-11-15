@@ -1,16 +1,16 @@
 <template>
   <main class="mentorship-page">
     <div class="container-fluid">
-      <div class="row matter-row g-4">
+      <div class="row g-4">
         <!-- Stepper Left Column -->
         <div class="col-2 col-md-2">
           <Stepper :currentStep="5" />
         </div>
 
         <!-- Right Main Column -->
-        <div class="col-10 col-md-10 mt-5">
+        <div class="col-10 col-md-10 ">
           <!-- Banner -->
-          <div class="banner mb-5">
+          <div class="banner mt-4 mb-3">
             <div class="banner-left">
               <h6 class="banner-title">Setup Your Communication</h6>
               <p class="banner-sub">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -20,17 +20,17 @@
 
           <!-- Two Cards Section -->
           <section>
-            <div class="row matter-row g-4 mb-4">
+            <div class="row g-4 ">
               <!-- Left Card -->
-              <div class="col-md-6 matter-col-md-6">
-                <section class=" matter-glass-card">
+              <div class="col-md-6">
+                <section class=" glass-card">
                   <div class="d-flex flex-column">
-                    <div class="reporting-header pt-4">
-                      <h6 class="mb-1 pt-0"> I'm your reporting manager</h6>
+                    <div class="reporting-header ">
+                      <h6 class="   pt-0"> I'm your reporting manager</h6>
                       <p class="text-muted mb-0">Let's set up your reporting time</p>
                     </div>
-                    <hr />
-                    <p class="mattermost-text mt-1 mx-auto">
+                    <hr class="m-0" />
+                    <p class="mattermost-text  mx-auto mt-2">
                       Please setup your email with Mattermost to continue...
                     </p>
                     <div class="text-center ">
@@ -39,10 +39,10 @@
                       </button>
                     </div>
 
-                    <div class="status-box mt-5 mx-auto">
+                    <div class="status-box mx-auto">
                       <div class="loading-icon" v-if="status === 'pending'">
                         <div class="blue-circle">
-                          <div class="matter-dots">
+                          <div class="dots">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -58,7 +58,7 @@
                         Status: {{ status === 'pending' ? 'Pending' : 'Successful' }}
                       </p>
 
-                      <p class="matter-sub-text text-center">
+                      <p class="sub-text text-center">
                         {{
                           status === "pending"
                             ? "You haven’t set up your email with Mattermost yet."
@@ -95,20 +95,20 @@
               </div>
 
               <!-- Right Card -->
-              <div class="col-md-6 matter-col-md-6">
-                <section class="roles-card matter-glass-card shadow-lg">
-                  <div class="reporting-header pt-4">
-                    <h6 class="mb-1 pt-0"> I'm your reporting manager</h6>
+              <div class="col-md-6">
+                <section class="roles-card glass-card shadow-lg">
+                  <div class="reporting-header">
+                    <h6 class=" pt-0"> I'm your reporting manager</h6>
                     <p class="text-muted mb-0">Let's set up your reporting time</p>
                   </div>
                   <hr />
-                  <hr class="matter-divider" />
+
 
                   <!-- Step 1: Time Zone (AUTO-DETECT, no dropdown) -->
                   <h6 class="time-label"> Your location is:</h6>
 
                   <!-- detected zone display (no dropdown) -->
-                  <div class="mb-3">
+                  <div class="">
                     <div class="detected-zone-box p-3 rounded-2 d-flex align-items-center justify-content-between">
                       <div>
                         <div class="fw-semibold">{{ detectedLabel || "Unknown location" }}</div>
@@ -124,7 +124,7 @@
                     </div>
 
                     <!-- Manual selector only shows if user toggles it (keeps UI intact) -->
-                    <div v-if="allowManual" class="mt-2">
+                    <div v-if="allowManual" class="">
                       <select v-model="selectedZone" class="form-select custom-select mb-4">
                         <option disabled value="">Select timezone</option>
                         <option value="IST">India (IST)</option>
@@ -156,14 +156,14 @@
                       </div>
 
                     <!-- Selected time confirmation -->
-<div class="selected-time mt-3 mb-3 p-3 rounded-3 shadow-sm" v-if="selectedTime">
+<div class="selected-time  p-3 rounded-3 shadow-sm" v-if="selectedTime">
   <i class="bi bi-check-circle-fill text-success me-2"></i>
   You selected: <strong>{{ selectedTime }} ({{ selectedZoneComputed }})</strong>
 </div>
 
 <!-- Finish button: placed under time buttons and aligned with left -->
 <div class="time-footer" v-if="selectedTime">
-  <router-link :to="finishRoute" class="next-btn btn-submit">
+  <router-link :to="finishRoute" class="next-btn btn-submit d-flex justify-content-end">
     Finish Onboarding
   </router-link>
 </div>
@@ -254,7 +254,7 @@ export default {
       return null;
     },
 
-    // Detect timezone via brow matter-rowser
+    // Detect timezone via browser
     detectTimezone() {
       try {
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
@@ -285,6 +285,21 @@ export default {
 
 
 
+/* Card */
+.reporting-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
+  padding: 35px;
+  max-width: 650px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.reporting-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
 
 /* Header */
 .reporting-header {
@@ -293,7 +308,6 @@ export default {
 }
 
 .reporting-header h5 {
-  font-weight: 600;
   color: #2f3542;
 }
 
@@ -302,16 +316,16 @@ export default {
   color: #6c757d;
 }
 
-/* matter-divider */
-.matter-divider {
+/* Divider */
+.divider {
   margin: -1px 0;
   border-top: 1px solid #e0e6ed;
 }
 
 /* Labels */
 .time-label {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+
 
   color: #333;
 }
@@ -334,7 +348,7 @@ export default {
 .time-options {
   display: flex !important;       /* make sure flex is applied */
   flex-wrap: wrap;
-  gap: 12px !important;           /* space between buttons (modern brow matter-rowsers) */
+  gap: 12px !important;           /* space between buttons (modern browsers) */
   padding-left: 8px;              /* left padding so first button is not flush to edge */
   align-items: center;
 }
@@ -381,22 +395,36 @@ export default {
 }
 
 
+.btn-submit {
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+.mentorship-page {
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  min-height: 100vh;
+  /* padding: 30px; */
+  font-family: "Inter", sans-serif;
+}
 
-
-/* row matter-row: make equal height cards */
-.matter-row.g-4 {
+/* Row: make equal height cards */
+.row.g-4 {
   /* display: flex;
   align-items: stretch; */
       display: flex;
   align-items: stretch;
 }
 
-.matter-col-md-6 {
+.col-md-6 {
   display: flex;
 }
 
 /* Glass Cards */
-.matter-glass-card {
+.glass-card {
   flex: 1;
    min-height: 301px;
   background: rgba(255, 255, 255, 0.95);
@@ -408,15 +436,53 @@ export default {
   flex-direction: column;
 }
 
+/* Banner */
+.banner {
+  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  padding: 18px 25px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
 
+.banner-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
 
-.matter-sub-text {
+.banner-sub {
+  font-size: 13px;
+  opacity: 0.9;
+  margin: 2px 0 0 0;
+}
+
+.banner-right {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.cvadd-head {
+  color: #000000;
+  font-weight: 500;
+}
+
+.sub-text {
   color: #00000099;
   font-size: 14px;
   font-weight: 400;
 }
 
-
+.info-text {
+  font-size: 15px;
+  color: #000000;
+  line-height: 1.6;
+  max-width: 600px;
+  font-weight: 500;
+}
 
 .mattermost-text {
   font-size: 16px;
@@ -425,7 +491,7 @@ export default {
 
 .status-box {
   border: 1px solid #ddd;
-  border-radius: 18px;
+  border-radius: 10px;
   padding: 30px 20px;
   max-width: 400px;
   background-color: #fafafa;
@@ -452,7 +518,7 @@ export default {
   align-items: center;
 }
 
-.matter-dots {
+.dots {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -464,7 +530,7 @@ export default {
   padding: 3px;
 }
 
-.matter-dots span {
+.dots span {
   width: 5px;
   height: 5px;
   background-color: white;
@@ -472,11 +538,11 @@ export default {
   animation: blink 1s infinite;
 }
 
-.matter-dots span:nth-child(2) {
+.dots span:nth-child(2) {
   animation-delay: 0.2s;
 }
 
-.matter-dots span:nth-child(3) {
+.dots span:nth-child(3) {
   animation-delay: 0.4s;
 }
 
@@ -506,17 +572,42 @@ export default {
   border-radius: 8px;
 }
 
-
-
-.next-btn:hover {
-  background-color: #4a9dcf;
-}
-.mattermost-btn {
+/* Next Button */
+.next-btn {
+  /* position: fixed;
+  bottom: 90px;
+  left: 30rem;
+  transform: translateX(-50%);
+  margin-top: 30rem;
   padding: 12px 40px;
   background-color: #007baf;
   color: #ffffff;
   border: none;
   border-radius: 30px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000; */
+ /* ensure previous positioning rules don't pull button elsewhere */
+
+  position: static !important;
+  transform: none !important;
+  left: auto !important;
+  bottom: auto !important;
+  margin-left: 0;
+}
+
+.next-btn:hover {
+  background-color: #4a9dcf;
+}
+.mattermost-btn {
+  padding: 10px 40px;
+  background-color: #007baf;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
   font-weight: 600;
@@ -560,7 +651,7 @@ export default {
   width: 400px;
   max-width: 95%;
   background: #fff;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   animation: fadeIn 0.3s ease;
 }
@@ -590,7 +681,7 @@ export default {
   background-color: #007baf;
   color: #ffffff;
   border: none;
-  border-radius: 30px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
   font-weight: 600;
@@ -670,7 +761,7 @@ html, body, .mentorship-page {
   }
 }
 @media (min-width: 1367px) and (max-width: 1920px) {
-  .matter-glass-card {
+  .glass-card {
     padding: 30px;
   }
   .banner-title {

@@ -9,7 +9,7 @@
       <!-- Main -->
       <div class="col-10 col-md-10 main-col">
         <!-- Banner -->
-        <div class="banner mb-5">
+        <div class="banner mb-5 ms-5">
           <div class="banner-left">
             <h6 class="banner-title">Badges</h6>
             <p class="banner-sub">
@@ -25,7 +25,7 @@
           <div
             v-for="(badge, index) in badges"
             :key="index"
-            class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex flex-column align-items-center"
+            class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 ms-3 d-flex flex-column align-items-center"
           >
             <img :src="badge.img" alt="" class="badges-img mb-2" />
             <p class="grid-text mb-1">{{ badge.title }}</p>
@@ -116,7 +116,7 @@ export default {
 
 .banner {
   margin-top: 30px;
-  width: 100%;
+  width: 95%;
   background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
   border-radius: 12px;
   padding: 18px 25px;
@@ -135,5 +135,71 @@ export default {
   opacity: 0.9;
   margin: 2px 0 0 0;
 }
+/* ============================================================================
+   📱 TABLET RESPONSIVE FIX — for Badges Page (768px–1024px)
+   ============================================================================ */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* Sidebar becomes 25% width */
+  .sidebar-col {
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
+  }
+
+  /* Main becomes 75% */
+  .main-col,
+  .col-10.col-md-10 {
+    flex: 0 0 75% !important;
+    max-width: 75% !important;
+    margin-left: 0 !important;   /* Remove forced 16.5% shift */
+    padding-left: 20px !important;
+  }
+
+  /* Banner – remove ms-5 overflow */
+  .banner {
+    margin-left: 10px !important;
+    width: calc(100% - 10px) !important;
+    padding: 14px 18px !important;
+  }
+
+  .banner-title {
+    font-size: 15px !important;
+  }
+
+  .banner-sub {
+    font-size: 12px !important;
+  }
+
+  /* Badge grid fix */
+  .row.px-3.px-md-5 {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  /* Remove ms-3 from cards that breaks layout */
+  .col-12.col-sm-6.col-md-4.col-lg-3.ms-3 {
+    margin-left: 0 !important;
+  }
+
+  /* Badge images resize for tablet */
+  .badges-img {
+    max-width: 200px !important;
+  }
+
+  /* Text resize */
+  .grid-text {
+    font-size: 17px !important;
+  }
+
+  .grid-subtext {
+    font-size: 12px !important;
+  }
+
+  /* Prevent horizontal scroll */
+  .mentorship-page {
+    overflow-x: hidden !important;
+  }
+}
+
 
 </style>
