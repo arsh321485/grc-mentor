@@ -66,7 +66,7 @@
             </label>
             <span   class="text-primary small text-decoration-underline "
                 @click="openPolicyModal">
-               Acceptanble Usage Policy
+               Acceptable Usage Policy
             </span>
           </div>
 
