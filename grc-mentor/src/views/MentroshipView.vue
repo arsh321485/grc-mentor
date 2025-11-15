@@ -66,8 +66,7 @@
             </label>
             <span   class="text-primary small text-decoration-underline "
                 @click="openPolicyModal">
-
-             terms & conditions
+               Acceptanble Usage Policy
             </span>
           </div>
 
@@ -145,7 +144,7 @@
     <div v-if="showPolicyModal" class="center-modal-overlay" @click.self="closePolicyModal">
       <div class="center-modal glass-card">
         <div class="modal-header">
-          <h6>Acceptance Usage Policy</h6>
+          <h6>Acceptable Usage Policy</h6>
           <button class="close-btn" @click="closePolicyModal">&times;</button>
         </div>
         <div class="modal-body">
