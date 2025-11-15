@@ -72,7 +72,7 @@
 
     <!-- <section class="container my-5">
       <div class="text-center mb-5">
-      
+
         <h1 class="industry-h1">Industries you’ll work with:</h1>
         <p class="industry-subtext">Industries you’ll work with:</p>
       </div>
@@ -81,14 +81,14 @@
           <div v-for="(item, index) in industries" :key="index" class="col-12 col-md-6 col-lg-4">
             <div class="flip-card">
               <div class="flip-card-inner">
-               
+
                 <div class="flip-card-front d-flex flex-column justify-content-center align-items-center p-4 rounded-3"
                   :style="{ backgroundColor: item.color }">
                   <i :class="item.icon + ' fs-1'" :style="{ color: item.iconColor }"></i>
                   <h5 class="mt-3 fw-bold">{{ item.title }}</h5>
                 </div>
 
-              
+
                 <div class="flip-card-back">
                   <img :src="item.image" class="img-fluid rounded-3" :alt="item.title" />
                 </div>
@@ -848,8 +848,8 @@ export default defineComponent({
 
 /* Indicators aligned to left */
 .custom-indicators {
-  justify-content: flex-start;
-  margin-left: 2rem;
+  justify-content: flex-between;
+  margin-left: 8rem;
   /* adjust left spacing */
   margin-bottom: 1.5rem;
   /* space from bottom */
@@ -861,7 +861,7 @@ export default defineComponent({
   background-color: #fff;
   border: none;
   border-radius: 10px;
-  margin-right: 6px;
+  margin-right: 10px;
 }
 
 .custom-indicators .active {
