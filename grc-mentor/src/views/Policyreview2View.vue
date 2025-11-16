@@ -76,24 +76,24 @@
                     How to ?
                   </button>
 
-                  <ul v-show="openDropdown === index" class="dropdown-menu show">
-                    <li> <i class="bi bi-file-earmark-ruled p-3"></i> Method
+                  <ul v-show="openDropdown === index" class="dropdown-menu  bg-colors show">
+                    <li class=""><a href="#" class="dropdown-item bg-colors"><i class="bi bi-file-earmark-ruled "></i> Method »</a>
                     </li>
-                    <li><a class="dropdown-item" href="#">Design and Development</a></li>
+                    <li class="fs-6"><a class="dropdown-item " href="#">Design and Development</a></li>
 
                     <!-- Submenu -->
-                    <li class="dropdown-submenu">
-                      <a href="#" class="dropdown-item"><i class="bi bi-tools p-1"></i> Tools »</a>
+                    <li class="dropdown-submenu bg-colors ">
+                     <a class="dropdown-item bg-colors" href="#"> <i class="bi bi-tools "></i> Tools »</a>
                       <ul class="dropdown-menu">
-                        <li>
+                        <li class="fs-6">
                           <a class="dropdown-item" href="#">
                             Develop and create <br />
                             security tools, processes,<br />
                             and documentation
                           </a>
                         </li>
-                        <li class="dropdown-submenu">
-                          <a href="#" class="dropdown-item"><i class="bi bi-check2-square"></i> Action »</a>
+                        <li class="dropdown-submenu bg-colors">
+                          <a href="#" class="dropdown-item bg-colors"><i class="bi bi-check2-square"></i> Action »</a>
                           <ul class="dropdown-menu">
                             <li>
                               <a href="#" class="dropdown-item"
@@ -220,24 +220,13 @@ export default {
   left: 0;
   height: 100vh;
 
-  /* About Company Button — clearly visible */
-  .about-btn {
-    background: #ffffff;
-    color: #1d3557;
-    border-radius: 25px;
-    font-weight: 600;
-    padding: 8px 20px;
-    font-size: 14px;
-    border: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
-  }
 
-  .about-btn:hover {
-    background: #f1f1f1;
-    color: #0d47a1;
-    transform: scale(1.05);
-  }
+}
+.bg-colors {
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  color:#f0eded;
+  font-weight: 700;
+border-radius: 2px;
 }
 
 
@@ -246,7 +235,7 @@ export default {
 .about-btn {
   background: #ffffff;
   color: #1d3557;
-  border-radius: 25px;
+  border-radius: 10px;
   font-weight: 600;
   padding: 8px 20px;
   font-size: 14px;
@@ -347,7 +336,7 @@ export default {
 .btn-submit {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   border: none;
-  border-radius: 22px;
+  border-radius: 10px;
   padding: 10px 28px;
   font-weight: 600;
   font-size: 14px;
@@ -456,7 +445,6 @@ export default {
   right: 0;
   /* stick to right edge of button */
   transform: translateX(-0%);
-  /* shift a little left */
   background: white;
   border: 1px solid #ddd;
   min-width: 200px;
@@ -474,12 +462,12 @@ export default {
 .dropdown-item {
   padding: 8px 14px;
   font-size: 14px;
-  color: #333;
+  /* color: #333; */
 }
 
 .dropdown-item:hover {
-  background: #f4f9ff;
-  color: #2d7dd2;
+  color: #0b0c0e;
+
 }
 
 /* Submenu */
@@ -630,6 +618,7 @@ export default {
   .dropdown-menu {
     min-width: 160px !important;
     font-size: 13px !important;
+    padding: 5px;
   }
 
   /* Industry modal (right side panel) */

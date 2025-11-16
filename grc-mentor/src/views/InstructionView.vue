@@ -3,7 +3,7 @@
     <div class="instructions-card  shadow-lg">
 
       <!-- Logo -->
-      <div class="text-center">
+      <div class="text-center p-lg-4 p-0">
         <img src="../assets/logo-img.png" alt="Logo" class="ins-logo"  />
       </div>
 
@@ -16,8 +16,8 @@
       <hr />
 
       <!-- Instructions List -->
-      <div class="">
-        <h5 class="fw-semibold mb-3 ">📘 General Guidelines</h5>
+      <div class="p-lg-4 p-3">
+        <h5 class="fw-semibold ">📘 General Guidelines</h5>
 
         <ol class="instruction-list ">
           <li class="pb-1">
@@ -35,7 +35,7 @@
         </ol>
 
         <!-- Rules Section -->
-        <h5 class="fw-semibold mb-3">⚡ Other Rules</h5>
+        <h5 class="fw-semibold ">⚡ Other Rules</h5>
         <ul class="instruction-list">
           <li class="pb-1 ">Complete the assessment in one sitting.</li>
           <li class="pb-1 ">Ensure a stable internet connection.</li>
@@ -45,14 +45,14 @@
       </div>
 
       <!-- Buttons -->
-      <div class="d-flex justify-content-between align-items-center ">
+      <div class="d-flex justify-content-between align-items-centerp-lg-4 p-3">
         <router-link
           to="/welcome"
           class="text-decoration-none fw-semibold active-text">
           ← Back
         </router-link>
 
-        <router-link to="/assessment" class="btn btn-submit px-4">
+        <router-link to="/assessment" class="btn btn-submit ">
           Start Assessment
         </router-link>
       </div>
@@ -103,10 +103,10 @@ export default {
 }
 
 .instruction-list li {
- 
+
   font-size: 14px;
     color: #444;
- 
+
 }
 .heading{
   color:#002B5B
