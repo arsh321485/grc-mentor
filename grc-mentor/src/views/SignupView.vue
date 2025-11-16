@@ -50,7 +50,7 @@
                 <div class="captcha-box d-flex align-items-center justify-content-between ">
                   <div class="d-flex align-items-center gap-2">
                     <input type="checkbox" id="captcha-check" class="captcha-check" />
-                    <label for="captcha-check">I'm not a robot</label>
+                    <label for="captcha-check " class="form-label m-0">I'm not a robot</label>
                   </div>
                   <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" class="captcha-img" />
                 </div>
@@ -170,7 +170,7 @@
       display: flex;
       background: white;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    
+
     }
 
     /* LOGO */
@@ -178,7 +178,7 @@
 
     /* FORM ITEMS */
     .form-label {
-      font-size: 14px; 
+      font-size: 14px;
     }
 
     .form-control {
@@ -200,7 +200,7 @@
       padding: 10px;
       font-size: 14px;
       text-decoration: none;
-      
+
       background-color: #0096d6;
       color: white;
       display: block;
