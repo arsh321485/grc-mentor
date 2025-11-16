@@ -50,7 +50,7 @@
                 <div class="captcha-box d-flex align-items-center justify-content-between ">
                   <div class="d-flex align-items-center gap-2">
                     <input type="checkbox" id="captcha-check" class="captcha-check" />
-                    <label for="captcha-check " class="form-label m-0">I'm not a robot</label>
+                    <label for="captcha-check">I'm not a robot</label>
                   </div>
                   <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" class="captcha-img" />
                 </div>

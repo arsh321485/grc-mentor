@@ -1,43 +1,47 @@
 <template>
-  <main>
-    <div class="container signup-container">
-      <div class="row w-100 form-section mt-2">
-        <div class="mt-5 mb-0">
-          <img src="../assets/logo-img.png" alt="Logo" style="height: 35px;">
-        </div>
+  <main class="signin-wrapper">
+    <div class="signin-card">
+      <div class="row g-0 align-items-center">
 
-        <!-- Left Side -->
-        <div class="col-lg-6 col-md-12 left">
-          <router-link to="/home" class="d-block mb-1 text-decoration-none" style="color: #005E86; font-weight: 600;">
-            &larr; Back to homepage
+        <!-- LEFT SIDE (Form) -->
+        <div class="col-12 col-lg-6 px-5">
+          <!-- LOGO -->
+          <img src="../assets/logo-img.png" alt="Logo" class="signin-logo" />
+
+          <router-link to="/home" class="d-block back-link text-decoration-none py-2">
+            ← Back to homepage
           </router-link>
 
-          <h4 style="font-weight: 600;">Forgot Password</h4>
-          <p class="mb-4" style="font-weight: 500; color: #00000099; font-size: 12px;">
-            Enter your registered email address and we’ll send you a reset link.
-          </p>
+          <h6 class="my-2">Forgot Password</h6>
+          <p class="subtitle">Enter your registered email address and we’ll send you a reset link.</p>
 
           <form @submit.prevent="handleForgot">
-            <div class="mb-3">
+            <div class="mb-1">
               <label class="form-label">Email</label>
-              <input type="email" v-model.trim="email" class="form-control" placeholder="Enter your email address">
+              <input
+                type="email"
+                v-model.trim="email"
+                class="form-control"
+                placeholder="Enter your email address"
+              />
             </div>
 
-            <button type="submit" class="btn w-100 btn-submit">
-              Send Reset Link
-            </button>
+            <button type="submit" class="btn-submit w-100 mb-2">Send Reset Link</button>
 
-            <p class="have-account">
+            <p class="form-label pb-2">
               Remember your password?
               <router-link to="/signin" class="login-link">Back to Login</router-link>
             </p>
           </form>
         </div>
 
-        <!-- Right Side (Image) -->
-        <div class="col-lg-6 right p-0 d-none d-lg-block">
-          <img src="../assets/signup-img.png" alt="Forgot Password Image" style="border-radius: 30px;">
+        <!-- RIGHT IMAGE -->
+        <div class="col-lg-6 d-none d-lg-flex right">
+          <div class="image-wrapper">
+            <img src="../assets/signup-img.png" class="right-img" alt="Forgot Image" />
+          </div>
         </div>
+
       </div>
     </div>
   </main>
@@ -63,54 +67,99 @@ export default {
         return;
       }
       alert(`Password reset link sent to ${this.email}`);
-      // 🔗 API call goes here
+      // place API call for sending reset link here
     },
   },
 };
 </script>
 
 <style scoped>
-/* Reuse styles from your Signup page */
-
-.btn-submit {
-    border-radius: 30px;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    background-color: #0096D6;
-    color: #FFFFFF;
+/* ---- Matches SignIn sizing & typography ---- */
+.signin-logo {
+  height: 25px; /* same as SignIn */
 }
 
-.btn-submit:hover {
-    border-radius: 30px;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    background-color: #0096D6;
-    color: #FFFFFF;
+/* Wrapper same as SignIn */
+.signin-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f7faff, #eef3fb);
+  padding: 30px;
 }
 
+/* Card same as SignIn */
+.signin-card {
+  height: 610px;
+  max-width: 1100px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
 
-.have-account {
+/* Typography & spacing same as SignIn */
+.form-label { font-size: 14px; }
+.form-control {
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* subtitle same as SignIn */
+.subtitle {
   font-size: 13px;
-  color: #555;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 0;
+  color: #5a5a5a;
+  margin-bottom: 8px;
 }
+
+/* Button - same visual weight as SignIn */
+.btn-submit {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #0096d6;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+  border: none;
+  font-weight: 600;
+}
+
+/* Right image same as SignIn */
+.right { padding: 24px; }
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.right-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Login link style consistent with SignIn */
 .login-link {
   color: #005E86;
   font-weight: 600;
   text-decoration: none;
   margin-left: 3px;
-}    
+}
 .login-link:hover {
   text-decoration: underline;
 }
 
-/* Add a default style for btn-submit in case it's not global */
+/* small helpers */
+.mb-1 { margin-bottom: .5rem; }
+.mb-2 { margin-bottom: .75rem; }
+.my-2 { margin-top: .5rem; margin-bottom: .5rem; }
 
-.btn-submit:hover {
-  opacity: 0.95;
+/* Responsive */
+@media (max-width: 992px) {
+  .right { display: none !important; }
+  .signin-card { height: auto; padding-top: 30px; padding-bottom: 30px; }
 }
 </style>
