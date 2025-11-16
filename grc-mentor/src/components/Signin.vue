@@ -4,12 +4,12 @@
       <div class="row g-0 align-items-center">
 
         <!-- LEFT SIDE -->
-        <div class="col-12 col-lg-6 px-5 ">
+        <div class="col-12 col-lg-6 px-5">
 
           <!-- LOGO -->
-          <img src="../assets/logo-img.png" alt="Logo" class="signin-logo " />
+          <img src="../assets/logo-img.png" alt="Logo" class="signin-logo" />
 
-          <router-link to="/home" class="d-block  back-link text-decoration-none py-2">
+          <router-link to="/home" class="d-block back-link text-decoration-none py-2">
             ← Back to homepage
           </router-link>
 
@@ -28,7 +28,7 @@
               <input type="password" v-model="form.password" class="form-control" placeholder="Enter password" />
             </div>
 
-            <div class="d-flex justify-content-between align-items-center  flex-wrap">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
               <div class="d-flex align-items-center gap-1 py-2">
                 <input type="checkbox" v-model="form.remember" />
                 <label class="form-label">Remember me</label>
@@ -92,7 +92,7 @@ export default {
 </script>
 
 <style scoped>
-.signin-logo{
+.signin-logo {
   height: 25px;
 }
 
@@ -106,9 +106,10 @@ export default {
   padding: 30px;
 }
 
-/* Same card style */
+/* FIXED — FULL RESPONSIVE WITHOUT CHANGING UI */
 .signin-card {
-  height: 610px;
+  min-height: 610px; /* SAME LOOK */
+  height: auto;      /* responsive */
   max-width: 1100px;
   border-radius: 20px;
   overflow: hidden;
@@ -116,9 +117,13 @@ export default {
   box-shadow: 0 5px 20px rgba(0,0,0,0.12);
 }
 
-/* Typography & spacing same as Signup */
-.form-label { font-size: 14px; }
-.form-control { font-size: 14px; }
+/* Typography */
+.form-label {
+  font-size: 14px;
+}
+.form-control {
+  font-size: 14px;
+}
 
 .subtitle {
   font-size: 13px;
@@ -142,10 +147,14 @@ export default {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
-.captcha-img { height: 22px; }
+.captcha-img {
+  height: 22px;
+}
 
 /* RIGHT IMAGE SAME AS SIGNUP */
-.right { padding: 24px; }
+.right {
+  padding: 24px;
+}
 .image-wrapper {
   width: 100%;
   height: 100%;
@@ -158,9 +167,20 @@ export default {
   object-fit: cover;
 }
 
-/* Responsive */
+/* RESPONSIVE (NO UI CHANGE) */
 @media (max-width: 992px) {
-  .right { display: none !important; }
+  .right {
+    display: none !important;
+  }
+}
+/* Fix for iPad Air / iPad Mini / medium-height screens */
+@media (max-height: 900px) and (min-width: 600px) {
+  .signin-wrapper {
+    align-items: flex-start !important;
+    padding-top: 60px !important;  /* keeps same spacing as desktop */
+    padding-bottom: 40px !important;
+    overflow-y: auto;              /* allows normal scroll without affecting UI */
+  }
 }
 
 </style>

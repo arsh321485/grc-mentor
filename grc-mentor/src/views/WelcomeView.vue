@@ -1,7 +1,7 @@
 <template>
   <main class="welcome-page page">
     <div class="container-fluid welcome-container">
-      <div class="row justify-content-center align-items-center min-vh-100">
+      <div class="row justify-content-center min-vh-100 align-items-center welcome-row">
 
         <!-- CARD -->
         <div class="col-12 col-md-10 col-lg-8 col-xl-7">
@@ -89,9 +89,11 @@ export default {
   font-weight: 600;
 }
 
-/* RESPONSIVE FIXES */
+/* ---------------------------------------------- */
+/* RESPONSIVE — WITHOUT CHANGING ANY UI ELEMENT   */
+/* ---------------------------------------------- */
 
-/* 📱 Mobile */
+/* 📱 Mobile (UI preserved) */
 @media (max-width: 576px) {
   .welcome-card {
     padding: 2rem 1.2rem !important;
@@ -107,7 +109,7 @@ export default {
   }
 }
 
-/* 🖥 Large Screens (DESKTOP + MONITORS) */
+/* 🖥 Larger Desktops */
 @media (min-width: 1200px) {
   .welcome-card {
     max-width: 950px;
@@ -135,6 +137,17 @@ export default {
   }
   .intro-text {
     font-size: 1.2rem;
+  }
+}
+
+/* ⭐ FIX FOR IPAD / MEDIUM HEIGHT SCREENS */
+/* Prevents logo/card from shifting upward */
+@media (max-height: 900px) and (min-width: 600px) {
+  .welcome-row {
+    align-items: flex-start !important;
+    padding-top: 60px !important;
+    padding-bottom: 40px !important;
+    overflow-y: auto !important;
   }
 }
 </style>
