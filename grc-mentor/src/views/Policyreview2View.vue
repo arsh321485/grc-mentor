@@ -14,7 +14,6 @@
             <h6 class="banner-title"> Industry: Media</h6>
             <p class="banner-sub">Policy Review</p>
           </div>
-          <!-- back Button -->
           <div class="ms-auto">
             <button class="btn about-btn" @click="showModal = true">
               <i class="bi bi-info-circle me-2"></i> About the Company
@@ -23,16 +22,13 @@
         </div>
 
         <!-- Star Media Modal -->
-        <!-- Right-Side About Company Modal -->
         <div v-if="showModal" class="right-modal-overlay">
           <div class="right-modal">
-            <!-- Header -->
             <div class="modal-header d-flex justify-content-between align-items-center">
               <h5 class="fw-bold mb-0">Star Media</h5>
               <button class="btn-close" @click="showModal = false">✕</button>
             </div>
 
-            <!-- Body -->
             <div class="modal-body">
               <div class="row">
                 <div v-for="(item, i) in companyDetails" :key="i" class="col-12 col-md-6 col-lg-4 mb-3">
@@ -42,79 +38,114 @@
               </div>
             </div>
 
-            <!-- Footer -->
             <div class="modal-footer">
-              <button class="btn btn-secondary" @click="showModal = false">
-                Close
-              </button>
+              <button class="btn btn-secondary" @click="showModal = false">Close</button>
             </div>
           </div>
         </div>
 
-
         <!-- Projects Section -->
-        <section class=" glass-card mb-4 mt-5 ms-5">
-          <div class="d-flex justify-content-between align-items-center mb-3 ">
+        <section class="glass-card mb-4 mt-5 ms-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="section-title mb-0">Projects</h6>
-
           </div>
           <p class="subtitle">You'll be working on these project/tasks:</p>
 
           <div class="accordion custom-accordion" id="projectAccordion">
             <div class="accordion-item" v-for="(project, index) in projects" :key="index">
-              <h2 class="accordion-header d-flex justify-content-between align-items-center" :id="'heading' + index">
-                <!-- Left side: accordion toggle with project title -->
-                <button class="accordion-button collapsed flex-grow-1" type="button" data-bs-toggle="collapse"
-                  :data-bs-target="'#collapse' + index" :aria-controls="'collapse' + index"
+              <!-- Header -->
+              <h2 class="accordion-header d-flex align-items-center" :id="'heading' + index">
+                <button class="accordion-button collapsed flex-grow-1 d-flex align-items-center" type="button"
+                  data-bs-toggle="collapse" :data-bs-target="'#collapse' + index" :aria-controls="'collapse' + index"
                   @click="toggleAccordion(index)">
-                  <i class="fas fa-folder me-2"></i> {{ project.title }}
+                  <i class="fas fa-folder me-2"></i>
+                  <span class="project-title">{{ project.title }}</span>
                 </button>
-
-                <!-- Right side: How to button (only visible if open) -->
-                <div class="dropdown ms-2" v-if="activeAccordion === index">
-                  <button class="btn btn-submit dropdown-toggle" @click.stop="toggleDropdown(index)">
-                    How to ?
-                  </button>
-
-                  <ul v-show="openDropdown === index" class="dropdown-menu  bg-colors show">
-                    <li class=""><a href="#" class="dropdown-item bg-colors"><i class="bi bi-file-earmark-ruled "></i> Method »</a>
-                    </li>
-                    <li class="fs-6"><a class="dropdown-item " href="#">Design and Development</a></li>
-
-                    <!-- Submenu -->
-                    <li class="dropdown-submenu bg-colors ">
-                     <a class="dropdown-item bg-colors" href="#"> <i class="bi bi-tools "></i> Tools »</a>
-                      <ul class="dropdown-menu">
-                        <li class="fs-6">
-                          <a class="dropdown-item" href="#">
-                            Develop and create <br />
-                            security tools, processes,<br />
-                            and documentation
-                          </a>
-                        </li>
-                        <li class="dropdown-submenu bg-colors">
-                          <a href="#" class="dropdown-item bg-colors"><i class="bi bi-check2-square"></i> Action »</a>
-                          <ul class="dropdown-menu">
-                            <li>
-                              <a href="#" class="dropdown-item"
-                                @click.prevent="openDoc('https://docs.google.com/document/d/YOUR_DOC_ID/pub?embedded=true')">
-                                Lets Go <i class="bi bi-box-arrow-up-right"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
               </h2>
 
-
+              <!-- Body -->
               <div :id="'collapse' + index" class="accordion-collapse collapse" :aria-labelledby="'heading' + index"
                 data-bs-parent="#projectAccordion">
-                <div class="accordion-body">
-                  {{ project.details }}
+                <div class="accordion-body d-flex flex-column flex-md-row align-items-start gap-3">
+                  <!-- Left column -->
+                  <div class="card-details flex-grow-1">
+                    <p class="small-text text-muted mb-1">{{ project.domain }}</p>
+                    <h5 class="fw-bold mb-1">{{ project.title }}</h5>
 
+                    <p class="text-muted small mb-2">{{ project.subtitle }}</p>
+                    <div class="text-muted small">{{ project.date }}</div>
+
+                    <div class="mb-2">
+                      <span v-for="(tag, tIndex) in project.tags" :key="tIndex" class="badge-tag me-2">
+                        {{ tag }}
+                      </span>
+                    </div>
+                    <div class="progress-wrapper mb-1">
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" :style="{ width: project.progress + '%' }"
+                          :aria-valuenow="project.progress" aria-valuemin="0" aria-valuemax="100"></div>
+
+                      </div>
+                    </div>
+                    <div class="status small-text text-muted">{{ project.status }} {{ project.progress }}%</div>
+
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium aspernatur dolorum
+                          sapiente itaque iure accusantium mollitia et facilis vel inventore quam, eveniet neque amet
+                          vitae sit a alias perspiciatis quil Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          Laudantium nisi mollitia aliquid facilis expedita odio quae, molestias accusantium dolorum
+                          ipsa, laborum animi harum, corrupti corporis ab ea non maiores ullam!.</p>
+
+                        <!-- button column (positioned relative for dropdown) -->
+                        <div class="">
+
+                          <button class="btn howto-btn" @click.stop="toggleDropdown(index)"
+                            :aria-expanded="openDropdown === index ? 'true' : 'false'">
+                            How to ?
+                          </button>
+
+                          <!-- ROOT dropdown anchored under the button (slightly left-shifted to match screenshot) -->
+                          <ul v-show="openDropdown === index" class="dropdown-menu root-dropdown show header-dropdown">
+                            <li>
+                              <a href="#" class="dropdown-item bg-colors"><i class="bi bi-file-earmark-ruled"></i>
+                                Method »</a>
+                            </li>
+                            <li class="fs-6"><a class="dropdown-item" href="#">Design and Development</a></li>
+
+                            <li class="dropdown-submenu">
+                              <a class="dropdown-item" href="#"><i class="bi bi-tools"></i> Tools »</a>
+                              <ul class="dropdown-menu">
+                                <li class="fs-6">
+                                  <a class="dropdown-item" href="#">
+                                    Develop and create <br />
+                                    security tools, processes,<br />
+                                    and documentation
+                                  </a>
+                                </li>
+
+                                <li class="dropdown-submenu">
+                                  <a href="#" class="dropdown-item"><i class="bi bi-check2-square"></i> Action »</a>
+                                  <ul class="dropdown-menu">
+                                    <li>
+                                      <a href="#" class="dropdown-item"
+                                        @click.prevent="openDoc('https://docs.google.com/document/d/YOUR_DOC_ID/pub?embedded=true')">
+                                        Lets Go <i class="bi bi-box-arrow-up-right"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li>
+
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+
+
+
+
+
+
+
+                  </div>
 
 
                 </div>
@@ -123,12 +154,8 @@
           </div>
         </section>
 
-
-        <!-- tp -->
-
         <!-- Google Docs Side Panel -->
         <div v-if="selectedDoc" class="doc-panel" :class="{ fullscreen: isFullscreen }">
-          <!-- Panel Header -->
           <div class="doc-header">
             <button class="doc-btn" @click="toggleFullscreen" title="Toggle Fullscreen">
               <i class="bi" :class="isFullscreen ? 'bi-fullscreen-exit' : 'bi-arrows-fullscreen'"></i>
@@ -138,7 +165,6 @@
             </button>
           </div>
 
-          <!-- Embedded Google Doc -->
           <iframe :src="selectedDoc" width="100%" height="100%" style="border: none; flex: 1"></iframe>
         </div>
         <!-- End Google Docs Side Panel -->
@@ -158,13 +184,9 @@ export default {
       showModal: false,
       openDropdown: null as number | null,
       openSubmenu: null as string | null,
-      openActionSubmenu: false,
       selectedDoc: null as string | null,
       isFullscreen: false,
-
-
-      activeAccordion: null as number | null, // track open accordion
-
+      activeAccordion: null as number | null,
       companyDetails: [
         { label: "About the company", value: "ⓘ" },
         { label: "Industry", value: "Sustainable Products E-commerce" },
@@ -178,19 +200,46 @@ export default {
         { label: "Mandatory laws", value: "Security Investment" },
       ],
       projects: [
-        { title: "Project 1", details: "Details of Project 1 go here." },
-        { title: "Project 2", details: "Details of Project 2 go here." },
-        { title: "Project 3", details: "Details of Project 3 go here." },
+        {
+          domain: "Domain Name",
+          title: "Media Task 1",
+          subtitle: "Name of the Subtask",
+          tags: ["ISO 27001", "Policy", "Security"],
+          progress: 45,
+          status: "In progress",
+          date: "23rd July, 2025",
+          note: "Draft the first policy section and get peer review.",
+        },
+        {
+          domain: "Domain Name",
+          title: "Project 2",
+          subtitle: "Subtask example",
+          tags: ["Tag A", "Tag B"],
+          progress: 20,
+          status: "Not started",
+          date: "1st Aug, 2025",
+          note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis pariatur, dolorem ducimus magnam...",
+        },
+        {
+          domain: "Domain Name",
+          title: "Project 3",
+          subtitle: "Another task",
+          tags: ["Tag X"],
+          progress: 80,
+          status: "Almost done",
+          date: "10th Aug, 2025",
+          note: "Finalize remaining checklist items.",
+        },
       ],
-
     };
   },
 
   methods: {
     toggleAccordion(index: number) {
       this.activeAccordion = this.activeAccordion === index ? null : index;
-      this.openDropdown = null; // reset dropdown when accordion changes
-      this.openSubmenu = null; // reset submenu
+      // close dropdown when changing accordion
+      this.openDropdown = null;
+      this.openSubmenu = null;
     },
     toggleDropdown(index: number) {
       this.openDropdown = this.openDropdown === index ? null : index;
@@ -201,37 +250,43 @@ export default {
     },
     openDoc(link: string) {
       this.selectedDoc = link;
-      this.openDropdown = null; // close dropdown when doc opens
+      this.openDropdown = null;
       this.openSubmenu = null;
     },
     toggleFullscreen() {
       this.isFullscreen = !this.isFullscreen;
     },
-  }
-
-  // },
+  },
 };
 </script>
 
 <style scoped>
+/* original styles retained where important; updated dropdown cascade & spacing */
+
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-
-
 }
+
+/* Hide any leftover "view" button selectors (non-destructive) */
+.view-btn,
+.view-button,
+.btn-view {
+  display: none !important;
+}
+
+/* Gradient / accent class */
 .bg-colors {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  color:#f0eded;
+  color: #f0eded;
   font-weight: 700;
-border-radius: 2px;
+  border-radius: 2px;
 }
 
-
-
-/* About Company Button — clearly visible */
+/* About Company Button */
 .about-btn {
   background: #ffffff;
   color: #1d3557;
@@ -249,7 +304,6 @@ border-radius: 2px;
   color: #0d47a1;
   transform: scale(1.05);
 }
-
 
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
@@ -292,7 +346,6 @@ border-radius: 2px;
   margin: 2px 0 0 0;
 }
 
-/* Section Title */
 .section-title {
   font-size: 15px;
   font-weight: 600;
@@ -300,8 +353,6 @@ border-radius: 2px;
   color: #222;
 }
 
-
-/* Projects */
 .subtitle {
   font-size: 13px;
   color: #666;
@@ -312,7 +363,6 @@ border-radius: 2px;
   border: none;
   margin-bottom: 10px;
   border-radius: 8px;
-  /* overflow: hidden; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
@@ -320,6 +370,7 @@ border-radius: 2px;
   background: #f9f9f9;
   font-size: 14px;
   font-weight: 500;
+  padding: 12px 16px;
 }
 
 .custom-accordion .accordion-button:not(.collapsed) {
@@ -328,167 +379,167 @@ border-radius: 2px;
   font-weight: 600;
 }
 
-/* Policy */
-.small-text {
-  font-size: 13px;
+/* Keep project title spacing neat */
+.project-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.btn-submit {
+.accordion-body {
+  padding: 16px !important;
+}
+
+/* Tag style */
+.badge-tag {
+  display: inline-block;
+  background: #eef6ff;
+  color: #2b6db3;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* Progress styles */
+.progress {
+  height: 8px;
+  background: #e6eef6;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+  box-shadow: none;
+}
+
+/* How to button (pill) */
+.howto-btn,
+.btn.howto-btn {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   border: none;
-  border-radius: 10px;
-  padding: 10px 28px;
-  font-weight: 600;
-  font-size: 14px;
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-weight: 700;
+  font-size: 13px;
   color: #fff;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(45, 156, 219, 0.15);
 }
 
-.btn-submit:hover {
-  background: linear-gradient(90deg, #2f80ed, #2d9cdb);
+/* ---------- NEW: layout for progress/button/note & dropdown cascade ---------- */
+
+.progress-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  /* column 1 = bar, column 2 = button */
+  grid-template-rows: auto auto;
+  /* row 1 = bar+button, row 2 = note */
+  gap: 8px 12px;
+  align-items: center;
 }
 
-.btn-submit:disabled {
-  background: #b3d7e6;
-  cursor: not-allowed;
+/* SHORT PROGRESS BAR (requested 180px) */
+.progress-wrapper {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  width: 180px;
+  min-width: 120px;
+  max-width: 320px;
 }
 
-/* 🌟 Right-Side Slide Modal */
-.right-modal-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1050;
+/* The button's column so dropdown positions relative to it */
+.btn-col {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
   display: flex;
-  justify-content: flex-end;
-  align-items: stretch;
-  animation: fadeIn 0.3s ease forwards;
-}
-
-/* The white panel sliding from right */
-.right-modal {
-  background: #fff;
-  width: 420px;
-  max-width: 90%;
-  height: 100vh;
-  border-radius: 0;
-  overflow-y: auto;
-  box-shadow: -6px 0 16px rgba(0, 0, 0, 0.25);
-  animation: slideInRight 0.4s ease forwards;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Slide animation */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-
-/* Overlay fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-/* Modal parts */
-.right-modal .modal-header,
-.right-modal .modal-footer {
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
-  background: #f9fafb;
-}
-
-.right-modal .modal-body {
-  padding: 20px;
-}
-
-.btn-close {
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  cursor: pointer;
-  color: #555;
-  transition: color 0.2s;
-}
-
-.btn-close:hover {
-  color: #000;
-}
-
-
-
-
-
-/* Dropdown */
-
-
-.accordion-button {
-  font-size: 14px;
-}
-
-
-.dropdown-menu {
-  position: absolute;
-  right: 0;
-  /* stick to right edge of button */
-  transform: translateX(-0%);
-  background: white;
-  border: 1px solid #ddd;
-  min-width: 200px;
-  border-radius: 6px;
-  padding: 5px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  /* z-index: 1050; */
-}
-
-
-.dropdown-menu.show {
-  display: block;
-}
-
-.dropdown-item {
-  padding: 8px 14px;
-  font-size: 14px;
-  /* color: #333; */
-}
-
-.dropdown-item:hover {
-  color: #0b0c0e;
-
-}
-
-/* Submenu */
-.dropdown-submenu {
+  align-items: center;
   position: relative;
+  /* ensure dropdown is positioned relative to this */
 }
 
+/* ROOT dropdown anchored to the button container (slightly left-shifted to match screenshot) */
+.btn-col>.root-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -10px;
+  /* slight left shift — matches the screenshot placement */
+  transform: none;
+  min-width: 220px;
+  z-index: 2000;
+  /* high z-index so it floats above other elements */
+}
 
-
-/* .dropdown-submenu>.dropdown-menu {
+/* nested submenu: open to the right of parent menu (cascade) */
+.dropdown-submenu>.dropdown-menu {
+  position: absolute;
   top: 0;
-  right: 100%;
-  margin-right: 1.25rem;
-} */
+  left: 100%;
+  margin-left: 6px;
+  min-width: 220px;
+  display: none;
+  /* shown on hover (below) */
+  z-index: 2100;
+}
 
-/* Show submenu on hover */
+/* deeper nested submenu */
+.dropdown-submenu .dropdown-submenu>.dropdown-menu {
+  left: 100%;
+  top: 0;
+  margin-left: 6px;
+  z-index: 2200;
+}
+
+/* show submenu on hover */
 .dropdown-submenu:hover>.dropdown-menu {
   display: block;
 }
 
-/* Right-side Google Doc panel */
+/* NOTE: placed under the progress bar column and right-aligned in that column */
+.progress-note {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  margin: 18px 0 0 0;
+  /* requested gap */
+  text-align: right;
+  /* starts from the right edge of the progress bar column */
+  color: #6c757d;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* dropdown base look */
+.header-dropdown {
+  padding: 8px 0;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* dropdown menu base */
+.dropdown-menu {
+  background: white;
+  border: 1px solid #ddd;
+  min-width: 200px;
+  border-radius: 6px;
+  padding: 6px 0;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Submenu caret spacing tweak */
+.dropdown-submenu>a::after {
+  content: "›";
+  float: right;
+  font-weight: 700;
+}
+
+/* ensure nested menus remain accessible when hovering */
+.dropdown-submenu {
+  position: relative;
+}
+
+/* Doc panel */
 .doc-panel {
   position: fixed;
   top: 0;
@@ -496,41 +547,14 @@ border-radius: 2px;
   width: 50%;
   height: 100%;
   background: #fff;
-  box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
   z-index: 2000;
   display: flex;
   flex-direction: column;
-}
-
-.close-panel {
-  align-self: flex-end;
-  background: #0096D6;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  margin: 8px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.doc-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50%;
-  /* Default half width */
-  height: 100%;
-  background: #fff;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  z-index: 2000;
-  transition: all 0.3s ease-in-out;
 }
 
 .doc-panel.fullscreen {
   width: 100%;
-  /* Expand fullscreen */
 }
 
 .doc-header {
@@ -555,24 +579,19 @@ border-radius: 2px;
   transform: scale(1.2);
   color: #e63946;
 }
-/* ==========================================================
-   📱 TABLET (768px – 1024px) RESPONSIVE FIX PACK
-   ========================================================== */
-@media (min-width: 768px) and (max-width: 1024px) {
 
-  /* Sidebar – take 25% of screen */
+/* Responsive tweaks (tablet) */
+@media (min-width: 768px) and (max-width: 1024px) {
   .sidebar-col {
     flex: 0 0 25% !important;
     max-width: 25% !important;
   }
 
-  /* Main content – 75% */
   .col-10.col-md-10 {
     flex: 0 0 75% !important;
     max-width: 75% !important;
   }
 
-  /* Fix all components with ms-5 that were overflowing */
   .banner,
   .glass-card,
   .projects-card,
@@ -584,27 +603,11 @@ border-radius: 2px;
     width: calc(100% - 20px) !important;
   }
 
-  /* Banner adjustments */
-  .banner {
-    padding: 14px 18px !important;
-    width: calc(100% - 20px) !important;
-  }
-
-  .banner-title {
-    font-size: 14px !important;
-  }
-
-  .banner-sub {
-    font-size: 12px !important;
-  }
-
-  /* About company button smaller */
   .about-btn {
     font-size: 12px !important;
     padding: 6px 14px !important;
   }
 
-  /* Accordion items fit inside tablet width */
   .accordion-button {
     font-size: 13px !important;
     padding: 10px !important;
@@ -614,51 +617,45 @@ border-radius: 2px;
     font-size: 13px !important;
   }
 
-  /* Dropdown inside accordion */
   .dropdown-menu {
     min-width: 160px !important;
     font-size: 13px !important;
     padding: 5px;
   }
 
-  /* Industry modal (right side panel) */
   .right-modal {
     width: 320px !important;
   }
 
-  /* Company details text */
-  .detail-value {
-    font-size: 13px !important;
-  }
-
-  /* Glass card padding reduced */
-  .glass-card {
-    padding: 16px !important;
-  }
-
-  /* Projects title text */
-  .section-title {
-    font-size: 14px !important;
-  }
-
-  /* Subtitle adjustment */
-  .subtitle {
-    font-size: 12px !important;
-  }
-
-  /* Right-side DOC panel */
   .doc-panel {
-    width: 60% !important;    /* instead of 50% → better for tablet */
+    width: 60% !important;
   }
 
   .doc-panel.fullscreen {
     width: 100% !important;
   }
 
-  /* Buttons in doc panel */
   .doc-btn {
     font-size: 18px !important;
   }
 }
 
+/* Mobile tweaks */
+@media (max-width: 767.98px) {
+  .progress-wrapper {
+    width: 140px;
+    min-width: 100px;
+  }
+
+  .btn-col>.root-dropdown {
+    left: -6px;
+    min-width: 180px;
+  }
+
+  .progress-note {
+    font-size: 0.85rem;
+    margin-top: 12px;
+    text-align: right;
+  }
+}
 </style>
