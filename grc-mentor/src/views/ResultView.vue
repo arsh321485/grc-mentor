@@ -43,13 +43,7 @@
 
                           <circle cx="60" cy="60" r="52" class="track" />
 
-                          <circle
-                            cx="60"
-                            cy="60"
-                            r="52"
-                            class="progress"
-                            :style="circleStyle"
-                          />
+                          <circle cx="60" cy="60" r="52" class="progress" :style="circleStyle" />
 
                           <text x="60" y="64" text-anchor="middle" class="score-text">
                             {{ percent }}%
@@ -89,17 +83,17 @@
                         <strong class="ms-1">{{ displayLevel }}</strong>
                       </li>
                     </ul>
-
-                    <router-link to="/payment1" class="btn btn-submit">
-                      Proceed to Payment
-                    </router-link>
+                    <!-- payment button -->
+                    <div class="d-flex justify-content-end">
+                      <router-link to="/payment1" class="btn btn-submit">
+                        Proceed to Payment
+                      </router-link>
+                    </div>
                   </div>
-
                 </div>
 
                 <!-- Note -->
-                <div class="alert mt-4 mb-0"
-                     :class="passed ? 'alert-success' : 'alert-warning'">
+                <div class="alert mt-4 mb-0" :class="passed ? 'alert-success' : 'alert-warning'">
                   <strong>{{ passed ? "Nice!" : "Heads up:" }}</strong>
                   {{
                     passed
@@ -208,101 +202,6 @@ export default {
 .btn-submit {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
   border: none;
-  border-radius:10px;
-  padding: 10px 28px;
-  font-weight: 600;
-  font-size: 14px;
-  color: #fff;
-}
-
-/* Banner */
-.banner {
-  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
-  border-radius: 12px;
-  padding: 18px 25px;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-.banner-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
-}
-.banner-sub {
-  font-size: 13px;
-  opacity: 0.9;
-  margin: 2px 0 0 0;
-}
-.banner-right {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-/* Score card */
-.score-card {
-  background: #ffffff;
-  border: 1px solid #eef1f4;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-}
-
-.score-ring {
-  width: 180px;
-  height: 180px;
-}
-
-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.track {
-  fill: none;
-  stroke: #eef1f4;
-  stroke-width: 10;
-}
-
-.progress {
-  fill: none;
-  stroke: url(#grad); /* ✅ use gradient */
-  stroke-width: 10;
-  stroke-linecap: round;
-  transform: rotate(-90deg);
-  transform-origin: 60px 60px;
-  transition: stroke-dasharray 400ms ease;
-}
-
-.score-text {
-  font-size: 28px;
-  fill: #0d1b2a;
-  font-weight: 700;
-}
-
-/* Dots in list */
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #0d6efd;
-  display: inline-block;
-}
-
-.alert {
-  border: none;
-}
-@media (min-width: 1000px) and (max-width: 2000px) {
-  .mentorship-page {
-  background: linear-gradient(135deg, #f7faff, #eef3fb);
-  min-height: 100vh;
-  /* padding: 30px; */
-  font-family: "Inter", sans-serif;
-}
-
-.btn-submit {
-  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  border: none;
   border-radius: 10px;
   padding: 10px 28px;
   font-weight: 600;
@@ -321,16 +220,19 @@ svg {
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
+
 .banner-title {
   font-size: 16px;
   font-weight: 600;
   margin: 0;
 }
+
 .banner-sub {
   font-size: 13px;
   opacity: 0.9;
   margin: 2px 0 0 0;
 }
+
 .banner-right {
   font-size: 15px;
   font-weight: 600;
@@ -361,7 +263,8 @@ svg {
 
 .progress {
   fill: none;
-  stroke: url(#grad); /* ✅ use gradient */
+  stroke: url(#grad);
+  /* ✅ use gradient */
   stroke-width: 10;
   stroke-linecap: round;
   transform: rotate(-90deg);
@@ -387,5 +290,105 @@ svg {
 .alert {
   border: none;
 }
+
+@media (min-width: 1000px) and (max-width: 2000px) {
+  .mentorship-page {
+    background: linear-gradient(135deg, #f7faff, #eef3fb);
+    min-height: 100vh;
+    /* padding: 30px; */
+    font-family: "Inter", sans-serif;
+  }
+
+  .btn-submit {
+    background: linear-gradient(90deg, #2d9cdb, #2f80ed);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 28px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  /* Banner */
+  .banner {
+    background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
+    border-radius: 12px;
+    padding: 18px 25px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .banner-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .banner-sub {
+    font-size: 13px;
+    opacity: 0.9;
+    margin: 2px 0 0 0;
+  }
+
+  .banner-right {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* Score card */
+  .score-card {
+    background: #ffffff;
+    border: 1px solid #eef1f4;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  }
+
+  .score-ring {
+    width: 180px;
+    height: 180px;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .track {
+    fill: none;
+    stroke: #eef1f4;
+    stroke-width: 10;
+  }
+
+  .progress {
+    fill: none;
+    stroke: url(#grad);
+    /* ✅ use gradient */
+    stroke-width: 10;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 60px 60px;
+    transition: stroke-dasharray 400ms ease;
+  }
+
+  .score-text {
+    font-size: 28px;
+    fill: #0d1b2a;
+    font-weight: 700;
+  }
+
+  /* Dots in list */
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #0d6efd;
+    display: inline-block;
+  }
+
+  .alert {
+    border: none;
+  }
 }
 </style>

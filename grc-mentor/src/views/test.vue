@@ -1,661 +1,264 @@
 <template>
-  <main class="mentorship-page">
-    <div class="container-fluid row g-0">
-      <!-- Sidebar -->
-      <div class="col-2 col-md-2 sidebar-col">
-        <Sidebar class="sidebar" />
-      </div>
+  <div class="d-flex align-items-center justify-content-center min-vh-100 p-4 bg-light">
+    <div class="auth-card rounded-4 shadow-sm d-flex overflow-hidden">
+      <!-- LEFT SIDEBAR -->
+      <aside class="left-pane p-4 d-none d-md-flex flex-column">
+        <div class="brand mb-4">
+          <strong>Untitled UI</strong>
+        </div>
 
-      <!-- Main -->
-      <div class="col-10 col-md-10">
-        <!-- Banner -->
-        <div class="banner mb-4 ms-5">
-          <div class="banner-left">
-            <h6 class="banner-title"> Industry: Media</h6>
-            <p class="banner-sub">Policy Review</p>
-          </div>
-          <div class="ms-auto">
-            <button class="btn about-btn" @click="showModal = true">
-              <i class="bi bi-info-circle me-2"></i> About the Company
-            </button>
+        <nav class="steps flex-grow-1">
+          <ul class="list-unstyled mb-0">
+            <li v-for="(s, i) in steps" :key="i" class="d-flex gap-3 mb-3">
+              <div class="step-icon d-flex align-items-center justify-content-center"
+                   :class="{'bg-success text-white': i === currentStep, 'bg-light text-muted': i !== currentStep}">
+                <i :class="s.icon"></i>
+              </div>
+              <div class="step-text">
+                <div class="small text-muted">{{ s.title }}</div>
+                <div class="small">{{ s.subtitle }}</div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="mt-auto small text-muted">
+          <a href="#" class="text-decoration-none">&larr; Back to home</a>
+          <span class="d-block mt-2"><a href="/login" class="text-decoration-none">Sign in</a></span>
+        </div>
+      </aside>
+
+      <!-- RIGHT FORM -->
+      <section class="right-pane p-5 flex-fill">
+        <div class="d-flex justify-content-center mb-3">
+          <!-- small logo -->
+          <div class="logo rounded-circle bg-dark text-white d-flex align-items-center justify-content-center" style="width:36px;height:36px;">
+            <span style="font-weight:700">U</span>
           </div>
         </div>
 
-        <!-- Star Media Modal -->
-        <div v-if="showModal" class="right-modal-overlay">
-          <div class="right-modal">
-            <div class="modal-header d-flex justify-content-between align-items-center">
-              <h5 class="fw-bold mb-0">Star Media</h5>
-              <button class="btn-close" @click="showModal = false">✕</button>
+        <h3 class="text-center mb-1">Create a free account</h3>
+        <p class="text-center text-muted mb-4">Provide your email and choose a password.</p>
+
+        <!-- form card -->
+        <div class="mx-auto" style="max-width:420px;">
+          <form @submit.prevent="onSubmit" novalidate :class="{ 'was-validated': tried }">
+
+            <div class="mb-3">
+              <label class="form-label">Name *</label>
+              <input v-model.trim="form.name" required type="text" class="form-control" :class="{ 'is-invalid': errors.name }" />
+              <div class="invalid-feedback">{{ errors.name }}</div>
             </div>
 
-            <div class="modal-body">
-              <div class="row">
-                <div v-for="(item, i) in companyDetails" :key="i" class="col-12 col-md-6 col-lg-4 mb-3">
-                  <p class="detail-label fw-semibold text-muted small mb-1">{{ item.label }}</p>
-                  <p class="detail-value text-dark mb-0">{{ item.value }}</p>
-                </div>
+            <div class="mb-3">
+              <label class="form-label">Email *</label>
+              <input v-model.trim="form.email" required type="email" class="form-control" :class="{ 'is-invalid': errors.email }" />
+              <div class="invalid-feedback">{{ errors.email }}</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Organization Name</label>
+              <input v-model.trim="form.organization" type="text" class="form-control" />
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-md-6">
+                <label class="form-label">Teams Present *</label>
+                <select v-model="form.team" required class="form-select" :class="{ 'is-invalid': errors.team }">
+                  <option value="">Select...</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+                <div class="invalid-feedback">{{ errors.team }}</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Location</label>
+                <input v-model.trim="form.location" type="text" class="form-control" placeholder="City, Country" />
               </div>
             </div>
 
-            <div class="modal-footer">
-              <button class="btn btn-secondary" @click="showModal = false">Close</button>
+            <div class="mb-3">
+              <label class="form-label">Password *</label>
+              <input v-model="form.password" required type="password" class="form-control" :class="{ 'is-invalid': errors.password }" />
+              <div class="invalid-feedback">{{ errors.password }}</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Confirm password *</label>
+              <input v-model="form.passwordConfirm" required type="password" class="form-control" :class="{ 'is-invalid': errors.passwordConfirm }" />
+              <div class="invalid-feedback">{{ errors.passwordConfirm }}</div>
+            </div>
+
+            <!-- visual separator -->
+            <div class="d-flex align-items-center my-3">
+              <div class="flex-grow-1 h-1 bg-light" style="height:6px;border-radius:6px;"></div>
+              <div class="mx-2 small text-muted">OR</div>
+              <div class="flex-grow-1 h-1 bg-light" style="height:6px;border-radius:6px;"></div>
+            </div>
+
+            <!-- social buttons -->
+            <div class="d-grid gap-2 mb-3">
+              <button type="button" @click="onGoogle" class="btn btn-outline-secondary d-flex align-items-center justify-content-center gap-2">
+                <img src="https://www.svgrepo.com/show/355037/google.svg" alt="g" style="width:18px;height:18px" />
+                Sign up with Google
+              </button>
+
+              <button type="button" @click="onApple" class="btn btn-outline-secondary d-flex align-items-center justify-content-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-apple" viewBox="0 0 16 16">
+                  <path d="M11.013 1.5c0 .867-.438 1.66-1.088 2.2-.515.447-1.189.8-1.826.8-.04-1.05.45-1.824 1.035-2.4C9.576 1.45 10.14 1.1 11.013 1.5z"/>
+                  <path d="M8.79 3.9c.46.02 1.03.282 1.45.5.5.26 1.06.684 1.495 1.16.19.24.36.46.48.66-1.08.77-1.97.99-3.135 1-1.166.01-2.06-.34-3.14-1.1.12-.2.29-.42.48-.66.435-.477.995-.9 1.495-1.16.42-.217.99-.48 1.45-.502z"/>
+                </svg>
+                Sign up with Apple ID
+              </button>
+            </div>
+
+            <div class="d-grid mb-2">
+              <button class="btn btn-success btn-lg" :disabled="submitting">
+                <span v-if="submitting" class="spinner-border spinner-border-sm me-2"></span>
+                Continue
+              </button>
+            </div>
+
+            <p v-if="message" :class="['mt-2', messageClass]" role="alert">{{ message }}</p>
+          </form>
+
+          <!-- small progress indicator -->
+          <div class="progress-wrapper mt-4 d-flex align-items-center justify-content-center">
+            <div class="progress d-inline-block" style="width:160px;height:8px;border-radius:8px;background:#e9ecef;">
+              <div :style="{ width: progressPercent + '%', height:'8px', background:'#2f855a', borderRadius:'8px' }"></div>
             </div>
           </div>
         </div>
-
-        <!-- Projects Section -->
-        <section class="glass-card mb-4 mt-5 ms-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="section-title mb-0">Projects</h6>
-          </div>
-          <p class="subtitle">You'll be working on these project/tasks:</p>
-
-          <div class="accordion custom-accordion" id="projectAccordion">
-            <div class="accordion-item" v-for="(project, index) in projects" :key="index">
-              <!-- Header -->
-              <h2 class="accordion-header d-flex align-items-center" :id="'heading' + index">
-                <button class="accordion-button collapsed flex-grow-1 d-flex align-items-center" type="button"
-                  data-bs-toggle="collapse" :data-bs-target="'#collapse' + index" :aria-controls="'collapse' + index"
-                  @click="toggleAccordion(index)">
-                  <i class="fas fa-folder me-2"></i>
-                  <span class="project-title">{{ project.title }}</span>
-                </button>
-              </h2>
-
-              <!-- Body -->
-              <div :id="'collapse' + index" class="accordion-collapse collapse" :aria-labelledby="'heading' + index"
-                data-bs-parent="#projectAccordion">
-                <div class="accordion-body d-flex flex-column flex-md-row align-items-start gap-3">
-                  <!-- Left column -->
-                  <div class="card-details flex-grow-1">
-                    <p class="small-text text-muted mb-1">{{ project.domain }}</p>
-                    <h5 class="fw-bold mb-1">{{ project.title }}</h5>
-
-                    <p class="text-muted small mb-2">{{ project.subtitle }}</p>
-                    <div class="text-muted small">{{ project.date }}</div>
-
-                    <div class="mb-2">
-                      <span v-for="(tag, tIndex) in project.tags" :key="tIndex" class="badge-tag me-2">
-                        {{ tag }}
-                      </span>
-                    </div>
-                    <div class="progress-wrapper mb-1">
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" :style="{ width: project.progress + '%' }"
-                          :aria-valuenow="project.progress" aria-valuemin="0" aria-valuemax="100"></div>
-
-                      </div>
-                    </div>
-                    <div class="status small-text text-muted">{{ project.status }} {{ project.progress }}%</div>
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium aspernatur dolorum
-                          sapiente itaque iure accusantium mollitia et facilis vel inventore quam, eveniet neque amet
-                          vitae sit a alias perspiciatis quil Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          Laudantium nisi mollitia aliquid facilis expedita odio quae, molestias accusantium dolorum
-                          ipsa, laborum animi harum, corrupti corporis ab ea non maiores ullam!.</p>
-
-                        <!-- button column (positioned relative for dropdown) -->
-                        <div class="">
-
-                          <button class="btn howto-btn" @click.stop="toggleDropdown(index)"
-                            :aria-expanded="openDropdown === index ? 'true' : 'false'">
-                            How to ?
-                          </button>
-
-                          <!-- ROOT dropdown anchored under the button (slightly left-shifted to match screenshot) -->
-                          <ul v-show="openDropdown === index" class="dropdown-menu root-dropdown show header-dropdown">
-                            <li>
-                              <a href="#" class="dropdown-item bg-colors"><i class="bi bi-file-earmark-ruled"></i>
-                                Method »</a>
-                            </li>
-                            <li class="fs-6"><a class="dropdown-item" href="#">Design and Development</a></li>
-
-                            <li class="dropdown-submenu">
-                              <a class="dropdown-item" href="#"><i class="bi bi-tools"></i> Tools »</a>
-                              <ul class="dropdown-menu">
-                                <li class="fs-6">
-                                  <a class="dropdown-item" href="#">
-                                    Develop and create <br />
-                                    security tools, processes,<br />
-                                    and documentation
-                                  </a>
-                                </li>
-
-                                <li class="dropdown-submenu">
-                                  <a href="#" class="dropdown-item"><i class="bi bi-check2-square"></i> Action »</a>
-                                  <ul class="dropdown-menu">
-                                    <li>
-                                      <a href="#" class="dropdown-item"
-                                        @click.prevent="openDoc('https://docs.google.com/document/d/YOUR_DOC_ID/pub?embedded=true')">
-                                        Lets Go <i class="bi bi-box-arrow-up-right"></i>
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </li>
-
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-
-
-
-
-
-
-
-                  </div>
-
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Google Docs Side Panel -->
-        <div v-if="selectedDoc" class="doc-panel" :class="{ fullscreen: isFullscreen }">
-          <div class="doc-header">
-            <button class="doc-btn" @click="toggleFullscreen" title="Toggle Fullscreen">
-              <i class="bi" :class="isFullscreen ? 'bi-fullscreen-exit' : 'bi-arrows-fullscreen'"></i>
-            </button>
-            <button class="doc-btn" @click="selectedDoc = null" title="Close">
-              <i class="bi bi-x-circle-fill"></i>
-            </button>
-          </div>
-
-          <iframe :src="selectedDoc" width="100%" height="100%" style="border: none; flex: 1"></iframe>
-        </div>
-        <!-- End Google Docs Side Panel -->
-      </div>
+      </section>
     </div>
-  </main>
+  </div>
 </template>
 
-<script lang="ts">
-import Sidebar from "@/components/Sidebar.vue";
+<script setup>
+import { reactive, ref, computed } from 'vue';
 
-export default {
-  name: "IndustryModalPage",
-  components: { Sidebar },
-  data() {
-    return {
-      showModal: false,
-      openDropdown: null as number | null,
-      openSubmenu: null as string | null,
-      selectedDoc: null as string | null,
-      isFullscreen: false,
-      activeAccordion: null as number | null,
-      companyDetails: [
-        { label: "About the company", value: "ⓘ" },
-        { label: "Industry", value: "Sustainable Products E-commerce" },
-        { label: "Annual revenue", value: "$45 million" },
-        { label: "Geographic presence", value: "United States and Canada" },
-        { label: "Name of the project", value: "ISO 27001" },
-        { label: "Description", value: "ISO 27001 is a project..." },
-        { label: "Technology stack", value: "Modern cloud infrastructure" },
-        { label: "Business model", value: "Multi-vendor marketplace" },
-        { label: "Primary focus", value: "Sustainability" },
-        { label: "Mandatory laws", value: "Security Investment" },
-      ],
-      projects: [
-        {
-          domain: "Domain Name",
-          title: "Media Task 1",
-          subtitle: "Name of the Subtask",
-          tags: ["ISO 27001", "Policy", "Security"],
-          progress: 45,
-          status: "In progress",
-          date: "23rd July, 2025",
-          note: "Draft the first policy section and get peer review.",
-        },
-        {
-          domain: "Domain Name",
-          title: "Project 2",
-          subtitle: "Subtask example",
-          tags: ["Tag A", "Tag B"],
-          progress: 20,
-          status: "Not started",
-          date: "1st Aug, 2025",
-          note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis pariatur, dolorem ducimus magnam...",
-        },
-        {
-          domain: "Domain Name",
-          title: "Project 3",
-          subtitle: "Another task",
-          tags: ["Tag X"],
-          progress: 80,
-          status: "Almost done",
-          date: "10th Aug, 2025",
-          note: "Finalize remaining checklist items.",
-        },
-      ],
-    };
-  },
+const steps = [
+  { title: 'Your details', subtitle: 'Provide an email and password', icon: 'bi bi-person' },
+  { title: 'Verify your email', subtitle: 'Enter your verification code', icon: 'bi bi-envelope' },
+  { title: 'Invite your team', subtitle: 'Start collaborating with your team', icon: 'bi bi-people' },
+  { title: 'Welcome to Untitled!', subtitle: 'Get up and running in 3 minutes', icon: 'bi bi-check2-circle' }
+];
 
-  methods: {
-    toggleAccordion(index: number) {
-      this.activeAccordion = this.activeAccordion === index ? null : index;
-      // close dropdown when changing accordion
-      this.openDropdown = null;
-      this.openSubmenu = null;
-    },
-    toggleDropdown(index: number) {
-      this.openDropdown = this.openDropdown === index ? null : index;
-      this.openSubmenu = null;
-    },
-    toggleSubmenu(name: string) {
-      this.openSubmenu = this.openSubmenu === name ? null : name;
-    },
-    openDoc(link: string) {
-      this.selectedDoc = link;
-      this.openDropdown = null;
-      this.openSubmenu = null;
-    },
-    toggleFullscreen() {
-      this.isFullscreen = !this.isFullscreen;
-    },
-  },
-};
+const currentStep = 0; // visual; can be dynamic if you implement multi-step
+const progressPercent = computed(() => ((currentStep + 1) / steps.length) * 100);
+
+const form = reactive({
+  name: '',
+  email: '',
+  organization: '',
+  team: '',
+  location: '',
+  password: '',
+  passwordConfirm: ''
+});
+
+const errors = reactive({});
+const tried = ref(false);
+const submitting = ref(false);
+const message = ref('');
+const messageClass = ref('');
+
+function validate() {
+  Object.keys(errors).forEach(k => delete errors[k]);
+  let ok = true;
+
+  if (!form.name) { errors.name = 'Name is required.'; ok = false; }
+  if (!form.email) { errors.email = 'Email is required.'; ok = false; }
+  else if (!/^\S+@\S+\.\S+$/.test(form.email)) { errors.email = 'Enter a valid email.'; ok = false; }
+
+  if (!form.team) { errors.team = 'Select a team.'; ok = false; }
+
+  if (!form.password) { errors.password = 'Password is required.'; ok = false; }
+  else if (form.password.length < 8) { errors.password = 'Minimum 8 characters.'; ok = false; }
+
+  if (form.password !== form.passwordConfirm) { errors.passwordConfirm = 'Passwords do not match.'; ok = false; }
+
+  return ok;
+}
+
+async function onSubmit() {
+  tried.value = true;
+  message.value = '';
+  if (!validate()) return;
+  submitting.value = true;
+
+  const payload = {
+    name: form.name,
+    email: form.email,
+    organization: form.organization,
+    team: form.team,
+    location: form.location,
+    password: form.password
+  };
+
+  try {
+    console.log('SIGNUP PAYLOAD:', JSON.stringify(payload, null, 2));
+    // simulate network
+    await new Promise(r => setTimeout(r, 700));
+    message.value = 'Account created (demo). Check console for payload.';
+    messageClass.value = 'text-success';
+  } catch (e) {
+    message.value = 'Something went wrong.';
+    messageClass.value = 'text-danger';
+  } finally {
+    submitting.value = false;
+  }
+}
+
+function onGoogle() {
+  // demo placeholder
+  alert('Google sign-up clicked (demo). Hook your OAuth flow here.');
+}
+function onApple() {
+  alert('Apple sign-up clicked (demo). Hook your OAuth flow here.');
+}
 </script>
 
 <style scoped>
-/* original styles retained where important; updated dropdown cascade & spacing */
-
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-}
-
-/* Hide any leftover "view" button selectors (non-destructive) */
-.view-btn,
-.view-button,
-.btn-view {
-  display: none !important;
-}
-
-/* Gradient / accent class */
-.bg-colors {
-  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  color: #f0eded;
-  font-weight: 700;
-  border-radius: 2px;
-}
-
-/* About Company Button */
-.about-btn {
-  background: #ffffff;
-  color: #1d3557;
-  border-radius: 10px;
-  font-weight: 600;
-  padding: 8px 20px;
-  font-size: 14px;
-  border: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease-in-out;
-}
-
-.about-btn:hover {
-  background: #f1f1f1;
-  color: #0d47a1;
-  transform: scale(1.05);
-}
-
-.mentorship-page {
-  background: linear-gradient(135deg, #f7faff, #eef3fb);
-  min-height: 100vh;
-  padding: 30px;
-  font-family: "Inter", sans-serif;
-}
-
-/* Glass Cards */
-.glass-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  padding: 19px;
-}
-
-/* Banner */
-.banner {
-  margin-top: 30px;
-  width: 95%;
-  background: linear-gradient(90deg, #2d9cdb, #56ccf2, #2f80ed);
-  border-radius: 12px;
-  padding: 18px 25px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-.banner-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
-}
-
-.banner-sub {
-  font-size: 13px;
-  opacity: 0.9;
-  margin: 2px 0 0 0;
-}
-
-.section-title {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #222;
-}
-
-.subtitle {
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 14px;
-}
-
-.custom-accordion .accordion-item {
-  border: none;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.custom-accordion .accordion-button {
-  background: #f9f9f9;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 12px 16px;
-}
-
-.custom-accordion .accordion-button:not(.collapsed) {
-  background: #eaf5ff;
-  color: #2d7dd2;
-  font-weight: 600;
-}
-
-/* Keep project title spacing neat */
-.project-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.accordion-body {
-  padding: 16px !important;
-}
-
-/* Tag style */
-.badge-tag {
-  display: inline-block;
-  background: #eef6ff;
-  color: #2b6db3;
-  padding: 6px 10px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 12px;
-}
-
-/* Progress styles */
-.progress {
-  height: 8px;
-  background: #e6eef6;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  box-shadow: none;
-}
-
-/* How to button (pill) */
-.howto-btn,
-.btn.howto-btn {
-  background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  border: none;
-  border-radius: 12px;
-  padding: 6px 12px;
-  font-weight: 700;
-  font-size: 13px;
-  color: #fff;
-  white-space: nowrap;
-  box-shadow: 0 6px 18px rgba(45, 156, 219, 0.15);
-}
-
-/* ---------- NEW: layout for progress/button/note & dropdown cascade ---------- */
-
-.progress-grid {
-  display: grid;
-  grid-template-columns: auto auto;
-  /* column 1 = bar, column 2 = button */
-  grid-template-rows: auto auto;
-  /* row 1 = bar+button, row 2 = note */
-  gap: 8px 12px;
-  align-items: center;
-}
-
-/* SHORT PROGRESS BAR (requested 180px) */
-.progress-wrapper {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  width: 180px;
-  min-width: 120px;
-  max-width: 320px;
-}
-
-/* The button's column so dropdown positions relative to it */
-.btn-col {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  display: flex;
-  align-items: center;
-  position: relative;
-  /* ensure dropdown is positioned relative to this */
-}
-
-/* ROOT dropdown anchored to the button container (slightly left-shifted to match screenshot) */
-.btn-col>.root-dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: -10px;
-  /* slight left shift — matches the screenshot placement */
-  transform: none;
-  min-width: 220px;
-  z-index: 2000;
-  /* high z-index so it floats above other elements */
-}
-
-/* nested submenu: open to the right of parent menu (cascade) */
-.dropdown-submenu>.dropdown-menu {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  margin-left: 6px;
-  min-width: 220px;
-  display: none;
-  /* shown on hover (below) */
-  z-index: 2100;
-}
-
-/* deeper nested submenu */
-.dropdown-submenu .dropdown-submenu>.dropdown-menu {
-  left: 100%;
-  top: 0;
-  margin-left: 6px;
-  z-index: 2200;
-}
-
-/* show submenu on hover */
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-
-/* NOTE: placed under the progress bar column and right-aligned in that column */
-.progress-note {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-  margin: 18px 0 0 0;
-  /* requested gap */
-  text-align: right;
-  /* starts from the right edge of the progress bar column */
-  color: #6c757d;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-/* dropdown base look */
-.header-dropdown {
-  padding: 8px 0;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-/* dropdown menu base */
-.dropdown-menu {
+.auth-card {
+  width: 100%;
+  max-width: 1100px;
   background: white;
-  border: 1px solid #ddd;
-  min-width: 200px;
-  border-radius: 6px;
-  padding: 6px 0;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  overflow: hidden;
 }
 
-/* Submenu caret spacing tweak */
-.dropdown-submenu>a::after {
-  content: "›";
-  float: right;
-  font-weight: 700;
-}
-
-/* ensure nested menus remain accessible when hovering */
-.dropdown-submenu {
-  position: relative;
-}
-
-/* Doc panel */
-.doc-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: #fff;
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
-  z-index: 2000;
+/* left pane */
+.left-pane {
+  width: 320px;
+  background: #fbfbfb;
+  border-right: 1px solid #eef0f2;
   display: flex;
   flex-direction: column;
 }
 
-.doc-panel.fullscreen {
-  width: 100%;
+/* step icon circle */
+.step-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #f1f3f5;
+  color: #6b7280;
+  display: inline-flex;
 }
+.step-icon i { font-size: 14px; }
 
-.doc-header {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  background: #f9fafb;
-}
+/* right pane */
+.right-pane { min-width: 420px; }
 
-.doc-btn {
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  color: #0096d6;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
+.logo { width:36px;height:36px;border-radius:8px; }
 
-.doc-btn:hover {
-  transform: scale(1.2);
-  color: #e63946;
-}
-
-/* Responsive tweaks (tablet) */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .sidebar-col {
-    flex: 0 0 25% !important;
-    max-width: 25% !important;
-  }
-
-  .col-10.col-md-10 {
-    flex: 0 0 75% !important;
-    max-width: 75% !important;
-  }
-
-  .banner,
-  .glass-card,
-  .projects-card,
-  .top-banner,
-  .accordion,
-  section,
-  .industry-row {
-    margin-left: 20px !important;
-    width: calc(100% - 20px) !important;
-  }
-
-  .about-btn {
-    font-size: 12px !important;
-    padding: 6px 14px !important;
-  }
-
-  .accordion-button {
-    font-size: 13px !important;
-    padding: 10px !important;
-  }
-
-  .accordion-body {
-    font-size: 13px !important;
-  }
-
-  .dropdown-menu {
-    min-width: 160px !important;
-    font-size: 13px !important;
-    padding: 5px;
-  }
-
-  .right-modal {
-    width: 320px !important;
-  }
-
-  .doc-panel {
-    width: 60% !important;
-  }
-
-  .doc-panel.fullscreen {
-    width: 100% !important;
-  }
-
-  .doc-btn {
-    font-size: 18px !important;
-  }
-}
-
-/* Mobile tweaks */
-@media (max-width: 767.98px) {
-  .progress-wrapper {
-    width: 140px;
-    min-width: 100px;
-  }
-
-  .btn-col>.root-dropdown {
-    left: -6px;
-    min-width: 180px;
-  }
-
-  .progress-note {
-    font-size: 0.85rem;
-    margin-top: 12px;
-    text-align: right;
-  }
+/* smaller screens adjustments */
+@media (max-width: 767px) {
+  .auth-card { flex-direction: column; border-radius: 12px; }
+  .left-pane { display: none !important; }
+  .right-pane { padding: 2rem !important; }
 }
 </style>

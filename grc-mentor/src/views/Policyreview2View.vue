@@ -58,9 +58,13 @@
                 <button class="accordion-button collapsed flex-grow-1 d-flex align-items-center" type="button"
                   data-bs-toggle="collapse" :data-bs-target="'#collapse' + index" :aria-controls="'collapse' + index"
                   @click="toggleAccordion(index)">
-                  <i class="fas fa-folder me-2"></i>
-                  <span class="project-title">{{ project.title }}</span>
+                  <i class="fas fa-folder me-2"> </i>
+                  <span class="project-title flex-grow-1">{{ project.title }} <span v-for="(tag, tIndex) in project.tags" :key="tIndex" class="badge-tag  ms-lg-3"> {{tag }}</span></span>
+
+                       <span class="ms-auto align-items-end badge-tag ">{{ project.status }} </span>
                 </button>
+
+
               </h2>
 
               <!-- Body -->
@@ -75,11 +79,7 @@
                     <p class="text-muted small mb-2">{{ project.subtitle }}</p>
                     <div class="text-muted small">{{ project.date }}</div>
 
-                    <div class="mb-2">
-                      <span v-for="(tag, tIndex) in project.tags" :key="tIndex" class="badge-tag me-2">
-                        {{ tag }}
-                      </span>
-                    </div>
+
                     <div class="progress-wrapper mb-1">
                       <div class="progress">
                         <div class="progress-bar" role="progressbar" :style="{ width: project.progress + '%' }"

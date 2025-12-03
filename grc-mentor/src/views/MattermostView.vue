@@ -145,7 +145,7 @@
                       <h6 class="time-label">Select your reporting time ({{ selectedZoneComputed }}):</h6>
                       <div class="time-options">
                         <button
-                          v-for="(slot, i) in timeSlots[selectedZoneComputed]"
+                          v-for="(slot, i) in timeSlotsForSelectedZone"
                           :key="i"
                           class="time-btn"
                           :class="{ active: selectedTime === slot }"
@@ -162,8 +162,8 @@
 </div>
 
 <!-- Finish button: placed under time buttons and aligned with left -->
-<div class="time-footer" v-if="selectedTime">
-  <router-link :to="finishRoute" class="next-btn btn-submit d-flex justify-content-end">
+<div class="time-footer d-flex justify-content-end" v-if="selectedTime">
+  <router-link :to="finishRoute" class="next-btn btn-submit ">
     Finish Onboarding
   </router-link>
 </div>
@@ -181,9 +181,10 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import Stepper from "@/components/Stepper.vue";
 
-export default {
+export default defineComponent({
   name: "MattermostView",
   components: { Stepper },
   data() {
@@ -195,36 +196,56 @@ export default {
       },
       status: "pending",
       // timezone management
-      detectedIana: "",       // e.g. "Asia/Kolkata"
-      detectedLabel: "",      // e.g. "India (IST)"
-      allowManual: false,     // if user wants to manually choose
-      selectedZone: "",       // IST | EST | PST | GMT or empty
-      selectedTime: "",
+      detectedIana: "", // e.g. "Asia/Kolkata"
+      detectedLabel: "", // e.g. "India (IST)"
+      allowManual: false, // if user wants to manually choose
+      // selectedZone: "",       // IST | EST | PST | GMT or empty
+      // selectedTime: "",
+      finishRoute: "/grc101",
       timeSlots: {
-        IST: ["9 AM - 5 PM", "10 AM - 6 PM", "8 AM - 4 PM"],
+         IST: ["9 AM - 5 PM", "10 AM - 6 PM", "8 AM - 4 PM"],
         EST: ["8 AM - 4 PM", "9 AM - 5 PM", "1 PM - 9 PM"],
         PST: ["7 AM - 3 PM", "8 AM - 4 PM", "10 AM - 6 PM"],
         GMT: ["9 AM - 5 PM", "10 AM - 6 PM", "7 AM - 3 PM"]
-      },
-      finishRoute: "/grc101"
+      } as const,
+      selectedZone: "IST",
+      selectedTime: null as string | null,
     };
   },
   computed: {
     // If user manually selected zone use that, otherwise use detected mapping
-    selectedZoneComputed(): string | null {
-      if (this.allowManual && this.selectedZone) return this.selectedZone;
+    // Narrowed return type to the keys of timeSlots (or null)
+    selectedZoneComputed(): (keyof typeof this.timeSlots) | null {
+      if (this.allowManual && this.selectedZone) {
+        const candidate = this.selectedZone as keyof typeof this.timeSlots;
+        return candidate && candidate in this.timeSlots ? candidate : null;
+      }
       // derive short label from detectedIana
-      return this.mapIanaToShort(this.detectedIana);
-    }
+      const mapped = this.mapIanaToShort(this.detectedIana);
+      const key = mapped as keyof typeof this.timeSlots | null;
+      return key && key in this.timeSlots ? (key as keyof typeof this.timeSlots) : null;
+    },
+
+    // computed getter that always returns a string[] so template indexing is safe
+    timeSlotsForSelectedZone(): string[] {
+      const key = this.selectedZoneComputed;
+      if (!key) return [];
+      // `this.timeSlots[key]` is readonly (because of `as const`), return a copy
+      return Array.isArray(this.timeSlots[key]) ? [...this.timeSlots[key]] : [];
+    },
   },
   mounted() {
     this.detectTimezone();
   },
   methods: {
-    openModal() { this.showModal = true; },
-    closeModal() { this.showModal = false; },
+    openModal() {
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+    },
     saveChanges() {
-        this.status = "success";
+      this.status = "success";
       this.closeModal();
       alert("Your details have been updated!");
     },
@@ -235,7 +256,8 @@ export default {
     },
 
     // Map common IANA tz -> our short labels (fallback to IANA's region)
-    mapIanaToShort(iana: string): string | null {
+    // Return type narrowed to keys of timeSlots or null
+    mapIanaToShort(iana: string): (keyof typeof this.timeSlots) | null {
       if (!iana) return null;
       const tz = iana.toLowerCase();
       if (tz.includes("kolkata") || tz.includes("india") || tz.includes("asia/kolkata")) return "IST";
@@ -268,16 +290,18 @@ export default {
         else this.detectedLabel = tz || "Unknown";
 
         // pre-fill selectedZone (so the time slots show)
-        this.selectedZone = short || "";
+        this.selectedZone = (short as string) || "";
       } catch (e) {
-        // graceful fallback
+        // graceful fallback — log the error for debugging and then reset values
+        // eslint-disable-next-line no-console
+        console.error(e);
         this.detectedIana = "";
         this.detectedLabel = "";
         this.selectedZone = "";
       }
-    }
-  }
-};
+    },
+  },
+});
 </script>
 
 <style scoped>
@@ -355,8 +379,7 @@ export default {
 
 .time-footer {
   margin-top: 12px;
-  display: flex;
-  justify-content: flex-start;
+
 }
 
 .time-btn {
@@ -574,29 +597,14 @@ export default {
 
 /* Next Button */
 .next-btn {
-  /* position: fixed;
-  bottom: 90px;
-  left: 30rem;
-  transform: translateX(-50%);
-  margin-top: 30rem;
-  padding: 12px 40px;
-  background-color: #007baf;
-  color: #ffffff;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 600;
-  transition: background 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000; */
- /* ensure previous positioning rules don't pull button elsewhere */
+
+
 
   position: static !important;
   transform: none !important;
-  left: auto !important;
+  right: auto !important;
   bottom: auto !important;
-  margin-left: 0;
+  /* margin-left: 0; */
 }
 
 .next-btn:hover {
@@ -621,78 +629,6 @@ export default {
   background-color: #4a9dcf;
 }
 
-
-/* Responsive Styling */
-@media (max-width: 768px) {
-  .next-btn {
-    width: 90%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 14px;
-    font-size: 15px;
-  }
-}
-
-/* ✅ Center Modal */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-.modal-box {
-  width: 400px;
-  max-width: 95%;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  animation: fadeIn 0.3s ease;
-}
-
-.modal-header,
-.modal-footer {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-body {
-  padding: 15px;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.mattermost-btn {
-  padding: 12px 40px;
-  background-color: #007baf;
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 600;
-  transition: background 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  margin-top: 15px;
-}
-
-.mattermost-btn:hover {
-  background-color: #4a9dcf;
-}
 
 .success-icon {
   display: flex;

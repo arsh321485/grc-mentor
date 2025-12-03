@@ -21,12 +21,12 @@
                 <!-- <p class="mb-4 ps-5 pt-3 content-title">Your certificate</p> -->
 
                 <!-- Certificate Preview -->
-                <div class="mb-3">
-                    <img :src="certificatePath" alt="Certificate" class="ms-5 w-50" />
+                <div class="mb-3 d-flex justify-content-center">
+                    <img :src="certificatePath" alt="Certificate" class=" w-50" />
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="d-flex gap-3 justify-content-start ps-3 ms-5">
+                <div class="d-flex gap-3 justify-content-center ">
                     <!-- Share on LinkedIn -->
                     <button class="btn action-btn   d-flex align-items-center" @click="shareOnLinkedIn">
                         <i class="bi bi-box-arrow-up me-2"></i> Share on LinkedIn

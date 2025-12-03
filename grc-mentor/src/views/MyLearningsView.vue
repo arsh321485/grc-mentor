@@ -276,7 +276,10 @@ export default {
 /* Buttons */
 .btn-gradient {
   background: linear-gradient(90deg, #2d9cdb, #2f80ed);
-  border: none;
+/* background: #36a866; */
+  color: rgb(25, 216, 41);
+  border-radius: 10px;
+  /* border: none; */
   border-radius: 10px;
   padding: 8px 20px;
   font-weight: 500;

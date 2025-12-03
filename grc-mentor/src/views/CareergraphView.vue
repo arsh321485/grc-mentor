@@ -60,9 +60,9 @@
           </div>
 
           <!-- Grc701 -->
-          <div class="graph-box inactive">
+          <!-- <div class="graph-box inactive">
             <p class="placeholder-text">Grc701</p>
-          </div>
+          </div> -->
 
 
         </section>
@@ -132,7 +132,7 @@ export default {
 /* Graph Layout */
 .graph-layout {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: stretch;
   /* width: 100%; */
 
