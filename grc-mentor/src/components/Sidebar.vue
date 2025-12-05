@@ -181,7 +181,7 @@ type NavItemDropdown = {
 type NavItem = NavItemLink | NavItemDropdown;
 
 export default defineComponent({
-  name: "Sidebar",
+  name: "SideBar",
   data() {
     return {
       searchQuery: "" as string,
@@ -201,7 +201,7 @@ export default defineComponent({
         { name: "Task View", icon: "fas fa-list-check", key: "task", type: "dropdown" } as NavItem,
         { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph", type: "link" } as NavItem,
         { name: "My Profile", icon: "fas fa-user", key: "profile", type: "dropdown" } as NavItem,
-        { name: "MY Achievements", icon: "fas fa-award", key: "achievements", type: "dropdown" } as NavItem,
+        { name: "My Achievements", icon: "fas fa-award", key: "achievements", type: "dropdown" } as NavItem,
         { name: "Matching Jobs", icon: "fas fa-briefcase", route: "/matchingjobs", type: "link" } as NavItem,
       ] as NavItem[],
 

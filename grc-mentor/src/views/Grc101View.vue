@@ -23,7 +23,13 @@
           <div class="banner-content">
             <h4 class="banner-title">Industries</h4>
           </div>
-        </div>
+</div>
+<select v-model="selectedFilter" class="filter-select">
+  <option value="All">All Tasks</option>
+  <option value="Completed">Completed</option>
+  <option value="In progress">In progress</option>
+  <option value="Not started">Not started</option>
+</select>
 
         <!-- 🟢 Tabs -->
         <div class="tab-buttons mb-4 d-flex flex-wrap gap-2 ms-5">
@@ -112,6 +118,7 @@
         </section>
       </div>
     </div>
+
   </main>
 </template>
 
@@ -123,6 +130,7 @@ export default {
   components: { Sidebar },
   data() {
     return {
+      selectedFilter: "All",
       activeTab: "Media",
       industries: [
         {
@@ -131,7 +139,7 @@ export default {
             domain:"Domain Name",
             title: `Media Task ${i + 1}`,
             subtitle: "Name of the Subtask",
-            deadline: "23rd July, 2025",
+              deadline: "23rd July, 2025",
             progress: i % 2 === 0 ? "In progress" : "Completed",
             progressValue: i % 2 === 0 ? 60 : 100,
             tag: "ISO 27001",
@@ -185,14 +193,40 @@ export default {
     };
   },
   computed: {
+    // filteredIndustries() {
+    //   return this.industries.filter((i) => i.name === this.activeTab);
+    // },
     filteredIndustries() {
-      return this.industries.filter((i) => i.name === this.activeTab);
-    },
+  return this.industries
+    .filter((i) => i.name === this.activeTab)
+    .map((industry) => ({
+      ...industry,
+      tasks:
+        this.selectedFilter === "All"
+          ? industry.tasks
+          : industry.tasks.filter((t) => t.progress === this.selectedFilter),
+    }));
+}
+
   },
 };
 </script>
 
 <style scoped>
+.filter-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #2d9cdb;
+  font-size: 14px;
+  color: #2d9cdb;
+  background: #fff;
+  cursor: pointer;
+}
+.filter-select:focus {
+  outline: none;
+  border-color: #2f80ed;
+}
+
 .mentorship-page {
   background: linear-gradient(135deg, #f7faff, #eef3fb);
   min-height: 100vh;

@@ -707,5 +707,90 @@ html, body, .mentorship-page {
     font-size: 17px;
   }
 }
+/* ---------- Modal Overlay & Box (drop-in replacement) ---------- */
+.modal-overlay {
+  position: fixed;       /* stay above page and cover whole viewport */
+  inset: 0;              /* top:0; right:0; bottom:0; left:0; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.55); /* dark translucent backdrop */
+  z-index: 1090;         /* very high z-index so it sits above other UI */
+  padding: 20px;         /* spacing on small screens */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Modal box */
+.modal-box {
+  width: 100%;
+  max-width: 680px;      /* comfortable max width */
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 18px 50px rgba(20, 40, 60, 0.25);
+  overflow: hidden;      /* keep header/body/footer together */
+  animation: modalPop 160ms ease-out;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 64px); /* ensure it never overflows viewport */
+}
+
+/* smooth entrance */
+@keyframes modalPop {
+  from { transform: translateY(6px) scale(.995); opacity: 0; }
+  to   { transform: translateY(0)   scale(1);     opacity: 1; }
+}
+
+/* header / close button */
+.modal-header {
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eef3f7;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,251,0.98));
+}
+.modal-header h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  padding: 6px 8px;
+  cursor: pointer;
+  color: #3b3f45;
+  border-radius: 8px;
+}
+.close-btn:hover { background: rgba(0,0,0,0.04); }
+
+/* modal body scrolls inside the box if tall */
+.modal-body {
+  padding: 18px;
+  overflow: auto;               /* scroll inside the modal when content is tall */
+  flex: 1 1 auto;               /* flex grow so body takes available space */
+}
+
+/* footer */
+.modal-footer {
+  padding: 12px 18px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  border-top: 1px solid #eef3f7;
+  background: #fff;
+}
+
+/* responsive tweaks */
+@media (max-width: 576px) {
+  .modal-box { max-width: 520px; }
+  .modal-header h5 { font-size: 15px; }
+  .modal-body { padding: 14px; }
+  .modal-footer { padding: 10px 14px; }
+}
+
 
 </style>

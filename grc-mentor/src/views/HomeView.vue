@@ -278,7 +278,7 @@
 
     <div class="container-lg" style="max-width: 1100px;">
       <div class="row mt-3 core-benfites-row">
-        <div class="col-lg-6 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-4 mb-4">
           <div class="home-core-benifts-widget">
             <img class="main-img" src="../assets/course-img.png" alt="">
             <div class="blur-section"></div>
@@ -305,7 +305,7 @@
 
 
 
-        <div class="col-lg-6 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-4 mb-4">
           <div class="home-core-benifts-widget">
             <img class="main-img" src="../assets/course-img.png" alt="">
             <div class="blur-section"></div>
@@ -325,7 +325,7 @@
           </div>
           <!-- card here -->
         </div>
-        <div class="col-lg-6 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-4 mb-4">
           <div class="home-core-benifts-widget">
             <img class="main-img" src="../assets/course-img.png" alt="">
             <div class="blur-section"></div>
@@ -345,7 +345,7 @@
           </div>
           <!-- card here -->
         </div>
-        <div class="col-lg-6 col-md-6 mb-4">
+        <!-- <div class="col-lg-6 col-md-6 mb-4">
           <div class="home-core-benifts-widget">
             <img class="main-img" src="../assets/course-img.png" alt="">
             <div class="blur-section"></div>
@@ -363,8 +363,8 @@
               </router-link>
             </div>
           </div>
-          <!-- card here -->
-        </div>
+
+        </div> -->
       </div>
     </div>
 
@@ -1406,7 +1406,7 @@ main {
   border: 1px solid #0096D6;
   color: white;
   border-radius: 20px;
-  margin-bottom: 60px;
+  margin-bottom: 100px;
 }
 
 /* Flip Card */

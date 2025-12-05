@@ -44,12 +44,12 @@
               GRC-501
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="modal"
               data-bs-target="#grc701Modal">
               GRC-701
             </a>
-          </li>
+          </li> -->
 
           <!-- About Dropdown -->
           <li class="nav-item dropdown ms-3" @mouseleave="closeAbout">
@@ -98,7 +98,7 @@
                 <div class="card-body">
                   <h6 class="fw-bold">{{ item.title }}</h6>
                   <p class="text-muted">{{ item.description }}</p>
-                 
+
 
                   <router-link to="/signup-grc101" class="text-primary fw-bold">
                    Enroll Now ->
@@ -150,7 +150,7 @@
                 <p class="typing-paragraph text-start">{{ typedText }}</p>
 
 
-               
+
               </div>
             </div> -->
 
@@ -320,7 +320,7 @@ export default defineComponent({
     const toggleAbout = () => (isAboutOpen.value = !isAboutOpen.value);
     const closeAbout = () => (isAboutOpen.value = false);
 
-   
+
     const grc101Data = ref([
       { title: "Introduction to GRC", description: "Learn the basics of Governance, Risk & Compliance." },
       { title: "ISO 27001 Overview", description: "Understand core security framework concepts." },
@@ -373,11 +373,11 @@ export default defineComponent({
     const grc101Data = ref([
       { title: "Introduction to GRC", description: `Welcome to GRC 101! This course will Welcome to GRC 101! This course will guide you step by step through Governance, Risk, and Compliance fundamentals, helping you understand frameworks, policies, and real-world applications. You will learn how organizations identify, assess, and mitigate risks while ensuring compliance with industry standards.` },
       {
-        title: "What will we learn", description: `In GRC-101, you will gain a strong foundation in Governance, Risk, and Compliance. 
-  The course begins by introducing the key concepts of GRC and why they are essential 
-  for every organization. You will learn how governance sets the direction through 
-  policies and frameworks, how risk management helps identify, assess, and reduce 
-  potential threats, and how compliance ensures that organizations meet regulatory 
+        title: "What will we learn", description: `In GRC-101, you will gain a strong foundation in Governance, Risk, and Compliance.
+  The course begins by introducing the key concepts of GRC and why they are essential
+  for every organization. You will learn how governance sets the direction through
+  policies and frameworks, how risk management helps identify, assess, and reduce
+  potential threats, and how compliance ensures that organizations meet regulatory
   and industry standards.`  },
       { title: "What are the benefits", description: `GRC-101 equips you with a solid foundation in Governance, Risk, and Compliance, giving you practical skills to apply frameworks and manage risks effectively. It enhances career opportunities across multiple industries.` },
     ]);
@@ -409,7 +409,7 @@ export default defineComponent({
     //   if (index < fullText.length) {
     //     typedText.value += fullText[index];
     //     index++;
-    //     setTimeout(typeWriter, 50); 
+    //     setTimeout(typeWriter, 50);
     //   }
     // };
 
@@ -453,7 +453,7 @@ main {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
   font-weight: 700; /* bold headings */
- 
+
 }
 .btn-signup {
   background-color: #006cbf;
