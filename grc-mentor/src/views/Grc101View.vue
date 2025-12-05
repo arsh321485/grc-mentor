@@ -16,20 +16,22 @@
               You will be working with Media, Legal, Education and E-commerce industries.
             </p>
           </div>
+
+
         </div>
 
         <!-- 🟢 Top Banner -->
-        <div class="top-banner mb-4 ms-5">
+        <div class="top-banner mb-4 ms-5 d-flex justify-content-between align-items-center">
           <div class="banner-content">
             <h4 class="banner-title">Industries</h4>
           </div>
-</div>
-<select v-model="selectedFilter" class="filter-select">
-  <option value="All">All Tasks</option>
-  <option value="Completed">Completed</option>
-  <option value="In progress">In progress</option>
-  <option value="Not started">Not started</option>
-</select>
+              <select v-model="selectedFilter" class="filter-select">
+    <option value="All">All Tasks</option>
+    <option value="Completed">Completed</option>
+    <option value="In progress">In progress</option>
+    <option value="Not started">Not started</option>
+  </select>
+        </div>
 
         <!-- 🟢 Tabs -->
         <div class="tab-buttons mb-4 d-flex flex-wrap gap-2 ms-5">
@@ -118,7 +120,6 @@
         </section>
       </div>
     </div>
-
   </main>
 </template>
 
@@ -131,6 +132,7 @@ export default {
   data() {
     return {
       selectedFilter: "All",
+
       activeTab: "Media",
       industries: [
         {
@@ -139,7 +141,7 @@ export default {
             domain:"Domain Name",
             title: `Media Task ${i + 1}`,
             subtitle: "Name of the Subtask",
-              deadline: "23rd July, 2025",
+            deadline: "23rd July, 2025",
             progress: i % 2 === 0 ? "In progress" : "Completed",
             progressValue: i % 2 === 0 ? 60 : 100,
             tag: "ISO 27001",
