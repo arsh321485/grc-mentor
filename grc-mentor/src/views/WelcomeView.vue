@@ -83,8 +83,8 @@ export default {
 
 /* BUTTON SIZE */
 .btn-submit {
-  /* background-color: #0096d6; */
-  background-color: rgb(49, 117, 49);
+   background-color: #0096d6;
+  /* background-color: rgb(49, 117, 49); */
    /* background: linear-gradient(135deg, #81b0f7 0%, #8fb8f5 45%, #20c997 120%); */
   color: #fff;
   border-radius: 10px;

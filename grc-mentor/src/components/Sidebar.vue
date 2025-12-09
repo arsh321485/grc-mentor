@@ -199,7 +199,7 @@ export default defineComponent({
         { name: "About Mentorship", icon: "fas fa-home", route: "/aboutmentorship", type: "link" } as NavItem,
         { name: "Working Desk", icon: "fas fa-briefcase", route: "/grc101", type: "link" } as NavItem,
         { name: "Task View", icon: "fas fa-list-check", key: "task", type: "dropdown" } as NavItem,
-        { name: "Career graph", icon: "fas fa-chart-line", route: "/careergraph", type: "link" } as NavItem,
+        { name: "Career ", icon: "fas fa-chart-line", route: "/careergraph", type: "link" } as NavItem,
         { name: "My Profile", icon: "fas fa-user", key: "profile", type: "dropdown" } as NavItem,
         { name: "My Achievements", icon: "fas fa-award", key: "achievements", type: "dropdown" } as NavItem,
         { name: "Matching Jobs", icon: "fas fa-briefcase", route: "/matchingjobs", type: "link" } as NavItem,

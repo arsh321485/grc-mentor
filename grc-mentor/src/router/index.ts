@@ -51,6 +51,7 @@ import test from '@/views/test.vue'
 import ReportView from '@/views/ReportView.vue'
 import MyLearningsView from '@/views/MyLearningsView.vue'
 import AboutMentorshipView from '@/views/AboutMentorshipView.vue'
+import AdvisorView from '@/views/AdvisorView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -59,6 +60,11 @@ const router = createRouter({
       path: '/my-learnings',
       name: 'my-learnings',
       component: MyLearningsView
+    },
+    {
+      path: '/advisor',
+      name: 'advisor',
+      component: AdvisorView
     },
     {
       path: '/report',

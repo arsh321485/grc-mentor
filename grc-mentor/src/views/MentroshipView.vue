@@ -48,9 +48,8 @@
                   </li>
                 </ul>
 
-
-
-                    <div class="form-check gap-2 mt-lg-2">
+                <div class="d-flex justify-content-start ">
+                    <div class="form-check ">
                       <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree" />
                       <label class="form-check-label small-text" for="agreeTerms">
                         I agree to
@@ -59,9 +58,12 @@
                         Acceptable Usage Policy
                       </span>
                     </div>
-                 <div class=" d-flex justify-content-end">
+                </div>
+                <div >
+                     <div class=" d-flex justify-content-end ">
                     <button class=" btn-submit " :disabled="!agree" @click="goToCommunication">Setup your communication
                     </button>
+                </div>
                 </div>
               </section>
             </div>

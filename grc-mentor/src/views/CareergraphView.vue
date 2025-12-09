@@ -11,7 +11,7 @@
         <!-- Banner -->
         <div class="banner mb-3 ms-4 mt-3">
           <div class="banner-left">
-            <h6 class="banner-title">Career Page</h6>
+            <h6 class="banner-title">Career </h6>
             <p class="banner-sub">A snapshot of your career page</p>
           </div>
         </div>
@@ -66,7 +66,8 @@
                   </div>
                 </div>
                 <div class="footer-actions">
-                  <button v-if="c.active" class="btn btn-primary" @click.stop="openCourse(c.id)">Open</button>
+                  <button v-if="c.active" class="btn btn-primary   m-lg-2" >share</button>
+                   <button v-if="c.active" class="btn btn-primary" @click.stop="openCourse(c.id)">Open</button>
                   <button v-else class="btn btn-outline-secondary" @click.stop="lockedClick(c)">Locked</button>
                 </div>
               </div>
@@ -132,10 +133,9 @@
 </template>
 
 <script lang="ts">
-
 import Sidebar from '@/components/Sidebar.vue';
 import expertMentee from '@/assets/expert-mentee.png';
-import  cardImage from '@/assets/education-research.jpg';
+import cardImage from '@/assets/education-research.jpg';
 
 export default {
   name: 'CareergraphView',
@@ -161,7 +161,6 @@ export default {
           levelTag: 'GRC 101',
           endsIn: 'Ongoing',
           active: true,
-          // new image field (fallback handled in template)
           img: expertMentee
         },
         grc301: {
@@ -231,6 +230,9 @@ export default {
 </script>
 
 <style scoped>
+/* ----------------------
+   Base page + banner
+   ---------------------- */
 .career-page {
   background: #f8fbff;
   min-height: 100vh;
@@ -247,36 +249,37 @@ export default {
   display: flex;
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  margin-left: 16px;
 }
-.banner-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
-}
-.banner-sub {
-  font-size: 13px;
-  opacity: 0.9;
-  margin: 2px 0 0 0;
-}
+.banner-title { font-size: 16px; font-weight: 600; margin: 0; }
+.banner-sub { font-size: 13px; opacity: 0.9; margin: 2px 0 0 0; }
 
 /* cards area */
-.cards-area { margin-left: 16px; margin-right:16px; }
+.cards-area { margin-left: 16px; margin-right: 16px; }
 .unlock-hint { color:#374151; margin-bottom:12px; }
 
-/* Cards row */
-.cards-row { display:flex; gap:20px; align-items:flex-start; justify-content:center; }
+/* Cards row default (desktop first will override for smaller sizes) */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 20px;
+  /* justify-content: center; */
+  align-items: start;
+  margin-top: 6px;
+}
 
 /* ---- Card ---- */
 .career-card {
-  width: 440px;
-  height: 520px;
+  width: 240px;
+  height: 700px; /* <- increased overall desktop height */
   background:#fff;
   border-radius:12px;
   padding:18px;
-  box-shadow:0 12px 36px rgba(20,30,50,0.06);
+  box-shadow:0 18px 48px rgba(20,30,50,0.08);
   position:relative;
   display:flex;
   flex-direction:column;
+  transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
 /* IMAGE / media area at top of card */
@@ -284,9 +287,9 @@ export default {
   position: relative;
   width: 100%;
   border-radius: 10px;
-  /* overflow: hidden; */
+  overflow: hidden;
   margin-bottom: 12px;
-  height: 160px;
+  height: 240px; /* larger visual hero area for tall cards */
   background: linear-gradient(180deg, #f4f7fb, #fff);
 }
 .card-media img {
@@ -312,27 +315,31 @@ export default {
   font-size: 12px;
 }
 
-/* inactive state */
-.career-card.inactive { opacity:0.6; filter:grayscale(0.02); cursor:not-allowed; }
-.card-top { display:flex; justify-content:space-between; align-items:center; }
+/* card internal layout */
+.card-top { display:flex; justify-content:space-between; align-items:center; margin-top: 4px; }
 .card-tag { background:#f1f6ff; color:#0b66b2; padding:6px 8px; border-radius:8px; font-weight:700; }
-.card-title { margin:12px 0 6px; font-size:20px; }
+.card-title { margin:10px 0 6px; font-size:20px; }
 .card-sub { color:#6b7280; margin-bottom:8px; }
-.card-body { flex:1 1 auto; overflow:auto; }
+
+/* Body should scroll if it grows beyond available space */
+
+
 .skill-list { margin:6px 0 0 18px; }
 .frameworks { margin-top:8px; display:flex; gap:8px; flex-wrap:wrap; }
-.chip { background:#f1f6ff; padding:6px 10px; border-radius:999px;  border:1px solid #e6f0fb; }
+.chip { background:#f1f6ff; padding:6px 10px; border-radius:999px; border:1px solid #e6f0fb; }
+
 .card-footer { display:flex; justify-content:space-between; align-items:center; margin-top:12px; }
-.badges-inline { display:flex; gap:8px; }
-.badge-small img { width:44px; height:44px; border-radius:6px; }
-.footer-actions .btn { border-radius:8px; }
+.badges-inline { display:flex; gap:8px; align-items:center; }
+.badge-small img { width:56px; height:56px; border-radius:6px; }
+.footer-actions .btn { border-radius:8px; padding:6px 12px; }
+
 .card-lock { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)); border-radius:12px; }
 .lock-inner { background:#fff; padding:10px 14px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.08); display:flex; gap:8px; align-items:center; }
 
 /* Badges grid wide */
 .badges-grid-wide { display:flex; gap:12px; flex-wrap:wrap; }
 .badge-card-wide { display:flex; gap:10px; align-items:center; padding:10px; border:1px solid #eef6ff; background:#fff; border-radius:8px; }
-.badge-card-wide img { width:60px; height:60px; border-radius:8px; }
+.badge-card-wide img { width:72px; height:72px; border-radius:8px; }
 
 /* Modal square (large) */
 .modal-overlay { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(6,10,20,0.55); padding:20px; z-index:3000; }
@@ -342,86 +349,84 @@ export default {
 .modal-square-footer { padding:14px 18px; border-top:1px solid #eef3f7; display:flex; justify-content:flex-end; gap:8px; }
 .btn-close { background:transparent; border:none; font-size:22px; cursor:pointer; }
 
-/* responsive */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .sidebar-col {
-    flex: 0 0 25% !important;
-    max-width: 25% !important;
-  }
-  .col-10.col-md-10,
-  .main-col {
-    flex: 0 0 75% !important;
-    max-width: 75% !important;
-    margin-left: 0 !important;
-    padding-left: 20px !important;
-    padding-right: 10px !important;
-  }
-  .banner {
-    margin-left: 20px !important;
-    width: calc(100% - 10px) !important;
-    padding: 14px 18px !important;
-  }
-  .banner-title { font-size: 15px !important; }
-  .banner-sub { font-size: 12px !important; }
-}
+/* ----------------------
+   Responsive breakpoints
+   - keep UI consistent, only adjust widths & heights
+   ---------------------- */
 
-/* Mobile first: phones */
+/* Mobile phones: keep natural flow and smaller media */
 @media (max-width: 767.98px) {
   .container-fluid.row.g-0 { display: block; }
   .sidebar-col,
   .col-10.col-md-10 { width: 100% !important; max-width: 100% !important; padding: 8px 12px; }
-  .banner { width: calc(100% - 24px); padding: 12px; border-radius: 10px; flex-direction: column; gap: 6px; }
-  .cards-row { display: flex; flex-direction: column; gap: 14px; align-items: stretch; }
-  .career-card { width: 100% !important; max-width: none; height: auto; padding: 14px; }
-  .card-media { height: 180px; }
-  .card-body { max-height: 220px; }
-}
-
-/* Small tablets & large phones */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .sidebar-col { flex: 0 0 22% !important; max-width: 22% !important; }
-  .col-10.col-md-10 { flex: 0 0 78% !important; max-width: 78% !important; padding-left: 18px; }
+  .banner { width: calc(100% - 24px); padding: 12px; border-radius: 10px; flex-direction: column; gap: 6px; margin-left: 0; }
   .cards-row {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    align-items: center;
+    gap: 14px;
+    align-items: stretch;
   }
-  .career-card { width: min(660px, 100%); max-width: 760px; height: auto; }
+  .career-card {
+    width: 100% !important;
+    max-width: none;
+    height: auto;
+    min-height: 520px; /* moderate minimum on mobile so tall cards look balanced */
+    padding: 14px;
+  }
+  .card-media { height: 180px; }
   .card-body { max-height: 320px; }
 }
 
-/* Desktop small: 2 columns */
-@media (min-width: 1025px) and (max-width: 1399.98px) {
+/* Small tablets / medium screens (one column, taller cards) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sidebar-col { flex: 0 0 22% !important; max-width: 22% !important; }
+  .col-10.col-md-10 { flex: 0 0 78% !important; max-width: 78% !important; padding-left: 18px; }
+  .cards-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    justify-items: center;
+  }
+  .career-card {
+    width: min(760px, 100%);
+    height: 720px; /* taller on medium screens */
+  }
+  .card-media { height: 220px; }
+  .card-body { max-height: 420px; }
+}
+
+/* LG screens: 2-column layout, long cards */
+@media (min-width: 992px) and (max-width: 1399.98px) {
   .sidebar-col { flex: 0 0 18% !important; max-width: 18% !important; }
   .col-10.col-md-10 { flex: 0 0 82% !important; max-width: 82% !important; padding-left: 22px; }
   .cards-row {
     display: grid;
     grid-template-columns: repeat(2, minmax(320px, 1fr));
-    gap: 18px;
+    gap: 20px;
     justify-items: center;
   }
-  .career-card { width: 100%; max-width: 480px; height: 520px; }
-  .card-body { max-height: 420px; }
+  .career-card { width: 520px; height: 760px; } /* long cards for lg */
+  .card-media { height: 240px; }
+  .card-body { max-height: 460px; }
 }
 
-/* Wide desktops: 3 columns */
+/* Wide desktops: 3 columns, keep long card height */
 @media (min-width: 1400px) {
   .sidebar-col { flex: 0 0 15% !important; max-width: 15% !important; }
   .col-10.col-md-10 { flex: 0 0 85% !important; max-width: 85% !important; padding-left: 32px; }
   .cards-row {
     display: grid;
     grid-template-columns: repeat(3, minmax(320px, 1fr));
-    gap: 20px;
+    gap: 24px;
     justify-content: center;
   }
-  .career-card { width: 440px; height: 520px; }
+  .career-card { width: 490px; height: 700px; }
+  .card-media { height: 240px; }
+  .card-body { max-height: 460px; }
 }
 
-/* Small refinements kept across breakpoints */
+/* Small refinements */
 .career-card[role="button"] { outline: none; }
-.career-card:focus { box-shadow: 0 12px 30px rgba(47, 128, 237, 0.16); transform: translateY(-3px); transition: transform 120ms ease, box-shadow 120ms ease; }
+.career-card:focus { box-shadow: 0 12px 30px rgba(47, 128, 237, 0.16); transform: translateY(-3px); }
 .frameworks { max-width: 100%; word-break: break-word; }
-.modal-square { width: min(920px, 92vw); height: min(820px, 92vh); }
-
 </style>

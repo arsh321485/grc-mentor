@@ -64,6 +64,15 @@
               <li><router-link class="dropdown-item" to="/careerpath">Career Path</router-link></li>
             </ul>
           </li>
+            <!-- <li class="nav-item">
+            <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="modal"
+              data-bs-target="#grc701Modal">
+              GRC-701
+            </a>
+          </li> -->
+          <li>
+            <router-link to="/advisor" class="nav-link text-dark"> Advisor</router-link>
+          </li>
         </ul>
 
         <!-- Sign Up Button -->
