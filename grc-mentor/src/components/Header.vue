@@ -62,7 +62,7 @@
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center auth-buttons">
             <li class="nav-item d-flex gap-2 align-items-center me-2">
               <router-link to="/signin">
-                <button type="button" class="btn btn-signin rounded-pill">
+                <button type="button" class="btn btn-signin">
                   Sign in
                 </button>
               </router-link>
@@ -70,7 +70,7 @@
 
             <li class="nav-item d-flex gap-2 align-items-center">
               <router-link to="/signup">
-                <button type="button" class="btn btn-signup rounded-pill">
+                <button type="button" class="btn btn-signup ">
                   Sign up
                 </button>
               </router-link>
@@ -310,7 +310,9 @@ main {
 }
 .btn-signin:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(10,76,127,0.06);
+background: linear-gradient(180deg,#0078bf 0%, #005fa0 100%);
+color: #fff;
+  /* box-shadow: 0 8px 20px rgba(10,76,127,0.06); */
 }
 
 /* Signup button */
