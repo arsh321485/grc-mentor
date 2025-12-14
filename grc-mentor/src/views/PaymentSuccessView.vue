@@ -4,7 +4,7 @@
       <div class="row g-4">
         <!-- Stepper Left Column -->
         <div class="col-2 col-md-2">
-          <Stepper :currentStep="3" />
+          <Stepper :currentStep="2" />
         </div>
 
         <!-- Right Main Column -->
@@ -146,10 +146,10 @@
                       </button>
 
                       <router-link
-                        to="/mentorship"
+                        to="/instruction"
                         class="btn btn-submit ms-sm-auto d-flex align-items-center"
                       >
-                        Start Your Mentorship
+                        Continue
                       </router-link>
                     </div>
 

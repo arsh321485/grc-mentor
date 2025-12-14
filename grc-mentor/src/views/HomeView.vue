@@ -21,6 +21,18 @@
           <!-- Carousel Items -->
           <div class="carousel-inner rounded-4 overflow-hidden">
 
+<!-- Sticky Partnership Button -->
+<button
+  class="partnership-fab"
+  data-bs-toggle="modal"
+  data-bs-target="#partnershipModal"
+
+
+>
+  🤝 Partnership
+</button>
+
+
             <div class="carousel-item active">
               <img src="../assets/slider-img-chng.png" class="d-block w-100 carousel-img" alt="Slide 1">
               <div class="carousel-caption custom-caption">
@@ -571,22 +583,74 @@
           </div>
         </div>
       </div>
-
     </section>
-
-
     <!-- Footer section -->
     <div>
+      <!-- Partnership Modal -->
+<div
+  class="modal fade"
+  id="partnershipModal"
+  tabindex="-1"
+  aria-labelledby="partnershipModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content rounded-4 border-0">
+
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="partnershipModalLabel">
+          Partnership With Us
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-muted mb-4">
+          Interested in partnering with us?
+          Fill in the details and our team will connect with you.
+        </p>
+
+        <form>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Your Name" />
+            </div>
+            <div class="col-md-6">
+              <input type="email" class="form-control" placeholder="Email Address" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Company Name" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Contact Number" />
+            </div>
+            <div class="col-12">
+              <textarea
+                class="form-control"
+                rows="3"
+                placeholder="Tell us about your partnership idea"
+              ></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary">
+          Submit Request
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
       <Footer />
     </div>
-
-
-
   </main>
 </template>
-
-
 <script lang="ts">
 import { defineComponent } from "vue";
 import Header from "@/components/Header.vue";
@@ -826,12 +890,58 @@ export default defineComponent({
 
 });
 </script>
-
-
-
-
 <style scoped>
+/* 🔥 HARD REMOVE Bootstrap modal backdrop (NO BLACK SCREEN) */
+:deep(.modal-backdrop) {
+  display: none !important;
+}
 
+/* 🔥 Prevent body from shifting / locking scroll */
+:deep(body.modal-open) {
+  overflow: auto !important;
+  padding-right: 0 !important;
+}
+
+
+/* Sticky Partnership Floating Button */
+.partnership-fab {
+  position: fixed;
+  bottom: 24px;
+  right : 24px;
+  z-index: 9999;
+
+  background: linear-gradient(135deg, #0096d6, #0278d3);
+  color: #ffffff;
+
+  border: none;
+  border-radius: 30px;
+  padding: 12px 22px;
+
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.partnership-fab:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #0278d3, #005fa3);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+  .partnership-fab {
+    bottom: 16px;
+    left: 16px;
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+}
 
 
 .nav-link {
@@ -842,7 +952,7 @@ export default defineComponent({
 
 /* Make carousel images responsive */
 .carousel-img {
-  height: 91vh;
+  height: 65vh;
   object-fit: cover;
 }
 

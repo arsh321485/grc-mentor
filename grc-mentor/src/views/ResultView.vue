@@ -5,7 +5,7 @@
 
         <!-- LEFT STEPPER -->
         <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
-          <Stepper :currentStep="2" />
+          <Stepper :currentStep="3" />
         </div>
 
         <!-- RIGHT MAIN CONTENT -->
@@ -85,8 +85,8 @@
                     </ul>
                     <!-- payment button -->
                     <div class="d-flex justify-content-end">
-                      <router-link to="/payment1" class="btn btn-submit">
-                        Proceed to Payment
+                      <router-link to="/mentorship" class="btn btn-submit">
+                        Proceed to Onboarding
                       </router-link>
                     </div>
                   </div>

@@ -44,9 +44,9 @@ export default {
   data() {
     return {
       steps: [
-        "Upload your CV",
+        "Profile Setup",
+         "Mentorship Payment",
         "Assessment",
-        "Mentorship Payment",
         "Onboarding",
         "Connect Mattermost",
       ],

@@ -49,7 +49,7 @@
                 </ul>
 
                 <div class="d-flex justify-content-start ">
-                    <div class="form-check ">
+                    <div class="form-check mt-lg-5 ">
                       <input class="form-check-input" type="checkbox" id="agreeTerms" v-model="agree" />
                       <label class="form-check-label small-text" for="agreeTerms">
                         I agree to

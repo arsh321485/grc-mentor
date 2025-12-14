@@ -315,6 +315,7 @@ color: #fff;
   /* box-shadow: 0 8px 20px rgba(10,76,127,0.06); */
 }
 
+
 /* Signup button */
 .btn-signup {
   background: linear-gradient(180deg,#0078bf 0%, #005fa0 100%);

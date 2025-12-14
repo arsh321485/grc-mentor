@@ -4,7 +4,7 @@
         <div class="row g-4">
           <!-- Stepper Left Column -->
           <div class="col-2 col-md-2">
-            <Stepper :currentStep="3" />
+            <Stepper :currentStep="2" />
           </div>
 
           <!-- Right Main Column -->

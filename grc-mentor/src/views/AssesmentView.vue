@@ -6,7 +6,7 @@
 
         <!-- LEFT STEPPER -->
         <div class="col-12 col-md-2 stepper-col p-0">
-          <Stepper :currentStep="2" />
+          <Stepper :currentStep="3" />
         </div>
 
         <!-- RIGHT CONTENT -->
@@ -15,9 +15,9 @@
           <!-- Banner -->
           <div class="banner mt-3 flex-wrap">
             <div class="">
-              <h6 class="banner-title">Qualification Assessment</h6>
+              <h6 class="banner-title">Skill Assessment</h6>
               <p class="banner-sub">
-                Answer a few quick questions to map you to the right track.
+                Here we assess your GRC skills.
               </p>
             </div>
 
@@ -358,7 +358,7 @@ export default {
 }
 .progress-animated{
   height: 8px;
-  
+
 }
 
 /* TIMER BOX — FIX WIDTH ISSUES */

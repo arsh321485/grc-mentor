@@ -14,8 +14,9 @@
           </p>
 
           <div class="hero-actions">
-            <button class="btn primary" @click="scrollToApply">Apply as Advisor</button>
-            <button class="btn ghost" @click="scrollToLevels">Read Levels</button>
+            <!-- <button class="btn primary" @click="scrollToApply">Apply as Advisor</button>
+            <button class="btn ghost" @click="scrollToLevels">Read Levels</button> -->
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At nobis ea quos repudiandae deserunt omnis impedit soluta incidunt consequatur quas temporibus tempora facilis nostrum perferendis, aliquid, officia mollitia obcaecati asperiores.</p>
           </div>
         </div>
 
