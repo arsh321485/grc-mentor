@@ -17,7 +17,7 @@
 
           <form @submit.prevent="handleSubmit">
 
-            <div class="mb-1">
+            <!-- <div class="mb-1">
               <label class="form-label">First name</label>
               <input type="text" v-model="form.firstName" class="form-control" placeholder="Enter your first name" />
             </div>
@@ -25,7 +25,7 @@
             <div class="mb-1">
               <label class="form-label">Last name</label>
               <input type="text" v-model="form.lastName" class="form-control" placeholder="Enter your last name" />
-            </div>
+            </div> -->
 
             <div class="mb-1">
               <label class="form-label">Email</label>
@@ -64,7 +64,7 @@
             </div>
 
             <!-- SUBMIT -->
-            <router-link to="/welcome" class="btn-submit w-100 text-center mb-2" :class="{ disabled: !form.agree }">
+            <router-link to="/profileset" class="btn-submit w-100 text-center mb-2" :class="{ disabled: !form.agree }">
               Get started
             </router-link>
 
@@ -114,8 +114,8 @@ export default {
   data() {
     return {
       form: {
-        firstName: "",
-        lastName: "",
+        // firstName: "",
+        // lastName: "",
         emailUsername: "",
         password: "",
         confirmPassword: "",

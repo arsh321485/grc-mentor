@@ -56,21 +56,6 @@
                               </div>
                             </div>
 
-                            <!-- <div style="flex:1;">
-                              <input
-                                v-model="form.lastName"
-                                type="text"
-                                class="form-control"
-                                placeholder="Last name"
-                                :class="{ 'is-invalid': touched.lastName && !validators().lastName() }"
-                                @blur="touched.lastName = true"
-                                maxlength="40"
-                                required
-                              />
-                              <div v-if="touched.lastName && !validators().lastName()" class="invalid-feedback small">
-                                Please enter your last name.
-                              </div>
-                            </div> -->
                           </div>
                         </div>
 
@@ -250,7 +235,6 @@ export default {
       form: {
         firstName: '',
         lastName: '',
-        email: '',
         country: '',
         countryCode: '+91',
         phone: '',
@@ -266,7 +250,6 @@ export default {
       touched: {
         firstName: false,
         lastName: false,
-        email: false,
         country: false,
         phone: false,
         qualification: false,
@@ -287,7 +270,6 @@ export default {
       const v = this.validators();
       return v.firstName() &&
              v.lastName() &&
-             v.email() &&
              v.country() &&
              v.phone() &&
              v.qualification() &&
@@ -301,11 +283,6 @@ export default {
       return {
         firstName: () => !!(self.form.firstName && self.form.firstName.trim().length > 0),
         lastName: () => !!(self.form.lastName && self.form.lastName.trim().length > 0),
-        email: () => {
-          const val = (self.form.email || '').trim();
-          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return re.test(val);
-        },
         country: () => !!(self.form.country && self.form.country.trim().length > 0),
         phone: () => {
           const val = (self.form.phone || '').replace(/\s+/g, '');
